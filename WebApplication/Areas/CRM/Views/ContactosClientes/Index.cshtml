@@ -1,0 +1,154 @@
+﻿
+@{
+    Layout = null;
+}
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-gear"></i> Gestión Contactos</h3>
+    </div>
+</div>
+
+<div class="box box-default">
+    <div class="box-body">
+        <div class="col-md-6">
+            <button @*disabled id="urlRazor"*@ href="@Url.Action("Create", "ContactosClientes", new { Area = "CRM" })" class="btn btn-default modal-ajax-load" data-toggle="modal" data-target="#myModal3" data-remote="false">Agregar Contacto</button>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" value="" id="testing" />
+
+<div class="row">
+    <div class="col-md-12 connectedSortable ui-sortable">
+        <div class="box box-default">
+            <div class="box-header ui-sortable-handle" style="cursor: move;">
+                <i class="fa fa-gear"></i>
+                <h3 class="box-title">Información</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn bg-warning btn-sm" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn bg-warning btn-sm" data-widget="remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <table id="dt_contactos" class="table table-hover display responsive no-wrap" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th class="col-lg-1 col-md-1 col-sm-1">Nombre Cliente</th>
+                            <th class="col-lg-1 col-md-1 col-sm-1">Rut</th>
+                            <th class="col-lg-1 col-md-1 col-sm-1">Industria</th>
+                            <th class="col-lg-6 col-md-6 col-sm-6">Perfil</th>
+                            <th class="col-lg-1 col-md-1 col-sm-1">Personal Asignado CS</th>
+                            <th class="col-lg-1 col-md-1 col-sm-1">Asociación Cliente Contacto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var item in Model.listAnonymousToDynamic)
+                            {
+                                <tr value="@item.Id_cliente">
+                                    <td>@item.Nom_Cliente</td>
+                                    <td>@item.Rut</td>
+                                    <td>@item.Industria</td>
+                                    <td>@item.Profile</td>
+                                    <td>@item.Client_Service</td>
+                                    <td>
+                                        <button class="btn btn-default btn-xs modal-ajax-load" href="@Url.Action("Asociacion", "ContactosClientes", new { Area = "CRM", @id=item.Id_cliente })" data-toggle="modal" data-target="#myModal3" data-remote="false"><i class="glyphicon glyphicon-refresh" aria-hidden="true"></i></button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 connectedSortable ui-sortable">
+        <div class="box box-default">
+            <div class="box-header ui-sortable-handle" style="cursor: move;">
+                <i class="fa fa-gear"></i>
+                <h3 class="box-title">Contactos</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn bg-warning btn-sm" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn bg-warning btn-sm" data-widget="remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered table-hover dataTable" style="width:100%" id="detalle_contactos">
+                    <thead>
+                        <tr>
+                            <th class="col-lg-1 col-md-1 col-sm-1">Nombre</th>
+                            <th class="col-lg-1 col-md-1 col-sm-1">Apellido</th>
+                            <th class="col-lg-1 col-md-1 col-sm-1">Cargo</th>
+                            <th class="col-lg-1 col-md-1 col-sm-1">Email</th>
+                            <th class="col-lg-1 col-md-1 col-sm-1">Telefono</th>
+                            <th class="col-lg-1 col-md-1 col-sm-1">Editar</th>
+                            <th class="col-lg-1 col-md-1 col-sm-1">Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#dt_contactos').DataTable();
+        var url_Editar_Contacto = '@Url.Action("Editar", "ContactosClientes")';
+        var url_Eliminar_Contacto = '@Url.Action("Eliminar", "ContactosClientes")';
+        var _mensaje = 'Quieres Eliminar el Registro?';
+        var dataColumnsContacto = [
+           { data: "nombre" },
+           { data: "apellido" },
+           { data: "cargo" },
+           { data: "email" },
+           { data: "telefono" },
+           {
+               data: "id_contacto", render: function (data) {
+                   return '<a href=\"' + url_Editar_Contacto + '/' + data + '"class="btn btn-default btn-xs modal-ajax-load" data-toggle="modal" data-target="#myModal3" data-remote="false"><i class="fa fa-edit" aria-hidden="true"></i></a>'
+               }
+           },
+           {
+               data: "id_contacto", render: function (data) {
+                   //return '<a href=\"' + url_Eliminar_Contacto + '/' + data + '"class="btn btn-default btn-xs modal-ajax-load" data-toggle="modal" data-target="#myModal" data-remote="false"><i class="fa fa-remove" aria-hidden="true"></i></a>'
+                   return '<a href=\"javascript:confirmDelete(\'' + _mensaje + '\',\'' + url_Eliminar_Contacto + '/' + data + '\');\" class="btn btn-xs btn-default"><i class="fa fa-trash" aria-hidden="true"></i></a>'
+               }
+           },
+        ];
+
+        function parameterFunction(d) {
+            //debugger;
+            return $.extend({}, d, {
+                "id": 1
+            });
+        }
+
+        function dcontacto(grilla, url, parametro, columnas) {
+            //debugger;
+            var tabla;
+            tabla = $('#' + grilla).DataTable({
+                "ajax": {
+                    "url": url,
+                    "type": "POST",
+                    "data": parametro
+                },
+                columns: columnas,
+                order: [[0, "asc"]]
+            });
+            return tabla;
+        }
+        var contactos = dcontacto("detalle_contactos", "@Url.Action("cargaContactos", "ContactosClientes")", parameterFunction, dataColumnsContacto);
+        //contactos.ajax.reload();
+    });
+</script>

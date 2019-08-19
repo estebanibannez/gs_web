@@ -1,0 +1,120 @@
+﻿<!-- formulario Tabs  cabecera del formulario-->
+
+
+
+
+<form id="asignarEmpresa" action="@Url.Action("AsignarAUsuario", "Usuario")" method="post">
+    @Html.Hidden("id_usu", (int)ViewBag.id_usu)
+    <div class="nav-tabs-custom form-horizontal tab-warning">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#emgs" data-toggle="tab" aria-expanded="false">Empresas GS</a></li>
+            <li class=""><a href="#soft" data-toggle="tab" aria-expanded="false">Acceso Softland</a></li>
+            <li class=""><a href="#heap" data-toggle="tab" aria-expanded="false">Herramientas de Apoyo</a></li>
+        </ul>
+        <div class="tab-content">
+            <!-- /.tab-panel 1 -->
+            <div class="tab-pane box-body active" id="emgs">
+                <div class="col-md-12 center-block">
+                    <div id="empresa_id_multiple" class="bootstrap-duallistbox-container row">
+                        <div class="box1 col-md-12">
+                            @{
+                                @Html.DropDownList("empresa_id", (MultiSelectList)Model.listaEmpresa, null, new { multiple = "multiple" })
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.tab-panel 2 -->
+            <div class="tab-pane box-body" id="soft">
+                <div class="col-md-12 center-block">
+                    <div id="softland_id_multiple" class="bootstrap-duallistbox-container row">
+                        <div class="box1 col-md-12">
+                            @{
+                                @Html.DropDownList("softland_id", (MultiSelectList)Model.listaSoftland, null, new { multiple = "multiple" })
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.tab-panel 3 -->
+            <div class="tab-pane box-body" id="heap">
+                <div class="col-md-12 center-block">
+                    <div id="herramientas_id_multiple" class="bootstrap-duallistbox-container row">
+                        <div class="box1 col-md-12">
+                            @{
+                                @Html.DropDownList("herramientas_id", (MultiSelectList)Model.listaHerramientas, null, new { multiple = "multiple" })
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                <button type="button" class="btn btn-warning pull-right" action="save">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+<script type="text/javascript">
+
+    setFormulario("asignarEmpresa");
+
+
+    var empresadGS = $('#empresa_id').bootstrapDualListbox({
+                            nonSelectedListLabel: 'Lista Clientes GS, No Seleccionadas  ',
+                            selectedListLabel: 'Lista Clientes GS , Seleccionadas',
+                            preserveSelectionOnMove: 'moved',
+                            moveOnSelect: true
+    });
+
+    var empresasSoftlan = $('#softland_id').bootstrapDualListbox({
+                            nonSelectedListLabel: 'Clientes Softland  No, Seleccionados',
+                            selectedListLabel: 'Clientes Softland, Seleccionados',
+                            preserveSelectionOnMove: 'moved',
+                            moveOnSelect: true
+    });
+
+    var herramientas = $('#herramientas_id').bootstrapDualListbox({
+                            nonSelectedListLabel: 'Herram Apoyo,  No Seleccionadas',
+                            selectedListLabel: 'Herram Apoyo, Seleccionadas',
+                            preserveSelectionOnMove: 'moved',
+                            moveOnSelect: true
+    });
+
+    $('#empresa_id').on('change', function () {
+        console.log('triggers');
+        var selecionado = $(this).val();
+        console.log(selecionado);
+        if (selecionado == null) {
+            $("#bootstrap-duallistbox-selected-list_empresa_id").append('<option value ="0" selected>Ninguno<option>')
+        }
+    });
+
+    $('#softland_id').on('change', function () {
+        console.log('triggers');
+        var selecionado = $(this).val();
+        console.log(selecionado);
+        if (selecionado == null) {
+            $("#bootstrap-duallistbox-selected-list_softland_id").append('<option value ="0" selected>Ninguno<option>')
+        }
+    });
+
+    $('#herramientas_id').on('change', function () {
+        console.log('triggers');
+        var selecionado = $(this).val();
+        console.log(selecionado);
+        if (selecionado == null) {
+            $("#bootstrap-duallistbox-selected-list_herramientas_id").append('<option value ="0" selected>Ninguno<option>')
+        }
+
+    });
+
+    $(document).ready(function () {
+        $('.btn-warning').click(function () {
+            iziToast.show({ timeout: 5000, position: 'center', title: '', message: ' <i class="fa fa-refresh fa-spin"></i> Cargando Solicitud...' });
+        });
+
+    });
+</script> 

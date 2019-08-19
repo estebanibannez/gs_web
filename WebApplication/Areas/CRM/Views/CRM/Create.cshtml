@@ -1,0 +1,150 @@
+﻿@model WebApplicationMod.Contacto_Cliente_CRM
+
+@using (Html.BeginForm((Model == null ? "Create" : "Update"), "CRM", FormMethod.Post, new { @id = "mant-form", @novalidate = "novalidate", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @(Model == null ? new MvcHtmlString("") : Html.HiddenFor(p => p.ID_Cliente))
+    if (Model == null)
+    {
+        <div class="box-header with-border">
+            <h3 class="box-title">Enter the information of the new customer</h3>
+        </div>
+    }
+    else
+    {
+        <div class="box-header with-border">
+            <h3 class="box-title">Edit the client : @Html.DisplayFor(model => model.Cliente_CRM.Nombre)</h3>
+        </div>
+    }
+    
+    @*<div class="col-sm-12">
+        <br />
+        <div class="box-title">
+            <label class="col-sm-6 control-label pull-left" style="text-align: left">Status Client</label>
+            <div class="col-sm-6">
+                @Html.DropDownListFor(model => model.Cliente_CRM.Estado, (SelectList)ViewBag.ListStatus, new { @class = "form-control" })
+            </div>
+        </div>
+        <br />
+    </div>*@
+
+<div class="col-sm-12">
+    <div class="nav-tabs-custom form-horizontal">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#s1" id="tab1" data-toggle="tab" aria-expanded="false">Contact</a></li>
+            <li class=""><a href="#s2" id="tab2" data-toggle="tab" aria-expanded="false">Client</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane box-body active" id="s1">
+                <div class="form-group">
+                    <label class="col-sm-6 control-label pull-left" style="text-align: left">Name Contact:</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.Contacto_CRM.Nombre, new { @class = "form-control", type = "text" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-6 control-label pull-left" style="text-align: left">Last name:</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.Contacto_CRM.Apellido, new { @class = "form-control", type = "text" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-6 control-label pull-left" style="text-align: left">Run Contact:</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.Contacto_CRM.Rut, new { @class = "form-control", type = "text" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-6 control-label pull-left" style="text-align: left">Phone Number:</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.Telefono_Personal, new { @class = "form-control", type = "text" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-6 control-label pull-left" style="text-align: left">Email:</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.email, new { @class = "form-control", type = "text" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-6 control-label pull-left" style="text-align: left">Phone Number Work:</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.Telefono_Trabajo, new { @class = "form-control", type = "text" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-6 control-label pull-left" style="text-align: left">Position Contact:</label>
+                    <div class="col-sm-6">
+                        @Html.DropDownListFor(model => model.Cargo, (SelectList)ViewBag.ListPosition, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-6 control-label pull-left" style="text-align: left">Date Firts Contact:</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.Fecha_Inicio_Contacto, "{0:yyyy-MM-dd}", new { @class = "datefield form-control fechas", @placeholder = "", @type = "date" })
+                    </div>
+                </div>                    
+            </div>
+            <div class="tab-pane box-body" id="s2">
+                <div class="form-group">
+                    <label class="col-sm-6 control-label pull-left" style="text-align: left">Name Company:</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.Cliente_CRM.Nombre, new { @class = "form-control", type = "text" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-6 control-label pull-left" style="text-align: left">Rut Company:</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.Cliente_CRM.Rut, new { @class = "form-control", type = "text" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-6 control-label pull-left" style="text-align: left">Industry:</label>
+                    <div class="col-sm-6">
+                        @Html.DropDownListFor(model => model.Cliente_CRM.Industria, (SelectList)ViewBag.ListIndustry, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group" id="Pais_C">
+                    <label class="col-sm-6 control-label pull-left" style="text-align: left">Country Company:</label>
+                    <div class="col-sm-6">
+                        @Html.DropDownListFor(model => model.Cliente_CRM.ID_Pais, (SelectList)ViewBag.ListCountry, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group" id="PerfilE">
+                    <label class="col-sm-6 control-label pull-left" style="text-align: left">Profile English:</label>
+                    <div class="col-sm-6">
+                        @Html.TextAreaFor(model => model.Cliente_CRM.Profile, new { @class = "form-control", type = "text" })
+                    </div>
+                </div>
+                <div class="form-group" id="PerfilI">
+                    <label class="col-sm-6 control-label pull-left" style="text-align: left">Profile Spanish:</label>
+                    <div class="col-sm-6">
+                        @Html.TextAreaFor(model => model.Cliente_CRM.Perfil, new { @class = "form-control", type = "text" })
+                    </div>
+                </div>
+                <div class="form-group" id="ClientService">
+                    <label class="col-sm-6 control-label pull-left" style="text-align: left">Client Service Associate:</label>
+                    <div class="col-sm-6">
+                        @Html.DropDownListFor(model => model.Cliente_CRM.ID_Client_Service, (SelectList)ViewBag.ListClientService, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group" id="Parther">
+                    <label class="col-sm-6 control-label pull-left" style="text-align: left">Partner involved:</label>
+                    <div class="col-sm-6">
+                        @Html.DropDownListFor(model => model.Cliente_CRM.ID_Client_Service, (SelectList)ViewBag.ListPartner, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Close</button>
+    <button type="button" class="btn btn-warning pull-right" action="save">Save</button>
+</div>
+}
+<script>
+    $(document).ready(function () {
+        setFormulario("mant-form");
+    });
+</script>

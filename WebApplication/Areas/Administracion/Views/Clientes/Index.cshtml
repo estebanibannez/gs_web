@@ -1,0 +1,121 @@
+﻿@model   IEnumerable<WebApplicationMod.l_clientes>
+
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-users"></i> Clientes </h3>
+        <a href="@Url.Action("Create", "Clientes", new { Area = "Administracion" })" class="btn btn-warning modal-ajax-load btn-sm pull-right" data-toggle="modal" data-target="#myModal" data-remote="false">Nuevo Cliente</a>
+    </div>
+    <div class="box-body">
+        <div class="pull-left">
+            <i>  Clientes Activos: @Html.Display("contadorActivo", (int)ViewBag.contadorActivo) </i>
+            <br />
+            <i style="color:red;">  Clientes Inactivos: @Html.Display("contadorInactivo", (int)ViewBag.contadorInactivo) </i>
+        </div>
+        <div class="pull-right">
+            Mostrar Clientes
+            <div id="checkbox"> </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <div class="box">
+        <div class="box-body no-padding">
+            <table id="dt_basic" class="table table-bordered table-hover dataTable">
+      
+                    <thead>
+                        <tr>
+                            <th></th>
+                            @*<th>ID</th>*@
+                            <th>Rut</th>
+                            <th>Nombre Corto</th>
+                            <th>Factu</th>
+                            <th>GBO</th>
+                            <th>KPI F29</th>
+                            <th>Activo</th>
+                            <th>Iniciar Beta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <button class="btn btn-default btn-xs modal-ajax-load" href="@Url.Action("Edit", new { id = item.ID })" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i></button>
+                                        <button class="btn btn-default btn-xs" onclick="confirmDelete('Confirme la Eliminacion @Html.Raw(item.ID) ','@Url.Action("elimina", new { id = item.ID })');"><i class="glyphicon glyphicon-trash"></i></button>
+                                    </td>
+                                    @*<td>@Html.DisplayFor(modelItem => item.ID)</td>*@
+                                    <td>@Html.DisplayFor(modelItem => item.Rut)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Nom)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Sigla)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.gbo)</td>
+                                    @*<td>@Html.DisplayFor(modelItem => item.kpieeff)</td>*@
+                                    <td>@Html.DisplayFor(modelItem => item.kpif29)</td>
+                                    <td>
+                                        @{var active = item.Activo == "S" ? "Activo" : "Inactivo";
+                                        } @Html.DisplayFor(modelItem => active)
+                                    </td>
+                                    <td>
+                                        @*<button class="btn btn-default btn-xs modal-ajax-load" href="@Url.Action("iniciaBeta", new { id = item.ID })" data-toggle="modal" data-target="#myModal"><i class="fa fa-hourglass-start"></i></button>*@
+                                        <button class="btn btn-default btn-xs" onclick="confirmAprobacionBeta('Confirme la Activación @Html.Raw(item.ID) ','@Url.Action("iniciaBeta", new { id = item.ID })');"><i class="fa fa-hourglass-start"></i></button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                </table>
+		</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var selectactivo = 'Activo';
+    var table  = $(document).ready(function () {
+        $('#dt_basic').DataTable({
+            initComplete: function () {
+                this.api().columns([6]).every(function () {
+                    var column = this;
+                    var select = $('<select><option value="">Todos</option></select>')
+                        .appendTo($('#checkbox').empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+                 
+                    column.data().unique().sort().each(function (d, j) {
+
+                        if (selectactivo === d) {
+                            select.append('<option SELECTED value="' + d + '">' + d + '</option>')
+                        } else {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        }
+                       
+                    });
+                    $(table).ready(function () {
+                        column.search(selectactivo ? '^' + selectactivo + '$' : '', true, false).draw();
+                    });
+                });
+            }
+        });
+    });
+
+</script>

@@ -1,0 +1,56 @@
+﻿@{ string nom = (string)ViewBag.Nombre;}
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-gear"></i> Agregar Cuestionario para el Cliente: @nom </h3>
+    </div>
+</div>
+
+<form id="mant-form" action="@Url.Action("CargarContrato", "ApruebaPropuesta")" method="post">
+    <div class="panel">
+        <div class="box-header with-border">
+            <h3 class="box-title">Agregar Cuestionario</h3>
+        </div>
+        <div class="row col-sm-12">
+            <div class="col-sm-4">
+                <div class="input-group">
+                    @Html.DropDownList("documento", ((SelectList)ViewBag.categorias), "Select...", new { @id = "documento1", @class = "selectCat form-control" })
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <input type="file" id="files1" name="files" class="uploadfile" />
+            </div>
+        </div>
+    </div>
+    <br /><br />
+    <div class="box-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cerrar</button>
+        <button type="button" class="btn btn-warning pull-right" action="save">Guardar</button>
+    </div>
+</form>
+
+<script>
+    var $upload = $(".uploadfile").fileinput({
+        showPreview: false,
+        showCancel: true,
+        showUpload: false,
+        browseClass: 'btn btn-warning',
+        browseLabel: 'Select Document',
+        browseIcon: "<span class='glyphicon glyphicon-open-file' aria-hidden='true'></span>",
+        removeClass: "btn btn-danger",
+        removeLabel: "Delete",
+        removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i>",
+        showCancel: true//,
+        //maxFileSize: 2500
+
+    }).on('fileerror', function (e, params) {
+        iziToast.error({
+            title: 'Error',
+            message: "<i class='fa fa-clock-o'></i> <i>" + e.handleObj.handler.arguments[2] + "...</i>",
+            position: 'topRight',
+            transitionIn: 'fadeInDown'
+        });
+    });
+    $(document).ready(function () {
+        setFormulario("mant-form");
+    });
+</script>

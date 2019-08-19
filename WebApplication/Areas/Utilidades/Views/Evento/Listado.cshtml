@@ -1,0 +1,65 @@
+﻿@model IEnumerable<WebApplicationMod.evento>
+
+<section>
+    <a href="@Url.Action("Create", "Evento", new { Area = "Utilidades" })" class="btn btn-default modal-ajax-load" data-toggle="modal" data-target="#myModal" data-remote="false">Asignar una Tarea</a>
+       
+</section>
+
+<br />
+<div class="table-responsive">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title"></h3>
+        </div>
+        <div class="box-header no-padding">
+            <table id="dt_basic" class="table table-bordered table-hover dataTable">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nombre de la Empresa</th>
+                        <th>Titulo de la Tarea</th>
+                        <th>Descripcion de la tarea</th>
+                        <th>Fecha que fue asignada la Tarea</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>                                    
+                                    <button class="btn btn-default btn-xs modal-ajax-load" href="@Url.Action("Update", "Evento", new { Area = "Utilidades", @id=item.id })" data-toggle="modal" data-target="#myModal" data-remote="false"><i class="glyphicon glyphicon-pencil" ></i></button>
+                                    <button class="btn btn-default btn-xs" onclick="confirmDelete('Confirme la Eliminacion @Html.Raw(item.id) ','@Url.Action("Delete", new { id = item.id})');"><i class="glyphicon glyphicon-trash"></i></button>
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.Clientes.Nom)</td>
+                                <td>@Html.DisplayFor(modelItem => item.titulo)</td>
+                                <td>@Html.DisplayFor(modelItem => item.descripcion)</td>
+                                <td>@Html.DisplayFor(modelItem => item.fecha)</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+        setFormulario(
+             "mant-form",
+             {
+
+
+             }
+        )
+
+    });
+
+</script>
+<script type="text/javascript">
+    InicializaMantenedor("dt_basic");
+    setFormulario();
+</script>

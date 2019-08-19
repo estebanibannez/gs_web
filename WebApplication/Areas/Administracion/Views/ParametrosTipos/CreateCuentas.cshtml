@@ -1,0 +1,65 @@
+﻿@model  WebApplicationMod.GS_ClaCtas
+
+<style>
+    .pdddiv {
+        padding: 2px !important;
+    }
+</style>
+
+@using (Html.BeginForm((Model == null ? "CreateCuentas" : "UpdateCuentas"), "ParametrosTipos", FormMethod.Post, new { @id = "mant-form", @novalidate = "novalidate", role = "form" }))
+{
+
+    @Html.AntiForgeryToken()
+    @(Model == null ? new MvcHtmlString("") : Html.HiddenFor(p => p.ID))
+
+    <!-- -->
+    <div class="pdddiv">
+        @*<div class="row pdddiv">
+                <div class="col-12 col-md-8 col-xs-4">ID</div>
+                <div class="col-6 col-md-4 col-xs-8">@Html.TextBoxFor(model => model.id, new { @class = "form-control", type = "text" })</div>
+            </div>*@
+
+        <div class="row pdddiv">
+            <div class="col-12 col-md-8 col-xs-4">Nombre Cuenta</div>
+            <div class="col-6 col-md-4 col-xs-8">@Html.TextBoxFor(model => model.Nom, new { @class = "form-control", type = "text" })</div>
+        </div>
+
+        <div class="row pdddiv">
+            <div class="col-12 col-md-8 col-xs-4">Vcta</div>
+             
+            @{   var check = false;
+
+                if (Model != null) {
+                    if (Model.vcta == "S" ? true : false) { check = true; } else { check = false; }
+
+                }
+
+            <div class="col-6 col-md-4 col-xs-8">@Html.CheckBox("vcta", check)</div>
+            @*<div class="col-6 col-md-4 col-xs-8">@Html.TextBoxFor(model => model.vcta, new { @class = "form-control", type = "text" })</div>*@
+            }
+        </div>
+
+        <!-- /.box-footer -->
+        <div class="box-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+            <button type="button" class="btn btn-warning pull-right" action="save">Guardar</button>
+        </div>
+        <!-- /.box-footer -->
+    </div>
+
+}
+
+
+<script>
+
+    setFormulario(
+        "mant-form",
+        {
+            nom: { required: true },
+        },
+        {
+            nom: { required: '<span class="help-block error" ><i class="fa fa-warning"></i>Ingrese un nombre</span> ' }
+        }
+    );
+
+</script>

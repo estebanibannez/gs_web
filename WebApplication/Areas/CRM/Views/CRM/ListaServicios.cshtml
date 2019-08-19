@@ -1,0 +1,47 @@
+﻿@{ string nom = (string)ViewBag.Nombre;}
+
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-credit-card-alt"></i> List of services of the proposal, for Client: @nom</h3>
+    </div>
+</div>
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12 table-responsive">
+            <div class="panel table-responsive no-padding">
+                <table id="dt_servicios_" class="table table-hover display responsive no-wrap" style="width:100%">
+                    <thead>
+                        <tr>
+                            @*<th>#</th>*@
+                            <th>Name Service</th>
+                            <th>Service Group</th>
+                            <th>Proposed date</th>
+                            <th>Date Accepted Proposal </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var item in Model.listAnonymousToDynamic)
+                            {
+                                <tr>
+                                    @*<td>@item.ID_servicio</td>*@
+                                    <td>@item.Nombre</td>
+                                    <td>@item.Grupo</td>
+                                    <td>@item.FecPropuesta</td> 
+                                    <td>@item.FecAceptacion</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#dt_servicios_').DataTable();
+    });
+</script>

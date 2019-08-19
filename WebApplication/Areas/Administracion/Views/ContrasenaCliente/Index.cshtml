@@ -1,0 +1,42 @@
+﻿@model IEnumerable<WebApplicationMod.Clientes>
+
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="glyphicon glyphicon-wrench"></i> Contraseña Clientes</h3>
+        <a href="@Url.Action("Create", "HerramientasApoyo", new { Area = "Utilidades" })" class="btn btn-warning modal-ajax-load btn-sm pull-right" data-toggle="modal" data-target="#myModal" data-remote="false">Agregar heramienta de apoyo</a>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <div class="box">
+        <div class="box-header no-padding">
+            <table id="dt_basic" class="table table-bordered table-hover dataTable">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Rut</th>
+                        <th>Nombre Cliente</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>@Html.DisplayFor(modelItem => item.ID)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Rut)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Nombre_Archivo)</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    InicializaMantenedor("dt_basic");
+    setFormulario();
+</script>

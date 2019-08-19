@@ -1,0 +1,607 @@
+﻿<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-file-excel-o"></i>  Captura Facturas Electronicas</h3>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="box-header with-border">
+        <h3 class="box-title">Búsqueda de Documentos</h3>
+    </div>
+    <div id="panel-body">
+        <form id="form-busc">
+            <div class="panel-body">
+                <div class="col-md-6">
+                    <div class="form-group col-md-12">
+                        <label class="control-label">Clientes</label>
+                        <div class="">
+                            @Html.DropDownList("ListaClientes", (SelectList)ViewBag.ListaClientes, "--Seleccione Cliente--", new { @class = "form-control", @id = "cbxClientes" })
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="control-label">Tipos de Documentos</label>
+                        <div class="">
+                            <select name="cbxTipsDocs" id="cbxTipsDocs" class="form-control col-md-6">
+                                <option value="">--Seleccione Tipo--</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group col-md-12">
+                        <label class="control-label">Periodo</label>
+                        <div class="">
+                            @Html.TextBox("Periodo", null, new { @class = "form-control datepicker", @id = "idPeriodo", @maxlength = "10" })
+                        </div>
+                    </div>
+                    <div class="form-group col-md-11 col-sm-11">
+                        <label class="control-label">Subir Archivo</label>
+                        <div class="">
+                            <input type="file" name="csv_file" id="csv_file" accept=".xlsx" class="btn btn-info uploadfile form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <a href="@Url.Action("DescargarPlantilla","CapturaFacturasElecs")" class="btn btn-info pull-right" data-remote="false"><i class="fa fa-download" aria-hidden="true"></i> Plantilla Excel</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="panel">
+    <div class="table-responsive">
+        <div class="box-body table-responsive no-padding">
+            <table id="dt_facts" class="table table-striped display responsive no-wrap text-center" style="width:100%" role="grid" aria-describedby="example1_info">
+                <thead>
+                    <tr>
+                        <th>Fecha Emisión</th>
+                        @*<th>Fecha Vcto.</th>*@
+                        <th>N° Factura</th>
+                        <th>Razón Social</th>
+                        <th>Rut</th>
+                        <th>Exento</th>
+                        <th>Neto</th>
+                        <th>19%</th>
+                        <th>Total</th>
+                        @*<th>Cuenta</th>
+                        <th>C. Costo</th>*@
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="box-footer">
+            <button type="button" name="btnCargaSoftland" id="btnCargaSoftland" class="btn btn-warning pull-right right">Cargar a Softland</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function Desactivar() {
+        $("#btnCargaSoftland").prop("disabled", true);
+    };
+
+    function Limpiar() {
+        $("#csv_file").replaceWith($("#csv_file").val("").clone(true));
+        $("#cbxTipsDocs").val("");
+        $("#idPeriodo").val("");
+        $("#cbxClientes").val("");
+    }
+
+    function formatMoney(num) {
+        var p = num.toFixed(2).split(",");
+        return "$" + p[0].split("").reverse().reduce(function (acc, num, i, orig) {
+            return num == "-" ? acc : num + (i && !(i % 3) ? "." : "") + acc;
+        }, "") + "," + p[1];
+    }
+
+    var table = $('#dt_facts').DataTable({
+        "scrollX": true,
+        "bPaginate": false,
+        "bFilter": false,
+        "bInfo": false,
+        "searchable": false,
+        "ordering": false
+    });
+
+    var auxisCrear = [];
+    var dataExcel = [];
+    var validaciones = [];
+
+    $('.datepicker').datepicker({
+        autoclose: false,
+        changeYear: true,
+        format: 'dd-mm-yyyy',
+        startDate: '-1m',
+        endDate: '+1m',
+    });
+
+    $(".uploadfile").fileinput({
+
+        fileType: "pdf",
+        showPreview: false,
+        showCancel: true,
+        showUpload: false,
+        browseClass: 'btn btn-warning',
+        browseLabel: '',
+        browseIcon: "<i class=\"glyphicon glyphicon-open-file\"></i>",
+        removeClass: "btn btn-danger",
+        removeLabel: "",
+        removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i>",
+        showRemove: true,
+        showCancel: true,
+        uploadExtraData: function () {
+            return {
+                documento: JSON.stringify(lista)
+            };
+        }
+    });
+
+    //Funcion para cargar los tipos debido a que necesito trabajar con 3 campos
+    function CargarTipsDocs() {
+        $.ajax({
+            url: '@Url.Action("CargarTiposDocs", "CapturaFacturasElecs")',
+            success: function (response) {
+                $.each(response.data, function (value,item) {
+                    var descripcion = item.Descrip;
+                    var tipo = item.Tip;
+                    var codigo = item.Codig;
+                    if (tipo == "") {
+                        $("#cbxTipsDocs").append("<option value='" + codigo + "'>" + codigo + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + descripcion + " </option>");
+                    } else {
+                        $("#cbxTipsDocs").append("<option value='" + codigo + "'>" + codigo + "&nbsp;&nbsp;&nbsp;[" + tipo + "]&nbsp;&nbsp;&nbsp;" + descripcion + " </option>");
+                    }
+                });
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    //validacion de los campos antes de cargar un archivo
+    var $orderForm = $("#csv_file").click(function (e) {
+
+        if ($("#form-busc").valid()) {
+
+        } else {
+            e.preventDefault();
+        }
+    });
+    $(".fileinput-remove-button").click(function () {
+        table.clear();
+        table.draw();
+
+    });
+
+    function CrearAux(auxisCrear, clie) {
+        $.ajax({
+
+            url: '@Url.Action("Create", "CapturaFacturasElecs")',
+            data: {
+                auxisCrear: auxisCrear,
+                clie : clie
+            },
+            type: "POST",
+            dataType: "json",
+            success: function (result) {
+
+                if (result.success) {
+                    mensajeExito("¡Exito!", "Se han creado correctamente los nuevos auxiliares");
+                } else {
+                    mensajeError("Error", "Ocurrio un error al crear los auxiliares, por favor revise que 'Razon social' y 'Rut' sean validos");
+                }
+                
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    $("#btnCargaSoftland").click(function () {
+        var clie = $("#cbxClientes").val();
+        var perio = $("#idPeriodo").val();
+        var tip = $("#cbxTipsDocs").val();
+        if (auxisCrear.length != 0) { CrearAux(auxisCrear, clie); };
+        CargaSoftland(dataExcel, clie, validaciones, perio, tip);
+        
+
+    });
+
+    function CargaSoftland(datos, clie, valids, periodo, tip) {
+        $.ajax({
+
+            url: '@Url.Action("CargaSoftland", "CapturaFacturasElecs")',
+            data: {
+                data: datos,
+                clie: clie,
+                validaciones: valids,
+                periodo: periodo,
+                tipoDoc: tip
+            },
+            type: "POST",
+            dataType: "json",
+            success: function (result) {
+                if (result.success) {
+                    mensajeExito("Exito","La carga a softland se realizo de forma exitosa");
+
+                    loadAjaxContent(window.location.pathname);
+                } else {
+                    mensajeError("Error", "No se pudo cargar a softland, Revise la info de su documento");
+                }
+
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+
+
+
+
+    function CargaTabla(data) {
+        var clie = $("#cbxClientes").val();
+        var tipCod = $("#cbxTipsDocs").val();
+        _data = JSON.parse(data);
+        var datos = [];
+        for (var i = 0; i < _data["matriz de carga"].length; i++) {
+
+            datos[i] = {
+                FechaEmision: new moment(_data["matriz de carga"][i]['Fecha de Emisión']).format('DD-MM-YYYY'),
+                Tipo: _data["matriz de carga"][i]['Tipo'],
+                NumFactura: _data["matriz de carga"][i]["Nº Factura"],
+                FechaVcto: _data["matriz de carga"][i]["F/VCTO."],
+                RazonSocial: _data["matriz de carga"][i]["Razón Social"],
+                Rut: _data["matriz de carga"][i]["RUT"],
+                Exento: _data["matriz de carga"][i]["Exento"],
+                Neto: _data["matriz de carga"][i]["Neto"],
+                Iva: _data["matriz de carga"][i]["19%"],
+                Total: _data["matriz de carga"][i]["Total"],
+                Cuenta: _data["matriz de carga"][i][" CUENTA "],
+                CCosto: _data["matriz de carga"][i][" C.COSTO "]
+            };
+        }
+
+        dataExcel = datos;
+         $.ajax({
+            url: '@Url.Action("ValidacionCamposExcel", "CapturaFacturasElecs")',
+            type: "POST",
+            data: {
+                data: datos,
+                clie: clie,
+                tipCod: tipCod
+            },
+            dataType: "json",
+            success: function (result) {
+                $("#btnCargaSoftland").prop("disabled", false);
+                validaciones = result.listaValidaciones;
+                var auxBtnEnable = 0;
+                $.each(validaciones, function (value, item) {
+                    if (item.ValTot == false || item.ValFact == true || item.ValExtra == true || item.ValAux == false/*|| item.ValCta == false || item.ValCCost == false*/ || item.ValFechEmi == false) {
+                        auxBtnEnable = 1
+                    }
+
+                });
+                if (auxBtnEnable == 0) {
+                    mensajeExito("¡Exito!", "El documento subido esta listo para cargar a softland");
+                } else {
+                    mensajeError("¡Aviso!", "El documento subido presenta errores en sus datos ingresados, Revise y corriga");
+                }
+                auxisCrear = [];
+                var countAux = 0;
+                table.destroy();
+                table = $("#dt_facts").DataTable({
+                    data: datos,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "scrollX": true,
+                    "bInfo": false,
+                    "searchable": false,
+                    "ordering": false,
+                    "columns": [
+                        { data: 'FechaEmision' },//0
+                        //{ data: 'FechaVcto' },//
+                        {
+                            data: 'NumFactura',
+                            render: function (data) {
+                                if (data == null) {
+                                    return "Empty";
+                                } else {
+                                    return data;
+                                }
+                            }
+                        },//1
+                        {
+                            data: 'RazonSocial',
+                            render: function (data) {
+                                if (data == null) {
+                                    return "Empty";
+                                } else {
+                                    return data;
+                                }
+                            }
+                        },//2
+                        {
+                            data: 'Rut',
+                            render: function (data) {
+                                if (data == null) {
+                                    return "Empty";
+                                } else {
+                                    return data.replace(/-/g, "");
+                                }
+                            }
+                        },//3
+                        {
+                            data: 'Exento',
+                            render: function (data) {
+                                if (data >= 0) {
+                                    nf = Intl.NumberFormat();
+
+                                    return nf.format(data);
+                                } else {
+                                    return 0;
+                                }
+                            }
+                        },//4
+                        {
+                            data: 'Neto',
+                            render: function (data) {
+                                if (data >= 0) {
+                                    nf = Intl.NumberFormat();
+
+                                    return nf.format(data);
+                                } else {
+                                    return 0;
+                                }
+                            }
+                        },//5
+                        {
+                            data: 'Iva',
+                            render: function (data) {
+                                if (data >= 0) {
+                                    nf = Intl.NumberFormat();
+
+                                    return nf.format(data);
+                                } else {
+                                    return 0;
+                                }
+                            }
+                        },//6
+                        {
+                            data: 'Total',
+                            render: function (data) {
+                                if (data >= 0) {
+                                    nf = Intl.NumberFormat();
+
+                                    return nf.format(data);
+                                } else {
+                                    return 0;
+                                }
+                            }
+                        },//7
+                        //{ data: 'Cuenta' },//8
+                        //{ data: 'CCosto' }//9
+                    ],
+                    "rowCallback": function (row, data, index) {
+
+                        var similarFactDoc = false;
+                        var aux = "";
+                        for (var i = 0; i < validaciones.length; i++) {
+                            aux = datos[i].NumFactura;
+                            if (index != i) {
+                                if (aux == datos[index].NumFactura) {
+                                    similarFactDoc = true;
+                                }
+                            }
+                        }
+
+                        //si no calzan la suma del exento, neto e iva con el total se manda mensaje
+                        if (!validaciones[index].ValTot) {
+                            $(row).find("td:eq(7)").css('color', 'red');
+                            $(row).find("td:eq(7)").css('background-color', '#FFCCCC');
+                        }
+                        //si "EXISTE" el documento se enviara mensaje
+                        if (validaciones[index].ValFact) {
+                            $(row).find("td:eq(1)").css('color', 'red');
+                            $(row).find("td:eq(1)").css('background-color', '#FFCCCC');
+                        }
+                        //Si se repite el numero de factura con otro del mismo doc se manda mendaje
+                        if (similarFactDoc) {
+                            $(row).find("td:eq(1)").css('color', 'red');
+                            $(row).find("td:eq(1)").css('background-color', '#FFCCCC');
+                        }
+
+                        // si el rut pernetece a un extranjero enviar un mensaje y activar el boton crea aux
+                        if (validaciones[index].ValExtra) {
+                            $(row).find("td:eq(3)").css('color', 'red');
+                            $(row).find("td:eq(3)").css('background-color', '#FFCCCC');
+                            //llenado de arreglo axuliares no existentes para su pronta creacion
+                            auxisCrear[countAux] = datos[index].Rut + '/' + datos[index].RazonSocial;
+                            countAux += 1;
+                        } else
+                            //si "NO" existe aux enviar mensaje y activar boton crea aux
+                            if (!validaciones[index].ValAux) {
+                                if (datos[index].Rut == null) {
+                                    datos[index].Rut = "Empty";
+                                    $(row).find("td:eq(3)").css('color', 'red');
+                                    $(row).find("td:eq(3)").css('background-color', '#FFCCCC');
+                                } else {
+                                    $(row).find("td:eq(3)").css('color', 'orange');
+                                    $(row).find("td:eq(3)").css('background-color', '#FFFF66');
+                                }
+                                auxisCrear[countAux] = datos[index].Rut + '/' + datos[index].RazonSocial;
+                                countAux += 1;
+                            }
+
+                        ///proxima mejora validar el centro de costo y la cuenta...
+
+                        //// si no existe cuenta se envia un mensaje
+                        //if (!validaciones[index].ValCta) {
+                        //    $(row).find("td:eq(8)").css('color', 'red');
+                        //    $(row).find("td:eq(8)").css('background-color', '#FFCCCC');
+                        //}
+                        ////si no existe costo se envia un mensaje
+                        //if (!validaciones[index].ValCCost) {
+                        //    $(row).find("td:eq(9)").css('color', 'red');
+                        //    $(row).find("td:eq(9)").css('background-color', '#FFCCCC');
+                        //}
+
+
+                        //si la fecha no es valida se envia un mensaje
+                        if (!validaciones[index].ValFechEmi) {
+                            $(row).find("td:eq(0)").css('color', 'red');
+                            $(row).find("td:eq(0)").css('background-color', '#FFCCCC');
+                        }
+                        if (!validaciones[index].ValRazSol) {
+                            $(row).find("td:eq(2)").css('color', 'red');
+                            $(row).find("td:eq(2)").css('background-color', '#FFCCCC');
+                            if (datos[index].ValRazSol == null) {
+                                datos[index].ValRazSol = "Empty";
+                            }
+                        }
+
+                    }
+                    , "error": function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+
+        });
+     
+    };
+
+    //variables que trabajan con file
+    var X = XLSX;
+    var XW = {
+        msg: 'xlsx',
+        worker: '/Scripts/xlsxworker.js'
+    };
+
+    var webworkers;
+
+    $(document).ready(function () {
+        Desactivar();
+
+        $("#idPeriodo").keypress(function (e) {
+            if (String.fromCharCode(e.keyCode).match(/[^0-9-]/g)) return false;
+        });
+
+        CargarTipsDocs();
+
+        $("#form-busc").validate({
+            rules: {
+                ListaClientes: { required: true },
+                cbxTipsDocs: { required: true },
+                Periodo: {
+                    required: true,
+                },
+
+            },
+            messages: {
+                ListaClientes: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Campo Requerido</span>' },
+                cbxTipsDocs: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Campo Requerido</span>' },
+                Periodo: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Campo Requerido</span>' },
+
+            },
+            errorPlacement: function (error, element) {
+                error.insertAfter(element.parent());
+            }
+        });
+
+        //metodo que captura la hoja del excel (sheet=hoja)
+        var ejecutar_webworkers = (function () {
+            var crear_json = (function () {
+                var fmt = document.getElementsByName("JSON");
+                return function () {
+                    for (var i = 0; i < fmt.length; ++i) if (fmt[i].checked || fmt.length === 1) return fmt[i].value;
+                };
+            })();
+
+            var to_json = function to_json(workbook) {
+                var result = {};
+                var validaHoja;
+                $.each(workbook.SheetNames, function (value, item) {
+                    if (item != "matriz de carga") {
+                        validaHoja = 1;
+                    }
+                });
+
+                if (validaHoja == 1) {
+                    mensajeError("Error", "El excel subido no corresponde a la plantilla. Descargue la plantilla y trabaje en ella");
+                    return "Error";
+                } else {
+                    workbook.SheetNames.forEach(function (sheetName) {
+
+                        var range = X.utils.decode_range(workbook.Sheets['matriz de carga']['!ref']);
+                        range.s.r = 2;
+
+                        workbook.Sheets['matriz de carga']['!ref'] = X.utils.encode_range(range);
+
+                        var roa = X.utils.sheet_to_json(workbook.Sheets[sheetName]);
+
+                        if (roa.length) result[sheetName] = roa;
+                    });
+                    json = JSON.stringify(result, 2, 2);
+                    CargaTabla(json);//<!—aquí paso obj json --->
+                    return JSON.stringify(result, 2, 2);
+                }
+            };
+
+            return function ejecutar_webworkers(wb) {
+                webworkers = wb;
+                var output = "";
+                switch (crear_json()) {
+                    default: output = to_json(wb);
+                }
+            };
+
+        })();
+
+        // metodo que obtiene los campos
+        var do_file = (function () {
+            var rABS = typeof FileReader !== "undefined" && (FileReader.prototype || {}).readAsBinaryString;
+            var domrabs = document.getElementsByName("userabs")[0];
+
+            var use_worker = typeof Worker !== 'undefined';
+            var domwork = document.getElementsByName("useworker")[0];
+
+            var xw = function xw(data, cb) {
+                var worker = new Worker(XW.worker);
+                worker.onmessage = function (e) {
+                    switch (e.data.t) {
+                        case 'ready': break;
+                        case 'e': console.error(e.data.d); break;
+                        case XW.msg: cb(JSON.parse(e.data.d)); break;
+                    }
+                };
+                worker.postMessage({ d: data, b: rABS ? 'binary' : 'array' });
+            };
+
+            return function do_file(files) {
+                var f = files[0];
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var data = e.target.result;
+                    if (!rABS) data = new Uint8Array(data);
+                    if (use_worker) xw(data, ejecutar_webworkers);
+                    else ejecutar_webworkers(X.read(data, { type: rABS ? 'binary' : 'array' }));
+                };
+                if (rABS) reader.readAsBinaryString(f);
+                else reader.readAsArrayBuffer(f);
+            };
+        })();
+
+        //metodo que captura el file.
+        (function () {
+            var csv_file = document.getElementById('csv_file');
+            if (!csv_file.addEventListener) return;
+            function handleFile(e) { do_file(e.target.files); }
+            csv_file.addEventListener('change', handleFile, false);
+        })();
+    });
+</script>

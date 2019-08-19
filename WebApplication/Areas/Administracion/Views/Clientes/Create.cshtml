@@ -1,0 +1,245 @@
+﻿@model WebApplicationMod.Clientes
+
+@using (Html.BeginForm((Model == null ? "Create" : "Edit"), "Clientes", FormMethod.Post, new { @id = "mant-form", @novalidate = "novalidate", role = "form" }))
+{
+@Html.AntiForgeryToken()
+@(Model == null ? new MvcHtmlString("") : Html.HiddenFor(p => p.ID))
+
+<div>
+    <!-- formulario Tabs  cabecera del formulario-->
+    <div class="nav-tabs-custom form-horizontal tab-warning">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#serv" data-toggle="tab" aria-expanded="false">Servicios Activos</a></li>
+            <li class=""><a href="#dat" data-toggle="tab" aria-expanded="false">Datos del cliente</a></li>
+            <li class=""><a href="#det" data-toggle="tab" aria-expanded="false">Información de Pago</a></li>
+        </ul>
+        <div class="tab-content">
+            <!-- /.tab-panel 1 -->
+            <div class="tab-pane box-body active" id="serv">
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-6">
+                            <div class="">
+                                @{ 
+                                    var activo = Model == null ? false : Model.Activo.Trim() == "S" ? true : false;
+                                    var ifrs = Model == null ? false : Model.IRFS.Trim() == "S" ? true : false;
+                                    var adm_cheq = Model == null ? false : Model.AdmCheque.Trim() == "S" ? true : false;
+                                    var cont_dolares = Model == null ? false : Model.CTD.Trim() == "S" ? true : false;
+                                    var eeff = Model == null ? false : Model.publicar_eeff.Trim() == "S" ? true : false;
+                                    var tesoreria = Model == null ? false : Model.TES.Trim() == "S" ? true : false;
+                                    var payroll = Model == null ? false : Model.RRHH.Trim() == "S" ? true : false;
+                                    var idioma = Model == null ? false : Model.IIng.Trim() == "S" ? true : false;
+                                    var imputacion = Model == null ? false : Model.impsug.Trim() == "S" ? true : false;
+                                    var snr_ingles = Model == null ? false : Model.snr_ingl.Trim() == "S" ? true : false;
+                                }                                  
+                                @Html.CheckBox("chk_activo", activo, new { @id = "activo", @class = "", name = "chk_activo" }) Activo <br>
+                                @Html.CheckBox("chk_irfs", ifrs, new { @id = "IRFS", @class = "", name = "chk_irfs" }) IRFS <br>
+                                @Html.CheckBox("chk_adm_cheq", adm_cheq, new { @id = "adm_cheq", @class = "", name = "chk_admcheq" })Administra chequera <br>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-6">
+                            <div class="">
+                                @Html.CheckBox("chk_contdolares", cont_dolares, new { @id = "chk_contdolares", @class = "", name = "chk_contdolares" }) Contabilidad en Dolares <br>
+                                @Html.CheckBox("chk_eeff", eeff, new { @id = "chk_eeff", @class = "", name = "chk_eff" }) Entregar EEFF <br>
+                                @Html.CheckBox("chk_tesoreria", tesoreria, new { @id = "chk_tesoreria", @class = "", name = "chk_tesoreria" }) Tesorería <br> 
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-6">
+                            <div class="">
+                                @Html.CheckBox("chk_payroll", payroll, new { @id = "chk_payroll", @class = "", name = "chk_payroll" }) Payroll <br>
+                                @Html.CheckBox("chk_idioma", idioma, new { @id = "chk_idioma", @class = "", name = "chk_idioma" }) Idioma Inglés <br>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-6">
+                            <div class="">
+                                @Html.CheckBox("chk_impu", imputacion, new { @id = "chk_impu", @class = "", name = "chk_impu" }) Imputación sugerida<br>
+                                @Html.CheckBox("chk_snringles", snr_ingles, new { @id = "chk_snringles", @class = "", name = "chk_snringles" }) SNR en inglés<br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.tab-panel 2 -->
+            <div class="tab-pane box-body" id="dat">
+                <div class="">
+                    <div class="box-body no-padding">
+                        <table class="table table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td>Rut</td>
+                                    <td>@Html.TextBoxFor(model => model.Rut, new { @class = "form-control input-sm" })</td>
+                                    <td>Razón social</td>
+                                    <td>@Html.TextBoxFor(model => model.Nom, new { @class = "form-control input-sm" })</td>
+                                </tr>
+                                <tr>
+                                    <td>Nombre Corto</td>
+                                    <td>@Html.TextBoxFor(model => model.Nombre_Archivo, new { @class = "form-control input-sm" })</td>
+                                    <td>Ruta DB</td>
+                                    <td>@Html.TextBoxFor(model => model.Ruta, new { @class = "form-control input-sm" })</td>
+                                </tr>
+                                <tr>
+                                    <td>Gerencia SSAM</td>
+                                    <td>@Html.DropDownListFor(model => model.gerencia_ss, (SelectList)ViewBag.gerenciaSS, "Seleccione...", new { @class = "form-control input-sm" })</td>
+                                    <td>Gerencia Back Office</td>
+                                    <td>@Html.DropDownListFor(model => model.gerencia_bo, (SelectList)ViewBag.gerenciaBO, "Seleccione...", new { @class = "form-control input-sm" })</td>
+                                </tr>
+                                <tr>
+                                    <td>Grupo Back Office</td>
+                                    <td>@Html.DropDownListFor(model => model.gbo, (SelectList)ViewBag.grupoBO, "Seleccione...", new { @class = "form-control input-sm" })</td>
+                                    <td>Facturacion.cl</td>
+                                    <td>@Html.TextBoxFor(model => model.nomfaccl, new { @class = "form-control input-sm" })</td>
+                                </tr>
+                                <tr>
+                                    <td>KPI E.E.F.F.</td>
+                                    <td>@Html.TextBoxFor(model => model.kpieeff, new { @class = "form-control input-sm" })</td>
+                                    <td>Ruta Base IFRS</td>
+                                    <td>@Html.TextBoxFor(model => model.rutadestino, new { @class = "form-control input-sm" })</td>
+                                </tr>
+                                <tr>
+                                    @*<td>Centro Costo</td>
+                                    <td>@Html.DropDownListFor(model => model.CC ,(SelectList)ViewBag.CC, "Seleccione...", new { @class ="form-control input-sm"}) </td>*@
+                                    <td>KPI F29</td>
+                                    <td>@Html.DropDownListFor(model => model.kpif29, (SelectList)ViewBag.kpiF29, "Seleccione...", new { @class = "form-control input-sm" })</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <section>
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td>Cartera tesoreria</td>
+                                    <td>@Html.DropDownListFor(model => model.cartera_tes, (SelectList)ViewBag.tesoreria, "Seleccione...", new { @class = "form-control input-sm" })</td>
+                                </tr>
+                                <tr>
+                                    <td>Cartera Payroll</td>
+                                    <td>@Html.DropDownListFor(model => model.cartera_pay, (SelectList)ViewBag.payroll, "Seleccione...", new { @class = "form-control input-sm" })</td>
+                                </tr>
+                                <tr>
+                                    <td>Cartera Operaciones</td>
+                                    <td>@Html.DropDownListFor(model => model.cartera_oper, (SelectList)ViewBag.operaciones, "Seleccione...", new { @class = "form-control input-sm" })</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>                 
+            <!-- /.tab-panel 3 -->
+            <div class="tab-pane box-body" id="det">
+                <div class="box-body well">
+                    <p class="lead">Tarifas:</p>
+                    <div class="form-group">
+                        <p class="col-sm-2 control-label">Moneda</p>
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(model => model.TCFac, (SelectList)ViewBag.moneda1, "Seleccione...", new { @class = "form-control input-sm" })
+                        </div>
+                        <p class="col-sm-2 control-label">Tarifa</p>
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(model => model.Tarifa, new { @class = "form-control input-sm", @placeholder = "Ingrese Tarifa" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <p class="col-sm-2 control-label">Moneda II</p>
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(model => model.TCFac1, (SelectList)ViewBag.moneda2, "Seleccione...", new { @class = "form-control input-sm" })
+                        </div>
+                        <p class="col-sm-2 control-label">Tarifa</p>
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(model => model.Tarifa1, new { @class = "form-control input-sm", @placeholder = "Ingrese Tarifa" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <p class="col-sm-2 control-label">Tramo</p>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(model => model.TramoPR, new { @class = "form-control input-sm" })
+                        </div>
+                    </div>
+                </div>               
+                <div class="">
+                    <div class="form-group">
+                        <p class="col-sm-3 control-label">Medio de Pago:</p>
+                        <div class="col-sm-3">
+                            @Html.DropDownListFor(model => model.MPago, (SelectList)ViewBag.mediopago, new { @class = "form-control input-sm" })
+                        </div>
+                        <p class="col-sm-3 control-label">Tipo Cheque</p>
+                        <div class="col-sm-3">
+                            @Html.DropDownListFor(model => model.TipChe, (SelectList)ViewBag.tipo, "Seleccione...", new { @class = "form-control input-sm" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <p class="col-sm-3 control-label">Naturaleza IVA:</p>
+                        <div class="col-sm-3">
+                        <select class="form-control input-sm" id="ivaselect" name="ivaselect">
+                        @{
+                            if (ViewBag.iva == "0")
+                            {
+                                <option selected value="0">Afecto</option>
+                                <option value="1">Exento</option>
+                            }
+                            else
+                            {
+                                <option value="0">Afecto</option>
+                                <option selected value="1">Exento</option>
+                            }
+                        }
+                        </select>
+                        </div>
+                        <div class="">
+                            <p class="col-sm-3 control-label">Correo:</p>
+                            <div class="col-sm-3">
+                                @Html.TextBoxFor(model => model.emailcobro, new { @class = "form-control input-sm", @placeholder = "Ingrese E-mail" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body well">
+                        <p class="lead">Configuración de EEFF:</p>
+                        <div class="form-group">
+                            <p class="col-sm-7 pull-left">Numeración en que termina Balance:</p>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(model => model.BA, new { @class = "pull-left form-control input-sm", @placeholder = "Balance" })
+                            </div>
+                        </div>
+                        <div class="form-group">                            
+                            <p class="col-sm-7 pull-left">Numeración en que inicia Estado Resultado:</p>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(model => model.ER, new { @class = "pull-left form-control input-sm", @placeholder = "Estado Resultado" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                        <p class="">Observaciones</p>
+                        @Html.TextAreaFor(model => model.Obs, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.box-footer -->
+        <div class="box-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+            <button type="button" class="btn btn-warning pull-right" action="save">Guardar</button>
+        </div>
+        <!-- /.box-footer -->
+    </div>
+</div>
+}
+<script>
+$(document).ready(function () {
+    setFormulario(
+        "mant-form",
+        {
+            Rut: { required: true },
+            Nom: { required: true },
+            Nombre_Archivo: { required: true },
+            Ruta: { required: true },
+            BA: { number: true },
+            ER: { number: true }
+        },
+        {
+            Rut: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese un Rut.</span> ' },
+            Nom: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese un nombre corto.</span> ' },
+            Nombre_Archivo: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese un nombre.</span> ' },
+            Ruta: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese una Ruta.</span> ' },            
+        }
+    )
+});
+</script>

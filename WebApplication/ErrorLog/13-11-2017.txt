@@ -1,0 +1,12 @@
+Time: 13-11-2017 13:07:06
+-----------------------------------------------------------
+Code: c8EvH4IVYCQ06QtNI4Xu_13112017130706
+Message: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+StackTrace:    en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en WebApplication.Areas.Anticipo.Controllers.AnticipoController.Create(cab_anticipos model, det_anticipos[] model_det, Int32 Cta, HttpPostedFileBase files) en C:\ANEVES\Repositorios\Local\treasuryweb\WebApplication\Areas\Anticipo\Controllers\AnticipoController.cs:línea 68
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+-----------------------------------------------------------
+

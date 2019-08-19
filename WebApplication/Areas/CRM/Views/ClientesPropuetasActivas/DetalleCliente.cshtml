@@ -1,0 +1,176 @@
+﻿@{ string nom = (string)ViewBag.Nombre;}
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-gear"></i> Detalle Cliente : @nom </h3>
+    </div>
+</div>
+<div class="table-responsive">
+    <table id="dt_basic" class="table table-hover">
+        <thead>
+            <tr>
+                <th>Rut</th>
+                @*<th>Name</th>*@
+                <th>Industria</th>
+                <th>FEcha Primer Contacto</th>
+                <th>Personal CS Asignado</th>
+                <th>Partner Involucrado</th>
+                <th>Pais</th>
+                <th>Perfil Español</th>
+                <th>Perfil Ingles</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var item in Model.listAnonymousToDynamic)
+                {
+                    <tr value="@item.ID_Cliente">                        
+                        <td>@item.Rut</td>
+                        @*<td>@item.Nombre</td>*@
+                        <td>@item.Industria</td>
+                        <td>@item.Primer_Contacto</td>
+                        <td>@item.Nom_Client</td>
+                        <td>@item.Nom_parther</td>
+                        <td>@item.Nom_pais</td>
+                        <td>@item.Perfil</td>
+                        <td>@item.Profile</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12 connectedSortable ui-sortable">
+        <div class="box box-warning">
+            <div class="box-header ui-sortable-handle" style="cursor: move;">
+                <i class="fa fa-envelope"></i>
+                <h3 class="box-title">Persona PSO del Cliente</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn bg-warning btn-sm" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn bg-warning btn-sm" data-widget="remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered table-hover dataTable" style="width:100%" id="dt_personal">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Cargo</th>
+                            <th>Departamento</th>
+                            <th>Email</th>
+                            <th>Extencion</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 connectedSortable ui-sortable">
+        <div class="box box-warning">
+            <div class="box-header ui-sortable-handle" style="cursor: move;">
+                <i class="fa fa-envelope"></i>
+                <h3 class="box-title">Contactos del Cliente</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn bg-warning btn-sm" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn bg-warning btn-sm" data-widget="remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered table-hover dataTable" style="width:100%" id="dt_contactos">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Cargo</th>
+                            <th>Email</th>
+                            <th>Telefono</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    var id_cliente = @ViewBag.ID_CLiente;
+
+    $(document).ready(function () {
+        $('#dt_basic').DataTable();
+
+        var dataColumnsPersonal = [
+            { data: "nombreUsuario" },
+            { data: "nombreCargo" },
+            { data: "nombreUnidad" },
+            { data: "extencion" },
+            { data: "email" },
+        ];
+
+        var dataColumnsContacto = [
+           { data: "nombre" },
+           { data: "apellido" },
+           { data: "cargo" },
+           { data: "email" },
+           { data: "telefono" },
+        ];
+
+
+
+        function parameterFunction(d) {
+            //debugger;
+            //var a = $('#testing').val();
+            return $.extend({}, d, {
+                "id":id_cliente
+            });
+        }
+
+        function dcontacto(grilla, url, parametro, columnas) {
+            //debugger;
+            var tabla;
+            tabla = $('#' + grilla).DataTable({
+                "ajax": {
+                    "url": url,
+                    "type": "POST",
+                    "data": parametro
+                },
+                columns: columnas,
+                order: [[0, "desc"]]
+            });
+            return tabla;
+        }
+
+        function dpersonal(grilla, url, parametro, columnas) {
+            //debugger;
+            var tabla;
+            tabla = $('#' + grilla).DataTable({
+                "ajax": {
+                    "url": url,
+                    "type": "POST",
+                    "data": parametro
+                },
+                columns: columnas,
+                order: [[0, "desc"]]
+            });
+            return tabla;
+        }
+        var contactos = dcontacto("dt_contactos", "@Url.Action("cargaContactos", "ClientesPropuetasActivas")", parameterFunction, dataColumnsContacto);
+        var personal = dpersonal("dt_personal", "@Url.Action("cargaPersonal", "ClientesPropuetasActivas")", parameterFunction, dataColumnsPersonal);
+    });
+</script>

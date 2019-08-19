@@ -1,0 +1,9 @@
+F:\Repositorio Local Franc\treasuryweb\ModeloCRM\bin\Release\ModeloCRM.dll.config
+F:\Repositorio Local Franc\treasuryweb\ModeloCRM\bin\Release\ModeloCRM.dll
+F:\Repositorio Local Franc\treasuryweb\ModeloCRM\bin\Release\ModeloCRM.pdb
+F:\Repositorio Local Franc\treasuryweb\ModeloCRM\bin\Release\EntityFramework.dll
+F:\Repositorio Local Franc\treasuryweb\ModeloCRM\bin\Release\EntityFramework.SqlServer.dll
+F:\Repositorio Local Franc\treasuryweb\ModeloCRM\bin\Release\EntityFramework.xml
+F:\Repositorio Local Franc\treasuryweb\ModeloCRM\bin\Release\EntityFramework.SqlServer.xml
+F:\Repositorio Local Franc\treasuryweb\ModeloCRM\obj\Release\ModeloCRM.dll
+F:\Repositorio Local Franc\treasuryweb\ModeloCRM\obj\Release\ModeloCRM.pdb

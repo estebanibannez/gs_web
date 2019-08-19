@@ -1,0 +1,113 @@
+﻿@{
+    List<string> permisos = (List<string>)ViewBag.permisos;
+
+}
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-users"></i> Usuarios PSO</h3>
+        <a href="@Url.Action("Create", "Usuario", new { Area = "Administracion" })" class="btn btn-warning modal-ajax-load btn-sm pull-right" data-toggle="modal" data-target="#myModal" data-remote="false">Agregar Usuario</a>
+    </div>
+    <div class="box-body">
+        <div class="pull-left">
+            <i>  Usuarios Activos: @Html.Display("contadorActivo", (int)ViewBag.contadorActivo) </i>
+            <br />
+            <i style="color:red;">  Usuarios Inactivos: @Html.Display("contadorInactivo", (int)ViewBag.contadorInactivo) </i>  
+         </div>
+        <div class="pull-right">
+            Mostrar Usuarios
+            <div id="auxiliar"> </div>
+        </div>
+    </div>
+</div>
+<div class="table-responsive">
+    <div class="box">
+        <div class="box-header no-padding">
+
+
+            <table id="dt_basic" class="table table-bordered table-hover dataTable">
+                <thead>
+                    <tr>
+                        <th>Nombre Usuario</th>
+                        <th>Anexo</th>
+                        <th>Nom Cargo</th>
+                        <th>Unidad</th>
+                        <th>Estado</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        @if (permisos.Contains("MantPermiGs"))
+                        {
+                            <th></th>
+                        }
+                        </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var item in Model.listAnonymousToDynamic)
+                        {
+                    <tr>
+                        <td>@item.NombreUsu</td>
+                        <td>@item.AnexoUsu</td>
+                        <td>@item.NomCargo</td>
+                        <td>@item.Unidad</td>
+                        <td>@item.Estado</td>
+                        <td>
+                            <button class="btn btn-default btn-xs modal-ajax-load" href="@Url.Action("Update", "Usuario", new { Area = "Administracion", @id=item.IdUsuario })" data-toggle="modal" data-target="#myModal" data-remote="false"><i class="fa fa-edit"></i> Editar</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-default btn-xs" onclick="confirmDelete('Confirme la Eliminacion @Html.Raw(item.IdUsuario) ','@Url.Action("Delete", new { id = item.IdUsuario})');"><i class="fa fa-trash-o"></i> Eliminar</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-default btn-xs modal-ajax-load" href="@Url.Action("ReinicioPass", "Usuario", new { Area = "Administracion", @id=item.IdUsuario })" data-toggle="modal" data-target="#myModal" data-remote="false"><i class="fa fa-unlock"></i> Reinicio Clave</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-default btn-xs modal-ajax-load" href="@Url.Action("EmpresasAsignadasGS", "Usuario", new { Area = "Administracion", @id=item.IdUsuario })" data-toggle="modal" data-target="#myModal" data-remote="false"><i class="fa fa-plus"></i> Agregar Empresas</button>
+                        </td>
+                        @if (permisos.Contains("MantPermiGs"))
+                        {
+                            <td>
+                                <button class="btn btn-default btn-xs modal-ajax-load" href="@Url.Action("AsignarPermisoGsWeb", "Usuario", new { Area = "Administracion", @id = item.IdUsuario })" data-toggle="modal" data-target="#myModal" data-remote="false"><i class="fa fa-plus"></i> Asignar Permiso Gs Web</button>
+                            </td>
+                        }
+                        </tr>
+                    }
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    //InicializaMantenedor("dt_basic");
+    var Selector = 'Activos';
+    var table = $('#dt_basic').DataTable({
+
+        initComplete: function () {
+        this.api().columns(4).every( function () {
+            var column = this;
+            var select = $('<select><option value="">Todos</option></select>')
+                .appendTo($('#auxiliar').empty())
+                .on( 'change', function () {
+                    var val = $.fn.dataTable.util.escapeRegex($(this).val()
+                    ); 
+                    column.search( val ? '^'+val+'$' : '', true, false ).draw();
+                } );
+ 
+            column.data().unique().sort().each( function ( d, j ) {
+                if (Selector === d) {///Comparacion en valor y tipocon 3 ===
+                    select.append( '<option SELECTED value="'+d+'">'+d+'</option>' )
+                } else {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                }
+            } );
+            $(table).ready(function() {
+                column.search(Selector ? '^' + Selector + '$' : '', true, false).draw();
+            });
+        } );
+    }
+    });
+    setFormulario();
+</script>
+

@@ -1,0 +1,45 @@
+﻿
+@{
+    string ruta = (string)ViewBag.rutaPhoto;
+}
+
+@foreach (var item in Model.listAnonymousToDynamic)
+
+{
+    <div class="box box-widget widget-user">
+        <div class="widget-user-header bg-aqua-active">
+            <h3 class="widget-user-username">@Html.Label(("nomusu"), (string)ViewBag.nomusu)</h3>
+            <h4 class="widget-user-desc"><i>@item.cargo</i></h4>
+        </div>
+        <div class="widget-user-image" style="left:53%!important">
+            <img class="" src="@ruta" style="width:80%;" alt="User Avatar">
+        </div>
+
+        <div class="box-footer">
+
+            <div class="row">
+                <div class="col-sm-4 border-right">
+                    <div class="description-block">
+                        <h5 class="description-header">Anexo</h5>
+                        <span class="description-text">@item.anexo</span>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 border-right">
+                    <div class="description-block">
+                        <h5 class="description-header">Área</h5>
+                        <span class="description-text">@item.area</span>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="description-block">
+                        <h5 class="description-header">Email</h5>
+                        <span class="description-text">@item.email</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}

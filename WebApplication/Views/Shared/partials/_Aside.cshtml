@@ -1,0 +1,389 @@
+﻿@using WebApplication.App_GlobalResources
+@using WebApplication.Extensions
+
+@{ 
+    List<string> permisos = (List<string>)ViewBag.permisos;
+    string ruta = (string)ViewBag.rutaPhoto;
+}
+
+<section class="sidebar">
+    <div class="user-panel">
+@*@{
+    var sigla = ViewBag.listadousuarios;
+    var rutaimg = "../Img/fotos2/" + sigla + ".jpg";*@
+        <div class="pull-left image">
+            <img src="@ruta"  id="img" class="img-thumbnail img-responsive">
+        </div>
+        <input value="" class="hide" id="user" />
+        <div class="pull-left info">
+            <p style="font-size:10px;">@Html.Label(("nomusu"), (string)ViewBag.nomusu)</p>
+            <a href="#"><i class="fa fa-circle text-success"></i> En linea</a>
+        </div>
+    </div>
+        
+
+    @*<!---Buscador-->
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+        </form>
+        <!---Fin Buscador-->*@
+
+
+    <!---Menu Selector -->
+    <ul class="sidebar-menu">
+        <li class="header">@Pay_Lenguaje.men_Menu_Prin</li>
+
+        @if (permisos.Contains("MantCRM"))
+        {
+            <li class="left-sidebar-menu-widgets">
+                <a href="#">
+                    <i class="fa fa-gears"></i> <span> CRM</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+
+                <ul class="treeview-menu">
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-gear"></i> <span>Gestión de Contactos</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="">
+                                <a href="@Url.Action("Index", "ContactosClientes", new { Area = "CRM" })" class="main-content"><i class="fa fa-angle-right"></i>Mant Contactos </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="treeview-menu">
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-gear"></i> <span>Gestión de Clientes</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="">
+                                <a href="@Url.Action("Index", "ClientesProspective", new { Area = "CRM" })" class="main-content"><i class="fa fa-angle-right"></i>Agregar Clientes </a>
+                            </li>
+                            <li class="">
+                                <a href="@Url.Action("Index", "ClientesPropuetasActivas", new { Area = "CRM" })" class="main-content"><i class="fa fa-angle-right"></i>Clientes Propuestas</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="treeview-menu">
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-gear"></i> <span>Gestión de Servicios</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="">
+                                <a href="@Url.Action("Index", "CuestionarioCliente", new { Area = "CRM" })" class="main-content"><i class="fa fa-angle-right"></i>Agregar Cuestionario </a>
+                            </li>
+                            <li class="">
+                                <a href="@Url.Action("Index", "PropuestaServicio", new { Area = "CRM" })" class="main-content"><i class="fa fa-angle-right"></i>Agregar Propuesta</a>
+                            </li>
+                            <li class="">
+                                <a href="@Url.Action("Index", "ApruebaPropuesta", new { Area = "CRM" })" class="main-content"><i class="fa fa-angle-right"></i>Agregar Contracto</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="treeview-menu">
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-gear"></i> <span>Reportes</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="">
+                                <a href="@Url.Action("Index", "ReporteCliente", new { Area = "CRM" })" class="main-content"><i class="fa fa-angle-right"></i>Customer Report </a>
+                            </li>
+                            <li class="">
+                                <a href="@Url.Action("Index", "ReporteHistoricoServicio", new { Area = "CRM" })" class="main-content"><i class="fa fa-angle-right"></i>Historico de client</a>
+                            </li>
+                            @*<li class="">
+                                <a href="@Url.Action("Index", "ApruebaPropuesta", new { Area = "CRM" })" class="main-content"><i class="fa fa-angle-right"></i>Proposed Approval(Contract)</a>
+                            </li>*@
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        }
+
+        @if (permisos.Contains("LibroDiario"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "LibroDiario", new { Area = "BackOffice" })" class="main-content">
+                    <i class="fa fa-book"></i>
+                    <span>Libro Diario</span>
+                </a>
+            </li>
+        }
+        @if (permisos.Contains("CentPagos"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "CentralizarPagos", new { Area = "Tesoreria" })" class="main-content">
+                    <i class="fa fa-files-o"></i>
+                    <span>Centralizar Pagos</span>
+                </a>
+            </li>
+        }
+        @if (permisos.Contains("XlsBancos"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "XlsBancos", new { Area = "Tesoreria" })" class="main-content">
+                    <i class="fa fa-files-o"></i>
+                    <span>Xls Bancos</span>
+                </a>
+            </li>
+        }
+        @if (permisos.Contains("MantVincuSoftGs"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "VincuSoftGs", new { Area = "Administracion" })" class="main-content">
+                    <i class="fa fa-exchange"></i>
+                    <span>Vinculación Softland a GS</span>
+                </a>
+            </li>
+        }
+        @if (permisos.Contains("MantOper"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "IngresoDocumento", new { Area = "Operaciones" })" class="main-content">
+                    <i class="fa fa-file-pdf-o"></i>
+                    <span>Ingreso Documento</span>
+                </a>
+            </li>
+        }
+        @if (permisos.Contains("MantUsu"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "Usuario", new { Area = "Administracion" })" class="main-content">
+                    <i class="fa fa-users"></i>
+                    <span> Mantenedor Usuarios</span>
+                    @*<small class="label pull-right bg-green">Nuevo!</small>*@
+                </a>
+            </li>
+        }
+        @if (permisos.Contains("MantClie"))
+            {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "Clientes", new { Area = "Administracion" })" class="main-content">
+                    <i class="fa fa-suitcase"></i>
+                    <span> Mantenedor Clientes</span>
+                    @*<small class="label pull-right bg-green">Nuevo!</small>*@
+                </a>
+            </li>
+            }
+        @*@if (permisos.Contains("MantCent"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "Centraliza", new { Area = "Centraliza" })" class="main-content">
+                    <i class="fa fa-exchange"></i>
+                    <span>Centralización</span>
+                </a>
+            </li>
+        }*@
+        @if (permisos.Contains("MantBusq"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "Busqueda", new { Area = "Operaciones" })" class="main-content">
+                    <i class="fa fa-search"></i>
+                    <span> Busqueda Docu Tributarios</span>
+                    @*<small class="label pull-right bg-green">Nuevo!</small>*@
+                </a>
+            </li>
+        }
+        @if (permisos.Contains("MantDecl"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "Declaraciones", new { Area = "Utilidades" })" class="main-content">
+                    <i class="glyphicon glyphicon-list-alt"></i>
+                    <span> Declaraciones Juradas</span>
+                </a>
+            </li>
+        }
+        @if (permisos.Contains("MantFacturacion"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "Facturacion", new { Area = "Utilidades" })" class="main-content">
+                    <i class="glyphicon glyphicon-list-alt"></i>
+                    <span> Facturación Ventas</span>
+                </a>
+            </li>
+        }
+        @if (permisos.Contains("MantIndi"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "Indicadores", new { Area = "Administracion" })" class="main-content">
+                    <i class="fa fa-dollar"></i>
+                    <span> Indicadores Económicos</span>
+                    @*<small class="label pull-right bg-green">Nuevo!</small>*@
+                </a>
+            </li>
+        }
+        @if (permisos.Contains("MantAnti"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "Anticipo", new {Area = "BackOffice" })" class="main-content">
+                    <i class="fa fa-hand-paper-o"></i>
+                    <span> Portal Anticipos</span>
+                </a>
+            </li>
+        }
+        @if (permisos.Contains("MantEven"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "Evento", new { Area = "Utilidades" })" class="main-content">
+                    <i class="fa fa-flag"></i>
+                    <span> Eventos</span>                
+                </a>
+            </li>
+        }
+        @if (permisos.Contains("MantAuxi"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "Auxiliares", new { Area = "Administracion" })" class="main-content">
+                    <i class="glyphicon glyphicon-sunglasses"></i>
+                    <span> Mantenedor Proveedores</span>
+                </a>
+            </li>
+        }
+        @if (permisos.Contains("MantComp"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "Comprobante", new { Area = "Utilidades" })" class="main-content">
+                    <i class="fa fa-calendar-check-o"></i>
+                    <span> Comprobantes Pendientes</span>              
+                </a>
+            </li>
+        }
+        @if (permisos.Contains("MantRein"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "Reinicio", new { Area = "Administracion" })" class="main-content">
+                    <i class="glyphicon glyphicon-user"></i>
+                    <span> Reinicio Clave Softland</span>
+                </a>
+            </li>
+        }
+	@if (permisos.Contains("MantImput"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "Imputacion", new { Area = "BackOffice" })" class="main-content">
+                    <i class="glyphicon glyphicon-user"></i>
+                    <span> Imputación</span>
+                </a>
+            </li>
+        }
+        @if (permisos.Contains("MantModiDoc"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "ModiDocExistn", new { Area = "Operaciones" })" class="main-content">
+                    <i class="fa fa-file-text"></i>
+                    <span>Modificación de Documentos</span>
+                </a>
+            </li>
+        }
+        @if (permisos.Contains("MantSolPag"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "SolicitudPagos", new { Area = "BackOffice" })" class="main-content">
+                    <i class="fa fa-credit-card-alt"></i>
+                    <span>Solicitud de Pagos</span>
+                </a>
+            </li>
+        }
+        @if (permisos.Contains("MantGestPag"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "GestionPagos", new { Area = "Tesoreria" })" class="main-content">
+                    <i class="fa fa-credit-card"></i>
+                    <span>Gestión de Pagos</span>
+                </a>
+            </li>
+        }
+
+        @if (permisos.Contains("MantCapFacElec"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "CapturaFacturasElecs", new { Area = "Operaciones" })" class="main-content">
+                    <i class="fa fa-file-excel-o"></i>
+                    <span>Captura Facturas Electronicas</span>
+                </a>
+            </li>
+        }
+
+        @if (permisos.Contains("MantProgProcKPI"))
+        {
+            <li id="left-sidebar-menu-widgets">
+                <a href="@Url.Action("Index", "PrograProceKPI", new { Area = "Administracion" })" class="main-content">
+                    <i class="fa fa-calendar-check-o"></i>
+                    <span>Programación Registros KPI</span>
+                </a>
+            </li>
+        }
+        @if (permisos.Contains("MantHera") || permisos.Contains("MantPara") || permisos.Contains("MantCont") || permisos.Contains("MantBibl") || permisos.Contains("MantCliA"))
+        {
+
+            <li class="left-sidebar-menu-widgets">
+                <a href="#">
+                    <i class="fa fa-wrench"></i> <span>Herramientas</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu" style="">
+                    @if (permisos.Contains("MantHera"))
+                    {
+                        <li><a href="@Url.Action("Index", "HerramientasApoyo", new { Area = "Utilidades" })" class="main-content"><i class="fa fa-angle-right"></i> Herramientas de Apoyo </a></li>
+                    }
+                    @if (permisos.Contains("MantPara"))
+                    {
+                        <li class=""><a href="@Url.Action("Index", "ParametrosTipos", new { Area = "Administracion" })" class="main-content" ><i class="fa fa-angle-right"></i> Parametros </a></li>
+                    }
+                    @if (permisos.Contains("MantCont"))
+                    {
+                        <li class=""><a href="@Url.Action("Index", "Contacto", new { Area = "Utilidades" })" class="main-content"><i class="fa fa-angle-right"></i> Contraseña Clientes </a></li>
+                    }
+                    @if (permisos.Contains("MantBibl"))
+                    {
+                        <li class=""><a href="@Url.Action("Index", "Biblioteca", new { Area = "Utilidades" })" class="main-content"><i class="fa fa-angle-right"></i> Biblioteca GS </a></li>
+                    }
+                    @if (permisos.Contains("MantCliA"))
+                    {
+                        <li class=""><a href="@Url.Action("Index", "ClientesAsignados", new { Area = "Utilidades" })" class="main-content"><i class="fa fa-angle-right"></i> Clientes Asignados </a></li>
+                    }
+                    @if (permisos.Contains("MantTutorial"))
+                    {
+                        <li class=""><a href="@Url.Action("Index", "VideoTutoriales", new { Area = "Utilidades" })" class="main-content"><i class="fa fa-video-camera"></i> VideoTutoriales </a></li>
+                    }
+                </ul>
+            </li>
+        }
+
+        @*<li class="header">LABELS</li>
+        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>*@
+    </ul>
+</section>

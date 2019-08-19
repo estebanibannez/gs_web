@@ -1,0 +1,109 @@
+﻿@model  WebApplicationMod.Usu
+
+@using (Html.BeginForm((Model == null ? "Create" : "Update"), "Usuario", FormMethod.Post, new { @id = "mant-form", @novalidate = "novalidate", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @(Model == null ? new MvcHtmlString("") : Html.HiddenFor(p => p.ID))
+
+    if (Model == null)
+    {
+
+        <div class="box-header with-border">
+            <h3 class="box-title">Ingrese la información del nuevo usuario</h3>
+        </div>
+
+    }
+    else
+    {
+        <div class="box-header with-border">
+            <h3 class="box-title">Editar al usuario : @Html.DisplayFor(model => model.Nom)</h3>
+        </div>
+    }
+
+<div class="widget-body form-horizontal">     
+    <div class="">
+        <table class="table-condensed">
+            <tbody>
+                <tr>
+                    <td>Nombre</td>
+                    <td>@Html.TextBoxFor(model => model.Nom, new { @class = "custom-scroll form-control" })</td>
+                    <td>Nombre Usuario</td>
+                    <td>@Html.TextBoxFor(model => model.Sigla, new { @class = "custom-scroll form-control" })</td>
+                </tr>
+                <tr>
+                    <td>Nombre corto</td>
+                    <td>@Html.TextBoxFor(model => model.nomcorto, new { @class = "custom-scroll form-control" })</td>
+                    <td>Contraseña</td>
+                    <td>@Html.TextBoxFor(model => model.pass, new { @class = "custom-scroll form-control" })</td>
+                </tr>
+                <tr>
+                    <td>Anexo</td>
+                    <td>@Html.TextBoxFor(model => model.Anexo, new { @class = "custom-scroll form-control" })</td>
+                    <td>Usuario Softland</td>
+                    <td>@Html.TextBoxFor(model => model.nomususoft, new { @class = "custom-scroll form-control" })</td>
+                </tr>
+                <tr>
+                    <td>Cargo</td>
+                    <td>@Html.DropDownListFor(model => model.cargo, (SelectList)ViewBag.ListaCargos, "Seleccione...", new { @class = "form-control" })     </td>
+                    <td>Unidad</td>
+                    <td>@Html.DropDownListFor(model => model.unidad, (SelectList)ViewBag.ListaUnidad, "Seleccione...", new { @class = "form-control" })</td>
+                </tr>
+                <tr>
+                    <td>Jefe Directo</td>
+                    <td>@Html.DropDownListFor(model => model.jefatura, (SelectList)ViewBag.ListaUsu, "Seleccione...", new { @class = "form-control" })  </td>
+                    <td>Gerente General</td>
+                    <td>@Html.DropDownListFor(model => model.gergen, (SelectList)ViewBag.ListaGerente, "Seleccione...", new { @class = "form-control" })</td>
+                </tr>
+                <tr>
+                    <td>Gerencia</td>
+                    <td>@Html.DropDownListFor(model => model.ger, (SelectList)ViewBag.ListaGerencia, "Seleccione...", new { @class = "form-control" })</td>
+                    <td>Supervisor</td>
+                    <td>@Html.DropDownListFor(model => model.superv, (SelectList)ViewBag.ListaSupervisor, "Seleccione...", new { @class = "form-control" })</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>@Html.TextBoxFor(model => model.email, new { @class = "custom-scroll form-control" })</td>
+                    <td>Grupo</td>
+                    <td>@Html.DropDownListFor(model => model.grupo, (SelectList)ViewBag.ListaGrupo, "Seleccione...", new { @class = "form-control" })</td>
+
+                </tr>
+                <tr>
+                    @{
+                        var estado = false;
+                        estado = Model == null ? false : Model.uactivo == "s" ? true : false;
+                    }
+                    <td colspan="2">Estado del Usuario</td>
+                    <td colspan="2">@Html.CheckBox("estado", estado, "Seleccione...")</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>        
+    <div class="box-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+        <button type="button" class="btn btn-warning pull-right" action="save">Guardar</button>
+    </div>
+</div>
+
+}
+<script>
+
+    $(document).ready(function () {
+
+        setFormulario(
+                "mant-form",
+                {
+                    Nom: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese un nombre .</span> ' },
+                    Sigla: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese una Sigla para el usuario .</span> ' },
+                    nomcorto: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese un nombre corto.</span> ' },
+                    email: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese un Email.</span> ' }
+                },
+                {
+                    /* titulo: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese un nombre .</span> ' },
+                    fecha: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese una Fecha.</span> ' },
+                    id_cliente: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Seleccione un Cliente.</span> ' },
+                    descripcion: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese una breve descripcion.</span> ' },
+                    */
+                }
+        )
+    });
+</script>

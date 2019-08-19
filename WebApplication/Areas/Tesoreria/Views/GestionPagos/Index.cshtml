@@ -1,0 +1,582 @@
+﻿<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-credit-card"></i>  Gestión de Pagos</h3>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="box-header with-border">
+        <h3 class="box-title">Búsqueda de Documentos</h3>
+    </div>
+    <div id="panel-body">
+        <div class="box-body">
+            <form id="form-busc">
+                <div class="box-body">
+                    <div class="col-md-4 col-sm-4">
+                        <label>Cliente</label>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <select id="prSelect" class="form-control col-md-6">
+                            <option selected='selected' value='0'>--Seleccione Cliente--</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="box-footer">
+            <table id="dt_soli" class="table table-striped display responsive no-wrap text-center" style="width:100%" role="grid" aria-describedby="example1_info">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Proveedor</th>
+                        <th>N° Doc</th>
+                        <th>Doc</th>
+                        <th>Fecha</th>
+                        <th>Monto</th>
+                        <th>Saldo</th>
+                        <th>Fecha Limite</th>
+                        <th>Observaciones</th>
+                        <th>Fecha Solicitud</th>
+                        <th>Solicitado</th>
+                        <th>Banco prov</th>
+                        <th>Cuenta Prov</th>
+                        <th>Correo Prov</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="box-footer">
+            <button type="button" id="btnImprimir"  class="btn btn-warning pull-right">Imprimir</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel">
+            <div class="box-header with-border">
+                <h3 class="box-title">Pagar Solicitud</h3>
+            </div>
+            @model WebApplicationMod.GS_Pagos
+            @using (Html.BeginForm("Editar", "GestionPagos", FormMethod.Post, new { @id = "mant-form", role = "form" }))
+            {
+                @Html.HiddenFor(model => model.Org, new { id = "ID" })//mando id del pago relacionado con el doc para ver si se hace un insercion o un update
+                @Html.HiddenFor(model => model.Bco, new { id = "Bco" })
+                @Html.HiddenFor(model => model.CtaBco, new { id = "CtaBco" })
+                @Html.Hidden("idpag", null, new { @id = "ValidIDPag" })
+                @Html.Hidden("numcent", null, new { @id = "idNumCent" })
+                @Html.Hidden("clie", null, new { @id = "idCliente" })
+
+                <div class="box-body">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label">Cuentas Asociadas al Cliente</label>
+                            <div>
+                                <div><select class="ed form-control" name="Cuentas" id="idCuentas"></select></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">N° de Cuenta</label>
+                            <div>
+                                @Html.TextBox("Cuenta", null, new { @class = "custom-scroll form-control", @id = "idCuentaPag", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">N° del Pago</label>
+                            <div>
+                                @Html.TextBox("DPago", null, new { @class = "custom-scroll form-control", @id = "idNumDocPag", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Fecha del Pago</label>
+                            <div>
+                                @Html.TextBox("Fecha", null, new { @class = "custom-scroll form-control", @id = "idFechaPag", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Forma de pago</label>
+                            <div>
+                                @Html.DropDownList("MPago", new SelectListItem[] { new SelectListItem() { Text = "--Seleccione Forma--", Value = "" },
+                                                                                     new SelectListItem() { Text = "Cheque", Value="CH"},
+                                                                                     new SelectListItem() { Text = "Transferencia", Value ="TR"},
+                                                                                     new SelectListItem() { Text = "Vale Visa", Value="VV"} }, new { @class = "form-control custom-scroll", @id = "idFormaPago" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Monto del Documento</label>
+                            <div>
+                                @Html.TextBox("MontoDocPag", null, new { @class = "custom-scroll form-control", @id = "idMontoDoc", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Monto a Pagar</label>
+                            <div>
+                                @Html.TextBox("Monto", null, new { @class = "custom-scroll form-control", @id = "idMontoPag" ,@type="number"})
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Saldo</label>
+                            <div>
+                                @Html.TextBox("SaldoPag", null, new { @class = "custom-scroll form-control", @id = "idSaldoPag", @readonly = "readonly" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button type="button" action="save" id="btnGrabar" class="btn btn-warning pull-right">Enviar Pago</button>
+                </div>
+            }
+            <div class="box-footer" id="idRestric">
+                <div class="panel">
+                    <div class="box-header with-border">
+                        <h4 class="box-title">Restricciones Bancarias</h4>
+                    </div>
+                    <div id="panel-body">
+                        @Html.TextArea("Restriccion", null, new { @id = "Restriccion", @class = "ed form-control col-md-12", @maxlength = 200, @rows = 13, @style = "width:100%", @spellcheck = "false", @readonly = "readonly" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div id="doc" name="doc" class="doc">
+            <iframe src="" height="800" style="width:100%" id="ob"></iframe>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script>
+
+    var tableSoli;
+    function GrabaForm(form, rules, messages) {
+        var $ordenForm = $("#" + form).validate({
+            rules: rules,
+            messages: messages,
+            errorPlacement: function (error, element) {
+                error.insertAfter(element.parent());
+            }
+        });
+        $("button[action=save]").click(function () {
+            $("button[action=save]").prop('disable', true);
+            if ($('#' + form).valid()) {
+                var formJS = document.getElementById(form);
+                var formData = new FormData(formJS);
+
+                for (var pair of formData.entries()) {
+                    if (pair[0].includes(".monto")) {
+                        formData.set(pair[0], pair[1].replace(new RegExp('\\.', 'g'), ''));
+                    }
+                }
+                $.ajax({
+                    url: document.getElementById(form).action,
+                    type: document.getElementById(form).method,
+                    processData: false,
+                    contentType: false,
+                    data: formData,
+                    success: function (result) {
+                        if (result.success) {
+                            mensajeExito("Formulario", "Registro con exito");
+                            $("#idCuentas").prop("disabled", true);
+                            Desactivar();
+                            Limpiar();
+                            tableSoli.ajax.reload();
+                            $('#idFormaPago').attr('readonly', false);
+                        }
+                        else {
+                            mensajeError("Error", result.mensaje);
+                        }
+                    },
+                    error: function () {
+                        $("#content").html('<h2>Se ha generado un error</h2>');
+                    },
+                    complete: function () {
+
+                        $("button[action=save]").prop('disable', false);
+                    }
+                });
+            } else {
+                console.log("error formulario");
+                $("button[action=save]").prop('disable', false);
+            }
+        });
+    }
+
+    GrabaForm("mant-form", {
+        MPago: { required: true },
+        Monto: { required: true }
+    },
+        {
+            MPago: '<span class="help-block error"><i class="fa fa-warning"></i> Campo Requerido.</span>',
+            Monto: '<span class="help-block error"><i class="fa fa-warning"></i> Campo Requerido.</span>'
+    });
+
+    function Activar() {
+        $("#idFormaPago").prop("disabled", false);
+        $("#idMontoPag").prop("disabled", false);
+        $("#idPagTot").prop("disabled", false);
+        $("#idNumDocPag").prop("disabled", false);
+        $("#btnGrabar").prop("disabled", false);
+
+    }
+
+    function Desactivar() {
+        $("#btnGrabar").prop("disabled", true);
+        $("#idFormaPago").prop("disabled", true);
+        $("#idMontoPag").prop("disabled", true);
+        $("#idPagTot").prop("disabled", true);
+        $("#idNumDocPag").prop("disabled", true);
+        $("#idFormaPago").val("");
+        $("#idMontoPag").val("");
+        $("#idPagTot").val("");
+        $("#idNumDocPag").val("");
+        $("#idCuentaPag").val("");
+        $("#idFechaPag").val("");
+        $("#idMontoDoc").val("");
+        $("#idSaldoPag").val("");
+    }
+
+    function Limpiar() {
+        $("#idFormaPago").val("");
+        $("#idMontoPag").val("");
+        $("#idPagTot").val("");
+        $("#idNumDocPag").val("");
+        $("#idCuentaPag").val("");
+        $("#idFechaPag").val("");
+        $("#idMontoDoc").val("");
+        $("#idSaldoPag").val("");
+        $("#idCuentas").val("");
+        $("#ob").attr("src", "");
+    }
+
+    $('#idMontoPag').on('input', function () {
+
+        var limite = document.getElementById("idMontoDoc").value;
+        var value = $(this).val();
+
+        if ((value !== '') && (value.indexOf('.') === -1)) {
+            $(this).val(Math.max(Math.min(value, limite), 0));
+        }
+    });
+
+
+    function prSelect() {
+        $.ajax({
+            url:'@Url.Action("CargaClientes", "GestionPagos")',
+            success: function (response) {
+                $.each(response.data, function (value, item) {
+                    var clie = item.IdCli;
+                    var countPag = item.CountId;
+                    var countUrg = item.countFecLim;
+                    var nombre = item.NomCorto.trim();
+                    var largo = String(countPag).length;
+                    if (largo == 3) {
+                        $("#prSelect").append("<option value='" + clie + "'>[" + countPag + "]&nbsp;&nbsp;&nbsp;[" + countUrg + "]&nbsp;&nbsp;&nbsp;&nbsp;" + nombre + "</option>");
+                    } else if(largo == 2) {
+                        $("#prSelect").append("<option value='" + clie + "'>[" + countPag + "]&nbsp;&nbsp;&nbsp;&nbsp;[" + countUrg + "]&nbsp;&nbsp;&nbsp;&nbsp;" + nombre + "</option>");
+                    }else{
+                        $("#prSelect").append("<option value='" + clie + "'>[" + countPag + "]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[" + countUrg + "]&nbsp;&nbsp;&nbsp;&nbsp;" + nombre + "</option>");
+                    }
+                });
+            },
+            error: function () {
+                $("#content").html('<h2>Se ha generado un error</h2>');
+            }
+        });
+    }
+    $(document).ready(function () {
+        prSelect();
+        Desactivar();
+        $("#btnImprimir").prop("disabled", true);
+
+        function resta() {
+            $("#idSaldoPag").val(Number($("#idMontoDoc").val()) - Number($("#idMontoPag").val()));
+        }
+        $('#idMontoPag').on('keydown keyup', resta);
+
+        $("#idCuentas").prop("disabled", true);
+        $("#idRestric").hide();
+
+        var soliColumns = [
+            { data: "ID",
+                targets: 0,
+                searchable: false,
+                orderable: false,
+                className: 'sorting_disabled',
+                render: function (data) {
+                    var url = "'@Url.Action("DevolverPago", "GestionPagos", new { Area = "Tesoreria" })";
+                    var urlReturn = url + '?id=' + data + '\'';
+                    return '<button class=\"btn btn-default btn-xs noMove\" value="' + data + '" onclick=\"confirmDelete(\'¿Desea devolver este documento?\',' + urlReturn + ');\"><i class=\"fa fa-arrow-circle-left\"></i> Devolver Pago</button>'
+                }
+            },
+            { data: 'NomAux' },
+            { data: 'NumDocI' },
+            { data: 'RotuloDoc' },
+            { data: 'MovFe',
+                render:
+                    function (data, type, row) {
+                        return new moment(data).format('DD/MM/YYYY');
+                    }
+            },
+            { data: 'MontoPago',
+                render: $.fn.dataTable.render.number('.', '', '', '$')
+            },
+            { data: 'Saldo',
+                render: $.fn.dataTable.render.number('.', '', '', '$')
+            },
+            { data: 'PagUrg' },
+            { data: 'ObsSolPago' },
+            { data: 'FechaSolPago',
+                render:
+                    function (data, type, row) {
+                        return new moment(data).format('DD/MM/YYYY HH:mm:ss');
+                    }
+            },
+            { data: 'UsuSolPago',
+                render: function (data) {
+                    if (data != null) {
+                        var l = data.trim();
+                        var lar = l.length;
+                        var ape = l.substring(1, lar);
+                        var apes = ape.substring(0, 1).toUpperCase();
+                        var capi = l.substring(0, 1).toUpperCase();
+                        return capi + '.' + apes + ape.substring(1, (lar - 1));
+                    } else {
+                        return "";
+                    }
+                }
+            },
+            { data: 'NomBan',
+                render:
+                    function (data, full) {
+                        if (data != null) {
+                            var l = data.trim();
+                            if (l.length > 1) {
+                                return '<i class="fa fa-check"></i>';
+                            } else {
+                                return "";
+                            }
+                        } else {
+                            return "";
+                        }
+                    }
+            },
+            { data: 'Cta',
+                render:
+                    function (data, full) {
+                        if (data != null) {
+                            var l = data.trim();
+                            if (l.length > 3) {
+                                return '<i class="fa fa-check"></i>';
+                            } else {
+                                return "";
+                            }
+                        } else {
+                            return "";
+                        }
+                    }
+            },
+            { data: 'Email',
+                render:
+                    function (data, full) {
+                        if (data != null) {
+                            var l = data.trim();
+                            if (l.length > 3) {
+                                return '<i class="fa fa-check"></i>';
+                            } else {
+                                return "";
+                            }
+                        } else {
+                            return "";
+                        }
+                    }
+            },
+        ];
+
+        function paramIdCli(d) {
+            return $.extend({}, d, {
+                "id": $("#prSelect").val()
+            });
+        };
+
+        tableSoli = $("#dt_soli").DataTable({
+            "ajax": {
+                "url": "@Url.Action("Solicitudes", "GestionPagos")",
+                "type": "POST",
+                "data": paramIdCli,
+            },
+            processing: true,
+            language: {
+                'processing': '<i class="fa fa-refresh fa-spin"></i> <label> Cargando Solicitud...</label>'
+            },
+            "columns": soliColumns,
+            "order": [[4, "desc"]],
+            rowReorder: {
+            },
+        });
+
+        $("#prSelect").change(function () {
+            Limpiar();
+            Desactivar();
+            $("#idCuentas").prop("disabled", true);
+            var idCli = $("#prSelect").val();
+            $("#idRestric").hide(1000);
+            tableSoli.ajax.reload();
+            $.ajax({
+                async: true,
+                url: '@Url.Action("DatosCliente", "GestionPagos")?id=' + idCli,
+                dataType: 'json',
+                success: function (result) {
+                    $("#medioPago").text(result.data.Medio);
+                    if (result.data.Restricc != "") {
+
+                        $("#Restriccion").val(result.data.Restricc);
+                        $("#idRestric").show(1000);
+                    }
+                },
+                error: function () {
+                    $("#content").html('<h2>Se ha generado un error</h2>');
+                }
+            });
+        });
+
+        function printDiv() {
+            var divToPrint = document.getElementById('doc');
+            var newWin = window.open('', 'Print-Window');
+            newWin.document.open();
+            newWin.document.write('<html><body>' + divToPrint.innerHTML + '</body></html>');
+            newWin.window.print();
+            newWin.close();
+        }
+
+        $("#btnImprimir").click(function () {
+            printDiv();
+        });
+        
+        $("#dt_soli tbody").on('click', 'tr', function () {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+                $("#idCuentas").prop("disabled", true);
+                $("#idCuentas").empty();
+                Desactivar();
+                $("#btnImprimir").prop("disabled", true);
+                $("#ob").attr("src", "");
+            } else {
+                tableSoli.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+                Desactivar();
+                var $row = $(this).closest('tr');
+                var data = tableSoli.row($row).data();
+                var org = data.ID;
+                var archivo = data.Archivo;
+                var id_encab = data.id_encab;
+                var idCli = $("#prSelect").val();
+                var idD = data.ID;
+                var monto = data.Saldo;
+                var numCent = data.NumCent;
+                var bnc = data.NomBan;
+                var cta = data.Cta;
+                var ema = data.Email;
+
+                $.ajax({
+                    async: true,
+                    url: '@Url.Action("Edit", "GestionPagos" ,new {Area = "Tesoreria" })',
+                    data: '{id:' + idCli + ',org:' + org + '}',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (result) {
+                        var cambCheque = 0;
+                        
+                        if (bnc == null || cta == null || ema == null) {
+                            mensajeExito("Falta de Informacion del Proveedor", "Se cambiara a 'CHEQUE' La forma de pago");
+                            $("#idFormaPago").val('CH');
+                            cambCheque = 1;
+                        }
+
+                        var datosCta = result.datosCuenta;
+                        var pago = result.dataPag;
+                        var codPag = result.dataCodPag;
+                        var cuentas = result.dataCta;
+                        var fechPag = result.dataFech;
+                        $("#idCuentas").empty();
+                        $("#idCuentas").prop("disabled", false);
+                        $("#idCuentas").append('<option selected value= 0 >--Seleccione Cuenta--</option>');
+                        for (var i = 0; i < cuentas.length; i++) {
+                            $("#idCuentas").append('<option value=' + cuentas[i].Value + '>' + cuentas[i].Text + '</option>');
+                        }
+
+                        if (archivo != "") {
+                            $("#btnImprimir").prop("disabled", true);
+                            var url = '@Url.Action("Pdf", "GestionPagos")/' + idD;
+                            $.ajax({
+                                url: url,
+                                type: "POST",
+                                success: function (resultado) {
+                                    if (resultado.success == false) {
+                                        mensajeError("Not Found", "No se ha encontrado el documento. Contactece con el Administrador");
+                                        $("#ob").attr("src", "");
+                                    } else {
+                                        $("#ob").attr("src", url);
+                                    }
+                                }
+                            });
+                        } else {
+                            $("#btnImprimir").prop("disabled", false);
+                            $("#ob").attr("src", "http://gs.pso.cl/Master/DocuXml?idCab=" + id_encab);
+                        }
+                        
+                        $("#idCuentas").change(function () {
+                            $('#idFormaPago').attr('readonly', false);
+                            Activar()
+                            var cuenta = $("#idCuentas").val();
+                            if (pago != null) {
+                                $("#ValidIDPag").val(pago.IDPag);
+                            } else {
+                                $("#ValidIDPag").val(0);
+                            }
+                            for (var i = 0; i < datosCta.length; i++) {
+                                if (cuenta.trim() == datosCta[i].NumCta.trim()) {
+                                    var idBanc = datosCta[i].IdBanc;
+                                    var idCta = datosCta[i].IdCta;
+                                }
+                            }
+                            if (cambCheque == 1) {
+                                $("#idFormaPago").val('CH');
+                                $('#idFormaPago').attr('readonly', true);
+                            }
+                            $("#ID").val(idD);
+
+                            $("#Bco").val(idBanc);
+                            $("#CtaBco").val(idCta);
+                            $("#idFechaPag").val(new moment(fechPag).format('DD/MM/YYYY'));
+                            $("#idSaldoPag").val(0);
+                            $("#idMontoDoc").val(monto);
+                            $("#idMontoPag").val(monto);
+                            $("#idNumDocPag").val(codPag);
+                            $("#idCuentaPag").val(cuenta);
+                            $("#idNumCent").val(numCent);
+                            $("#idCliente").val(idCli);
+                        });
+                    },
+                    error: function () {
+                        $("#content").html('<h2>Se ha generado un error</h2>');
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+    
+

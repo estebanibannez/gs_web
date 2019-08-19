@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GSPSOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="TREA_anticipo_extencion">
+    <Key>
+      <PropertyRef Name="id_anticipo" />
+    </Key>
+    <Property Name="id_anticipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fecha_solicitud" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="id_tipo_anticipo" Type="Int32" Nullable="false" />
+    <Property Name="fecha_pago" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="estado_anticipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="id_anticipo_softland" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="C_id_cliente" Type="Int32" Nullable="false" />
+    <Property Name="C_id_auxiliar" Type="Int32" Nullable="false" />
+    <Property Name="C_monto" Type="Int32" Nullable="false" />
+    <Property Name="C_glosa" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="C_cuenta_contable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="id_usu_solicitud" Type="Int32" Nullable="false" />
+    <Property Name="id_usu_pago" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="GSPSOEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TREA_anticipo_extencion" EntityType="Self.TREA_anticipo_extencion" />
+  </EntityContainer>
+</Schema>

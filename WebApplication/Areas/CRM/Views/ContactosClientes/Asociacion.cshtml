@@ -1,0 +1,47 @@
+﻿@{ string nom = (string)ViewBag.Nombre;}
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-gear"></i> El Cliente Seleccionado es : @nom</h3>
+    </div>
+</div>
+
+
+<form id="asignarContacto" action="@Url.Action("Asociacion_Cliente_Contacto", "ContactosClientes")" method="post">
+    @Html.Hidden("id", (int)ViewBag.Id)
+    <div class="tab-pane box-body active" id="emgs">
+        <div class="col-md-12 center-block">
+            <div id="empresa_id_multiple" class="bootstrap-duallistbox-container row">
+                <div class="box1 col-md-12">
+                    @{
+                        @Html.DropDownList("contacto_id", (MultiSelectList)Model.list_contact, null, new { multiple = "multiple" })
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancelar</button>
+        <button type="button" class="btn btn-warning pull-right" action="save">Guardar</button>
+    </div>
+</form>
+
+
+<script type="text/javascript">
+    setFormulario("asignarContacto");
+
+    var empresadGS = $('#contacto_id').bootstrapDualListbox({
+        nonSelectedListLabel: 'Lista de contactos para asignar',
+        selectedListLabel: 'Contactos que estan asignados',
+        preserveSelectionOnMove: 'moved',
+        moveOnSelect: true
+    });
+
+    $('#contacto_id').on('change', function () {
+        console.log('triggers');
+        var selecionado = $(this).val();
+        console.log(selecionado);
+        if (selecionado == null) {
+            $("#bootstrap-duallistbox-selected-list_contacto_id").append('<option value ="0" selected>Ninguno<option>')
+        }
+    });
+</script> 

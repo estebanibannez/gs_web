@@ -1,0 +1,36 @@
+Time: 31-08-2017 12:15:28
+-----------------------------------------------------------
+Code: OmJAQEmr28gX2k9d6pHy_31082017121528
+Message: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+StackTrace:    en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en WebApplication.Areas.Anticipo.Controllers.AnticipoController.Create(Anticipos model) en C:\ANEVES\Repositorios\Local\treasuryweb\WebApplication\Areas\Anticipo\Controllers\AnticipoController.cs:línea 42
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+-----------------------------------------------------------
+
+Time: 31-08-2017 12:40:29
+-----------------------------------------------------------
+Code: 8Xo1kPtHSm6wbNwkUPq9_31082017124029
+Message: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+StackTrace:    en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en WebApplication.Areas.Anticipo.Controllers.AnticipoController.Create(Anticipos model) en C:\ANEVES\Repositorios\Local\treasuryweb\WebApplication\Areas\Anticipo\Controllers\AnticipoController.cs:línea 43
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+-----------------------------------------------------------
+
+Time: 31-08-2017 12:45:53
+-----------------------------------------------------------
+Code: ziJlWMHhe7RpUGcpefay_31082017124553
+Message: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+StackTrace:    en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en WebApplication.Areas.Anticipo.Controllers.AnticipoController.Create(Anticipos model)
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+-----------------------------------------------------------
+

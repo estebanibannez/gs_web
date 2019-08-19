@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="men_ingresos" xml:space="preserve">
+    <value>Entry</value>
+  </data>
+  <data name="men_certifi" xml:space="preserve">
+    <value>Certificates</value>
+  </data>
+  <data name="men_contrat" xml:space="preserve">
+    <value>Labor Agreement</value>
+  </data>
+  <data name="men_contrat_anex" xml:space="preserve">
+    <value>Attachments</value>
+  </data>
+  <data name="men_contrat_contra" xml:space="preserve">
+    <value>Labor Agreement</value>
+  </data>
+  <data name="men_Documen" xml:space="preserve">
+    <value>My Documents</value>
+  </data>
+  <data name="men_liquida" xml:space="preserve">
+    <value>Salary Stub</value>
+  </data>
+  <data name="men_Menu_Prin" xml:space="preserve">
+    <value>MAIN MENU</value>
+  </data>
+  <data name="home_cumple" xml:space="preserve">
+    <value>Birthdays of the Month</value>
+  </data>
+  <data name="men_certifi_Ant" xml:space="preserve">
+    <value>Antiquity</value>
+  </data>
+  <data name="men_solvaca" xml:space="preserve">
+    <value>Vacation claim</value>
+  </data>
+  <data name="cerrar" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="guardar_cambios" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
+  <data name="dias_adm" xml:space="preserve">
+    <value>Administrative Day</value>
+  </data>
+  <data name="men_solicitudes" xml:space="preserve">
+    <value>Request´s</value>
+  </data>
+  <data name="descarga_archivo_1" xml:space="preserve">
+    <value>If you don't have a Document Viewer plugin for this browser.
+            No biggie... you can</value>
+  </data>
+  <data name="descarga_archivo_2" xml:space="preserve">
+    <value>click here to download the file.</value>
+  </data>
+  <data name="antigüedad" xml:space="preserve">
+    <value>Certificate of Seniority</value>
+  </data>
+  <data name="apellidos_form" xml:space="preserve">
+    <value>Lastname</value>
+  </data>
+  <data name="archivo_adjunto" xml:space="preserve">
+    <value>Attached file</value>
+  </data>
+  <data name="avisos" xml:space="preserve">
+    <value>Notices</value>
+  </data>
+  <data name="año" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="btn_generar" xml:space="preserve">
+    <value>Generate</value>
+  </data>
+  <data name="cargo_form" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="certificado_antiguedad" xml:space="preserve">
+    <value>Certificate of seniority</value>
+  </data>
+  <data name="control_periodos" xml:space="preserve">
+    <value>Period control</value>
+  </data>
+  <data name="datos_afiliaciones" xml:space="preserve">
+    <value>Data affiliations</value>
+  </data>
+  <data name="datos_personales" xml:space="preserve">
+    <value>Personal information</value>
+  </data>
+  <data name="dias_trabajados" xml:space="preserve">
+    <value>Days worked of the month</value>
+  </data>
+  <data name="direccion_form" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="eliminar_registro" xml:space="preserve">
+    <value>Do you want delete the record?</value>
+  </data>
+  <data name="email_form" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="estadocivil_form" xml:space="preserve">
+    <value>Civil Status</value>
+  </data>
+  <data name="fecha_nacimiento_form" xml:space="preserve">
+    <value>Birthdate</value>
+  </data>
+  <data name="finiquito" xml:space="preserve">
+    <value>Settlement</value>
+  </data>
+  <data name="formulario_ingresop" xml:space="preserve">
+    <value>Personal income form</value>
+  </data>
+  <data name="gestion_liquidaciones" xml:space="preserve">
+    <value>Management liquidations</value>
+  </data>
+  <data name="liquidaciones_fecha" xml:space="preserve">
+    <value>Stubs to date</value>
+  </data>
+  <data name="men_finiquitos" xml:space="preserve">
+    <value>Settlements</value>
+  </data>
+  <data name="mes" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="nacionalidad_form" xml:space="preserve">
+    <value>Nationality</value>
+  </data>
+  <data name="nombre_form" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="rut_form" xml:space="preserve">
+    <value>ID Number</value>
+  </data>
+  <data name="telefono_form" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="texto_antiguedad" xml:space="preserve">
+    <value>According to our registration your date of incorporation to the company</value>
+  </data>
+  <data name="texto_tantiguedad" xml:space="preserve">
+    <value>Mr.</value>
+  </data>
+  <data name="agregar_solicitud" xml:space="preserve">
+    <value>Add request</value>
+  </data>
+  <data name="aprobar_registro" xml:space="preserve">
+    <value>Do you want approve the registration?</value>
+  </data>
+  <data name="bienvenido" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="cliente" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="contrato_trabajo" xml:space="preserve">
+    <value>Work contract</value>
+  </data>
+  <data name="descripcion" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="empleado" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="estado_aprobacion" xml:space="preserve">
+    <value>Approval State</value>
+  </data>
+  <data name="fecha" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="ingresar_persona" xml:space="preserve">
+    <value>Add person</value>
+  </data>
+  <data name="liberar_liquidaciones" xml:space="preserve">
+    <value>Free settlements of</value>
+  </data>
+  <data name="liquidaciones_alafecha" xml:space="preserve">
+    <value>Record of the Salary Stub</value>
+  </data>
+  <data name="monto" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="solicitudes_pendientes" xml:space="preserve">
+    <value>Awaiting requests</value>
+  </data>
+  <data name="tipo" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="tipo_solicitud" xml:space="preserve">
+    <value>Type request</value>
+  </data>
+  <data name="usuario" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="visualiza_contrato" xml:space="preserve">
+    <value>To view your labor agreement, press the "Generate" button.</value>
+  </data>
+  <data name="men_mantencion" xml:space="preserve">
+    <value>Maitenance</value>
+  </data>
+  <data name="editar_form" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="eliminar_form" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="aprov_reg" xml:space="preserve">
+    <value>Approved</value>
+  </data>
+  <data name="pend_reg" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="vista_prev" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="docu_index" xml:space="preserve">
+    <value>Document Name</value>
+  </data>
+  <data name="men_beneficios" xml:space="preserve">
+    <value>Benefits</value>
+  </data>
+  <data name="men_calendario" xml:space="preserve">
+    <value>Calendar</value>
+  </data>
+  <data name="men_ordyseg" xml:space="preserve">
+    <value>Health and Safety</value>
+  </data>
+  <data name="men_poli" xml:space="preserve">
+    <value>Company Policies</value>
+  </data>
+  <data name="categoria" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="aprovar_reg" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="politica_beneficios" xml:space="preserve">
+    <value>Employees Benefits Policy</value>
+  </data>
+  <data name="reg_interno" xml:space="preserve">
+    <value>Company Rules</value>
+  </data>
+  <data name="sel_lenguaje" xml:space="preserve">
+    <value>Select Lenguage</value>
+  </data>
+  <data name="es_el" xml:space="preserve">
+    <value>is the</value>
+  </data>
+  <data name="rechazado" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
+  <data name="sol_pendiente" xml:space="preserve">
+    <value>Pending Request</value>
+  </data>
+  <data name="anticipos" xml:space="preserve">
+    <value>Anticipos</value>
+  </data>
+  <data name="busqueda_" xml:space="preserve">
+    <value>Search</value>
+  </data>
+</root>

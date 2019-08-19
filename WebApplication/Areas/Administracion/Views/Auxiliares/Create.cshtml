@@ -1,0 +1,78 @@
+﻿@model  WebApplicationMod.Proveedores
+
+@using (Html.BeginForm((Model == null ? "Create" : "Update"), "Auxiliares", FormMethod.Post, new { @id = "mant-form", @novalidate = "novalidate", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @(Model == null ? new MvcHtmlString("") : Html.HiddenFor(p => p.ID))
+
+
+    if (Model == null)
+    {
+
+        <div class="box-header with-border">
+            <h3 class="box-title">Ingreso de un Proveedor</h3>
+        </div>
+
+    }
+    else
+    {
+        <div class="box-header with-border">
+            <h3 class="box-title">Editar un Auxiliar : @Html.DisplayFor(model => model.Nom)</h3>
+        </div>
+    }
+
+    <div class="widget-body form-horizontal">
+        <div class="">
+            <table class="table-condensed">
+                <tbody>
+                    <tr>
+                        <td>Rut Proveedor</td>
+                        
+                        <td>@Html.TextBoxFor(model => model.Aux, new { @class = "custom-scroll form-control", placeholder = "", rows = "2" })</td>
+                    </tr>
+                    <tr>
+                        <td>Nombre del Proveedor</td>
+                        <td>@Html.TextBoxFor(model => model.Nom, new { @class = "custom-scroll form-control", placeholder = "", rows = "2" })</td>
+                    </tr>
+                    <tr>
+                        <td>Cuenta</td>
+                        <td>@Html.TextBoxFor(model => model.Cta, new { @class = "custom-scroll form-control", placeholder = "", rows = "2" })</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>@Html.TextBoxFor(model => model.Email, new { @class = "custom-scroll form-control", placeholder = "", rows = "2" })</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+            <button type="button" class="btn btn-warning pull-right" action="save">Guardar</button>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        setFormulario(
+                "mant-form",
+                {
+                    Aux: {
+                        required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese un Rut Auxiliar.</span> ',
+                        digits: true
+                        //max:10
+                    },
+
+                    Nom: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese un nombre.</span> ' }
+                },
+                {
+                    /* titulo: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese un nombre .</span> ' },
+                    fecha: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese una Fecha.</span> ' },
+                    id_cliente: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Seleccione un Cliente.</span> ' },
+                    descripcion: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese una breve descripcion.</span> ' },
+                    */
+                }
+        )
+    });
+</script>

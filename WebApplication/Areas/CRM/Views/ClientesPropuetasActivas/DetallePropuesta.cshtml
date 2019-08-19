@@ -1,0 +1,118 @@
+﻿@{ string nom = (string)ViewBag.Nombre;}
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-gear"></i> Detalle de la propuesta, Cliente : @nom</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 table-responsive">
+        <div class="panel table-responsive no-padding">
+            <div class="box-header">
+                <h3 class="box-title"> Valores de los servicios asociados a la propuesta</h3>
+            </div>
+            <table class="table table-hover display responsive no-wrap" style="width:100%" id="dt_servicios">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre Servicios</th>
+                        <th>Valor</th>
+                        <th>Tipo Moneda</th>                        
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 table-responsive">
+        <div class="panel table-responsive no-padding">
+            <div class="box-header">
+                <h3 class="box-title">Documentos asociados al cliente</h3>
+            </div>
+            <table class="table table-hover display responsive no-wrap" style="width:100%" id="dt_documentos">
+                <thead>
+                    <tr>
+                        <th>Tipo de Documento</th>                        
+                        <th>Fecha Aprobación</th>
+                        <th>Docuemnto</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    var id_cliente = @ViewBag.ID_CLiente;
+    var url_Documento = '@Url.Action("Archivo", "ClientesPropuetasActivas")';
+
+        var dataColumnsServicios = [
+           { data: "ID_servicio" },
+           { data: "Nom_Servicio" },
+           { data: "Valor" },
+           { data: "Tipo_Moneda" },
+        ];
+
+        var dataColumnsDocument = [
+           { data: "Tipo_Documento" },
+            {
+                data: "Fec_Aprobacion",
+                render: function (data) {
+                    return moment(data).format("ll");
+                }
+            },
+            {
+                data: "ID_Documento", render: function (data) {
+                    return '<a href=\"' + url_Documento + '/' + data + '"class="btn btn-default btn-xs modal-ajax-load" data-toggle="modal" data-target="#myModal" data-remote="false"><i class="fa fa-clipboard" aria-hidden="true"></i></a>'
+                }
+            },
+        ];
+
+        function parameterFunction(d) {
+            return $.extend({}, d, {
+                "id": id_cliente
+            });
+        }
+
+        function dServicio(grilla, url, parametro, columnas) {
+            //debugger;
+            var tabla;
+            tabla = $('#' + grilla).DataTable({
+                "ajax": {
+                    "url": url,
+                    "type": "POST",
+                    "data": parametro
+                },
+                columns: columnas,
+                order: [[0, "desc"]]
+            });
+            return tabla;
+        }
+
+        function dDocumento(grilla, url, parametro, columnas) {
+            //debugger;
+            var tabla;
+            tabla = $('#' + grilla).DataTable({
+                "ajax": {
+                    "url": url,
+                    "type": "POST",
+                    "data": parametro
+                },
+                columns: columnas,
+                order: [[0, "desc"]]
+            });
+            return tabla;
+        }
+
+        var servicio = dServicio("dt_servicios", "@Url.Action("Servicios", "ClientesPropuetasActivas")", parameterFunction, dataColumnsServicios);
+        var documento = dDocumento("dt_documentos", "@Url.Action("Documentos", "ClientesPropuetasActivas")", parameterFunction, dataColumnsDocument);
+
+    $(document).ready(function () {
+        //servicio.ajax.reload();
+        //documento.ajax.reload();
+    });
+</script>

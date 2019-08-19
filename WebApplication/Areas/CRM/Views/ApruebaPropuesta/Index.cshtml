@@ -1,0 +1,55 @@
+﻿<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-gear"></i> Agregar Contrato</h3>
+    </div>
+</div>
+
+<input type="hidden" value="" id="testing" />
+
+<div class="row">
+    <div class="col-md-12 table-responsive">
+        <div class="panel table-responsive no-padding">
+            <div class="box-header">
+                <h3 class="box-title">Información</h3>
+            </div>
+            <table id="dt_clientes" class="table table-hover display responsive no-wrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Nombre Cliente</th>
+                        <th>Rut Client</th>
+                        <th>Personal CS Asignado</th>
+                        <th>Fecha Cuestionario Recibido</th>
+                        <th>Fecha Cuentionario Enviado</th>
+                        <th>Fecha de la Propuesta</th>
+                        <th>Cargar Contrato</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var item in Model.listAnonymousToDynamic)
+                        {
+                            <tr value="@item.Id_Propuesta">
+                                <td>@item.Nom_Cliente</td>
+                                <td>@item.Rut_Cliente</td>
+                                <td>@item.Clien_Service</td>
+                                <td>@item.Fec_Cuestionario_Enviado</td>
+                                <td>@item.Fec_Cuestionario_Recibido</td>
+                                <td>@item.Fec_Propuesta</td>
+                                <td>
+                                    @*<button class="btn btn-default btn-xs modal-ajax-load" href="@Url.Action("CargarContrato", "ApruebaPropuesta", new { Area = "CRM", @id=item.ID_Propuesta })" data-toggle="modal" data-target="#myModal" data-remote="false"><i class="glyphicon glyphicon-search" aria-hidden="true"></i></button>*@
+                                    <button class="btn btn-default btn-xs modal-ajax-load" href="@Url.Action("CargarContrato","ApruebaPropuesta",new { Area = "CRM", @id = item.Id_Propuesta})" data-toggle="modal" data-target="#myModal" data-remote="false"><i class="glyphicon glyphicon-search" aria-hidden="true"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#dt_clientes').DataTable();
+    });
+</script>

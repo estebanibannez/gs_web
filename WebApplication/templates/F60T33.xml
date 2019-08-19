@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<DTE>
+      <Documento ID="T33F7103366">
+        <Encabezado>
+          <IdDoc>
+            <TipoDTE>33</TipoDTE>
+            <Folio>7103366</Folio>
+            <FchEmis>2018-08-27</FchEmis>
+            <TipoDespacho>1</TipoDespacho>
+            <FmaPago>2</FmaPago>
+            <TermPagoGlosa>SE Crédito</TermPagoGlosa>
+            <FchVenc>2018-08-29</FchVenc>
+          </IdDoc>
+          <Emisor>
+            <RUTEmisor>99520000-7</RUTEmisor>
+            <RznSoc>COMPAÑIA DE PETROLEOS DE CHILE COPEC S.A.</RznSoc>
+            <GiroEmis>Distribución de Combustibles y exportación.</GiroEmis>
+            <CorreoEmisor>emisionfacturas@copec.cl</CorreoEmisor>
+            <Acteco>514110</Acteco>
+            <Sucursal>Caja Facturera Ped.I</Sucursal>
+            <CdgSIISucur>064222945</CdgSIISucur>
+            <DirOrigen>El Bosque Norte 0211 / Av. Isidora Goyenechea 2915, Piso 20</DirOrigen>
+            <CmnaOrigen>Las Condes</CmnaOrigen>
+          </Emisor>
+          <Receptor>
+            <RUTRecep>76027027-K</RUTRecep>
+            <CdgIntRecep>76027027-K</CdgIntRecep>
+            <RznSocRecep>PUENTE SUR GTR S.A</RznSocRecep>
+            <GiroRecep>OTRAS ACTIVIDADES</GiroRecep>
+            <Contacto>DR.MANUEL BARROS BORGOÑO 422</Contacto>
+            <CorreoRecep>alopetegui@puentesur-gtr.cl;bmouat@puentesur-gtr.cl;holding@pso.cl;malucema@puen</CorreoRecep>
+            <DirRecep>DR.MANUEL BARROS BORGOÑO 422</DirRecep>
+            <CmnaRecep>PROVIDENCIA</CmnaRecep>
+            <DirPostal>DR.MANUEL BARROS BORGOÑO 422 PROVID</DirPostal>
+            <CmnaPostal>PROVIDENCIA</CmnaPostal>
+          </Receptor>
+          <Totales>
+            <MntNeto>107742</MntNeto>
+            <MntExe>0</MntExe>
+            <TasaIVA>19</TasaIVA>
+            <IVA>20472</IVA>
+            <ImptoReten>
+              <TipoImp>35</TipoImp>
+              <TasaImp>1</TasaImp>
+              <MontoImp>71786</MontoImp>
+            </ImptoReten>
+
+			
+            <MntTotal>200000</MntTotal>
+          </Totales>
+
+        </Encabezado>
+        <Detalle>
+          <NroLinDet>1</NroLinDet>
+          <CdgItem>
+            <TpoCodigo>INT1</TpoCodigo>
+            <VlrCodigo>103</VlrCodigo>
+          </CdgItem>
+          <NmbItem>GASOLINA S/P 93 OCTANOS NU 1203</NmbItem>
+          <QtyItem>251</QtyItem>
+          <Subcantidad>
+            <SubQty>0.3723</SubQty>
+            <SubCod>IEV-|Fecha corte:29/08/2018</SubCod>
+          </Subcantidad>
+          <Subcantidad>
+            <SubQty>286.37400</SubQty>
+            <SubCod>IEF|Fecha corte:29/08/2018</SubCod>
+          </Subcantidad>
+          <Subcantidad>
+            <SubQty>796.00000</SubQty>
+            <SubCod>PBase</SubCod>
+          </Subcantidad>
+          <Subcantidad>
+            <SubQty>200000</SubQty>
+            <SubCod>SubTotal</SubCod>
+          </Subcantidad>
+          <UnmdItem>LT</UnmdItem>
+          <PrcItem>429.25099</PrcItem>
+          <CodImpAdic>35</CodImpAdic>
+          <MontoItem>107742</MontoItem>
+        </Detalle>
+       <Referencia>
+			<NroLinRef>1</NroLinRef>
+			<TpoDocRef>801</TpoDocRef>
+			<FolioRef>4500195544</FolioRef>
+			<FchRef>2006-03-01</FchRef>
+			</Referencia>
+		<SubTotInfo>
+          <NroSTI>1</NroSTI>
+          <GlosaSTI>IEF|35|Total DTE|FCorte:2018-08-29</GlosaSTI>
+          <SubTotNetoSTI>71880</SubTotNetoSTI>
+        </SubTotInfo>
+        <SubTotInfo>
+          <NroSTI>2</NroSTI>
+          <GlosaSTI>IEV-|35|Total DTE|FCorte:2018-08-29</GlosaSTI>
+          <SubTotNetoSTI>94</SubTotNetoSTI>
+        </SubTotInfo>
+        <TED version="1.0">
+          <DD>
+            <RE>99520000-7</RE>
+            <TD>33</TD>
+            <F>7103366</F>
+            <FE>2018-08-27</FE>
+            <RR>76027027-K</RR>
+            <RSR>PUENTE SUR GTR S.A</RSR>
+            <MNT>200000</MNT>
+            <IT1>GASOLINA S/P 93 OCTANOS NU 1203</IT1>
+            <CAF version="1.0">
+              <DA>
+                <RE>99520000-7</RE>
+                <RS>COMPANIA DE PETROLEOS DE CHILE COPEC S A</RS>
+                <TD>33</TD>
+                <RNG>
+                  <D>7049698</D>
+                  <H>7249697</H>
+                </RNG>
+                <FA>2018-07-18</FA>
+                <RSAPK>
+                  <M>vzNPmVVCpAeDWXo/4JRwJWG3oQhJAe8b4do/xmj5VwhBgee3k0jd0wE3zuCgMjArjTv7BLcLkAAj0Mym1WSwcQ==</M>
+                  <E>Aw==</E>
+                </RSAPK>
+                <IDK>300</IDK>
+              </DA>
+              <FRMA algoritmo="SHA1withRSA">jVAhn3glK+kHLvdEf5Kis2GieQnBifqRedoKGB3j1AbSSQtxyghiLdt8jTT/QTkav7WjnhMponbimf48JNBTEQ==</FRMA>
+            </CAF>
+            <TSTED>2018-08-27T08:47:41</TSTED>
+          </DD>
+          <FRMT algoritmo="SHA1withRSA">txprk+7qqy9z1p6IBFynSYsJjNaebDrpYmeJydwjOoC/R7uWMUy349n1Lz0zeuaISyg24ovPgiiB
+9Fj9viGa9A==</FRMT>
+        </TED>
+        <TmstFirma>2018-08-27T08:47:41</TmstFirma>
+      </Documento>
+      <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+	<SignedInfo>
+		<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+		<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+		<Reference URI="#T33F7103366">
+			<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+			<DigestValue>CUIZr5acKaPT8Q7FUmvZkl2EqWA=</DigestValue>
+		</Reference>
+	</SignedInfo>
+	<SignatureValue>rwBswGT4J5UxhziWBaPYBTF4PJOp8NCG1UDhlhhuP6rnzK5WEb1bDouL+V/RZBbWxLSO61a0OkWH
+xlEs3oOBCtfriTsvaIINfLh5iODAdh8uxB37uvsMjeuG5kuc38B2WOg/0mKHWWr8diI091elKcUJ
+8+9O1S4/xN7sqUdZpca28MfqQg11fRawt1P/FICzvdznXTbOQ8oXFdP62030lRtFBUFCBMmwKbYe
+zpWycxQ/Q/YoMgyxH0NzS1qrpZQjTkTerRjQ1RmNsdWiVVJN7EWi0ahnijfxS0XtqyV5R1Rxx0OB
+snGtFOgrlK+ayhAjRx5x7oE1KJoOnaKZIj2pbw==</SignatureValue>
+	<KeyInfo>
+		<KeyValue>
+			<RSAKeyValue>
+				<Modulus>3oLgPoh6SnnII8InxLOsIQooiJ0fSM3qLE3AG5YWsEW8FKzzZFLT+yXOdYrn7bPDKCpzvVd4J04n
+2aUps8xjFUAmZH38pDu3xiF6PJNXKtnPk8MenxD8jY7Pn4NBu8tFdehA0+lB/VVJ5lXug3ywWYGS
+J6ZEzggKXGTzuYatpbdkJoqqJ3Ct6JtrEFbMPQbR8xuHaeyGaIMQVQl7BHxOX+L9DI9g8nAHA3Ww
+ftNiY5XCAyYK9t5aEebxrozPW2xs87C0KiSJubCALEk+wc3ExDYo7TrXiXbGl3zv8VITLazx/Cmm
+5K/1zd+c7HcK1HeLqYZyV7teSA5Ei3gq4xLQBQ==</Modulus>
+				<Exponent>AQAB</Exponent>
+			</RSAKeyValue>
+		</KeyValue>
+		<X509Data>
+			<X509Certificate>MIIGdzCCBV+gAwIBAgICLFkwDQYJKoZIhvcNAQELBQAwgaYxCzAJBgNVBAYTAkNMMRgwFgYDVQQK
+Ew9BY2VwdGEuY29tIFMuQS4xSDBGBgNVBAMTP0FjZXB0YS5jb20gQXV0b3JpZGFkIENlcnRpZmlj
+YWRvcmEgQ2xhc2UgMyBQZXJzb25hIE5hdHVyYWwgLSBHNDEeMBwGCSqGSIb3DQEJARYPaW5mb0Bh
+Y2VwdGEuY29tMRMwEQYDVQQFEwo5NjkxOTA1MC04MB4XDTE4MDUyNTE1NTUzN1oXDTIxMDUyNTE1
+NTUzN1owgYwxCzAJBgNVBAYTAkNMMRgwFgYDVQQMEw9QRVJTT05BIE5BVFVSQUwxKzApBgNVBAMT
+IlNFUkdJTyBHQUJSSUVMIFZJTExBR1JBIFZJTExBTE9CT1MxITAfBgkqhkiG9w0BCQEWElNWSUxM
+QUdSQUBDT1BFQy5DTDETMBEGA1UEBRMKMTA3MTMzNTUtMDCCASIwDQYJKoZIhvcNAQEBBQADggEP
+ADCCAQoCggEBAN6C4D6Iekp5yCPCJ8SzrCEKKIidH0jN6ixNwBuWFrBFvBSs82RS0/slznWK5+2z
+wygqc71XeCdOJ9mlKbPMYxVAJmR9/KQ7t8YhejyTVyrZz5PDHp8Q/I2Oz5+DQbvLRXXoQNPpQf1V
+SeZV7oN8sFmBkiemRM4IClxk87mGraW3ZCaKqidwreibaxBWzD0G0fMbh2nshmiDEFUJewR8Tl/i
+/QyPYPJwBwN1sH7TYmOVwgMmCvbeWhHm8a6Mz1tsbPOwtCokibmwgCxJPsHNxMQ2KO0614l2xpd8
+7/FSEy2s8fwppuSv9c3fnOx3CtR3i6mGcle7XkgORIt4KuMS0AUCAwEAAaOCAsUwggLBMB8GA1Ud
+IwQYMBaAFKr9vcXpN032mU1XjsFxGvnrwwbjMB0GA1UdDgQWBBSNRViMjBn/yrAYOSIuUTCkEXaV
+pzALBgNVHQ8EBAMCBPAwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMEMBEGCWCGSAGG+EIB
+AQQEAwIFoDCB+gYDVR0gBIHyMIHvMIHsBggrBgEEAbVrAjCB3zAxBggrBgEFBQcCARYlaHR0cHM6
+Ly9hY2c0LmFjZXB0YS5jb20vQ1BTLUFjZXB0YWNvbTCBqQYIKwYBBQUHAgIwgZwwFhYPQWNlcHRh
+LmNvbSBTLkEuMAMCAQIagYFFbCB0aXR1bGFyIGhhIHNpZG8gdmFsaWRhZG8gZW4gZm9ybWEgcHJl
+c2VuY2lhbCwgcXVlZGFuZG8gaGFiaWxpdGFkbyBlbCBDZXJ0aWZpY2FkbyBwYXJhIHVzbyB0cmli
+dXRhcmlvLCBwYWdvcywgY29tZXJjaW8geSBvdHJvcy4wWgYDVR0SBFMwUaAYBggrBgEEAcEBAqAM
+Fgo5NjkxOTA1MC04oCQGCCsGAQUFBwgDoBgwFgwKOTY5MTkwNTAtOAYIKwYBBAHBAQKBD2luZm9A
+YWNlcHRhLmNvbTBdBgNVHREEVjBUoBgGCCsGAQQBwQEBoAwWCjEwNzEzMzU1LTCgJAYIKwYBBQUH
+CAOgGDAWDAoxMDcxMzM1NS0wBggrBgEEAcEBAoESU1ZJTExBR1JBQENPUEVDLkNMMEcGCCsGAQUF
+BwEBBDswOTA3BggrBgEFBQcwAYYraHR0cHM6Ly9hY2c0LmFjZXB0YS5jb20vYWNnNC9vY3NwL0Ns
+YXNlMy1HNDA/BgNVHR8EODA2MDSgMqAwhi5odHRwczovL2FjZzQuYWNlcHRhLmNvbS9hY2c0L2Ny
+bC9DbGFzZTMtRzQuY3JsMA0GCSqGSIb3DQEBCwUAA4IBAQC+eWjR8lnc7g39oBYjOVFSsyPR3OBM
+lyyk0uHerMyQivm1N1h55WyqjVc7Brlr6HGu0e5iJN+x7lClsycv/VALW0MrGoFIEFeaT2MOj6Q3
+5KuMo5xHHFGr4dCBdX5c2jmvRPbrhJcgXeJ/5kH+ajhCrvq82gg/TL8VkugObMLKRw8+2jG/ZnOX
+S+E2H1vgUtvGrFvwC9XBRPW2VvS7MaEbjlBGDbCz750gM1dWKd7HMKHfhbOeWq7A5T5QWsbYE54M
+UYQ+1f8kjB/EhAhrcDLRSQBzKVHcbYI+Ec9omOYJzBeaPaZXY0PPtKutzBzsqndg1MQMtg8AbAEN
+mj2AzjH8</X509Certificate>
+		</X509Data>
+	</KeyInfo>
+</Signature>
+    </DTE>

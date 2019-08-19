@@ -1,0 +1,1651 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GSPSOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Banco_Cliente_CRM">
+          <Key>
+            <PropertyRef Name="ID_Banco_Cliente" />
+          </Key>
+          <Property Name="ID_Banco_Cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Cliente" Type="int" />
+          <Property Name="ID_Banco" Type="int" />
+        </EntityType>
+        <EntityType Name="Cliente_CRM">
+          <Key>
+            <PropertyRef Name="ID_Cliente" />
+          </Key>
+          <Property Name="ID_Cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Pais" Type="int" />
+          <Property Name="ID_Client_Service" Type="int" />
+          <Property Name="ID_Parther" Type="int" />
+          <Property Name="Rut" Type="nvarchar" MaxLength="15" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
+          <Property Name="Industria" Type="nvarchar" MaxLength="100" />
+          <Property Name="Fecha_Primer_Contacto" Type="datetime" />
+          <Property Name="Perfil" Type="varchar" MaxLength="5000" />
+          <Property Name="Profile" Type="varchar" MaxLength="5000" />
+          <Property Name="Estado" Type="nvarchar" MaxLength="20" />
+          <Property Name="Fecha_Mod" Type="datetime" />
+          <Property Name="Usuario_Mod" Type="nvarchar" MaxLength="100" />
+          <Property Name="Referencia_Cliente" Type="varchar" MaxLength="100" />
+          <Property Name="ID_Cliente_Cliente" Type="int" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ruta" Type="nvarchar" MaxLength="255" />
+          <Property Name="Usu" Type="nvarchar" MaxLength="50" />
+          <Property Name="Nombre Archivo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tipo" Type="nvarchar" MaxLength="1" />
+          <Property Name="TC" Type="int" />
+          <Property Name="EcepCC" Type="char" MaxLength="1" />
+          <Property Name="IRFS" Type="char" MaxLength="1" />
+          <Property Name="Activo" Type="char" MaxLength="1" />
+          <Property Name="Rut" Type="int" />
+          <Property Name="BLK" Type="nchar" MaxLength="20" />
+          <Property Name="TCFac" Type="int" />
+          <Property Name="Tarifa" Type="float" />
+          <Property Name="TCFac1" Type="int" />
+          <Property Name="Tarifa1" Type="float" />
+          <Property Name="CC" Type="nchar" MaxLength="10" />
+          <Property Name="Holding" Type="char" MaxLength="1" />
+          <Property Name="BA" Type="int" />
+          <Property Name="ER" Type="int" />
+          <Property Name="SegMon" Type="int" />
+          <Property Name="BLKPag" Type="nchar" MaxLength="20" />
+          <Property Name="TES" Type="nchar" MaxLength="1" />
+          <Property Name="BcoPag" Type="int" />
+          <Property Name="CtaPag" Type="nchar" MaxLength="60" />
+          <Property Name="EmailPag" Type="nchar" MaxLength="100" />
+          <Property Name="MPago" Type="int" />
+          <Property Name="Obs" Type="varchar" MaxLength="800" />
+          <Property Name="Consi" Type="varchar" MaxLength="800" />
+          <Property Name="AdmCheque" Type="nchar" MaxLength="2" />
+          <Property Name="RRHH" Type="nchar" MaxLength="1" />
+          <Property Name="Grati" Type="int" />
+          <Property Name="ObsGrati" Type="nchar" MaxLength="100" />
+          <Property Name="Cola" Type="int" />
+          <Property Name="ObsCola" Type="nchar" MaxLength="100" />
+          <Property Name="Mov" Type="int" />
+          <Property Name="ObsMov" Type="nchar" MaxLength="100" />
+          <Property Name="Fpago" Type="int" />
+          <Property Name="Caja" Type="int" />
+          <Property Name="ObsCaja" Type="nchar" MaxLength="100" />
+          <Property Name="Mutual" Type="int" />
+          <Property Name="ObsMutual" Type="nchar" MaxLength="100" />
+          <Property Name="DiaSueldo" Type="int" />
+          <Property Name="DiaPago" Type="int" />
+          <Property Name="DiaAnticipo" Type="int" />
+          <Property Name="ObsRRHH" Type="varchar" MaxLength="800" />
+          <Property Name="PagaPSO" Type="int" />
+          <Property Name="emailcobro" Type="nchar" MaxLength="255" />
+          <Property Name="atencion" Type="nchar" MaxLength="60" />
+          <Property Name="TramoPR" Type="nchar" MaxLength="120" />
+          <Property Name="IIng" Type="nchar" MaxLength="2" />
+          <Property Name="TipChe" Type="int" />
+          <Property Name="rutadestino" Type="nvarchar" MaxLength="60" />
+          <Property Name="CTD" Type="char" MaxLength="1" />
+          <Property Name="fechalr" Type="date" />
+          <Property Name="gbo" Type="int" />
+          <Property Name="impsug" Type="nchar" MaxLength="1" />
+          <Property Name="gerencia_bo" Type="int" />
+          <Property Name="gerencia_ss" Type="int" />
+          <Property Name="snr_ingl" Type="nchar" MaxLength="1" />
+          <Property Name="cartera_tes" Type="int" />
+          <Property Name="cartera_pay" Type="int" />
+          <Property Name="publicar_eeff" Type="nchar" MaxLength="1" />
+          <Property Name="fingreso" Type="date" />
+          <Property Name="fsalida" Type="date" />
+          <Property Name="cartera_oper" Type="int" />
+          <Property Name="kpif29" Type="int" />
+          <Property Name="kpieeff" Type="nvarchar" MaxLength="60" />
+          <Property Name="nomfaccl" Type="nvarchar" MaxLength="60" />
+          <Property Name="kpieeffhabil" Type="bit" />
+          <Property Name="kpif29_automa" Type="int" />
+        </EntityType>
+        <EntityType Name="Comunas_CRM">
+          <Key>
+            <PropertyRef Name="ID_Comuna" />
+          </Key>
+          <Property Name="ID_Comuna" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom_Comuna" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ID_Provincia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contacto_Cliente_CRM">
+          <Key>
+            <PropertyRef Name="ID_Contacto_Cliente" />
+          </Key>
+          <Property Name="ID_Contacto_Cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Cliente" Type="int" />
+          <Property Name="ID_Contacto" Type="int" />
+          <Property Name="Cargo" Type="int" />
+          <Property Name="Contactado" Type="bit" />
+          <Property Name="Telefono_Personal" Type="nvarchar" MaxLength="25" />
+          <Property Name="Telefono_Trabajo" Type="nvarchar" MaxLength="25" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="25" />
+          <Property Name="Fecha_Inicio_Contacto" Type="datetime" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Referencia_Contacto" Type="varchar" MaxLength="100" />
+          <Property Name="Fecha_Mod" Type="datetime" />
+          <Property Name="Usuario_Mod" Type="nvarchar" MaxLength="100" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Contacto_CRM">
+          <Key>
+            <PropertyRef Name="ID_Contacto" />
+          </Key>
+          <Property Name="ID_Contacto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Apellido" Type="nvarchar" MaxLength="50" />
+          <Property Name="Rut" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Contactos_Operacionales_CRM">
+          <Key>
+            <PropertyRef Name="Id_Contacto_Operacional" />
+          </Key>
+          <Property Name="Id_Contacto_Operacional" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Contacto_Cliente" Type="int" />
+          <Property Name="ID_Tipo_Contacto_CRM" Type="int" />
+        </EntityType>
+        <EntityType Name="Cuestionario_CRM">
+          <Key>
+            <PropertyRef Name="ID_Cuestionario" />
+          </Key>
+          <Property Name="ID_Cuestionario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Cliente" Type="int" />
+          <Property Name="Nombre_Cuestionario" Type="nvarchar" MaxLength="100" />
+          <Property Name="Cuestionario_Enviado" Type="char" MaxLength="1" />
+          <Property Name="Cuestionario_Recibido" Type="char" MaxLength="1" />
+          <Property Name="Fecha_Cuestionario_Enviado" Type="datetime" />
+          <Property Name="Fecha_Cuestionario_Recibido" Type="datetime" />
+          <Property Name="Comentario" Type="nvarchar" MaxLength="3000" />
+          <Property Name="Estado" Type="nvarchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="Direccion_CRM">
+          <Key>
+            <PropertyRef Name="ID_Direccion" />
+          </Key>
+          <Property Name="ID_Direccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Cliente" Type="int" Nullable="false" />
+          <Property Name="ID_Comuna" Type="int" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Casa_Matriz" Type="bit" />
+          <Property Name="Pagina_Web" Type="varchar" MaxLength="200" />
+          <Property Name="Numeracion" Type="varchar" MaxLength="200" />
+          <Property Name="Piso" Type="varchar" MaxLength="10" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+          <Property Name="Usu_Mod" Type="varchar" MaxLength="100" />
+          <Property Name="Fecha_Mod" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Documento_CRM">
+          <Key>
+            <PropertyRef Name="ID_Documento" />
+          </Key>
+          <Property Name="ID_Documento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Cliente" Type="int" />
+          <Property Name="Ruta" Type="nvarchar" MaxLength="500" />
+          <Property Name="Nombre_Original" Type="nvarchar" MaxLength="200" />
+          <Property Name="Nombre_Asignado" Type="nvarchar" MaxLength="200" />
+          <Property Name="Categoria" Type="nvarchar" MaxLength="100" />
+          <Property Name="Fecha_Documento" Type="datetime" />
+          <Property Name="Estado" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GSPSO.dbo.GS_Asig_Carg_Clie' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="GS_Asig_Carg_Clie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usu" Type="int" />
+          <Property Name="clie" Type="int" />
+        </EntityType>
+        <EntityType Name="GS_Cargos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="nvarchar" MaxLength="60" />
+          <Property Name="area" Type="int" />
+          <Property Name="estado" Type="int" />
+          <Property Name="usuario_mod" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Pais_CRM">
+          <Key>
+            <PropertyRef Name="ID_Pais" />
+          </Key>
+          <Property Name="ID_Pais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Pais" Type="nvarchar" MaxLength="50" />
+          <Property Name="Abreviatura" Type="nvarchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="parametros">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="nvarchar" MaxLength="80" />
+          <Property Name="tipo" Type="nvarchar" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="Parametros_CRM">
+          <Key>
+            <PropertyRef Name="ID_Parametro" />
+          </Key>
+          <Property Name="ID_Parametro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Grupo" Type="varchar" MaxLength="40" />
+          <Property Name="Texto" Type="varchar" MaxLength="40" />
+          <Property Name="Valor" Type="nvarchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="Propuesta_CRM">
+          <Key>
+            <PropertyRef Name="ID_Propuesta" />
+          </Key>
+          <Property Name="ID_Propuesta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Cuestionario" Type="int" />
+          <Property Name="Fase" Type="varchar" MaxLength="20" />
+          <Property Name="Valor" Type="int" />
+          <Property Name="Horas" Type="int" />
+          <Property Name="Tipo_Moneda" Type="varchar" MaxLength="40" />
+          <Property Name="Comentario" Type="nvarchar" MaxLength="3000" />
+          <Property Name="Fecha_Propuesta" Type="datetime" />
+          <Property Name="Fecha_Aceptacion" Type="datetime" />
+          <Property Name="Fecha_Modificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Provincias_CRM">
+          <Key>
+            <PropertyRef Name="ID_Provincia" />
+          </Key>
+          <Property Name="ID_Provincia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom_Provincia" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ID_Region" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Region_CRM">
+          <Key>
+            <PropertyRef Name="ID_Region" />
+          </Key>
+          <Property Name="ID_Region" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom_Region" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Abreviatura" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Capital" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Servicio_Cliente_CRM">
+          <Key>
+            <PropertyRef Name="ID_Servicio_Cliente" />
+          </Key>
+          <Property Name="ID_Servicio_Cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Servicio" Type="int" />
+          <Property Name="ID_Cliente" Type="int" />
+          <Property Name="ID_Propuesta" Type="int" />
+          <Property Name="valor" Type="numeric" Precision="8" Scale="2" />
+          <Property Name="Tipo_Moneda" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="Servicio_CRM">
+          <Key>
+            <PropertyRef Name="ID_Servicio" />
+          </Key>
+          <Property Name="ID_Servicio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Padre" Type="int" />
+          <Property Name="Nombre_Servicio" Type="nvarchar" MaxLength="500" />
+          <Property Name="Valor" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Tipo_Contacto_CRM">
+          <Key>
+            <PropertyRef Name="ID_Tipo_Contacto_CRM" />
+          </Key>
+          <Property Name="ID_Tipo_Contacto_CRM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tipo" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Usu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sigla" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Perfil" Type="int" />
+          <Property Name="Anexo" Type="int" />
+          <Property Name="IP" Type="int" />
+          <Property Name="cargo" Type="int" />
+          <Property Name="nomcorto" Type="nvarchar" MaxLength="50" />
+          <Property Name="nomususoft" Type="nchar" MaxLength="20" />
+          <Property Name="pass" Type="nvarchar" MaxLength="20" />
+          <Property Name="jefatura" Type="int" />
+          <Property Name="valpubeeff" Type="nchar" MaxLength="1" />
+          <Property Name="grupo" Type="int" />
+          <Property Name="ger" Type="int" />
+          <Property Name="gergen" Type="int" />
+          <Property Name="superv" Type="int" />
+          <Property Name="uactivo" Type="nchar" MaxLength="1" />
+          <Property Name="unidad" Type="int" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Banco_Cli__ID_Cl__47E69B3D">
+          <End Role="Cliente_CRM" Type="Self.Cliente_CRM" Multiplicity="0..1" />
+          <End Role="Banco_Cliente_CRM" Type="Self.Banco_Cliente_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente_CRM">
+              <PropertyRef Name="ID_Cliente" />
+            </Principal>
+            <Dependent Role="Banco_Cliente_CRM">
+              <PropertyRef Name="ID_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cliente_C__ID_Cl__32EB7E57">
+          <End Role="Usu" Type="Self.Usu" Multiplicity="0..1" />
+          <End Role="Cliente_CRM" Type="Self.Cliente_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cliente_CRM">
+              <PropertyRef Name="ID_Client_Service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cliente_C__ID_Pa__31F75A1E">
+          <End Role="Pais_CRM" Type="Self.Pais_CRM" Multiplicity="0..1" />
+          <End Role="Cliente_CRM" Type="Self.Cliente_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais_CRM">
+              <PropertyRef Name="ID_Pais" />
+            </Principal>
+            <Dependent Role="Cliente_CRM">
+              <PropertyRef Name="ID_Pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comunas_C__ID_Pr__0B679CE2">
+          <End Role="Provincias_CRM" Type="Self.Provincias_CRM" Multiplicity="1" />
+          <End Role="Comunas_CRM" Type="Self.Comunas_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincias_CRM">
+              <PropertyRef Name="ID_Provincia" />
+            </Principal>
+            <Dependent Role="Comunas_CRM">
+              <PropertyRef Name="ID_Provincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contacto___ID_Cl__33DFA290">
+          <End Role="Cliente_CRM" Type="Self.Cliente_CRM" Multiplicity="0..1" />
+          <End Role="Contacto_Cliente_CRM" Type="Self.Contacto_Cliente_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente_CRM">
+              <PropertyRef Name="ID_Cliente" />
+            </Principal>
+            <Dependent Role="Contacto_Cliente_CRM">
+              <PropertyRef Name="ID_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contacto___ID_Co__34D3C6C9">
+          <End Role="Contacto_CRM" Type="Self.Contacto_CRM" Multiplicity="0..1" />
+          <End Role="Contacto_Cliente_CRM" Type="Self.Contacto_Cliente_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contacto_CRM">
+              <PropertyRef Name="ID_Contacto" />
+            </Principal>
+            <Dependent Role="Contacto_Cliente_CRM">
+              <PropertyRef Name="ID_Contacto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contactos__ID_Co__45C948A1">
+          <End Role="Contacto_Cliente_CRM" Type="Self.Contacto_Cliente_CRM" Multiplicity="0..1" />
+          <End Role="Contactos_Operacionales_CRM" Type="Self.Contactos_Operacionales_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contacto_Cliente_CRM">
+              <PropertyRef Name="ID_Contacto_Cliente" />
+            </Principal>
+            <Dependent Role="Contactos_Operacionales_CRM">
+              <PropertyRef Name="ID_Contacto_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contactos__ID_Ti__46BD6CDA">
+          <End Role="Tipo_Contacto_CRM" Type="Self.Tipo_Contacto_CRM" Multiplicity="0..1" />
+          <End Role="Contactos_Operacionales_CRM" Type="Self.Contactos_Operacionales_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Contacto_CRM">
+              <PropertyRef Name="ID_Tipo_Contacto_CRM" />
+            </Principal>
+            <Dependent Role="Contactos_Operacionales_CRM">
+              <PropertyRef Name="ID_Tipo_Contacto_CRM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cuestiona__ID_Cl__04EFA97D">
+          <End Role="Cliente_CRM" Type="Self.Cliente_CRM" Multiplicity="0..1" />
+          <End Role="Cuestionario_CRM" Type="Self.Cuestionario_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente_CRM">
+              <PropertyRef Name="ID_Cliente" />
+            </Principal>
+            <Dependent Role="Cuestionario_CRM">
+              <PropertyRef Name="ID_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Direccion__ID_Cl__0E44098D">
+          <End Role="Cliente_CRM" Type="Self.Cliente_CRM" Multiplicity="1" />
+          <End Role="Direccion_CRM" Type="Self.Direccion_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente_CRM">
+              <PropertyRef Name="ID_Cliente" />
+            </Principal>
+            <Dependent Role="Direccion_CRM">
+              <PropertyRef Name="ID_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Direccion__ID_Co__0F382DC6">
+          <End Role="Comunas_CRM" Type="Self.Comunas_CRM" Multiplicity="1" />
+          <End Role="Direccion_CRM" Type="Self.Direccion_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comunas_CRM">
+              <PropertyRef Name="ID_Comuna" />
+            </Principal>
+            <Dependent Role="Direccion_CRM">
+              <PropertyRef Name="ID_Comuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Propuesta__ID_Cu__05E3CDB6">
+          <End Role="Cuestionario_CRM" Type="Self.Cuestionario_CRM" Multiplicity="0..1" />
+          <End Role="Propuesta_CRM" Type="Self.Propuesta_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuestionario_CRM">
+              <PropertyRef Name="ID_Cuestionario" />
+            </Principal>
+            <Dependent Role="Propuesta_CRM">
+              <PropertyRef Name="ID_Cuestionario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Provincia__ID_Re__0A7378A9">
+          <End Role="Region_CRM" Type="Self.Region_CRM" Multiplicity="1" />
+          <End Role="Provincias_CRM" Type="Self.Provincias_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region_CRM">
+              <PropertyRef Name="ID_Region" />
+            </Principal>
+            <Dependent Role="Provincias_CRM">
+              <PropertyRef Name="ID_Region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicio___ID_Cl__7889D298">
+          <End Role="Cliente_CRM" Type="Self.Cliente_CRM" Multiplicity="0..1" />
+          <End Role="Servicio_Cliente_CRM" Type="Self.Servicio_Cliente_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente_CRM">
+              <PropertyRef Name="ID_Cliente" />
+            </Principal>
+            <Dependent Role="Servicio_Cliente_CRM">
+              <PropertyRef Name="ID_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicio___ID_Pr__7C5A637C">
+          <End Role="Propuesta_CRM" Type="Self.Propuesta_CRM" Multiplicity="0..1" />
+          <End Role="Servicio_Cliente_CRM" Type="Self.Servicio_Cliente_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Propuesta_CRM">
+              <PropertyRef Name="ID_Propuesta" />
+            </Principal>
+            <Dependent Role="Servicio_Cliente_CRM">
+              <PropertyRef Name="ID_Propuesta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicio___ID_Se__3F1C4B12">
+          <End Role="Servicio_CRM" Type="Self.Servicio_CRM" Multiplicity="0..1" />
+          <End Role="Servicio_Cliente_CRM" Type="Self.Servicio_Cliente_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio_CRM">
+              <PropertyRef Name="ID_Servicio" />
+            </Principal>
+            <Dependent Role="Servicio_Cliente_CRM">
+              <PropertyRef Name="ID_Servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usu_Usu">
+          <End Role="Usu" Type="Self.Usu" Multiplicity="1" />
+          <End Role="Usu1" Type="Self.Usu" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Usu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Usu1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GSPSOModelStoreContainer">
+          <EntitySet Name="Banco_Cliente_CRM" EntityType="Self.Banco_Cliente_CRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente_CRM" EntityType="Self.Cliente_CRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comunas_CRM" EntityType="Self.Comunas_CRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contacto_Cliente_CRM" EntityType="Self.Contacto_Cliente_CRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contacto_CRM" EntityType="Self.Contacto_CRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contactos_Operacionales_CRM" EntityType="Self.Contactos_Operacionales_CRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cuestionario_CRM" EntityType="Self.Cuestionario_CRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Direccion_CRM" EntityType="Self.Direccion_CRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Documento_CRM" EntityType="Self.Documento_CRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GS_Cargos" EntityType="Self.GS_Cargos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pais_CRM" EntityType="Self.Pais_CRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="parametros" EntityType="Self.parametros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parametros_CRM" EntityType="Self.Parametros_CRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Propuesta_CRM" EntityType="Self.Propuesta_CRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provincias_CRM" EntityType="Self.Provincias_CRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Region_CRM" EntityType="Self.Region_CRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Servicio_Cliente_CRM" EntityType="Self.Servicio_Cliente_CRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Servicio_CRM" EntityType="Self.Servicio_CRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo_Contacto_CRM" EntityType="Self.Tipo_Contacto_CRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usu" EntityType="Self.Usu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GS_Asig_Carg_Clie" EntityType="Self.GS_Asig_Carg_Clie" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [GS_Asig_Carg_Clie].[id] AS [id], 
+    [GS_Asig_Carg_Clie].[usu] AS [usu], 
+    [GS_Asig_Carg_Clie].[clie] AS [clie]
+    FROM [dbo].[GS_Asig_Carg_Clie] AS [GS_Asig_Carg_Clie]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Banco_Cli__ID_Cl__47E69B3D" Association="Self.FK__Banco_Cli__ID_Cl__47E69B3D">
+            <End Role="Cliente_CRM" EntitySet="Cliente_CRM" />
+            <End Role="Banco_Cliente_CRM" EntitySet="Banco_Cliente_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cliente_C__ID_Cl__32EB7E57" Association="Self.FK__Cliente_C__ID_Cl__32EB7E57">
+            <End Role="Usu" EntitySet="Usu" />
+            <End Role="Cliente_CRM" EntitySet="Cliente_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cliente_C__ID_Pa__31F75A1E" Association="Self.FK__Cliente_C__ID_Pa__31F75A1E">
+            <End Role="Pais_CRM" EntitySet="Pais_CRM" />
+            <End Role="Cliente_CRM" EntitySet="Cliente_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comunas_C__ID_Pr__0B679CE2" Association="Self.FK__Comunas_C__ID_Pr__0B679CE2">
+            <End Role="Provincias_CRM" EntitySet="Provincias_CRM" />
+            <End Role="Comunas_CRM" EntitySet="Comunas_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contacto___ID_Cl__33DFA290" Association="Self.FK__Contacto___ID_Cl__33DFA290">
+            <End Role="Cliente_CRM" EntitySet="Cliente_CRM" />
+            <End Role="Contacto_Cliente_CRM" EntitySet="Contacto_Cliente_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contacto___ID_Co__34D3C6C9" Association="Self.FK__Contacto___ID_Co__34D3C6C9">
+            <End Role="Contacto_CRM" EntitySet="Contacto_CRM" />
+            <End Role="Contacto_Cliente_CRM" EntitySet="Contacto_Cliente_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contactos__ID_Co__45C948A1" Association="Self.FK__Contactos__ID_Co__45C948A1">
+            <End Role="Contacto_Cliente_CRM" EntitySet="Contacto_Cliente_CRM" />
+            <End Role="Contactos_Operacionales_CRM" EntitySet="Contactos_Operacionales_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contactos__ID_Ti__46BD6CDA" Association="Self.FK__Contactos__ID_Ti__46BD6CDA">
+            <End Role="Tipo_Contacto_CRM" EntitySet="Tipo_Contacto_CRM" />
+            <End Role="Contactos_Operacionales_CRM" EntitySet="Contactos_Operacionales_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cuestiona__ID_Cl__04EFA97D" Association="Self.FK__Cuestiona__ID_Cl__04EFA97D">
+            <End Role="Cliente_CRM" EntitySet="Cliente_CRM" />
+            <End Role="Cuestionario_CRM" EntitySet="Cuestionario_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Direccion__ID_Cl__0E44098D" Association="Self.FK__Direccion__ID_Cl__0E44098D">
+            <End Role="Cliente_CRM" EntitySet="Cliente_CRM" />
+            <End Role="Direccion_CRM" EntitySet="Direccion_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Direccion__ID_Co__0F382DC6" Association="Self.FK__Direccion__ID_Co__0F382DC6">
+            <End Role="Comunas_CRM" EntitySet="Comunas_CRM" />
+            <End Role="Direccion_CRM" EntitySet="Direccion_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Propuesta__ID_Cu__05E3CDB6" Association="Self.FK__Propuesta__ID_Cu__05E3CDB6">
+            <End Role="Cuestionario_CRM" EntitySet="Cuestionario_CRM" />
+            <End Role="Propuesta_CRM" EntitySet="Propuesta_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Provincia__ID_Re__0A7378A9" Association="Self.FK__Provincia__ID_Re__0A7378A9">
+            <End Role="Region_CRM" EntitySet="Region_CRM" />
+            <End Role="Provincias_CRM" EntitySet="Provincias_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicio___ID_Cl__7889D298" Association="Self.FK__Servicio___ID_Cl__7889D298">
+            <End Role="Cliente_CRM" EntitySet="Cliente_CRM" />
+            <End Role="Servicio_Cliente_CRM" EntitySet="Servicio_Cliente_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicio___ID_Pr__7C5A637C" Association="Self.FK__Servicio___ID_Pr__7C5A637C">
+            <End Role="Propuesta_CRM" EntitySet="Propuesta_CRM" />
+            <End Role="Servicio_Cliente_CRM" EntitySet="Servicio_Cliente_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicio___ID_Se__3F1C4B12" Association="Self.FK__Servicio___ID_Se__3F1C4B12">
+            <End Role="Servicio_CRM" EntitySet="Servicio_CRM" />
+            <End Role="Servicio_Cliente_CRM" EntitySet="Servicio_Cliente_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usu_Usu" Association="Self.FK_Usu_Usu">
+            <End Role="Usu" EntitySet="Usu" />
+            <End Role="Usu1" EntitySet="Usu" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GSPSOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Banco_Cliente_CRM">
+          <Key>
+            <PropertyRef Name="ID_Banco_Cliente" />
+          </Key>
+          <Property Name="ID_Banco_Cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Cliente" Type="Int32" />
+          <Property Name="ID_Banco" Type="Int32" />
+          <NavigationProperty Name="Cliente_CRM" Relationship="Self.FK__Banco_Cli__ID_Cl__47E69B3D" FromRole="Banco_Cliente_CRM" ToRole="Cliente_CRM" />
+        </EntityType>
+        <EntityType Name="Cliente_CRM">
+          <Key>
+            <PropertyRef Name="ID_Cliente" />
+          </Key>
+          <Property Name="ID_Cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Pais" Type="Int32" />
+          <Property Name="ID_Client_Service" Type="Int32" />
+          <Property Name="ID_Parther" Type="Int32" />
+          <Property Name="Rut" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Industria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha_Primer_Contacto" Type="DateTime" Precision="3" />
+          <Property Name="Perfil" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="Profile" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha_Mod" Type="DateTime" Precision="3" />
+          <Property Name="Usuario_Mod" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Referencia_Cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Cliente_Cliente" Type="Int32" />
+          <NavigationProperty Name="Banco_Cliente_CRM" Relationship="Self.FK__Banco_Cli__ID_Cl__47E69B3D" FromRole="Cliente_CRM" ToRole="Banco_Cliente_CRM" />
+          <NavigationProperty Name="Usu" Relationship="Self.FK__Cliente_C__ID_Cl__32EB7E57" FromRole="Cliente_CRM" ToRole="Usu" />
+          <NavigationProperty Name="Pais_CRM" Relationship="Self.FK__Cliente_C__ID_Pa__31F75A1E" FromRole="Cliente_CRM" ToRole="Pais_CRM" />
+          <NavigationProperty Name="Contacto_Cliente_CRM" Relationship="Self.FK__Contacto___ID_Cl__33DFA290" FromRole="Cliente_CRM" ToRole="Contacto_Cliente_CRM" />
+          <NavigationProperty Name="Cuestionario_CRM" Relationship="Self.FK__Cuestiona__ID_Cl__04EFA97D" FromRole="Cliente_CRM" ToRole="Cuestionario_CRM" />
+          <NavigationProperty Name="Direccion_CRM" Relationship="Self.FK__Direccion__ID_Cl__0E44098D" FromRole="Cliente_CRM" ToRole="Direccion_CRM" />
+          <NavigationProperty Name="Servicio_Cliente_CRM" Relationship="Self.FK__Servicio___ID_Cl__7889D298" FromRole="Cliente_CRM" ToRole="Servicio_Cliente_CRM" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ruta" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Usu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre_Archivo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tipo" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="TC" Type="Int32" />
+          <Property Name="EcepCC" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IRFS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Activo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Rut" Type="Int32" />
+          <Property Name="BLK" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="TCFac" Type="Int32" />
+          <Property Name="Tarifa" Type="Double" />
+          <Property Name="TCFac1" Type="Int32" />
+          <Property Name="Tarifa1" Type="Double" />
+          <Property Name="CC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Holding" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="BA" Type="Int32" />
+          <Property Name="ER" Type="Int32" />
+          <Property Name="SegMon" Type="Int32" />
+          <Property Name="BLKPag" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="TES" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="BcoPag" Type="Int32" />
+          <Property Name="CtaPag" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="EmailPag" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="MPago" Type="Int32" />
+          <Property Name="Obs" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
+          <Property Name="Consi" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
+          <Property Name="AdmCheque" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="RRHH" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="Grati" Type="Int32" />
+          <Property Name="ObsGrati" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Cola" Type="Int32" />
+          <Property Name="ObsCola" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Mov" Type="Int32" />
+          <Property Name="ObsMov" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Fpago" Type="Int32" />
+          <Property Name="Caja" Type="Int32" />
+          <Property Name="ObsCaja" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Mutual" Type="Int32" />
+          <Property Name="ObsMutual" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="DiaSueldo" Type="Int32" />
+          <Property Name="DiaPago" Type="Int32" />
+          <Property Name="DiaAnticipo" Type="Int32" />
+          <Property Name="ObsRRHH" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
+          <Property Name="PagaPSO" Type="Int32" />
+          <Property Name="emailcobro" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="atencion" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="TramoPR" Type="String" MaxLength="120" FixedLength="true" Unicode="true" />
+          <Property Name="IIng" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="TipChe" Type="Int32" />
+          <Property Name="rutadestino" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="CTD" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="fechalr" Type="DateTime" Precision="0" />
+          <Property Name="gbo" Type="Int32" />
+          <Property Name="impsug" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="gerencia_bo" Type="Int32" />
+          <Property Name="gerencia_ss" Type="Int32" />
+          <Property Name="snr_ingl" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="cartera_tes" Type="Int32" />
+          <Property Name="cartera_pay" Type="Int32" />
+          <Property Name="publicar_eeff" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="fingreso" Type="DateTime" Precision="0" />
+          <Property Name="fsalida" Type="DateTime" Precision="0" />
+          <Property Name="cartera_oper" Type="Int32" />
+          <Property Name="kpif29" Type="Int32" />
+          <Property Name="kpieeff" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="nomfaccl" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="kpieeffhabil" Type="Boolean" />
+          <Property Name="kpif29_automa" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Comunas_CRM">
+          <Key>
+            <PropertyRef Name="ID_Comuna" />
+          </Key>
+          <Property Name="ID_Comuna" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom_Comuna" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_Provincia" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Provincias_CRM" Relationship="Self.FK__Comunas_C__ID_Pr__0B679CE2" FromRole="Comunas_CRM" ToRole="Provincias_CRM" />
+          <NavigationProperty Name="Direccion_CRM" Relationship="Self.FK__Direccion__ID_Co__0F382DC6" FromRole="Comunas_CRM" ToRole="Direccion_CRM" />
+        </EntityType>
+        <EntityType Name="Contacto_Cliente_CRM">
+          <Key>
+            <PropertyRef Name="ID_Contacto_Cliente" />
+          </Key>
+          <Property Name="ID_Contacto_Cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Cliente" Type="Int32" />
+          <Property Name="ID_Contacto" Type="Int32" />
+          <Property Name="Cargo" Type="Int32" />
+          <Property Name="Contactado" Type="Boolean" />
+          <Property Name="Telefono_Personal" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono_Trabajo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha_Inicio_Contacto" Type="DateTime" Precision="3" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Referencia_Contacto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Mod" Type="DateTime" Precision="3" />
+          <Property Name="Usuario_Mod" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Cliente_CRM" Relationship="Self.FK__Contacto___ID_Cl__33DFA290" FromRole="Contacto_Cliente_CRM" ToRole="Cliente_CRM" />
+          <NavigationProperty Name="Contacto_CRM" Relationship="Self.FK__Contacto___ID_Co__34D3C6C9" FromRole="Contacto_Cliente_CRM" ToRole="Contacto_CRM" />
+          <NavigationProperty Name="Contactos_Operacionales_CRM" Relationship="Self.FK__Contactos__ID_Co__45C948A1" FromRole="Contacto_Cliente_CRM" ToRole="Contactos_Operacionales_CRM" />
+        </EntityType>
+        <EntityType Name="Contacto_CRM">
+          <Key>
+            <PropertyRef Name="ID_Contacto" />
+          </Key>
+          <Property Name="ID_Contacto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Rut" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Contacto_Cliente_CRM" Relationship="Self.FK__Contacto___ID_Co__34D3C6C9" FromRole="Contacto_CRM" ToRole="Contacto_Cliente_CRM" />
+        </EntityType>
+        <EntityType Name="Contactos_Operacionales_CRM">
+          <Key>
+            <PropertyRef Name="Id_Contacto_Operacional" />
+          </Key>
+          <Property Name="Id_Contacto_Operacional" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Contacto_Cliente" Type="Int32" />
+          <Property Name="ID_Tipo_Contacto_CRM" Type="Int32" />
+          <NavigationProperty Name="Contacto_Cliente_CRM" Relationship="Self.FK__Contactos__ID_Co__45C948A1" FromRole="Contactos_Operacionales_CRM" ToRole="Contacto_Cliente_CRM" />
+          <NavigationProperty Name="Tipo_Contacto_CRM" Relationship="Self.FK__Contactos__ID_Ti__46BD6CDA" FromRole="Contactos_Operacionales_CRM" ToRole="Tipo_Contacto_CRM" />
+        </EntityType>
+        <EntityType Name="Cuestionario_CRM">
+          <Key>
+            <PropertyRef Name="ID_Cuestionario" />
+          </Key>
+          <Property Name="ID_Cuestionario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Cliente" Type="Int32" />
+          <Property Name="Nombre_Cuestionario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Cuestionario_Enviado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Cuestionario_Recibido" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Fecha_Cuestionario_Enviado" Type="DateTime" Precision="3" />
+          <Property Name="Fecha_Cuestionario_Recibido" Type="DateTime" Precision="3" />
+          <Property Name="Comentario" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="Estado" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cliente_CRM" Relationship="Self.FK__Cuestiona__ID_Cl__04EFA97D" FromRole="Cuestionario_CRM" ToRole="Cliente_CRM" />
+          <NavigationProperty Name="Propuesta_CRM" Relationship="Self.FK__Propuesta__ID_Cu__05E3CDB6" FromRole="Cuestionario_CRM" ToRole="Propuesta_CRM" />
+        </EntityType>
+        <EntityType Name="Direccion_CRM">
+          <Key>
+            <PropertyRef Name="ID_Direccion" />
+          </Key>
+          <Property Name="ID_Direccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Cliente" Type="Int32" Nullable="false" />
+          <Property Name="ID_Comuna" Type="Int32" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Casa_Matriz" Type="Boolean" />
+          <Property Name="Pagina_Web" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Numeracion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Piso" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Usu_Mod" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Mod" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cliente_CRM" Relationship="Self.FK__Direccion__ID_Cl__0E44098D" FromRole="Direccion_CRM" ToRole="Cliente_CRM" />
+          <NavigationProperty Name="Comunas_CRM" Relationship="Self.FK__Direccion__ID_Co__0F382DC6" FromRole="Direccion_CRM" ToRole="Comunas_CRM" />
+        </EntityType>
+        <EntityType Name="Documento_CRM">
+          <Key>
+            <PropertyRef Name="ID_Documento" />
+          </Key>
+          <Property Name="ID_Documento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Cliente" Type="Int32" />
+          <Property Name="Ruta" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre_Original" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre_Asignado" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Categoria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha_Documento" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Pais_CRM">
+          <Key>
+            <PropertyRef Name="ID_Pais" />
+          </Key>
+          <Property Name="ID_Pais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Pais" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Abreviatura" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cliente_CRM" Relationship="Self.FK__Cliente_C__ID_Pa__31F75A1E" FromRole="Pais_CRM" ToRole="Cliente_CRM" />
+        </EntityType>
+        <EntityType Name="parametros">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="tipo" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Parametros_CRM">
+          <Key>
+            <PropertyRef Name="ID_Parametro" />
+          </Key>
+          <Property Name="ID_Parametro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Grupo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Texto" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Propuesta_CRM">
+          <Key>
+            <PropertyRef Name="ID_Propuesta" />
+          </Key>
+          <Property Name="ID_Propuesta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Cuestionario" Type="Int32" />
+          <Property Name="Fase" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="Int32" />
+          <Property Name="Horas" Type="Int32" />
+          <Property Name="Tipo_Moneda" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Comentario" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha_Propuesta" Type="DateTime" Precision="3" />
+          <Property Name="Fecha_Aceptacion" Type="DateTime" Precision="3" />
+          <Property Name="Fecha_Modificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cuestionario_CRM" Relationship="Self.FK__Propuesta__ID_Cu__05E3CDB6" FromRole="Propuesta_CRM" ToRole="Cuestionario_CRM" />
+          <NavigationProperty Name="Servicio_Cliente_CRM" Relationship="Self.FK__Servicio___ID_Pr__7C5A637C" FromRole="Propuesta_CRM" ToRole="Servicio_Cliente_CRM" />
+        </EntityType>
+        <EntityType Name="Provincias_CRM">
+          <Key>
+            <PropertyRef Name="ID_Provincia" />
+          </Key>
+          <Property Name="ID_Provincia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom_Provincia" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_Region" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Comunas_CRM" Relationship="Self.FK__Comunas_C__ID_Pr__0B679CE2" FromRole="Provincias_CRM" ToRole="Comunas_CRM" />
+          <NavigationProperty Name="Region_CRM" Relationship="Self.FK__Provincia__ID_Re__0A7378A9" FromRole="Provincias_CRM" ToRole="Region_CRM" />
+        </EntityType>
+        <EntityType Name="Region_CRM">
+          <Key>
+            <PropertyRef Name="ID_Region" />
+          </Key>
+          <Property Name="ID_Region" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom_Region" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Abreviatura" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Capital" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Provincias_CRM" Relationship="Self.FK__Provincia__ID_Re__0A7378A9" FromRole="Region_CRM" ToRole="Provincias_CRM" />
+        </EntityType>
+        <EntityType Name="Servicio_Cliente_CRM">
+          <Key>
+            <PropertyRef Name="ID_Servicio_Cliente" />
+          </Key>
+          <Property Name="ID_Servicio_Cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Servicio" Type="Int32" />
+          <Property Name="ID_Cliente" Type="Int32" />
+          <Property Name="ID_Propuesta" Type="Int32" />
+          <Property Name="valor" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="Tipo_Moneda" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cliente_CRM" Relationship="Self.FK__Servicio___ID_Cl__7889D298" FromRole="Servicio_Cliente_CRM" ToRole="Cliente_CRM" />
+          <NavigationProperty Name="Propuesta_CRM" Relationship="Self.FK__Servicio___ID_Pr__7C5A637C" FromRole="Servicio_Cliente_CRM" ToRole="Propuesta_CRM" />
+          <NavigationProperty Name="Servicio_CRM" Relationship="Self.FK__Servicio___ID_Se__3F1C4B12" FromRole="Servicio_Cliente_CRM" ToRole="Servicio_CRM" />
+        </EntityType>
+        <EntityType Name="Servicio_CRM">
+          <Key>
+            <PropertyRef Name="ID_Servicio" />
+          </Key>
+          <Property Name="ID_Servicio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Padre" Type="Int32" />
+          <Property Name="Nombre_Servicio" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Valor" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Servicio_Cliente_CRM" Relationship="Self.FK__Servicio___ID_Se__3F1C4B12" FromRole="Servicio_CRM" ToRole="Servicio_Cliente_CRM" />
+        </EntityType>
+        <EntityType Name="Tipo_Contacto_CRM">
+          <Key>
+            <PropertyRef Name="ID_Tipo_Contacto_CRM" />
+          </Key>
+          <Property Name="ID_Tipo_Contacto_CRM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Contactos_Operacionales_CRM" Relationship="Self.FK__Contactos__ID_Ti__46BD6CDA" FromRole="Tipo_Contacto_CRM" ToRole="Contactos_Operacionales_CRM" />
+        </EntityType>
+        <EntityType Name="Usu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sigla" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Perfil" Type="Int32" />
+          <Property Name="Anexo" Type="Int32" />
+          <Property Name="IP" Type="Int32" />
+          <Property Name="cargo" Type="Int32" />
+          <Property Name="nomcorto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nomususoft" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="pass" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="jefatura" Type="Int32" />
+          <Property Name="valpubeeff" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="grupo" Type="Int32" />
+          <Property Name="ger" Type="Int32" />
+          <Property Name="gergen" Type="Int32" />
+          <Property Name="superv" Type="Int32" />
+          <Property Name="uactivo" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="unidad" Type="Int32" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cliente_CRM" Relationship="Self.FK__Cliente_C__ID_Cl__32EB7E57" FromRole="Usu" ToRole="Cliente_CRM" />
+          <NavigationProperty Name="Usu1" Relationship="Self.FK_Usu_Usu" FromRole="Usu" ToRole="Usu1" />
+          <NavigationProperty Name="Usu2" Relationship="Self.FK_Usu_Usu" FromRole="Usu1" ToRole="Usu" />
+        </EntityType>
+        <Association Name="FK__Banco_Cli__ID_Cl__47E69B3D">
+          <End Role="Cliente_CRM" Type="Self.Cliente_CRM" Multiplicity="0..1" />
+          <End Role="Banco_Cliente_CRM" Type="Self.Banco_Cliente_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente_CRM">
+              <PropertyRef Name="ID_Cliente" />
+            </Principal>
+            <Dependent Role="Banco_Cliente_CRM">
+              <PropertyRef Name="ID_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cliente_C__ID_Cl__32EB7E57">
+          <End Role="Usu" Type="Self.Usu" Multiplicity="0..1" />
+          <End Role="Cliente_CRM" Type="Self.Cliente_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cliente_CRM">
+              <PropertyRef Name="ID_Client_Service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cliente_C__ID_Pa__31F75A1E">
+          <End Role="Pais_CRM" Type="Self.Pais_CRM" Multiplicity="0..1" />
+          <End Role="Cliente_CRM" Type="Self.Cliente_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais_CRM">
+              <PropertyRef Name="ID_Pais" />
+            </Principal>
+            <Dependent Role="Cliente_CRM">
+              <PropertyRef Name="ID_Pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contacto___ID_Cl__33DFA290">
+          <End Role="Cliente_CRM" Type="Self.Cliente_CRM" Multiplicity="0..1" />
+          <End Role="Contacto_Cliente_CRM" Type="Self.Contacto_Cliente_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente_CRM">
+              <PropertyRef Name="ID_Cliente" />
+            </Principal>
+            <Dependent Role="Contacto_Cliente_CRM">
+              <PropertyRef Name="ID_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cuestiona__ID_Cl__04EFA97D">
+          <End Role="Cliente_CRM" Type="Self.Cliente_CRM" Multiplicity="0..1" />
+          <End Role="Cuestionario_CRM" Type="Self.Cuestionario_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente_CRM">
+              <PropertyRef Name="ID_Cliente" />
+            </Principal>
+            <Dependent Role="Cuestionario_CRM">
+              <PropertyRef Name="ID_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Direccion__ID_Cl__0E44098D">
+          <End Role="Cliente_CRM" Type="Self.Cliente_CRM" Multiplicity="1" />
+          <End Role="Direccion_CRM" Type="Self.Direccion_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente_CRM">
+              <PropertyRef Name="ID_Cliente" />
+            </Principal>
+            <Dependent Role="Direccion_CRM">
+              <PropertyRef Name="ID_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicio___ID_Cl__7889D298">
+          <End Role="Cliente_CRM" Type="Self.Cliente_CRM" Multiplicity="0..1" />
+          <End Role="Servicio_Cliente_CRM" Type="Self.Servicio_Cliente_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente_CRM">
+              <PropertyRef Name="ID_Cliente" />
+            </Principal>
+            <Dependent Role="Servicio_Cliente_CRM">
+              <PropertyRef Name="ID_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comunas_C__ID_Pr__0B679CE2">
+          <End Role="Provincias_CRM" Type="Self.Provincias_CRM" Multiplicity="1" />
+          <End Role="Comunas_CRM" Type="Self.Comunas_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincias_CRM">
+              <PropertyRef Name="ID_Provincia" />
+            </Principal>
+            <Dependent Role="Comunas_CRM">
+              <PropertyRef Name="ID_Provincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Direccion__ID_Co__0F382DC6">
+          <End Role="Comunas_CRM" Type="Self.Comunas_CRM" Multiplicity="1" />
+          <End Role="Direccion_CRM" Type="Self.Direccion_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comunas_CRM">
+              <PropertyRef Name="ID_Comuna" />
+            </Principal>
+            <Dependent Role="Direccion_CRM">
+              <PropertyRef Name="ID_Comuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contacto___ID_Co__34D3C6C9">
+          <End Role="Contacto_CRM" Type="Self.Contacto_CRM" Multiplicity="0..1" />
+          <End Role="Contacto_Cliente_CRM" Type="Self.Contacto_Cliente_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contacto_CRM">
+              <PropertyRef Name="ID_Contacto" />
+            </Principal>
+            <Dependent Role="Contacto_Cliente_CRM">
+              <PropertyRef Name="ID_Contacto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contactos__ID_Co__45C948A1">
+          <End Role="Contacto_Cliente_CRM" Type="Self.Contacto_Cliente_CRM" Multiplicity="0..1" />
+          <End Role="Contactos_Operacionales_CRM" Type="Self.Contactos_Operacionales_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contacto_Cliente_CRM">
+              <PropertyRef Name="ID_Contacto_Cliente" />
+            </Principal>
+            <Dependent Role="Contactos_Operacionales_CRM">
+              <PropertyRef Name="ID_Contacto_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contactos__ID_Ti__46BD6CDA">
+          <End Role="Tipo_Contacto_CRM" Type="Self.Tipo_Contacto_CRM" Multiplicity="0..1" />
+          <End Role="Contactos_Operacionales_CRM" Type="Self.Contactos_Operacionales_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Contacto_CRM">
+              <PropertyRef Name="ID_Tipo_Contacto_CRM" />
+            </Principal>
+            <Dependent Role="Contactos_Operacionales_CRM">
+              <PropertyRef Name="ID_Tipo_Contacto_CRM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Propuesta__ID_Cu__05E3CDB6">
+          <End Role="Cuestionario_CRM" Type="Self.Cuestionario_CRM" Multiplicity="0..1" />
+          <End Role="Propuesta_CRM" Type="Self.Propuesta_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuestionario_CRM">
+              <PropertyRef Name="ID_Cuestionario" />
+            </Principal>
+            <Dependent Role="Propuesta_CRM">
+              <PropertyRef Name="ID_Cuestionario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicio___ID_Pr__7C5A637C">
+          <End Role="Propuesta_CRM" Type="Self.Propuesta_CRM" Multiplicity="0..1" />
+          <End Role="Servicio_Cliente_CRM" Type="Self.Servicio_Cliente_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Propuesta_CRM">
+              <PropertyRef Name="ID_Propuesta" />
+            </Principal>
+            <Dependent Role="Servicio_Cliente_CRM">
+              <PropertyRef Name="ID_Propuesta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Provincia__ID_Re__0A7378A9">
+          <End Role="Region_CRM" Type="Self.Region_CRM" Multiplicity="1" />
+          <End Role="Provincias_CRM" Type="Self.Provincias_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region_CRM">
+              <PropertyRef Name="ID_Region" />
+            </Principal>
+            <Dependent Role="Provincias_CRM">
+              <PropertyRef Name="ID_Region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicio___ID_Se__3F1C4B12">
+          <End Role="Servicio_CRM" Type="Self.Servicio_CRM" Multiplicity="0..1" />
+          <End Role="Servicio_Cliente_CRM" Type="Self.Servicio_Cliente_CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio_CRM">
+              <PropertyRef Name="ID_Servicio" />
+            </Principal>
+            <Dependent Role="Servicio_Cliente_CRM">
+              <PropertyRef Name="ID_Servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usu_Usu">
+          <End Role="Usu" Type="Self.Usu" Multiplicity="1" />
+          <End Role="Usu1" Type="Self.Usu" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Usu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Usu1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GSPSOCRMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Banco_Cliente_CRM" EntityType="Self.Banco_Cliente_CRM" />
+          <EntitySet Name="Cliente_CRM" EntityType="Self.Cliente_CRM" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+          <EntitySet Name="Comunas_CRM" EntityType="Self.Comunas_CRM" />
+          <EntitySet Name="Contacto_Cliente_CRM" EntityType="Self.Contacto_Cliente_CRM" />
+          <EntitySet Name="Contacto_CRM" EntityType="Self.Contacto_CRM" />
+          <EntitySet Name="Contactos_Operacionales_CRM" EntityType="Self.Contactos_Operacionales_CRM" />
+          <EntitySet Name="Cuestionario_CRM" EntityType="Self.Cuestionario_CRM" />
+          <EntitySet Name="Direccion_CRM" EntityType="Self.Direccion_CRM" />
+          <EntitySet Name="Documento_CRM" EntityType="Self.Documento_CRM" />
+          <EntitySet Name="Pais_CRM" EntityType="Self.Pais_CRM" />
+          <EntitySet Name="parametros" EntityType="Self.parametros" />
+          <EntitySet Name="Parametros_CRM" EntityType="Self.Parametros_CRM" />
+          <EntitySet Name="Propuesta_CRM" EntityType="Self.Propuesta_CRM" />
+          <EntitySet Name="Provincias_CRM" EntityType="Self.Provincias_CRM" />
+          <EntitySet Name="Region_CRM" EntityType="Self.Region_CRM" />
+          <EntitySet Name="Servicio_Cliente_CRM" EntityType="Self.Servicio_Cliente_CRM" />
+          <EntitySet Name="Servicio_CRM" EntityType="Self.Servicio_CRM" />
+          <EntitySet Name="Tipo_Contacto_CRM" EntityType="Self.Tipo_Contacto_CRM" />
+          <EntitySet Name="Usu" EntityType="Self.Usu" />
+          <AssociationSet Name="FK__Banco_Cli__ID_Cl__47E69B3D" Association="Self.FK__Banco_Cli__ID_Cl__47E69B3D">
+            <End Role="Cliente_CRM" EntitySet="Cliente_CRM" />
+            <End Role="Banco_Cliente_CRM" EntitySet="Banco_Cliente_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cliente_C__ID_Cl__32EB7E57" Association="Self.FK__Cliente_C__ID_Cl__32EB7E57">
+            <End Role="Usu" EntitySet="Usu" />
+            <End Role="Cliente_CRM" EntitySet="Cliente_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cliente_C__ID_Pa__31F75A1E" Association="Self.FK__Cliente_C__ID_Pa__31F75A1E">
+            <End Role="Pais_CRM" EntitySet="Pais_CRM" />
+            <End Role="Cliente_CRM" EntitySet="Cliente_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contacto___ID_Cl__33DFA290" Association="Self.FK__Contacto___ID_Cl__33DFA290">
+            <End Role="Cliente_CRM" EntitySet="Cliente_CRM" />
+            <End Role="Contacto_Cliente_CRM" EntitySet="Contacto_Cliente_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cuestiona__ID_Cl__04EFA97D" Association="Self.FK__Cuestiona__ID_Cl__04EFA97D">
+            <End Role="Cliente_CRM" EntitySet="Cliente_CRM" />
+            <End Role="Cuestionario_CRM" EntitySet="Cuestionario_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Direccion__ID_Cl__0E44098D" Association="Self.FK__Direccion__ID_Cl__0E44098D">
+            <End Role="Cliente_CRM" EntitySet="Cliente_CRM" />
+            <End Role="Direccion_CRM" EntitySet="Direccion_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicio___ID_Cl__7889D298" Association="Self.FK__Servicio___ID_Cl__7889D298">
+            <End Role="Cliente_CRM" EntitySet="Cliente_CRM" />
+            <End Role="Servicio_Cliente_CRM" EntitySet="Servicio_Cliente_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comunas_C__ID_Pr__0B679CE2" Association="Self.FK__Comunas_C__ID_Pr__0B679CE2">
+            <End Role="Provincias_CRM" EntitySet="Provincias_CRM" />
+            <End Role="Comunas_CRM" EntitySet="Comunas_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Direccion__ID_Co__0F382DC6" Association="Self.FK__Direccion__ID_Co__0F382DC6">
+            <End Role="Comunas_CRM" EntitySet="Comunas_CRM" />
+            <End Role="Direccion_CRM" EntitySet="Direccion_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contacto___ID_Co__34D3C6C9" Association="Self.FK__Contacto___ID_Co__34D3C6C9">
+            <End Role="Contacto_CRM" EntitySet="Contacto_CRM" />
+            <End Role="Contacto_Cliente_CRM" EntitySet="Contacto_Cliente_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contactos__ID_Co__45C948A1" Association="Self.FK__Contactos__ID_Co__45C948A1">
+            <End Role="Contacto_Cliente_CRM" EntitySet="Contacto_Cliente_CRM" />
+            <End Role="Contactos_Operacionales_CRM" EntitySet="Contactos_Operacionales_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contactos__ID_Ti__46BD6CDA" Association="Self.FK__Contactos__ID_Ti__46BD6CDA">
+            <End Role="Tipo_Contacto_CRM" EntitySet="Tipo_Contacto_CRM" />
+            <End Role="Contactos_Operacionales_CRM" EntitySet="Contactos_Operacionales_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Propuesta__ID_Cu__05E3CDB6" Association="Self.FK__Propuesta__ID_Cu__05E3CDB6">
+            <End Role="Cuestionario_CRM" EntitySet="Cuestionario_CRM" />
+            <End Role="Propuesta_CRM" EntitySet="Propuesta_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicio___ID_Pr__7C5A637C" Association="Self.FK__Servicio___ID_Pr__7C5A637C">
+            <End Role="Propuesta_CRM" EntitySet="Propuesta_CRM" />
+            <End Role="Servicio_Cliente_CRM" EntitySet="Servicio_Cliente_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Provincia__ID_Re__0A7378A9" Association="Self.FK__Provincia__ID_Re__0A7378A9">
+            <End Role="Region_CRM" EntitySet="Region_CRM" />
+            <End Role="Provincias_CRM" EntitySet="Provincias_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicio___ID_Se__3F1C4B12" Association="Self.FK__Servicio___ID_Se__3F1C4B12">
+            <End Role="Servicio_CRM" EntitySet="Servicio_CRM" />
+            <End Role="Servicio_Cliente_CRM" EntitySet="Servicio_Cliente_CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usu_Usu" Association="Self.FK_Usu_Usu">
+            <End Role="Usu" EntitySet="Usu" />
+            <End Role="Usu1" EntitySet="Usu" />
+          </AssociationSet>
+          <EntitySet Name="GS_Cargos" EntityType="GSPSOModel.GS_Cargos" />
+          <EntitySet Name="GS_Asig_Carg_Clie" EntityType="GSPSOModel.GS_Asig_Carg_Clie" />
+        </EntityContainer>
+        <EntityType Name="GS_Cargos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="area" Type="Int32" />
+          <Property Name="estado" Type="Int32" />
+          <Property Name="usuario_mod" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="GS_Asig_Carg_Clie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usu" Type="Int32" />
+          <Property Name="clie" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GSPSOModelStoreContainer" CdmEntityContainer="GSPSOCRMEntities">
+          <EntitySetMapping Name="Banco_Cliente_CRM">
+            <EntityTypeMapping TypeName="GSPSOModel.Banco_Cliente_CRM">
+              <MappingFragment StoreEntitySet="Banco_Cliente_CRM">
+                <ScalarProperty Name="ID_Banco_Cliente" ColumnName="ID_Banco_Cliente" />
+                <ScalarProperty Name="ID_Cliente" ColumnName="ID_Cliente" />
+                <ScalarProperty Name="ID_Banco" ColumnName="ID_Banco" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente_CRM">
+            <EntityTypeMapping TypeName="GSPSOModel.Cliente_CRM">
+              <MappingFragment StoreEntitySet="Cliente_CRM">
+                <ScalarProperty Name="ID_Cliente" ColumnName="ID_Cliente" />
+                <ScalarProperty Name="ID_Pais" ColumnName="ID_Pais" />
+                <ScalarProperty Name="ID_Client_Service" ColumnName="ID_Client_Service" />
+                <ScalarProperty Name="ID_Parther" ColumnName="ID_Parther" />
+                <ScalarProperty Name="Rut" ColumnName="Rut" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Industria" ColumnName="Industria" />
+                <ScalarProperty Name="Fecha_Primer_Contacto" ColumnName="Fecha_Primer_Contacto" />
+                <ScalarProperty Name="Perfil" ColumnName="Perfil" />
+                <ScalarProperty Name="Profile" ColumnName="Profile" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha_Mod" ColumnName="Fecha_Mod" />
+                <ScalarProperty Name="Usuario_Mod" ColumnName="Usuario_Mod" />
+                <ScalarProperty Name="Referencia_Cliente" ColumnName="Referencia_Cliente" />
+                <ScalarProperty Name="ID_Cliente_Cliente" ColumnName="ID_Cliente_Cliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="GSPSOModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Ruta" ColumnName="Ruta" />
+                <ScalarProperty Name="Usu" ColumnName="Usu" />
+                <ScalarProperty Name="Nombre_Archivo" ColumnName="Nombre Archivo" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="TC" ColumnName="TC" />
+                <ScalarProperty Name="EcepCC" ColumnName="EcepCC" />
+                <ScalarProperty Name="IRFS" ColumnName="IRFS" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Rut" ColumnName="Rut" />
+                <ScalarProperty Name="BLK" ColumnName="BLK" />
+                <ScalarProperty Name="TCFac" ColumnName="TCFac" />
+                <ScalarProperty Name="Tarifa" ColumnName="Tarifa" />
+                <ScalarProperty Name="TCFac1" ColumnName="TCFac1" />
+                <ScalarProperty Name="Tarifa1" ColumnName="Tarifa1" />
+                <ScalarProperty Name="CC" ColumnName="CC" />
+                <ScalarProperty Name="Holding" ColumnName="Holding" />
+                <ScalarProperty Name="BA" ColumnName="BA" />
+                <ScalarProperty Name="ER" ColumnName="ER" />
+                <ScalarProperty Name="SegMon" ColumnName="SegMon" />
+                <ScalarProperty Name="BLKPag" ColumnName="BLKPag" />
+                <ScalarProperty Name="TES" ColumnName="TES" />
+                <ScalarProperty Name="BcoPag" ColumnName="BcoPag" />
+                <ScalarProperty Name="CtaPag" ColumnName="CtaPag" />
+                <ScalarProperty Name="EmailPag" ColumnName="EmailPag" />
+                <ScalarProperty Name="MPago" ColumnName="MPago" />
+                <ScalarProperty Name="Obs" ColumnName="Obs" />
+                <ScalarProperty Name="Consi" ColumnName="Consi" />
+                <ScalarProperty Name="AdmCheque" ColumnName="AdmCheque" />
+                <ScalarProperty Name="RRHH" ColumnName="RRHH" />
+                <ScalarProperty Name="Grati" ColumnName="Grati" />
+                <ScalarProperty Name="ObsGrati" ColumnName="ObsGrati" />
+                <ScalarProperty Name="Cola" ColumnName="Cola" />
+                <ScalarProperty Name="ObsCola" ColumnName="ObsCola" />
+                <ScalarProperty Name="Mov" ColumnName="Mov" />
+                <ScalarProperty Name="ObsMov" ColumnName="ObsMov" />
+                <ScalarProperty Name="Fpago" ColumnName="Fpago" />
+                <ScalarProperty Name="Caja" ColumnName="Caja" />
+                <ScalarProperty Name="ObsCaja" ColumnName="ObsCaja" />
+                <ScalarProperty Name="Mutual" ColumnName="Mutual" />
+                <ScalarProperty Name="ObsMutual" ColumnName="ObsMutual" />
+                <ScalarProperty Name="DiaSueldo" ColumnName="DiaSueldo" />
+                <ScalarProperty Name="DiaPago" ColumnName="DiaPago" />
+                <ScalarProperty Name="DiaAnticipo" ColumnName="DiaAnticipo" />
+                <ScalarProperty Name="ObsRRHH" ColumnName="ObsRRHH" />
+                <ScalarProperty Name="PagaPSO" ColumnName="PagaPSO" />
+                <ScalarProperty Name="emailcobro" ColumnName="emailcobro" />
+                <ScalarProperty Name="atencion" ColumnName="atencion" />
+                <ScalarProperty Name="TramoPR" ColumnName="TramoPR" />
+                <ScalarProperty Name="IIng" ColumnName="IIng" />
+                <ScalarProperty Name="TipChe" ColumnName="TipChe" />
+                <ScalarProperty Name="rutadestino" ColumnName="rutadestino" />
+                <ScalarProperty Name="CTD" ColumnName="CTD" />
+                <ScalarProperty Name="fechalr" ColumnName="fechalr" />
+                <ScalarProperty Name="gbo" ColumnName="gbo" />
+                <ScalarProperty Name="impsug" ColumnName="impsug" />
+                <ScalarProperty Name="gerencia_bo" ColumnName="gerencia_bo" />
+                <ScalarProperty Name="gerencia_ss" ColumnName="gerencia_ss" />
+                <ScalarProperty Name="snr_ingl" ColumnName="snr_ingl" />
+                <ScalarProperty Name="cartera_tes" ColumnName="cartera_tes" />
+                <ScalarProperty Name="cartera_pay" ColumnName="cartera_pay" />
+                <ScalarProperty Name="publicar_eeff" ColumnName="publicar_eeff" />
+                <ScalarProperty Name="fingreso" ColumnName="fingreso" />
+                <ScalarProperty Name="fsalida" ColumnName="fsalida" />
+                <ScalarProperty Name="cartera_oper" ColumnName="cartera_oper" />
+                <ScalarProperty Name="kpif29" ColumnName="kpif29" />
+                <ScalarProperty Name="kpieeff" ColumnName="kpieeff" />
+                <ScalarProperty Name="nomfaccl" ColumnName="nomfaccl" />
+                <ScalarProperty Name="kpieeffhabil" ColumnName="kpieeffhabil" />
+                <ScalarProperty Name="kpif29_automa" ColumnName="kpif29_automa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comunas_CRM">
+            <EntityTypeMapping TypeName="GSPSOModel.Comunas_CRM">
+              <MappingFragment StoreEntitySet="Comunas_CRM">
+                <ScalarProperty Name="ID_Comuna" ColumnName="ID_Comuna" />
+                <ScalarProperty Name="Nom_Comuna" ColumnName="Nom_Comuna" />
+                <ScalarProperty Name="ID_Provincia" ColumnName="ID_Provincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacto_Cliente_CRM">
+            <EntityTypeMapping TypeName="GSPSOModel.Contacto_Cliente_CRM">
+              <MappingFragment StoreEntitySet="Contacto_Cliente_CRM">
+                <ScalarProperty Name="ID_Contacto_Cliente" ColumnName="ID_Contacto_Cliente" />
+                <ScalarProperty Name="ID_Cliente" ColumnName="ID_Cliente" />
+                <ScalarProperty Name="ID_Contacto" ColumnName="ID_Contacto" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="Contactado" ColumnName="Contactado" />
+                <ScalarProperty Name="Telefono_Personal" ColumnName="Telefono_Personal" />
+                <ScalarProperty Name="Telefono_Trabajo" ColumnName="Telefono_Trabajo" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Fecha_Inicio_Contacto" ColumnName="Fecha_Inicio_Contacto" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Referencia_Contacto" ColumnName="Referencia_Contacto" />
+                <ScalarProperty Name="Fecha_Mod" ColumnName="Fecha_Mod" />
+                <ScalarProperty Name="Usuario_Mod" ColumnName="Usuario_Mod" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacto_CRM">
+            <EntityTypeMapping TypeName="GSPSOModel.Contacto_CRM">
+              <MappingFragment StoreEntitySet="Contacto_CRM">
+                <ScalarProperty Name="ID_Contacto" ColumnName="ID_Contacto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Rut" ColumnName="Rut" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contactos_Operacionales_CRM">
+            <EntityTypeMapping TypeName="GSPSOModel.Contactos_Operacionales_CRM">
+              <MappingFragment StoreEntitySet="Contactos_Operacionales_CRM">
+                <ScalarProperty Name="Id_Contacto_Operacional" ColumnName="Id_Contacto_Operacional" />
+                <ScalarProperty Name="ID_Contacto_Cliente" ColumnName="ID_Contacto_Cliente" />
+                <ScalarProperty Name="ID_Tipo_Contacto_CRM" ColumnName="ID_Tipo_Contacto_CRM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cuestionario_CRM">
+            <EntityTypeMapping TypeName="GSPSOModel.Cuestionario_CRM">
+              <MappingFragment StoreEntitySet="Cuestionario_CRM">
+                <ScalarProperty Name="ID_Cuestionario" ColumnName="ID_Cuestionario" />
+                <ScalarProperty Name="ID_Cliente" ColumnName="ID_Cliente" />
+                <ScalarProperty Name="Nombre_Cuestionario" ColumnName="Nombre_Cuestionario" />
+                <ScalarProperty Name="Cuestionario_Enviado" ColumnName="Cuestionario_Enviado" />
+                <ScalarProperty Name="Cuestionario_Recibido" ColumnName="Cuestionario_Recibido" />
+                <ScalarProperty Name="Fecha_Cuestionario_Enviado" ColumnName="Fecha_Cuestionario_Enviado" />
+                <ScalarProperty Name="Fecha_Cuestionario_Recibido" ColumnName="Fecha_Cuestionario_Recibido" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Direccion_CRM">
+            <EntityTypeMapping TypeName="GSPSOModel.Direccion_CRM">
+              <MappingFragment StoreEntitySet="Direccion_CRM">
+                <ScalarProperty Name="ID_Direccion" ColumnName="ID_Direccion" />
+                <ScalarProperty Name="ID_Cliente" ColumnName="ID_Cliente" />
+                <ScalarProperty Name="ID_Comuna" ColumnName="ID_Comuna" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Casa_Matriz" ColumnName="Casa_Matriz" />
+                <ScalarProperty Name="Pagina_Web" ColumnName="Pagina_Web" />
+                <ScalarProperty Name="Numeracion" ColumnName="Numeracion" />
+                <ScalarProperty Name="Piso" ColumnName="Piso" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Usu_Mod" ColumnName="Usu_Mod" />
+                <ScalarProperty Name="Fecha_Mod" ColumnName="Fecha_Mod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documento_CRM">
+            <EntityTypeMapping TypeName="GSPSOModel.Documento_CRM">
+              <MappingFragment StoreEntitySet="Documento_CRM">
+                <ScalarProperty Name="ID_Documento" ColumnName="ID_Documento" />
+                <ScalarProperty Name="ID_Cliente" ColumnName="ID_Cliente" />
+                <ScalarProperty Name="Ruta" ColumnName="Ruta" />
+                <ScalarProperty Name="Nombre_Original" ColumnName="Nombre_Original" />
+                <ScalarProperty Name="Nombre_Asignado" ColumnName="Nombre_Asignado" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="Fecha_Documento" ColumnName="Fecha_Documento" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pais_CRM">
+            <EntityTypeMapping TypeName="GSPSOModel.Pais_CRM">
+              <MappingFragment StoreEntitySet="Pais_CRM">
+                <ScalarProperty Name="ID_Pais" ColumnName="ID_Pais" />
+                <ScalarProperty Name="Nombre_Pais" ColumnName="Nombre_Pais" />
+                <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="parametros">
+            <EntityTypeMapping TypeName="GSPSOModel.parametros">
+              <MappingFragment StoreEntitySet="parametros">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parametros_CRM">
+            <EntityTypeMapping TypeName="GSPSOModel.Parametros_CRM">
+              <MappingFragment StoreEntitySet="Parametros_CRM">
+                <ScalarProperty Name="ID_Parametro" ColumnName="ID_Parametro" />
+                <ScalarProperty Name="Grupo" ColumnName="Grupo" />
+                <ScalarProperty Name="Texto" ColumnName="Texto" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Propuesta_CRM">
+            <EntityTypeMapping TypeName="GSPSOModel.Propuesta_CRM">
+              <MappingFragment StoreEntitySet="Propuesta_CRM">
+                <ScalarProperty Name="ID_Propuesta" ColumnName="ID_Propuesta" />
+                <ScalarProperty Name="ID_Cuestionario" ColumnName="ID_Cuestionario" />
+                <ScalarProperty Name="Fase" ColumnName="Fase" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Horas" ColumnName="Horas" />
+                <ScalarProperty Name="Tipo_Moneda" ColumnName="Tipo_Moneda" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="Fecha_Propuesta" ColumnName="Fecha_Propuesta" />
+                <ScalarProperty Name="Fecha_Aceptacion" ColumnName="Fecha_Aceptacion" />
+                <ScalarProperty Name="Fecha_Modificacion" ColumnName="Fecha_Modificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provincias_CRM">
+            <EntityTypeMapping TypeName="GSPSOModel.Provincias_CRM">
+              <MappingFragment StoreEntitySet="Provincias_CRM">
+                <ScalarProperty Name="ID_Provincia" ColumnName="ID_Provincia" />
+                <ScalarProperty Name="Nom_Provincia" ColumnName="Nom_Provincia" />
+                <ScalarProperty Name="ID_Region" ColumnName="ID_Region" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Region_CRM">
+            <EntityTypeMapping TypeName="GSPSOModel.Region_CRM">
+              <MappingFragment StoreEntitySet="Region_CRM">
+                <ScalarProperty Name="ID_Region" ColumnName="ID_Region" />
+                <ScalarProperty Name="Nom_Region" ColumnName="Nom_Region" />
+                <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Servicio_Cliente_CRM">
+            <EntityTypeMapping TypeName="GSPSOModel.Servicio_Cliente_CRM">
+              <MappingFragment StoreEntitySet="Servicio_Cliente_CRM">
+                <ScalarProperty Name="ID_Servicio_Cliente" ColumnName="ID_Servicio_Cliente" />
+                <ScalarProperty Name="ID_Servicio" ColumnName="ID_Servicio" />
+                <ScalarProperty Name="ID_Cliente" ColumnName="ID_Cliente" />
+                <ScalarProperty Name="ID_Propuesta" ColumnName="ID_Propuesta" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="Tipo_Moneda" ColumnName="Tipo_Moneda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Servicio_CRM">
+            <EntityTypeMapping TypeName="GSPSOModel.Servicio_CRM">
+              <MappingFragment StoreEntitySet="Servicio_CRM">
+                <ScalarProperty Name="ID_Servicio" ColumnName="ID_Servicio" />
+                <ScalarProperty Name="ID_Padre" ColumnName="ID_Padre" />
+                <ScalarProperty Name="Nombre_Servicio" ColumnName="Nombre_Servicio" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_Contacto_CRM">
+            <EntityTypeMapping TypeName="GSPSOModel.Tipo_Contacto_CRM">
+              <MappingFragment StoreEntitySet="Tipo_Contacto_CRM">
+                <ScalarProperty Name="ID_Tipo_Contacto_CRM" ColumnName="ID_Tipo_Contacto_CRM" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usu">
+            <EntityTypeMapping TypeName="GSPSOModel.Usu">
+              <MappingFragment StoreEntitySet="Usu">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Sigla" ColumnName="Sigla" />
+                <ScalarProperty Name="Perfil" ColumnName="Perfil" />
+                <ScalarProperty Name="Anexo" ColumnName="Anexo" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="cargo" ColumnName="cargo" />
+                <ScalarProperty Name="nomcorto" ColumnName="nomcorto" />
+                <ScalarProperty Name="nomususoft" ColumnName="nomususoft" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="jefatura" ColumnName="jefatura" />
+                <ScalarProperty Name="valpubeeff" ColumnName="valpubeeff" />
+                <ScalarProperty Name="grupo" ColumnName="grupo" />
+                <ScalarProperty Name="ger" ColumnName="ger" />
+                <ScalarProperty Name="gergen" ColumnName="gergen" />
+                <ScalarProperty Name="superv" ColumnName="superv" />
+                <ScalarProperty Name="uactivo" ColumnName="uactivo" />
+                <ScalarProperty Name="unidad" ColumnName="unidad" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GS_Cargos">
+            <EntityTypeMapping TypeName="GSPSOModel.GS_Cargos">
+              <MappingFragment StoreEntitySet="GS_Cargos">
+                <ScalarProperty Name="usuario_mod" ColumnName="usuario_mod" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GS_Asig_Carg_Clie">
+            <EntityTypeMapping TypeName="GSPSOModel.GS_Asig_Carg_Clie">
+              <MappingFragment StoreEntitySet="GS_Asig_Carg_Clie">
+                <ScalarProperty Name="clie" ColumnName="clie" />
+                <ScalarProperty Name="usu" ColumnName="usu" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

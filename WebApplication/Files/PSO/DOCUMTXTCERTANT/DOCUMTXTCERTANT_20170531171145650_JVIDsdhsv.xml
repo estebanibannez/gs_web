@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CERTIFICADOS>
+	<C_ANTIGUEDAD>
+ {NomB}. Rut: {RutE} , con domicilio en {Dire}, {Comu},  {Ciud},  certifica que  {NOM} C.I. {rut} se desempeña en el cargo de {CarNom} con fecha de ingreso el día {fechaIngreso}, manteniendo su contrato en carácter de {T_Contrato}
+	</C_ANTIGUEDAD>
+</CERTIFICADOS>

@@ -1,0 +1,344 @@
+﻿<style>
+    .add_event_label {
+        /*padding-left: 91px;*/
+        font-size: 15px;
+    }
+
+    .fc-widget-content {
+        position: relative;
+    }
+
+    .foo {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+
+    .calDay {
+        background-color: #28FFFF;
+        border-color: #ff0000 !important;
+    }
+
+    .payroll {
+        background-color: #e5ffe6;
+    }
+
+    .eeff {
+        background-color: #e0f4ff;
+    }
+
+    .declaracionMenF19 {
+        background-color: #ffe5e5;
+    }
+</style>
+
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-calendar-check-o"></i> Programación de Procesos KPI</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel">
+            <div class="box-header with-border">
+                <h3 class="box-title"> Filtrar Calendario por Procesos</h3>
+            </div>
+            <div class="box-body">
+                <div class="col-md-12">
+                    <p>Tipo de Proceso</p>
+                    @Html.DropDownList("proce", (SelectList)ViewBag.tipoProce, new { @class = "form-control", @id = "id_proce" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel">
+            <div class="box-header with-border">
+                <h3 class="box-title"> Buscar Periodo de acuerdo al Cliente</h3>
+            </div>
+            <div class="box-body">
+                <div class="col-md-6">
+                    <p>Cliente</p>
+                    @Html.DropDownList("clientes", (SelectList)ViewBag.lstClientes, "Seleccione...", new { @class = "form-control", @id = "id_cliente" })
+                </div>
+                <div class="col-md-6">
+                    <p>Periodo del Proceso</p>
+                    <input type="text" class="form-control" name="peridClient" id="peridClient" maxlesngth="9" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="box-header with-border">
+        <h3 class="box-title titleCal" id=""> Traspaso de sueldos de Payroll hacia BO</h3>
+    </div>
+    <div class="box-body">
+        <div class="table-responsive payroll">
+            <div id="calendar" class="col-md-12">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //colores para los eventos..(etiquetas del calendario)
+    //var colors = ["#56c4fb", "#1baa06", "#c186ab", "#8e091e", "#76ad00", "#63b598", "#ce7d78", "#ea9e70", "#a48a9e", "#c6e1e8", "#648177", "#0d5ac1", "#f205e6", "#d298e2", "#6119d0", "#d2737d", "#c0a43c", "#f2510e", "#651be6", "#79806e", "#61da5e", "#cd2f00"];
+    //function random(array) {
+    //    return array[Math.floor(Math.random() * array.length)]
+    //}
+
+    //Flags
+    var calDaySelected = "";
+
+    //Document Ready---------------------------------------00
+    $(function () {
+
+        /* initialize the external events
+        -----------------------------------------------------------------*/
+        function ini_events(ele) {
+            ele.each(function () {
+
+                // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+                // it doesn't need to have a start or end
+                var eventObject = {
+                    title: $.trim($(this).text()) // use the element's text as the event title
+                };
+
+                // store the Event Object in the DOM element so we can get to it later
+                $(this).data('eventObject', eventObject);
+
+                // make the event draggable using jQuery UI
+                $(this).draggable({
+                    zIndex: 1070,
+                    revert: true, // will cause the event to go back to its
+                    revertDuration: 0  //  original position after the drag
+                });
+
+            });
+        }
+
+        ini_events($('#external-events div.external-event'));
+
+        /*-- inicia calendario --*/
+        CargarCal();
+
+    });
+
+    ///funcuion para cargar y refrescar el calendario
+    function CargarCal() {
+        var calendario = $('#calendar').fullCalendar({
+            monthNames: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
+            buttonText: { today: '   Hoy   ' },
+            firstDay: 1,
+            locale: 'en',
+            //editable: true,
+            eventLimit: true,
+            dateFormat: 'yyyy-mm-dd',
+            header: {
+                right: 'prevYear,prev,next,nextYear today',
+                left: 'title',
+            },
+            titleFormat: '[Periodo]: YYYY-MM'
+        ,
+            events: function (start, end, timezone, callback, date) {
+                $.ajax({
+                    url: '@Url.Action("GetDates","PrograProceKPI")',
+                    data: { idTipo: $("#id_proce").val() },
+                    type: "POST",
+                    dataType: "json",
+                    success: function (result) {
+                        var events = [];
+                        var utc = new Date().toJSON().slice(0,10)
+                        if ($(result.data) != undefined) {
+                            $.each(result.data, function (i, reg) {
+                                //if (reg.DiasPlazo == null) {
+                                //    var dp = 0;
+                                //} else {
+                                //    var dp = reg.DiasPlazo;
+                                //}
+                                let createdDate = moment(reg.Periodo).utc().format("YYYY-MM-DD");
+                                let expirationDate = moment(createdDate).add(reg.DiasPlazo, 'd').format("YYYY-MM-DD");
+                                events.push({
+                                    title: reg.NomClie,
+                                    id: reg.IdEvent,
+                                    icon: 'fa fa-trash',
+                                    allDay: true,
+                                    description: "Vence " + expirationDate ,
+                                    start: moment(reg.Periodo).format('YYYY-MM-DD')
+                                    //backgroundColor: random(colors)
+                                });
+                            });
+                        }
+                        callback(events)
+                    },
+                    error: function () {
+                        mensajeError("Ops..", "Error de controlador. Contactese con el administrador");
+                    }
+                });
+            },
+            eventRender: function (event, element, icon) {
+
+                element.find('.fc-event-title').append("boton");
+
+                var urlDel = "@Url.Action("Delete", "PrograProceKPI")" + "?id=" + event.id;
+                var urlUpd = "@Url.Action("Edit", "PrograProceKPI")" + "?id=" + event.id;
+                element.find(' .fc-title').append('<a href=' + urlUpd + ' class="modal-ajax-load pull-right" data-toggle="modal" data-target="#myModal" data-remote="false" style="padding:4px;color:white"</a><i class="fa fa-edit" aria-hidden="true"></i></a>');
+                element.find(' .fc-title').append("<a href=\'javascript:confirmDeletePersonal(\"Confirme la eliminacion\",\"" + urlDel + "\");\' class='" + event.icon + " pull-right' style='padding:4px;color:white'</a>");
+                $(element).tooltip({ title: event.description });
+            },
+            dayRender: function (date, cell, view) {
+                var urlCrea = '@Url.Action("Create", "PrograProceKPI")?date=' + moment(date).format('YYYY-MM-DD') + '&tipoPro=' + $("#id_proce").val();
+                var add_button = '<a href="' + urlCrea + '" class="add_event_label pull-left modal-ajax-load" data-toggle="modal" data-target="#myModal" data-remote="false"><i class="fa fa-plus"></i> Add</a>';
+
+                $('.fc-day-number[data-date=' + moment(date).format('YYYY-MM-DD') + ']').prepend(add_button);
+
+            },
+            windowResize: function (event, ui) {
+                $('#calendar').fullCalendar('render');
+            },
+        });
+    }
+
+
+    //filtro del calendario
+    $("#id_proce").change(function () {
+        //refrescar calendario
+        $('#calendar').fullCalendar('destroy');
+        CargarCal();
+        //cambiar el titulo deacuerdo al proceso
+        var text = $(this).find("option:selected").text();
+        $('h3.box-title.titleCal').text(text);
+        //remover clase(color del calendario) y dia seleccionado(si lo esta)
+        removerCalDay(calDaySelected);
+        $(".payroll").removeClass("payroll");
+        $(".eeff").removeClass("eeff");
+        $(".declaracionMenF19").removeClass("declaracionMenF19");
+        //agregar el color deacuerdo al proce
+        switch ($("#id_proce").val()) {
+            case "7":
+                $("div.table-responsive").addClass('payroll');
+                break;
+            case "11":
+                $("div.table-responsive").addClass('eeff');
+                break;
+            case "12":
+                $("div.table-responsive").addClass('declaracionMenF19');
+                break;
+            default:
+        }
+    });
+    //Busca el periodo de un cliente en especifico
+    $("#id_cliente").change(function () {
+
+        removerCalDay(calDaySelected);
+        var date = moment($('#calendar').fullCalendar('getDate').year() + "-" + ($('#calendar').fullCalendar('getDate').month() + 1) + "-" + "01").format('YYYY-MM-DD');
+        var cliente = $("#id_cliente").val();
+        var tipo = $("#id_proce").val();
+
+        $.ajax({
+            url: '@Url.Action("PeriodoMesDelCliente", "PrograProceKPI")',
+            data: {
+                tipo: tipo,
+                date: date,
+                cliente: cliente
+            },
+            type: "POST",
+            dataType: "json",
+            success: function (result) {
+                if (result.data == "client-null")
+                {
+                    $("#peridClient").val("");
+                }else if (result.data != "") {
+                    var periodo = moment(result.data[0].periodo).format('YYYY-MM-DD');
+                    mensajeExitoModal("Encontrado", "Se encontro proceso registrado en este mes...<br/><h5>Al crear un nuevo proceso en este periodo, se borrara el antiguo y se mantendra el nuevo</h5>","5");
+                    $("#peridClient").val(periodo);
+                    $("#btnVerEnCal").prop("disabled", false);
+                    $("td[data-date='" + periodo + "']").addClass('calDay');
+                    calDaySelected = $("td[data-date='" + periodo + "']");
+                } else {
+                    mensajeExitoModal("No encontrado", "No se encontro proceso registrado en este mes...", "4")
+                    $("#peridClient").val("No contiene registro en este mes...");
+                }
+            },
+            error: function () {
+                mensajeError("Ops..", "Error de controlador. Contactese con el administrador");
+                //$("#content").html('<h2>Se ha generado un error</h2>');
+            }
+        });
+
+    });
+    //agrega la clase data-date para tener las fechas en los
+    $("#calendar").on("click", ".fc-day-number a.add_event_label",
+    function () {
+        var dt = $(this).parent().attr('data-date');
+    });
+
+    function removerCalDay(daySelected) {
+        if (daySelected!="") {
+            calDaySelected.removeClass('calDay');
+        }
+    };
+
+    /////////////////////////// DELETE PERSONAL PARA NO RECARGAR LA PAGINA Y QUEDAR EN EL MISMO PERIODO Y PROGESO
+
+    function confirmDeletePersonal(mensaje, url) {
+        var msg = mensaje;
+        if (msg == null || msg == "") {
+            msg = "¿Desea eliminar el registro?";
+        }
+        $('#Modal_Background').modal({ backdrop: 'static', keyboard: false }).modal('show');
+        iziToast.show({
+            color: 'dark',
+            icon: 'icon-person',
+            title: 'Eliminación',
+            transitionIn: 'flipInX',
+            message: msg,
+            position: 'center', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+            progressBarColor: 'rgb(0, 255, 184)',
+            buttons: [
+                ['<button>Ok</button>', function (instance, toast) {
+                    $.ajax({
+                        url: url,
+                        error: function () { },
+                        success: function (result) {
+                            if (result.success) {
+                                $('#Modal_Background').modal('hide');
+                                mensajeExito("Formulario", "Registro procesado con exito");
+                                iziToast.hide({
+                                    transitionOut: 'flipOutX',
+                                }, toast);
+                            } else {
+                                if (result.error) {
+                                    $('#Modal_Background').modal('hide');
+                                    mensajeError("Formulario", "Registro con errores<br>" + result.mensaje);
+                                    iziToast.hide({
+                                        transitionOut: 'flipOutX'
+                                    }, toast);
+                                }
+                            }
+                        },
+                        complete: function () {
+                            $('#calendar').fullCalendar('destroy');
+                            CargarCal();
+                        }
+                    });
+                }],
+                ['<button>Close</button>', function (instance, toast) {
+                    iziToast.hide({
+                        transitionOut: 'flipOutX'
+                    }, toast);
+                    $('#Modal_Background').modal('hide');
+                }]
+            ],
+            onClose: function (instance, toast) { //esconde el modal si la barra de progreso del alert termina
+                $('#Modal_Background').modal('hide');
+            }
+        });
+    }
+</script>

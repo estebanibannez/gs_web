@@ -1,0 +1,114 @@
+﻿@model   IQueryable<ModeloCRM.Servicio_CRM>
+
+@{ string nom = (string)ViewBag.Nombre;
+    int id = (int)ViewBag.ID_CLiente;}
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-gear"></i> Agregar contrato para el Cliente : @nom </h3>
+    </div>
+</div>
+
+<form id="mant-form" action="@Url.Action("CargarContrato", "ApruebaPropuesta")" method="post">
+    <div class="alert panel row">
+        <div class="box-title col-sm-12">
+            <h5 class="col-sm-3">Selecione la moneda</h5>
+            <div class="col-sm-8">                
+                @Html.DropDownList("money", ViewBag.Money as SelectList, "Select...", new { @class = "form-control", @style = "width:100%" })                
+            </div>
+        </div>
+        <br/>
+        <div class="box-title col-sm-12">
+            <h5 class="col-sm-3">Seleccione el Documento</h5>
+        @*</div>
+        <div class="row col-sm-12">*@
+            @*<div class="col-sm-4">
+                <div class="input-group">
+                    @Html.DropDownList("documento", ((SelectList)ViewBag.categorias), "Select...", new { @id = "documento1", @class = "selectCat form-control" })
+                </div>
+            </div>*@
+            <div class="col-sm-5">
+                <input type="file" id="files1" name="files" class="uploadfile" />
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table id="dt_basic" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nombre del Servicio</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ 
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Nombre_Servicio)</td>
+                            <td><input type="text" class="col-sm-6 form-control valor" readonly id="valor"></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="box-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Close</button>
+        <button type="button" class="btn btn-warning pull-right" action="save">Save</button>
+    </div>
+</form>
+
+<script>
+    var $upload = $(".uploadfile").fileinput({
+        showPreview: false,
+        showCancel: true,
+        showUpload: false,
+        browseClass: 'btn btn-warning',
+        browseLabel: 'Select Document',
+        browseIcon: "<span class='glyphicon glyphicon-open-file' aria-hidden='true'></span>",
+        removeClass: "btn btn-danger",
+        removeLabel: "Delete",
+        removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i>",
+        showCancel: true//,
+        //maxFileSize: 2500
+
+    }).on('fileerror', function (e, params) {
+        iziToast.error({
+            title: 'Error',
+            message: "<i class='fa fa-clock-o'></i> <i>" + e.handleObj.handler.arguments[2] + "...</i>",
+            position: 'topRight',
+            transitionIn: 'fadeInDown'
+        });
+    });
+
+    function mascara() {
+        $('.valor').mask('000.000.000.000.000', { placeholder: "USD" }, { reverse: true });
+        $('.valor').mask("##0,000", { placeholder: "UF" }, { reverse: true });
+    }
+
+    $(document).ready(function () {
+        setFormulario("mant-form");
+
+        //$('#dt_basic').DataTable();
+
+        $('#money').change(function () {
+            debugger;
+
+            $('.valor').prop('readonly', false);
+
+            var var_clie = $('#money').val();
+            if (var_clie == 'MONEYUSD') {
+                $('.valor').mask('000.000.000.000.000', { placeholder: "USD" }, { reverse: true });
+            }
+            if (var_clie == 'MONEYUF') {
+                $('.valor').mask("00.000,00", { placeholder: "UF" }, { reverse: true });
+            }
+            if (var_clie == 'MONEYEURO') {
+                $('.valor').mask("00.000,00", { placeholder: "EUR" }, { reverse: true });
+            }
+            if (var_clie == 'MONEYCLP') {
+                $('.valor').mask("00.000,00", { placeholder: "CLP" }, { reverse: true });
+            }
+        });
+    });
+</script>

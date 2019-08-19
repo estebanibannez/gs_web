@@ -1,0 +1,274 @@
+﻿<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-credit-card-alt"></i> Customer Relationship Management</h3>
+    </div>
+</div>
+
+<div class="box box-default">
+    <div class="box-body">
+        <div class="col-md-6">
+            <button @*disabled id="urlRazor"*@ href="@Url.Action("Create", "CRM", new { Area = "CRM" })" class="btn btn-default modal-ajax-load" data-toggle="modal" data-target="#myModal" data-remote="false">Add Client</button>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" value="" id="testing" />
+
+<div class="row">    
+    <div class="col-md-12 table-responsive">
+        <div class="panel table-responsive no-padding">
+            <div class="box-header">
+                <h3 class="box-title">Client Information</h3>
+            </div>
+            <table id="dt_clientes" class="table table-hover display responsive no-wrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Company</th>
+                        <th>Industry</th>
+                        <th>First Contact</th>
+                        <th>Status</th>
+                        <th>Rut</th>
+                        <th>Country</th>
+                        @*<th>See Services</th>*@
+                        <th>Add Proposal</th>
+                        <th>Edit Client</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var item in Model.listAnonymousToDynamic)
+                        {
+                            <tr value="@item.id">                                    
+                                <td>@item.nombre</td>
+                                <td>@item.industria</td>
+                                <td>@item.fec_pri_con</td>
+                                @{ var estado = ""; if (item.tipo_estado == "1") { estado = "Activo"; } if (item.tipo_estado == "2") { estado = "Inactivo"; } } 
+                                <td>@estado</td>
+                                <td>@item.rut</td>
+                                <td>@item.pais</td>
+                                @*<td>
+                                    <button class="btn btn-default btn-xs modal-ajax-load" href="@Url.Action("AgregarServicios", "CRM", new { Area = "CRM", @id=item.id })" data-toggle="modal" data-target="#myModal" data-remote="false">See Services</button>
+                                </td>*@
+                                <td>
+                                    <button class="btn btn-default btn-xs modal-ajax-load" href="@Url.Action("AgregarPropuesta", "CRM", new { Area = "CRM", @id=item.id })" data-toggle="modal" data-target="#myModal" data-remote="false"><i class="fa fa-clipboard" aria-hidden="true"></i></button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-default btn-xs modal-ajax-load" href="@Url.Action("Edit", "CRM", new { Area = "CRM", @id=item.id })" data-toggle="modal" data-target="#myModal" data-remote="false"><i class="fa fa-edit" aria-hidden="true"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    }                                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 table-responsive">
+        <div class="panel table-responsive no-padding">
+            <div class="box-header">
+                <h3 class="box-title">Client with Services in Revision</h3>
+            </div>
+            <table class="table table-hover display responsive no-wrap" style="width:100%" id="dt_servicios">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Client</th>
+                        <th>Status</th>
+                        <th>Name Propusal</th>                        
+                        <th>Fecha Propuesta</th>
+                        <th>Fecha Aceptacion</th>
+                        <th>Comentario</th>
+                        <th>Detail of the Services</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div  class="col-md-6 connectedSortable ui-sortable">
+        <div class="box box-warning">
+            <div class="box-header ui-sortable-handle" style="cursor: move;">
+                <i class="fa fa-envelope"></i>
+                <h3 class="box-title">Contact of Client</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn bg-warning btn-sm" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn bg-warning btn-sm" data-widget="remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered table-hover dataTable" style="width:100%" id="dt_contactos">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Last Name</th>
+                            <th>Position</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 connectedSortable ui-sortable">
+        <div class="box box-warning">
+            <div class="box-header ui-sortable-handle" style="cursor: move;">
+                <i class="fa fa-envelope"></i>
+                <h3 class="box-title">Staff of Client</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn bg-warning btn-sm" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn bg-warning btn-sm" data-widget="remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered table-hover dataTable" style="width:100%" id="dt_personal">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Department</th>
+                            <th>Ext</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        //InicializaMantenedor("dt_personal");
+        //setFormulario();
+        $('#dt_clientes').DataTable();
+
+        var url_Lista_Servicios = '@Url.Action("ListaServicios", "CRM")';
+
+        var dataColumnsContacto = [
+           { data: "nombre" },
+           { data: "apellido" },
+           { data: "cargo" },
+           { data: "email" },
+           { data: "telefono" },
+        ];
+
+        var dataColumnsPersonal = [
+           { data: "nombreUsuario" },
+           { data: "nombreCargo" },
+           { data: "nombreUnidad" },
+           { data: "extencion" },
+        ];
+
+        var dataColumnsServicios = [
+           { data: "id_propuesta" },
+           { data: "nombreCliente" },
+           { data: "nombreStatus" },
+           { data: "comentariPropuesta" },
+           {
+               data: "fechaPropuesta",
+               render: function (data) {
+                   return moment(data).format("ll");
+               }
+           },
+           {
+               data: "fechaAceptacion",
+               render: function (data) {
+                   return moment(data).format("ll");
+               }
+           },
+           { data: "nombreCuestionario" },
+           {
+               data: "id_propuesta", render: function (data) {
+                   return '<a href=\"' + url_Lista_Servicios + '/' + data + '"class="btn btn-default btn-xs modal-ajax-load" data-toggle="modal" data-target="#myModal" data-remote="false"><i class="fa fa-clipboard" aria-hidden="true"></i></a>'
+               }
+           },
+
+        ];
+
+        function parameterFunction(d) {
+            //debugger;
+            var a = $('#testing').val();
+            return $.extend({}, d, {
+                "id": $('#testing').val()
+            });
+        }
+
+        function dcontacto(grilla, url, parametro, columnas) {
+            //debugger;
+            var tabla;
+            tabla = $('#' + grilla).DataTable({
+                "ajax": {
+                    "url": url,
+                    "type": "POST",
+                    "data": parametro
+                },
+                columns: columnas,
+                order: [[0, "desc"]]
+            });
+            return tabla;
+        }
+
+        function dpersonal(grilla, url, parametro, columnas) {
+            //debugger;
+            var tabla;
+            tabla = $('#' + grilla).DataTable({
+                "ajax": {
+                    "url": url,
+                    "type": "POST",
+                    "data": parametro
+                },
+                columns: columnas,
+                order: [[0, "desc"]]
+            });
+            return tabla;
+        }
+
+        function dservicio(grilla, url, parametro, columnas) {
+            //debugger;
+            var tabla;
+            tabla = $('#' + grilla).DataTable({
+                "ajax": {
+                    "url": url,
+                    "type": "POST",
+                    "data": parametro
+                },
+                columns: columnas,
+                order: [[0, "desc"]]
+            });
+            return tabla;
+        }
+
+        var contactos = dcontacto("dt_contactos", "@Url.Action("cargaContactos", "CRM")", parameterFunction, dataColumnsContacto);
+        var personal = dpersonal("dt_personal", "@Url.Action("cargaPersonal", "CRM")", parameterFunction, dataColumnsPersonal);
+        var servicios = dservicio("dt_servicios", "@Url.Action("cargaServicios", "CRM")", parameterFunction, dataColumnsServicios);
+
+        $("#dt_clientes").on('click', 'tr', function (e) {
+            e.preventDefault();
+            //debugger;
+            var idtr = parseInt($(this).attr('value'));
+            $('#testing').val(idtr);
+            var a = $('#testing').val();
+            servicios.ajax.reload();
+            contactos.ajax.reload();
+            personal.ajax.reload();
+        });
+
+    });
+</script>
+
+

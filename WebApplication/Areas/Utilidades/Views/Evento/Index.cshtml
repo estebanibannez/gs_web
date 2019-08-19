@@ -1,0 +1,119 @@
+﻿@{
+    ViewBag.Title = "Calendar";
+    Random r = new Random();
+    var colores = new[] { "#56c4fb", "#1baa06", "#c186ab", "#8e091e",
+        "#76ad00", "#061BAA", "#3d06aa","#a9aa06" };
+    //int numColor = colores.Length;
+}
+<style>
+    .fc-title {
+        white-space: nowrap;
+    }title
+
+    .fc-event .fa {
+        margin-top: 0;
+        margin-right: 5px;
+        margin-left: 0;
+    }
+
+    #contcalendar {
+        padding: 10px 30px 10px 10px;
+    }
+</style>
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-flag"></i> Eventos</h3>
+        <a href="@Url.Action("Listado", "Evento", new { Area = "Utilidades" })" class="btn btn-warning pull-right">Ver Listado de Tareas</a>
+        @*<a href="@Url.Action("Create", "Clientes", new { Area = "Administracion" })" class="btn btn-warning modal-ajax-load btn-sm pull-right" data-toggle="modal" data-target="#myModal" data-remote="false">Nuevo Cliente</a>*@
+    </div>
+</div>
+
+<div id='calendar'></div>
+
+<script>
+    $(function () {
+        /* initialize the external events
+        -----------------------------------------------------------------*/
+        function ini_events(ele) {
+            ele.each(function () {
+
+                // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+                // it doesn't need to have a start or end
+                var eventObject = {
+                    title: $.trim($(this).text()) // use the element's text as the event title
+                };
+
+                // store the Event Object in the DOM element so we can get to it later
+                $(this).data('eventObject', eventObject);
+
+                // make the event draggable using jQuery UI
+                $(this).draggable({
+                    zIndex: 1070,
+                    revert: true, // will cause the event to go back to its
+                    revertDuration: 0  //  original position after the drag
+                });
+
+            });
+        }
+
+        ini_events($('#external-events div.external-event'));
+
+        /* inicia calendario
+         -----------------------------------------------------------------*/
+        //Date for the calendar events (dummy data)
+        //var d = new Date();
+        var date = new Date();
+        var d = date.getDate(),
+            m = date.getMonth(),
+            y = date.getFullYear();
+
+        $('#calendar').fullCalendar({
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
+            buttonText: { today: '   Hoy   ' },
+            firstDay: 1,
+            locale: 'en',
+
+            //dateFormat: 'dd-mm-yyyy',
+            //dateFormat: 'yyyy-mm-dd hh-mm-ss',
+            dateFormat: 'yyyy-mm-dd',
+            firstDay: 1,
+            header: {
+                right: 'prev,next today',
+                left: 'title',
+            },
+            //buttonText: {
+            //    today: 'Hoy',
+            //    month: 'Mes',
+            //    week: 'Semana',
+            //    day: 'Día'
+            //},
+            //foreach cumpleaños
+            events: [
+
+            @foreach (WebApplicationMod.evento it in Model) {
+
+                @Html.Raw("{title: '" + (it.descripcion) + "',  allDay: true, description: '" + (it.titulo) + "', start: new Date('"+(it.fecha.AddDays(1).ToString("yyyy-MM-dd"))+"'), " +
+                " backgroundColor:'" + colores[r.Next(0, colores.Length)].ToString() + "'} ,");
+                //"end: '" + (it["fecha_fin"]) + "', " +
+            }
+
+            ],
+            eventRender: function (event, element, icon) {
+
+                //$('fc-content').each(function () {
+                //   $('.fc-title').css('background-color', color);
+                element.find('.fc-title').append("<span class='" + event.icon + "' style='position:absolute; left: calc(100% - 15px);'></span>");
+                element.find('.fc-content').append("<h6><p style='text-align:center;' class='fc-title'>" + event.description + "</p></h6>");
+
+                ////})
+            },
+            windowResize: function (event, ui) {
+                $('#calendar').fullCalendar('render');
+            },
+        });
+    });
+
+</script>

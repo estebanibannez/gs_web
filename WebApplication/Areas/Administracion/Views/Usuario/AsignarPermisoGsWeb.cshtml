@@ -1,0 +1,53 @@
+﻿<style>
+    /*select[multiple] {
+        min-height: 300px;
+        min-width: 120px;
+    }*/
+    .buttons > .btn {
+        display: none;
+    }
+</style>
+
+<div class="panel" id="AsigpermiGs">
+    @Html.Hidden("id_usu", (int)ViewBag.id_usu)
+    <div class="panel-body">
+        <div id="" class="bootstrap-duallistbox-container modal-ajax-load pdf-size">
+            <div class="col-md-12">
+                @{
+                    @Html.DropDownList("permisos_gsweb", (MultiSelectList)Model.listadoPermisos, null, new { multiple = "multiple" })
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var PermisosGSweb = $('#permisos_gsweb').bootstrapDualListbox({
+        nonSelectedListLabel: 'Permisos GS  -----  No Seleccionados',
+        selectedListLabel: 'Permisos GS   -----  Seleccionados',
+        preserveSelectionOnMove: 'moved',
+        moveOnSelect: true,
+        selectorMinimalHeight: 300,
+        //infoText: 'Permisos Asignados: {0}',
+        filterTextClear: false,
+        showFilterInputs: false,
+        infoTextEmpty: '------ no existen permisos para asignar'
+       
+    });
+
+    $('#permisos_gsweb').change(function () {
+
+        var array = $(this).val();
+        var request = $.ajax({
+            url: '@Url.Action("AsignarPermisoGs", "Usuario")',
+            method: "POST",
+            data: { PermisosGsWeb: array, id_usu : $('#id_usu').val() },
+            dataType: "json"
+        }).done(function (res) {
+            mensajeExitoModal("Permiso", res.mensaje, res.numero);
+            $('#permisos_gsweb').bootstrapDualListbox('refresh', true);
+        });
+
+    });
+
+</script>

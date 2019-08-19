@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b6f67a3bc7f64683b83fabd496a5aad8" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="GSPSOModel.Banco_Cliente_CRM" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GSPSOModel.Cliente_CRM" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GSPSOModel.Clientes" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GSPSOModel.Comunas_CRM" Width="1.5" PointX="3" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GSPSOModel.Contacto_Cliente_CRM" Width="1.5" PointX="8.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="GSPSOModel.Contacto_CRM" Width="1.5" PointX="6" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GSPSOModel.Contactos_Operacionales_CRM" Width="1.5" PointX="10.5" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GSPSOModel.Cuestionario_CRM" Width="1.5" PointX="5.25" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GSPSOModel.Direccion_CRM" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GSPSOModel.Documento_CRM" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GSPSOModel.Pais_CRM" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GSPSOModel.parametros" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GSPSOModel.Parametros_CRM" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GSPSOModel.Propuesta_CRM" Width="1.5" PointX="7.5" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GSPSOModel.Provincias_CRM" Width="1.5" PointX="0.75" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GSPSOModel.Region_CRM" Width="1.5" PointX="1.5" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GSPSOModel.Servicio_Cliente_CRM" Width="1.5" PointX="10.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GSPSOModel.Servicio_CRM" Width="1.5" PointX="8.5" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GSPSOModel.Tipo_Contacto_CRM" Width="1.5" PointX="8.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GSPSOModel.Usu" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="GSPSOModel.FK__Banco_Cli__ID_Cl__47E69B3D" ManuallyRouted="false" />
+        <AssociationConnector Association="GSPSOModel.FK__Cliente_C__ID_Cl__32EB7E57" ManuallyRouted="false" />
+        <AssociationConnector Association="GSPSOModel.FK__Cliente_C__ID_Pa__31F75A1E" ManuallyRouted="false" />
+        <AssociationConnector Association="GSPSOModel.FK__Contacto___ID_Cl__33DFA290" ManuallyRouted="false" />
+        <AssociationConnector Association="GSPSOModel.FK__Cuestiona__ID_Cl__04EFA97D" ManuallyRouted="false" />
+        <AssociationConnector Association="GSPSOModel.FK__Direccion__ID_Cl__0E44098D" ManuallyRouted="false" />
+        <AssociationConnector Association="GSPSOModel.FK__Servicio___ID_Cl__7889D298" ManuallyRouted="false" />
+        <AssociationConnector Association="GSPSOModel.FK__Comunas_C__ID_Pr__0B679CE2" ManuallyRouted="false" />
+        <AssociationConnector Association="GSPSOModel.FK__Direccion__ID_Co__0F382DC6" ManuallyRouted="false" />
+        <AssociationConnector Association="GSPSOModel.FK__Contacto___ID_Co__34D3C6C9" ManuallyRouted="false" />
+        <AssociationConnector Association="GSPSOModel.FK__Contactos__ID_Co__45C948A1" ManuallyRouted="false" />
+        <AssociationConnector Association="GSPSOModel.FK__Contactos__ID_Ti__46BD6CDA" ManuallyRouted="false" />
+        <AssociationConnector Association="GSPSOModel.FK__Propuesta__ID_Cu__05E3CDB6" ManuallyRouted="false" />
+        <AssociationConnector Association="GSPSOModel.FK__Servicio___ID_Pr__7C5A637C" ManuallyRouted="false" />
+        <AssociationConnector Association="GSPSOModel.FK__Provincia__ID_Re__0A7378A9" ManuallyRouted="false" />
+        <AssociationConnector Association="GSPSOModel.FK__Servicio___ID_Se__3F1C4B12" ManuallyRouted="false" />
+        <AssociationConnector Association="GSPSOModel.FK_Usu_Usu" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GSPSOModel.GS_Cargos" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="GSPSOModel.GS_Asig_Carg_Clie" Width="1.5" PointX="15.375" PointY="3.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,46 @@
+C:\ANEVES\Repositorios\Remoto\treasuryweb\WebApplicationMod\bin\Debug\WebApplicationMod.dll.config
+C:\ANEVES\Repositorios\Remoto\treasuryweb\WebApplicationMod\bin\Debug\WebApplicationMod.dll
+C:\ANEVES\Repositorios\Remoto\treasuryweb\WebApplicationMod\bin\Debug\WebApplicationMod.pdb
+C:\ANEVES\Repositorios\Remoto\treasuryweb\WebApplicationMod\bin\Debug\EntityFramework.dll
+C:\ANEVES\Repositorios\Remoto\treasuryweb\WebApplicationMod\bin\Debug\EntityFramework.SqlServer.dll
+C:\ANEVES\Repositorios\Remoto\treasuryweb\WebApplicationMod\bin\Debug\EntityFramework.xml
+C:\ANEVES\Repositorios\Remoto\treasuryweb\WebApplicationMod\bin\Debug\EntityFramework.SqlServer.xml
+C:\ANEVES\Repositorios\Remoto\treasuryweb\WebApplicationMod\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+C:\ANEVES\Repositorios\Remoto\treasuryweb\WebApplicationMod\obj\Debug\WebApplicationMod.dll
+C:\ANEVES\Repositorios\Remoto\treasuryweb\WebApplicationMod\obj\Debug\WebApplicationMod.pdb
+C:\GSWEB\WebApplicationMod\obj\Debug\Modelo.csprojAssemblyReference.cache
+C:\GSWEB\WebApplicationMod\obj\Debug\Modelo.csproj.CoreCompileInputs.cache
+C:\ANEVES\Repositorios\Local\treasuryweb\WebApplicationMod\bin\Debug\WebApplicationMod.dll.config
+C:\ANEVES\Repositorios\Local\treasuryweb\WebApplicationMod\bin\Debug\WebApplicationMod.dll
+C:\ANEVES\Repositorios\Local\treasuryweb\WebApplicationMod\bin\Debug\WebApplicationMod.pdb
+C:\ANEVES\Repositorios\Local\treasuryweb\WebApplicationMod\bin\Debug\EntityFramework.dll
+C:\ANEVES\Repositorios\Local\treasuryweb\WebApplicationMod\bin\Debug\EntityFramework.SqlServer.dll
+C:\ANEVES\Repositorios\Local\treasuryweb\WebApplicationMod\bin\Debug\EntityFramework.xml
+C:\ANEVES\Repositorios\Local\treasuryweb\WebApplicationMod\bin\Debug\EntityFramework.SqlServer.xml
+C:\ANEVES\Repositorios\Local\treasuryweb\WebApplicationMod\obj\Debug\WebApplicationMod.dll
+C:\ANEVES\Repositorios\Local\treasuryweb\WebApplicationMod\obj\Debug\WebApplicationMod.pdb
+C:\ANEVES\Repositorios\Local\treasuryweb\WebApplicationMod\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local\WebApplicationMod\bin\Debug\WebApplicationMod.dll.config
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local\WebApplicationMod\bin\Debug\WebApplicationMod.dll
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local\WebApplicationMod\bin\Debug\WebApplicationMod.pdb
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local\WebApplicationMod\bin\Debug\EntityFramework.dll
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local\WebApplicationMod\bin\Debug\EntityFramework.SqlServer.dll
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local\WebApplicationMod\bin\Debug\EntityFramework.xml
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local\WebApplicationMod\bin\Debug\EntityFramework.SqlServer.xml
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local\WebApplicationMod\obj\Debug\Modelo.csprojAssemblyReference.cache
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local\WebApplicationMod\obj\Debug\Modelo.csproj.CoreCompileInputs.cache
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local\WebApplicationMod\obj\Debug\Modelo.csproj.CopyComplete
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local\WebApplicationMod\obj\Debug\WebApplicationMod.dll
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local\WebApplicationMod\obj\Debug\WebApplicationMod.pdb
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\WebApplicationMod\bin\Debug\WebApplicationMod.dll.config
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\WebApplicationMod\bin\Debug\WebApplicationMod.dll
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\WebApplicationMod\bin\Debug\WebApplicationMod.pdb
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\WebApplicationMod\bin\Debug\EntityFramework.dll
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\WebApplicationMod\bin\Debug\EntityFramework.SqlServer.dll
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\WebApplicationMod\bin\Debug\EntityFramework.xml
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\WebApplicationMod\bin\Debug\EntityFramework.SqlServer.xml
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\WebApplicationMod\obj\Debug\Modelo.csproj.CoreCompileInputs.cache
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\WebApplicationMod\obj\Debug\Modelo.csproj.CopyComplete
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\WebApplicationMod\obj\Debug\WebApplicationMod.dll
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\WebApplicationMod\obj\Debug\WebApplicationMod.pdb
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\WebApplicationMod\obj\Debug\Modelo.csprojAssemblyReference.cache

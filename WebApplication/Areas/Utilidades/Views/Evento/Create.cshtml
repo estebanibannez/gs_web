@@ -1,0 +1,95 @@
+﻿@model  WebApplicationMod.evento
+
+@using (Html.BeginForm((Model == null ? "Create" : "Update"), "Evento", FormMethod.Post, new { @id = "mant-form", @novalidate = "novalidate", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @(Model == null ? new MvcHtmlString("") : Html.HiddenFor(p => p.id))
+
+    <div class="box-header with-border">
+        <h3 class="box-title">Ingreso de tarea</h3>
+    </div>
+    <div class="">
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <p>Título de la tarea</p>
+                        @Html.TextBoxFor(model => model.titulo, new { @class = "custom-scroll form-control", placeholder = "", rows = "2" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <!-- /.form-group -->
+                    <div class="form-group">
+                        <p>Fecha asignación</p>
+                        @Html.TextBoxFor(model => model.fecha, new { @class = "form-control datefield", rows = "2" })
+                    </div>
+                    <!-- /.form-group -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <p>Cliente</p>
+                        @Html.DropDownListFor(model => model.id_cliente, (SelectList)ViewBag.Clientes, "Seleccione...", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                       @Html.TextAreaFor(model => model.descripcion, new { @class = "custom-scroll form-control", placeholder = "Descripción" })
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.box-body -->
+    </div>
+
+    <div class="widget-body form-horizontal">
+        <div class="box-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+            <button type="button" class="btn btn-warning pull-right" action="save">Guardar</button>
+        </div>
+    </div>
+
+}
+
+
+<script>
+
+    $(document).ready(function () {
+
+        setFormulario(
+             "mant-form",
+             {
+                 titulo: { required: true },
+                 fecha: { required: true },
+                 id_cliente: { required: true },
+                 descripcion: { required: true }
+
+             },
+             {
+                 titulo: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese un titulo del evento.</span> ' },
+                 fecha: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese una Fecha.</span> ' },
+                 id_cliente: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Seleccione un Cliente.</span> ' },
+                 descripcion: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese una breve descripcion.</span> ' },
+                 
+             }
+        )
+
+        $(".datefield").datepicker
+        ({
+            autoclose: true,
+            format: 'dd-mm-yyyy',
+            changeYear: true
+        });
+
+    });
+
+
+
+</script>
+
+
+
+

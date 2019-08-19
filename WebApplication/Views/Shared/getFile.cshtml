@@ -1,0 +1,29 @@
+﻿@using WebApplication.App_GlobalResources
+@{ 
+    Layout = null;
+}
+<div class="modal-body">
+    <div id="div1">
+
+
+        @{ if (((string)ViewBag.MimeType).Equals("other"))
+            {
+                @*<div id="" class="gdocsviewer">
+                        <iframe src="http://docs.google.com/viewer?embedded=true&amp;url=@Url.Action("getFileData", "Master", (RouteValueDictionary)ViewBag.Routes_values, Request.Url.Scheme)" style="border: none; width:100%; height:750px;"></iframe>
+                    </div>*@
+                <object data="@Url.Action("getFileData", "Master", (RouteValueDictionary)ViewBag.Routes_values)" type="application/pdf" style="width:100%; height:750px;"></object>
+
+
+            }
+            else
+            {
+                <object data="@Url.Action("getFileData", "Master", (RouteValueDictionary)ViewBag.Routes_values)" type="application/pdf" style="width:100%; height:750px;"></object>
+            }
+        }
+        <p>
+            @Pay_Lenguaje.descarga_archivo_1 <a href="@Url.Action("getFileData", "Master", (RouteValueDictionary)ViewBag.Routes_values)">
+                @Pay_Lenguaje.descarga_archivo_2
+            </a>
+        </p>
+    </div>
+</div>

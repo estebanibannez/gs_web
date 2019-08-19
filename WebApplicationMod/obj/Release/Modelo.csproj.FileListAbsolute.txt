@@ -1,0 +1,10 @@
+C:\ANEVES\Repositorios\Local\treasuryweb\WebApplicationMod\bin\Release\WebApplicationMod.dll.config
+C:\ANEVES\Repositorios\Local\treasuryweb\WebApplicationMod\bin\Release\WebApplicationMod.dll
+C:\ANEVES\Repositorios\Local\treasuryweb\WebApplicationMod\bin\Release\WebApplicationMod.pdb
+C:\ANEVES\Repositorios\Local\treasuryweb\WebApplicationMod\bin\Release\EntityFramework.dll
+C:\ANEVES\Repositorios\Local\treasuryweb\WebApplicationMod\bin\Release\EntityFramework.SqlServer.dll
+C:\ANEVES\Repositorios\Local\treasuryweb\WebApplicationMod\bin\Release\EntityFramework.xml
+C:\ANEVES\Repositorios\Local\treasuryweb\WebApplicationMod\bin\Release\EntityFramework.SqlServer.xml
+C:\ANEVES\Repositorios\Local\treasuryweb\WebApplicationMod\obj\Release\Modelo.csprojResolveAssemblyReference.cache
+C:\ANEVES\Repositorios\Local\treasuryweb\WebApplicationMod\obj\Release\WebApplicationMod.dll
+C:\ANEVES\Repositorios\Local\treasuryweb\WebApplicationMod\obj\Release\WebApplicationMod.pdb

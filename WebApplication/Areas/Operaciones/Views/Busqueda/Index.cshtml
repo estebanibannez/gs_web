@@ -1,0 +1,404 @@
+﻿@model WebApplicationMod.GS_Documentos
+<style>
+    td.details-control {
+        background: url('/Img/details_open.png') no-repeat center center;
+        cursor: pointer;
+    }
+
+    tr.shown td.details-control {
+        background: url('/Img/details_close.png') no-repeat center center;
+    }
+</style>
+
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-search"></i> Consulta de documentos</h3>
+    </div>
+</div>
+
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title">--</h3>
+    </div>
+  
+    <form class="form-horizontal">
+        <div class="box-body">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Cliente</label>
+
+                <div class="col-sm-10">
+                    @Html.DropDownList("empresas", new SelectList(ViewBag.rutcliente, "Value", "Text"), "-- Seleccione --", new { @class = "form-control", id = "empresas" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Nombre Auxiliar</label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="txtauxiliar" placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Folio Solicitud</label>
+
+                <div class="col-sm-4">
+                    <input type="number" class="form-control" id="txtfolio" placeholder="">
+                </div>
+                <label class="col-sm-2 control-label">N° Documento</label>
+
+                <div class="col-sm-4">
+                    <input type="number" class="form-control" id="txtnumdoc" placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Tipo</label>
+
+                <div class="col-sm-10">
+                    <select id="selecttipo" class="form-control">
+                        <option value="all">all</option>
+                        <option value="compras">Compras</option>
+                        <option value="ventas">Ventas</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Fecha inicio</label>
+
+                <div class="col-sm-4">
+                    @Html.TextBox("fecha_inicio", DateTime.Now.ToShortDateString(), new { @class = "Date form-control", id = "fecha_inicio" })
+                </div>
+                <label class="col-sm-2 control-label">Fecha fin</label>
+
+                <div class="col-sm-4">
+                    @Html.TextBox("fecha_fin", DateTime.Now.ToShortDateString(), new { @class = "Date form-control", id = "fecha_fin" })
+                </div>
+            </div>
+
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <button type="button" id="btnbuscar" class="btn btn-warning pull-right">Buscar</button>
+        </div>
+        <!-- /.box-footer -->
+    </form>
+</div>
+
+
+    <div class="box box-warning">
+        <div class="box-body">
+        
+                    <table id="dt_basic" class="table-striped table-bordered" style="width:100%" role="grid" aria-describedby="example1_info">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>ID</th>
+                                <th>Tipo</th>
+                                <th>Cliente de PSO</th>
+                                <th>Mes</th>
+                                <th>Año</th>
+                                <th>Doc</th>
+                                <th>N° Doc</th>
+                                <th>Proveedor</th>
+                                <th>Emision</th>
+                                <th>Monto</th>
+                                <th>N° Comp</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+   
+    </div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        setFormulario();
+        $(".Date").datepicker({
+            autoclose: true,
+            format: 'dd-mm-yyyy',
+            changeYear: true
+        });
+        var dataColumns = [
+        {
+            "className":      'details-control',
+            "orderable":      false,
+            "data":           null,
+            "defaultContent": ''
+        },
+        { data: 'ID'     },
+        { data: 'TipoCV' },
+        { data: 'cliente' },
+        { data: 'CPBMes' },
+        { data: 'CPBAño' },
+        { data: 'RotuloDoc' },
+        { data: 'NumDocI' },
+        { data: 'auxiliar' },
+        { data: 'MovFe', "render": function (data, type, row) {
+            return new moment(data).format('DD/MM/YYYY');
+        }
+        },
+        { data: 'Total' },
+        { data: 'NumCent' },
+        { data: 'ID', "render": function (data, type, row) {
+           
+            if (row.Archivo==""){
+                debugger;
+                var crea=   moment(row.cre).format('YYYYMMDDHHmm');
+                
+
+
+                return '<a href="@Url.Action("DTE", "Master", new {area="" })?idCab=' + row.id_encab + '&id_c='+ row.id_c +'&tipo_doc='+ row.tipo_doc+ '&monto='+ row.Total+ '&cre='+ crea +'" target="_blank" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
+            }
+            else if (row.Archivo =="..."){
+                return '<a href="@Url.Action("ArchivoAnticipo", "Busqueda")/' + data + '" target="_blank" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
+            }
+            else{
+                return '<a href="@Url.Action("PDF","Busqueda")/' + data + '" class="btn btn-info btn-xs modal-ajax-load" data-toggle="modal" data-target="#myModal" data-remote="false"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
+            }
+        }
+        }
+        ];
+
+        function parameterFunction(d) {
+            return $.extend({}, d, {
+                "inicio" : $('#fecha_inicio').val(),
+                "fin" : $('#fecha_fin').val(),
+                "cliente" : $('#empresas').val(),
+                "auxiliar" : $('#txtauxiliar').val(),
+                "numdoc":  $('#txtnumdoc').val(),
+                "nfolio" : $('#txtfolio').val(),
+                "tipo" : $('#selecttipo').val()
+            });
+        }
+
+        function createdRow(row, data, dataIndex) {
+            if (data.TipoCV == "V") {
+                $('td', row).removeClass('details-control');
+                $(row).children('td').css('background', '#FFD4A6');
+            }
+        }
+
+        function dtSearch(grilla, url, parametros, Columnas, callBack, createdRow) {
+            var tabla;
+            callBack = typeof callBack !== 'undefined' ? callBack : function (ajax) { return ajax.data };
+            tabla = $('#' + grilla).DataTable({
+                "ajax": {
+                    "url": url,
+                    "type": "POST",
+                    "data": parametros,
+                },
+                createdRow: createdRow,
+                processing: true,
+                language: {
+                    'processing': '<i class="fa fa-refresh fa-spin"></i> <label> Cargando Solicitud...</label>'
+                },
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                "columns": Columnas,
+                "order": [[0, "asc"]]
+            });
+            return tabla;
+        }
+
+
+        var oTable = dtSearch("dt_basic", "@Url.Action("consulta", "Busqueda")", parameterFunction, dataColumns, createdRow);
+
+        $("#btnbuscar").on('click', function () {
+            oTable.ajax.reload();
+
+        });
+
+        function format(resultado) {
+            var [Folio_GS, fecha_solicitud, fecha_recepcion, fecha_centralizacion, Folio_sol_Emi, num_centralizacion, PagoNumero] = "";
+            var [Solicitadopor, CuandoseSolicito, FechaPago, SolicitadoUrg, obs_soltesoria, obs_pagocliente, Mediodepago, N_Docpago] = "";
+            var [MontoPagado, UsuarioPagador, BancoPagador, CuentaPagadora, BancoReceptor, Ncomprobante] = "";
+
+            if ((resultado.data).length !== 0) {
+
+                Folio_GS = (resultado.data[0]['Folio GS'] == null || resultado.data[0]['Folio GS'] == "undefined") ? "" : resultado.data[0]['Folio GS'];
+                fecha_solicitud = (resultado.data[0]['Fecha de solicitud (venta)'] == null || resultado.data[0]['Fecha de solicitud (venta)'] == "undefined") ? "" : moment(resultado.data[0]['Fecha de solicitud (venta)']).format('DD/MM/YYYY');
+                fecha_recepcion = (resultado.data[0]['Fecha de recepcion'] == null || resultado.data[0]['Fecha de recepcion'] == "undefined") ? "" : moment(resultado.data[0]['Fecha de recepcion']).format('DD/MM/YYYY');
+                fecha_centralizacion = (resultado.data[0]['Fecha de centralización (venta)'] == "undefined" || resultado.data[0]['Fecha de centralización (venta)'] == null) ? "" : moment(resultado.data[0]['Fecha de centralización (venta)']).format('DD/MM/YYYY');
+                Folio_sol_Emi = (resultado.data[0]['Folio solicitud Emisión (venta)'] == "undefined" || resultado.data[0]['Folio solicitud Emisión (venta)'] == null) ? "" : resultado.data[0]['Folio solicitud Emisión (venta)'];
+                num_centralizacion = (resultado.data[0]['N° de centralización (venta)'] == "undefined" || resultado.data[0]['N° de centralización (venta)'] == null) ? "" : resultado.data[0]['N° de centralización (venta)'];
+
+            } else {
+
+                Folio_GS = "";
+                fecha_solicitud = "";
+                fecha_recepcion = "";
+                fecha_centralizacion = "";
+                Folio_sol_Emi = "";
+                num_centralizacion = "";
+
+            }
+
+            /*****************************************************************/
+            if((resultado.data2).length !== 0){
+
+                PagoNumero = resultado.data2[0]['Pago numero'] == null || resultado.data2[0]['Pago numero'] == "undefined"  ? "" :resultado.data2[0]['Pago numero'];
+                Solicitadopor = resultado.data2[0]['Solicitado por'] == null || resultado.data2[0]['Solicitado por'] == "undefined" ? "" : resultado.data2[0]['Solicitado por'];
+                CuandoseSolicito = resultado.data2[0]['Cuando se solicito'] == null || resultado.data2[0]['Cuando se solicito'] == "undefined" ? "" : moment(resultado.data2[0]['Cuando se solicito']).format('DD/MM/YYYY');
+                FechaPago = resultado.data2[0]['Fecha en que se realiza el pago'] == null || resultado.data2[0]['Fecha en que se realiza el pago'] == "undefined" ? "" : moment(resultado.data2[0]['Fecha en que se realiza el pago']).format('DD/MM/YYYY');
+                SolicitadoUrg = resultado.data2[0]['Solicitado con urgencia para el'] == null || resultado.data2[0]['Solicitado con urgencia para el'] == "undefined" ? "" : resultado.data2[0]['Solicitado con urgencia para el'];
+                obs_soltesoria = resultado.data2[0]['Obs de la solicitud a tesoreria'] == null || resultado.data2[0]['Obs de la solicitud a tesoreria'] == "undefined" ? "" : resultado.data2[0]['Obs de la solicitud a tesoreria'];
+                obs_pagocliente = resultado.data2[0]['Obs pago realizado por el cliente'] == null || resultado.data2[0]['Obs pago realizado por el cliente'] == "undefined" ? "" : resultado.data2[0]['Obs pago realizado por el cliente'];
+                Mediodepago = resultado.data2[0]['Medio de pago'] == null || resultado.data2[0]['Medio de pago'] == "undefined" ? "" : resultado.data2[0]['Medio de pago'];
+                N_Docpago = resultado.data2[0]['N° del documento de pago'] == null || resultado.data2[0]['N° del documento de pago'] == "undefined" ? "" : resultado.data2[0]['N° del documento de pago'];
+                MontoPagado = resultado.data2[0]['Monto pagado'] == null || resultado.data2[0]['Monto pagado'] == "undefined" ? "" : resultado.data2[0]['Monto pagado'];
+                UsuarioPagador = resultado.data2[0]['Usuario que realizo el pago'] == null || resultado.data2[0]['Usuario que realizo el pago'] == "undefined" ? "" : resultado.data2[0]['Usuario que realizo el pago'];
+                BancoPagador = resultado.data2[0]['Banco pagador'] == null || resultado.data2[0]['Banco pagador'] == "undefined" ? "" : resultado.data2[0]['Banco pagador'];
+                CuentaPagadora = resultado.data2[0]['Cuenta pagadora'] == null || resultado.data2[0]['Cuenta pagadora'] == "undefined" ? "" :  resultado.data2[0]['Cuenta pagadora'];
+                BancoReceptor = resultado.data2[0]['Banco Receptor'] == null || resultado.data2[0]['Banco Receptor'] =="undefined" ? "": resultado.data2[0]['Banco Receptor'];
+                Ncomprobante = resultado.data2[0]['Numero de comprobante'] == null || resultado.data2[0]['Numero de comprobante'] =="undefined" ? "" : resultado.data2[0]['Numero de comprobante'];
+                centralizado = resultado.data2[0]['Cuando se centralizo'] == null || resultado.data2[0]['Cuando se centralizo'] == "undefined" ? "" : moment(resultado.data2[0]['Cuando se centralizo']).format('DD/MM/YYYY');
+            } else {
+
+                PagoNumero ="";
+                Solicitadopor ="";
+                CuandoseSolicito = "";
+                FechaPago = "";
+                SolicitadoUrg = "";
+                obs_soltesoria = "";
+                obs_pagocliente = "";
+                Mediodepago = "";
+                N_Docpago = "";
+                MontoPagado = "";
+                UsuarioPagador = "";
+                BancoPagador = "";
+                CuentaPagadora = "";
+                BancoReceptor = "";
+                Ncomprobante = "";
+                centralizado = "";
+            }
+
+
+            return `<table class="table table-sm table-inverse">
+                      <thead>
+                        <tr>
+                          <th colspan="2">Contabilización del documento</th>
+                          <th colspan="2"> Descripción del pago</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td scope="row">Fecha de Recepción:</th>
+                          <td>${fecha_recepcion }</td>
+                          <td>Pago Número:</td>
+                          <td>${ PagoNumero }</td>
+                        </tr>
+                        <tr>
+                          <td scope="row">Fecha de Solicitud(venta):</th>
+                          <td>${fecha_solicitud }</td>
+                          <td>Solicitado por:</td>
+                          <td>${Solicitadopor }</td>
+                        </tr>
+                        <tr>
+                          <td scope="row">Folio Solicitud emisión(venta):</th>
+                          <td>${Folio_sol_Emi }</td>
+                          <td>Cuando se solicito:</td>
+                          <td>${CuandoseSolicito }</td>
+                        </tr>
+                        <tr>
+                          <td scope="row">Fecha Centralización(venta):</th>
+                          <td>${fecha_centralizacion}</td>
+                          <td>Fecha en que se realizó el pago:</td>
+                          <td>${FechaPago}</td>
+                        </tr>
+                         <tr>
+                          <td scope="row">Número de Centralización(venta):</th>
+                          <td>${num_centralizacion }</td>
+                          <td>Monto pagado:</td>
+                          <td>${MontoPagado}</td>
+                        </tr>
+                        <tr>
+                          <td scope="row"></th>
+                          <td></td>
+                          <td>Usuario que realizo el pago:</td>
+                          <td>${ UsuarioPagador }</td>
+                        </tr>
+                         <tr>
+                          <td scope="row"></th>
+                          <td></td>
+                          <td>Banco pagador:</td>
+                          <td>${BancoPagador}</td>
+                        </tr>
+                         <tr>
+                          <td scope="row"></th>
+                          <td></td>
+                          <td>Cuenta pagadora:</td>
+                          <td>${CuentaPagadora}</td>
+                        </tr>
+                        <tr>
+                          <td scope="row"></th>
+                          <td></td>
+                          <td>Número del Doc pago:</td>
+                          <td>${ N_Docpago }</td>
+                         </tr>
+                        <tr>
+                          <td scope="row"></th>
+                          <td></td>
+                          <td>Medio de pago:</td>
+                          <td> ${Mediodepago} </td>
+                        </tr>
+                        <tr>
+                          <td scope="row"></th>
+                          <td></td>
+                          <td>Banco receptor:</td>
+                          <td>${BancoReceptor} </td>
+                         </tr>
+                        <tr>
+                          <td scope="row"></th>
+                          <td></td>
+                          <td>Número de Comprobante:</td>
+                          <td> ${Ncomprobante}  </td>
+                        </tr>
+                        <tr>
+                          <td scope="row"></th>
+                          <td></td>
+                          <td>Centralizado el:</td>
+                          <td>${centralizado}</td>
+                        </tr>
+                      </tbody>
+                    </table>`
+
+        }
+
+        $('#dt_basic tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = oTable.row(tr);
+            if (row.child.isShown()) {
+                // fila abierta, la cierra
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Abro la Row
+                var dato = row.data().ID
+                detalleconta(dato, tr, row);
+            }
+        });
+
+
+        function detalleconta(dato, tr, row) {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("detallecontabilizacion", "Busqueda", new {Area = "Operaciones" })',
+                dataType: 'json',
+                data: {
+                    id: dato
+                },
+                success: function (resultado) {
+                    tr.addClass('shown');
+                    row.child(format(resultado)).show();
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+        }
+    });
+</script>

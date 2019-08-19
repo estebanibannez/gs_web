@@ -1,0 +1,422 @@
+﻿@model WebApplicationMod.GS_Documentos
+    
+<style>
+    td.details-control {
+        background: url('/Img/details_open.png') no-repeat center center;
+        cursor: pointer;
+    }
+    tr.shown td.details-control {
+        background: url('/Img/details_close.png') no-repeat center center;
+    }
+</style>
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-file-text"></i> Modificacion de Documentos</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 col-md-6">
+        <div class="box box-warning">
+            <div class="box-header with-border">
+                <h4 class="box-title">Busqueda por numero, tipo de documento y codigo del Auxiliar</h4>
+            </div>
+            <form class="form-horizontal" id="form-datos">
+                <div class="box-body">
+                    <div class="form-group row">
+                        <label class="col-sm-3 control-label">Codigo de Auxiliar</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="txtcod" id="txtCodAux" maxlength="10">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 control-label">N° de Documento</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="txtnum" id="txtNumDoc" maxlength="10">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 control-label">Tipo de Documento</label>
+                        <div class="col-sm-9" id="box">
+                            @Html.DropDownListFor(model => model.CTDCod, (SelectList)ViewBag.ListaTiposDoc, "Seleccione...", new { @class = "form-control js-example-basic-multiple", @id = "txtTipoDoc"})
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button type="submit" id="btnBuscarXDatos" class="btn btn-warning pull-right">Buscar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+        <div class="box box-warning">
+            <div class="box-header with-border">
+                <h4 class="box-title">Busqueda por ID</h4>
+            </div>
+            <form class="form-horizontal" id="form-id">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">ID</label>
+
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="txtID" name="txtID" maxlength="10">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button type="submit" id="btnBuscarPorId" class="btn btn-warning pull-right">Buscar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="box box-warning">
+    <div class="box-body">
+
+        <table id="dt_basic" class="table-bordered table-bordered" style="width:100%" role="grid" aria-describedby="example1_info">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Auxiliar</th>
+                    <th>Tipo Doc</th>
+                    <th>N° Documento</th>
+                    <th>Monto</th>
+                    <th>Mes Imputacion</th>
+                    <th>Año Imputacion</th>
+                    <th>Recepcionado</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="Cuerpo"></tbody>
+        </table>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        //solo numeros
+        $("#txtID").keypress(function (e) {
+            if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
+        });
+        $("#txtCodAux").keypress(function (e) {
+            if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
+        });
+        $("#txtNumDoc").keypress(function (e) {
+            if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
+        });
+
+
+        
+
+        $("#btnBuscarXDatos").click(function (e) {
+            
+
+            //Validacion de campos
+            $("#form-datos").validate({
+                rules: {
+                    txtcod: { required: true },
+                    txtnum: { required: true },
+                    CTDCod: { required: true},
+                },
+                messages: {
+                    txtcod: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese el codigo del auxiliar.</span>' },
+                    txtnum: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese el numero del documento.</span>' },
+                    CTDCod: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese el tipo de documento.</span>' },
+                },
+            });
+
+            var codAux = $("#txtCodAux").val();
+            var numDoc = $("#txtNumDoc").val();
+            var tipoDoc = $("#txtTipoDoc").val();
+            
+            if (codAux == "") {
+               
+                $("#txtCodAux").focus();
+            } else if (numDoc == "") {
+                
+                $("#txtNumDoc").focus();
+            } else if (tipoDoc == "") {
+                
+                $("#txtTipoDoc").focus();
+                
+                
+            } else {
+                e.preventDefault();
+
+                $.ajax({
+                    
+                asyng: true,
+                type: 'GET',
+                url: '@Url.Action("ConsultarDocPorDatos", "ModiDocExistn")?codAuxiliar=' + codAux +'&numDoc='+ numDoc +'&tipoDoc='+ tipoDoc,
+                dataType: 'json',
+                    success: function (result) {
+                        if (result.success == false) {
+                            $("#dt_basic tbody").empty();
+                            mensajeError('No encontrado...', 'No se encontro el documento con los datos ingresados');
+                        } else {
+                            $("#dt_basic tbody").empty();
+                            $.each(result.data, function (value, index) {
+                                var mes = index.Mes;
+                            switch (mes) {
+                                case "01":
+                                    mes = "Enero";
+                                    break;
+                                case "02":
+                                    mes = "Febrero";
+                                    break;
+                                case "03":
+                                    mes = "Marzo";
+                                    break;
+                                case "04":
+                                    mes = "Abril";
+                                    break;
+                                case "05":
+                                    mes = "Mayo";
+                                    break;
+                                case "06":
+                                    mes = "Junio";
+                                    break;
+                                case "07":
+                                    mes = "Julio";
+                                    break;
+                                case "08":
+                                    mes = "Agosto";
+                                    break;
+                                case "09":
+                                    mes = "Septiembre";
+                                    break;
+                                case "10":
+                                    mes = "Octubre";
+                                    break;
+                                case "11":
+                                    mes = "Noviembre";
+                                    break;
+                                case "12":
+                                    mes = "Diciembre";
+                                    break;
+                                default:
+                                    mes = null;
+                            }
+
+                            //Validaciones de campos nulos para desplegar
+
+                                var recepcionado = index.Recepcionado;
+                                if (recepcionado == null) {
+                                recepcionado = "Aun no Repc."
+                                 } else {
+                                recepcionado = new moment(recepcionado).format("DD-MM-YYYY");
+                                }
+                                
+                                if (index.Monto == null) {
+                                    index.Monto = "Sin Monto."
+                                }
+
+                                if (index.Año == null) {
+                                    index.Año = "Sin Fecha."
+                                }
+
+                                if (index.Mes == null) {
+                                    mes = "Sin Fecha."
+                                } 
+
+                                if (index.NumDoc == null) {
+                                    index.NumDoc = "Sin N° de Doc."
+                                }
+
+                                if (index.TipoDocu == null) {
+                                    index.TipoDocu = "Sin tipo de Doc."
+                                }
+
+                                if (index.Cod_Aux == null) {
+                                    index.Cod_Aux = "Sin Auxiliar"
+                                }
+
+                                if (index.Cliente == null) {
+                                    index.Cliente = "Sin nombre de cliente"
+                                }
+
+                                var id_ = index.ID_gs;
+                            var urlDel = "@Url.Action("EliminarDoc", "ModiDocExistn")" + "?id=" + id_;
+                            var urlUpd = "@Url.Action("Update", "ModiDocExistn")" + "?id=" + id_;
+
+                            $("#dt_basic tbody").append(
+                                '<tr><td>' + index.ID_gs
+                                + '</td><td>' + index.Cliente
+                                + '</td><td>' + index.Cod_Aux
+                                + '</td><td>' + index.TipoDocu
+                                + '</td><td>' + index.NumDoc
+                                + '</td><td>' + index.Monto
+                                + '</td><td>' + mes
+                                + '</td><td>' + index.Año
+                                + '</td><td>' + recepcionado  //new moment(index.fecha).format('DD/MM/YYYY hh:mm')
+                                + '</td><td><a href=' + urlUpd + ' class="btn btn-xs btn-default btn-xs modal-ajax-load" data-toggle="modal" data-target="#myModal" data-remote="false"><i class="fa fa-edit" aria-hidden="true"></i>Editar</a></td><td>'
+                                + '</td><td><a href=\"javascript:confirmDelete(\'Confirme la eliminacion\',\'' + urlDel + '\');\" class="btn btn-xs btn-default"><i class="fa fa-trash" aria-hidden="true"></i>Eliminar</a></td>'
+                                + '</tr > "');
+                            });
+                            mensajeExito("¡Encontrado(s)!","");
+                        }
+                    },
+                    error: function () {
+                        mensajeError("Ops..", "Error de controlador. Contactese con el administrador");
+                        //$("#content").html('<h2>Se ha generado un error</h2>');
+                    }
+            });
+
+            }
+            
+        });
+            
+        
+
+        $("#btnBuscarPorId").click(function (e) {
+            //Validacion de campos
+            $("#form-id").validate({
+
+                rules: {
+
+                    txtID: { required: true },
+                },
+                messages: {
+                    txtID: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese el ID del documento.</span>' },
+                },
+
+            });
+
+            var id = $("#txtID").val();
+            
+            if (id == "") {
+                $("#txtID").focus();
+            } else {
+
+                e.preventDefault();
+
+                $.ajax({
+                async: true,
+                type: 'POST',
+                url: '@Url.Action("ConsultarDocPorID", "ModiDocExistn")?idp=' + id,
+                dataType: 'json',
+                    success: function (result) {
+                        if (result.success == false) {
+                            $("#dt_basic tbody").empty();
+                            mensajeError('No encontrado...', 'No se encontro el documento con el id ingresado');
+                        } else {
+
+                            $("#dt_basic tbody").empty();
+                            var mes = result.data[0].Mes;
+
+                            switch (mes) {
+                                case "01":
+                                    mes = "Enero";
+                                    break;
+                                case "02":
+                                    mes = "Febrero";
+                                    break;
+                                case "03":
+                                    mes = "Marzo";
+                                    break;
+                                case "04":
+                                    mes = "Abril";
+                                    break;
+                                case "05":
+                                    mes = "Mayo";
+                                    break;
+                                case "06":
+                                    mes = "Junio";
+                                    break;
+                                case "07":
+                                    mes = "Julio";
+                                    break;
+                                case "08":
+                                    mes = "Agosto";
+                                    break;
+                                case "09":
+                                    mes = "Septiembre";
+                                    break;
+                                case "10":
+                                    mes = "Octubre";
+                                    break;
+                                case "11":
+                                    mes = "Noviembre";
+                                    break;
+                                case "12":
+                                    mes = "Diciembre";
+                                    break;
+                                default:
+                                    mes = null;
+                            }
+
+                            //Validacion de campos nulos
+                            var recepcionado = result.data[0].Recepcionado;
+                            if (recepcionado == null) {
+                                recepcionado = "Aun no Repc."
+                            } else {
+                                recepcionado = new moment(recepcionado).format("DD-MM-YYYY");
+                            }
+
+                            if (result.data[0].Monto == null) {
+                                result.data[0].Monto = "Sin monto."
+                            }
+
+                            if (result.data[0].Año == null) {
+                                result.data[0].Año = "Sin Fecha"
+                            }
+
+                            if (result.data[0].Mes == null) {
+                                mes = "Sin Fecha"
+                            }
+
+                            if (result.data[0].NumDoc == null) {
+                                result.data[0].NumDoc = "Sin N° de Doc."
+                            }
+
+                            if (result.data[0].TipoDocu == null) {
+                                result.data[0].TipoDocu = "Sin tipo de Doc."
+                            }
+
+                            if (result.data[0] == null) {
+                                result.data[0] = "Sin Auxiliar"
+                            }
+
+                            if (result.data[0] == null) {
+                                result.data[0] = "Sin nombre de cliente"
+                            }
+
+                            var id_ = result.data[0].ID_gs;
+                            var urlDel = "@Url.Action("EliminarDoc", "ModiDocExistn")" + "?id=" + id_;
+                            var urlUpd = "@Url.Action("Update", "ModiDocExistn")" + "?id=" + id_;
+
+                            $("#dt_basic tbody").append(
+                                '<tr><td>' + result.data[0].ID_gs
+                                + '</td><td>' + result.data[0].Cliente
+                                + '</td><td>' + result.data[0].Cod_Aux
+                                + '</td><td>' + result.data[0].TipoDocu
+                                + '</td><td>' + result.data[0].NumDoc
+                                + '</td><td>' + result.data[0].Monto
+                                + '</td><td>' + mes
+                                + '</td><td>' + result.data[0].Año
+                                + '</td><td>' + recepcionado  //new moment(index.fecha).format('DD/MM/YYYY hh:mm')
+                                + '</td><td><button class="btn btn-default btn-xs modal-ajax-load" href="' + urlUpd + '" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i>Editar</button></td><td>'
+                                + '</td><td><a href=\"javascript:confirmDelete(\'Confirme la eliminacion\',\'' + urlDel + '\');\" class="btn btn-xs btn-default"><i class="fa fa-trash" aria-hidden="true"></i>Eliminar</a></td>'
+                                + '</tr > "');
+                            
+                            mensajeExito("¡Encontrado!", "");
+                        }
+                        
+                        
+                    },
+                       error: function () {
+                           mensajeError("Ops..", "Error de controlador. Contactese con el administrador");
+                       }
+                });
+            }
+        });
+    });
+</script>
+
+
+

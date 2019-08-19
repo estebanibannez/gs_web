@@ -1,0 +1,210 @@
+﻿<style>
+    .help-block {
+        padding-left: 217px;
+    }
+
+    .fa-warning {
+        color: orange;
+    }
+  .datepicker table tr td:first-child {
+color: red
+}
+  .datepicker table tr td:first-child + td + td + td + td + td + td {
+color: red
+}
+</style>
+@model WebApplicationMod.GS_ctrl_cump
+
+@using (Html.BeginForm((Model == null ? "Create" : "Edit"), "PrograProceKPI", FormMethod.Post, new { @id = "mant-form", @novalidate = "novalidate", @role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @(Model == null ? new MvcHtmlString("") : Html.HiddenFor(model => model.id))
+    if (Model == null)
+    {
+        <div class="box-header with-border">
+            <h3 class="box-title">Ingrese la información del nuevo proceso</h3>
+        </div>
+    }
+    else
+    {
+        <div class="box-header with-border">
+            <h3 class="box-title">Edite la información del proceso</h3>
+        </div>
+    }
+    <div class="widget-body form-horizontal">
+        <div class="box-body no-padding">
+            <br />
+            <div class="form-group">
+                <div class="col-md-4">
+                    Cliente
+                </div>
+                <div class="col-md-8">
+                    @if (Model == null)
+                    {
+                        @Html.DropDownListFor(model => model.clie, (SelectList)ViewBag.lstClientes, "Seleccione...", new { @class = "form-control" })
+                    }
+                    else
+                    {
+                        @Html.DropDownListFor(model => model.clie, (SelectList)ViewBag.lstClientes, new { @class = "form-control", @disabled = "disabled" })
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    Periodo
+                </div>
+                <div class="col-md-8">
+                    @Html.TextBox("periodoView", (object)ViewBag.periodoView, new { @class = "form-control", @id = "id_plazo", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    Fecha de vencimiento
+                </div>
+                <div class="col-md-8">
+                    
+                    @if (Model == null)
+                    {
+                        @Html.TextBox("diasPlazo", "", new { @class = "form-control datefield", @id = "id_plazo", @autocomplete = "off" })
+                    }
+                    else
+                    {
+                        @Html.TextBox("diasPlazo", (object)ViewBag.diasPlazo, new { @class = "form-control datefield", @id = "id_plazo", @autocomplete = "off" })
+                    }
+                </div>
+            </div>
+            <div>
+                @Html.Hidden("periodo", (object)ViewBag.periodo)
+            </div>
+            <div>
+                @Html.Hidden("tipo", (object)ViewBag.tipo)
+            </div>
+        </div>
+        <div class="box-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+            <button type="submit" class="btn btn-warning pull-right" action="guardar" id="btnGuardar">Registrar</button>
+        </div>
+    </div>
+
+    <script>
+        //$('#id_plazo').on('input', function () {
+        //    //variable para cambiar el limite
+        //    var limite = 999;
+        //    var value = $(this).val();
+
+        //    if ((value !== '') && (value.indexOf('.') === -1)) {
+        //        $(this).val(Math.max(Math.min(value, limite), 0));
+        //    }
+        //});
+
+        $(".datefield").datepicker
+            ({
+                autoclose: true,
+                format: 'yyyy-mm-dd',
+                changeYear: true
+            });
+
+        $(function () {
+            //$(".datefield").addClass('ui-datepicker-week-end a');
+
+
+
+            setFormularioPersonal("mant-form",
+                {
+                    clie:{
+                        required:true,
+                    },
+                    tipo:{
+                        required:true
+                    },
+                    diasPlazo:{
+                        required:true
+                    }
+                },
+                {
+                    clie:{
+                        required: '<span class="help-block error"><i class="fa fa-warning"></i> Seleccione un cliente.</span>'
+                    },
+                    tipo:{
+                        required: '<span class="help-block error"><i class="fa fa-warning"></i> Seleccione un tipo de proceso.</span>'
+                    },
+                    diasPlazo: {
+                        required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese la fecha de vencimiento.</span>'
+                    }
+                }
+                );
+        });
+
+        function setFormularioPersonal(form, rules, messages) {
+            var $orderForm = $("#" + form).validate({
+                rules: rules,
+                messages: messages,
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+
+            $("button[action=guardar]").click(function () {
+                $("button[action=guardar]").prop('disabled', true);
+                if ($('#' + form).valid()) {
+                    var formJS = document.getElementById(form);
+                    var formData = new FormData(formJS);
+
+                    for(var pair of formData.entries()) {
+
+                        if (pair[0].includes(".monto")) {
+                            formData.set(pair[0], pair[1].replace(new RegExp('\\.', 'g'), ''));
+                        }
+                    }
+
+                    $.ajax({
+                        url: document.getElementById(form).action,
+                        type: document.getElementById(form).method,
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        success: function (result) {
+                            debugger;
+                            if (result.success) {
+
+                                mensajeExito("Actualizado", "Datos actualizados con éxito!");
+
+                                $('#myModal').modal('hide');
+
+
+                                //setTimeout(function () { location.reload(); }, 3000);
+
+                                //$('#dt_table').DataTable().ajax.reload(null, false);
+                                //$(this).removeClass('selected');
+                                //vaciar();
+                                //$("#CabGlo").removeAttr("disabled");
+                                //$("#ob").attr("src", "");
+                                //$("#object").attr("data", "");
+                                //$("#ob").hide();
+                                //$(".help-block").hide();
+                                //Desactivar();
+                                //$("#contfile").hide();
+                                //document.getElementById("archivo").value = null;
+                            }
+                            else {
+                                if (result.error) {
+                                    mensajeError("Error", result.mensaje);
+                                } else {
+                                    $(contenedor).html(result);
+                                }
+                            }
+                        }, complete: function () {
+                            $("button[action=guardar]").prop('disabled', false);
+                            $('#calendar').fullCalendar('destroy');
+                            CargarCal();
+                        }
+                    });
+                } else {
+                    console.log("error formulario");
+                    $("button[action=guardar]").prop('disabled', false);
+                }
+            });
+        }
+    </script>
+}

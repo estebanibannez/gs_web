@@ -1,0 +1,35 @@
+﻿@model dynamic
+
+
+<body>
+    <div class="table-responsive">
+        <table id="dt_basic0" class="table table-hover">
+            <thead>
+                <tr>                            
+                    <th>Organización</th>
+                    <th>Usuario/Rut</th>
+                    <th>Password</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var item in Model.listAnonymousToDynamic)
+                    {
+
+                        <tr>                                    
+                            <td><div class="tester2" contenteditable="false"  >@item.Orga </div></td>
+                            <td><div class="tester2" contenteditable="false"  >@item.Usu</div></td>
+                            <td><div class="tester2" contenteditable="false"  >@item.Pass</div></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+
+<script type="text/javascript">
+    copiaTexto('.tester2');
+    setFormulario();
+    InicializaMantenedor('dt_basic0');
+</script>

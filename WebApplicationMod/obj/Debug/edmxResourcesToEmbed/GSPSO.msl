@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GSPSOModelStoreContainer" CdmEntityContainer="GSPSOEntities">
+    <EntitySetMapping Name="TREA_anticipo_extencion">
+      <EntityTypeMapping TypeName="GSPSOModel.TREA_anticipo_extencion">
+        <MappingFragment StoreEntitySet="TREA_anticipo_extencion">
+          <ScalarProperty Name="id_anticipo" ColumnName="id_anticipo" />
+          <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
+          <ScalarProperty Name="id_tipo_anticipo" ColumnName="id_tipo_anticipo" />
+          <ScalarProperty Name="fecha_pago" ColumnName="fecha_pago" />
+          <ScalarProperty Name="estado_anticipo" ColumnName="estado_anticipo" />
+          <ScalarProperty Name="id_anticipo_softland" ColumnName="id_anticipo_softland" />
+          <ScalarProperty Name="C_id_cliente" ColumnName="_id_cliente" />
+          <ScalarProperty Name="C_id_auxiliar" ColumnName="_id_auxiliar" />
+          <ScalarProperty Name="C_monto" ColumnName="_monto" />
+          <ScalarProperty Name="C_glosa" ColumnName="_glosa" />
+          <ScalarProperty Name="C_cuenta_contable" ColumnName="_cuenta_contable" />
+          <ScalarProperty Name="id_usu_solicitud" ColumnName="id_usu_solicitud" />
+          <ScalarProperty Name="id_usu_pago" ColumnName="id_usu_pago" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

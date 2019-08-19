@@ -1,0 +1,235 @@
+﻿@Html.Hidden("Unidad", (int)ViewBag.unidad)
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-video-camera"></i> Video Tutoriales</h3>
+    </div>
+</div>
+<div class="panel panel-heading">
+    <div class="row">
+        <div class="col-md-9">
+            <label class="pull-right text-yellow"><i>Seleccione una categoría</i></label>
+        </div>
+        <div class="col-md-3">
+            @Html.DropDownList("selectCategorias", new SelectList(ViewBag.listadoCategorias, "id_categoria", "nombre_categoria"), "--Todas las Categorias--", new { @class = "form-control", id = "selectCategorias" })
+        </div>
+    </div>
+</div>
+
+<div class="row" id="bxVideos">
+</div>
+
+<!--Box solo para pruebas de seguimiento de los videos.-->
+@if (ViewBag.unidad == 63) {
+
+<div class="row" id="detVideo">
+    <div class="col-md-2">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <i class="fa fa-video-camera"></i>
+
+                <h3 class="box-title">Detalle video.</h3>
+            </div>
+            <div class="box-body">
+                <p class="text-green">Tiempo Transcurrido</p>
+                <input type="text" readonly class="form-control" id="transcurrrido">
+                <p class="text-aqua">Duración total de video</p>
+                <input type="text" readonly class="form-control" id="tiempototal">
+                <p class="text-light-blue">Momento que lanzo función a la BD</p>
+                <input type="text" readonly class="form-control" id="avisoView">
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+<script>
+    $(function () {
+
+
+
+     getVideos($('#selectCategorias').val());
+
+    $('#selectCategorias').change(function (e) {
+        $('#bxVideos')
+            .hide()
+            .empty()
+            .fadeOut(300);
+
+        getVideos($(this).val());
+    });
+    //función que carga los videos dinamicamente
+    function videoBx(elem, data) {
+        let bxVideos = $('#bxVideos');
+        let url_deletevideo = '@Url.Action("DeleteVideo", "VideoTutoriales")/' + data.id_video;
+        let btnEdit = (document.getElementById("Unidad").value == 63 ? `<button class="btn btn-default btn-xs" onclick="editVideo(${data.id_video});"><i class="glyphicon glyphicon-edit"></i></button>`:'');
+        let btnDelete = (document.getElementById("Unidad").value == 63 ? `<button class="btn btn-default btn-xs" onclick="confirmDelete('Está seguro que desea eliminar el video ${data.titulo_video}','${url_deletevideo}');"><i class="glyphicon glyphicon-trash"></i></button>` : '');
+        let box = `<div class="col-md-4">
+                    <div class="box box-solid">
+                        <div class="box-body">
+                            <video id="${data.id_video}" class="vjs-16-9 videos"
+                            ontimeupdate="videoPlay(this);"
+                            onclick="videoPlayer(this);"
+                            controls preload="metadata" autobuffer width="100%"
+                            poster = "${(data.ruta_poster == null ? '' : data.ruta_poster)}">
+                            <source src="${data.ruta_video}" type="video/mp4" codec="mp4a.40.2"/>
+                            </video>
+                        </div>
+                        <div class="box-footer" id="video_${data.id_video}">
+                            <h3 id="titulo_${data.id_video}" class="text-yellow">${data.titulo_video}</h3>
+                            <p id="descripcion_${data.id_video}"><i>${data.descripcion}</i></p>
+                            
+                        </div>
+                        <div class="box-footer text-center">
+                            <p id="botones_${data.id_video}">${btnDelete} ${btnEdit} </p>
+                        </div>
+                    </div>
+                  </div>`;
+            bxVideos
+                .append(box)
+                .hide()
+                .fadeIn(300);
+    }
+    // llamada a videotutoriales
+    function getVideos(id) {
+        $.ajax({
+            //async: true,
+            type: 'POST',
+            data: { id: id },
+            url: '@Url.Action("getVideos", "VideoTutoriales")',
+            success: function (res) {
+                $.each(res.data, videoBx);
+            }
+        });
+    }
+    });
+
+    //variable global para indicar que hizo play
+    var count = 0;
+    var videoAnt = "";
+
+    //función que detecta si un video ya está en play y lo pausa.
+    function videoPlayer(video) {
+        if (videoAnt == "") {
+            videoAnt = video;
+        } else {
+            if (videoAnt.id != video.id) {
+                videoAnt.pause();
+                videoAnt = video;
+            }
+        }
+        video.addEventListener("play", e => {
+            video.play();
+            count = 1;
+        }, true);
+    }
+
+    //listener para el tiempo del video en ejecución
+    function videoPlay(video) {
+
+        video.addEventListener("timeupdate", e => {
+
+            var time = Number(parseInt(video.currentTime));
+            var duracion = Number(parseInt(video.duration));
+            var rest = Number(parseInt(duracion * 0.30));
+            var viewBD = Number(parseInt(duracion - rest));
+            //----Solo para pruebas ----
+            document.getElementById("transcurrrido").value = time;
+            document.getElementById("tiempototal").value = duracion;
+            //document.getElementById("menos").value = rest;
+            document.getElementById("avisoView").value = viewBD;
+
+            if (time == viewBD) {
+                if (count == 1) {
+                    //mensajeExito("visualizacion registrada", ".");
+                    console.log('visualización registrada en la bd');
+                    callController(parseInt(video.id));
+                    count++ ;
+                }
+            }
+        });
+
+    }
+
+    function callController(id) {
+        $.ajax({
+            data: { id_video: id },
+            url: '@Url.Action("sendVideosGs","VideoTutoriales")',
+            type: 'POST',
+            success: (e) => {
+                console.log("se almaceno un registro.");
+            }
+        });
+    }
+
+    function editVideo(video) {
+        
+        let boton = '#botones_' + video;
+        $(boton).append(`<button class="btn btn-default btn-xs" onclick="saveText(${video});" id="btnSave_${video}"><i class="glyphicon glyphicon-floppy-saved"></i></button>
+                         <button class="btn btn-default btn-xs" onclick="closeVideo(${video});" id="btnCerrar_${video}"><i class="glyphicon glyphicon-remove"></i></button>
+                        `);
+        let nomv = "#video_" + video;
+        let titulo = "#titulo_" + video;
+        let descripcion = "#descripcion_" + video;
+        let seleccionado = $(nomv);
+        let tit = $(titulo).text();
+        let des = $(descripcion).text();
+        seleccionado
+            .append(
+            `
+            <div id="textosEditar_${video}">
+            <input type="text" id="title_${video}" placeholder="Introduzca un titulo para este video..." class="form-control" value="${tit}">
+            <textarea class="form-control" id="desc_${video}" placeholder="Introduzca una descripción para este video..."  rows="3">${des}</textarea>
+            </div>
+            `
+        );
+    }
+
+    
+    function saveText(id) {
+        let newTitle = "#title_" + id;
+        let newDesc = "#desc_" + id;
+        let videoEdit = new Object();
+        let form = $('#video_' + id);
+       
+        videoEdit.id_video = id;
+        videoEdit.titulo_video = $(newTitle).val();
+        videoEdit.descripcion_video = $(newDesc).val();
+
+        console.log(videoEdit);
+        $.post('@Url.Action("updateVideo","VideoTutoriales")', videoEdit, function (res) {
+            let detVideo = $('#detVideo').fadeOut(600);
+            $('#bxVideos').fadeOut(600, function (res) {
+                location.reload(true);
+                this.fadeIn().delay(500);
+                detVideo.fadeIn().delay(500);
+            });
+        });
+        mensajeExitoModal("Video", "Actualizado exitosamente","2");
+    }
+
+    function closeVideo(id) {
+        let btnCerrar = $("#btnCerrar_" + id);
+        let btnSave = $("#btnSave_" + id);
+        let footerVideo = $('#textosEditar_' + id);
+        footerVideo
+            .hide(800)
+            .empty();
+        btnCerrar
+            .hide(800)
+            .empty();
+        btnSave
+            .hide(800)
+            .empty();
+    }
+
+    //var aviso = function ()
+    //{
+    //    mensajeExitoModal('MENSAJE IMPORTANTE', 'Para visualizar los videos \n Ingrese el usuario y clave con el que accede a su equipo.', '3')
+    //};
+
+    //setTimeout(function () {
+    //    aviso()
+    //}, 900);
+    
+
+</script>

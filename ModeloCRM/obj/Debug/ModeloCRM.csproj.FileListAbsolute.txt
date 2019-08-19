@@ -1,0 +1,34 @@
+F:\Repositorio Local Franc\treasuryweb\ModeloCRM\bin\Debug\ModeloCRM.dll.config
+F:\Repositorio Local Franc\treasuryweb\ModeloCRM\bin\Debug\ModeloCRM.dll
+F:\Repositorio Local Franc\treasuryweb\ModeloCRM\bin\Debug\ModeloCRM.pdb
+F:\Repositorio Local Franc\treasuryweb\ModeloCRM\bin\Debug\EntityFramework.dll
+F:\Repositorio Local Franc\treasuryweb\ModeloCRM\bin\Debug\EntityFramework.SqlServer.dll
+F:\Repositorio Local Franc\treasuryweb\ModeloCRM\bin\Debug\EntityFramework.xml
+F:\Repositorio Local Franc\treasuryweb\ModeloCRM\bin\Debug\EntityFramework.SqlServer.xml
+F:\Repositorio Local Franc\treasuryweb\ModeloCRM\obj\Debug\ModeloCRM.dll
+F:\Repositorio Local Franc\treasuryweb\ModeloCRM\obj\Debug\ModeloCRM.pdb
+F:\Repositorio Local Franc\treasuryweb\ModeloCRM\obj\Debug\ModeloCRM.csprojResolveAssemblyReference.cache
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - copia\ModeloCRM\bin\Debug\ModeloCRM.dll.config
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - copia\ModeloCRM\bin\Debug\ModeloCRM.dll
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - copia\ModeloCRM\bin\Debug\ModeloCRM.pdb
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - copia\ModeloCRM\bin\Debug\EntityFramework.dll
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - copia\ModeloCRM\bin\Debug\EntityFramework.SqlServer.dll
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - copia\ModeloCRM\bin\Debug\EntityFramework.xml
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - copia\ModeloCRM\bin\Debug\EntityFramework.SqlServer.xml
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - copia\ModeloCRM\obj\Debug\ModeloCRM.csprojAssemblyReference.cache
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - copia\ModeloCRM\obj\Debug\ModeloCRM.csproj.CoreCompileInputs.cache
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - copia\ModeloCRM\obj\Debug\ModeloCRM.csproj.CopyComplete
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - copia\ModeloCRM\obj\Debug\ModeloCRM.dll
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - copia\ModeloCRM\obj\Debug\ModeloCRM.pdb
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\ModeloCRM\bin\Debug\ModeloCRM.dll.config
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\ModeloCRM\bin\Debug\ModeloCRM.dll
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\ModeloCRM\bin\Debug\ModeloCRM.pdb
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\ModeloCRM\bin\Debug\EntityFramework.dll
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\ModeloCRM\bin\Debug\EntityFramework.SqlServer.dll
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\ModeloCRM\bin\Debug\EntityFramework.xml
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\ModeloCRM\bin\Debug\EntityFramework.SqlServer.xml
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\ModeloCRM\obj\Debug\ModeloCRM.csproj.CoreCompileInputs.cache
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\ModeloCRM\obj\Debug\ModeloCRM.csproj.CopyComplete
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\ModeloCRM\obj\Debug\ModeloCRM.dll
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\ModeloCRM\obj\Debug\ModeloCRM.pdb
+D:\PROYECTOS\WEB-GS\proyecto-gs-web - local - Funcional\ModeloCRM\obj\Debug\ModeloCRM.csprojAssemblyReference.cache

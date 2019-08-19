@@ -1,0 +1,24 @@
+Time: 06-11-2017 10:57:57
+-----------------------------------------------------------
+Code: ApxjtJJyaDalmt1wyHrT_06112017105757
+Message: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+StackTrace:    en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en WebApplication.Areas.Anticipo.Controllers.AnticipoController.Create(Anticipos model, HttpPostedFileBase files) en C:\ANEVES\Repositorios\Local\treasuryweb\WebApplication\Areas\Anticipo\Controllers\AnticipoController.cs:línea 107
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+-----------------------------------------------------------
+
+Time: 06-11-2017 11:08:02
+-----------------------------------------------------------
+Code: LhwrSGpi7U65tCerfFF9_06112017110802
+Message: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+StackTrace:    en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en WebApplication.Areas.Anticipo.Controllers.AnticipoController.Create(Anticipos model, HttpPostedFileBase files) en C:\ANEVES\Repositorios\Local\treasuryweb\WebApplication\Areas\Anticipo\Controllers\AnticipoController.cs:línea 107
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+-----------------------------------------------------------
+

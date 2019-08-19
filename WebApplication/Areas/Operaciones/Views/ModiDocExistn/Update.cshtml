@@ -1,0 +1,155 @@
+﻿@model  WebApplicationMod.GS_Documentos
+
+
+@using (Html.BeginForm("UpdateDoc", "ModiDocExistn", FormMethod.Post, new { @id = "mant-formUp", @novalidate = "novalidate", role = "form"}))
+{@*//@Html.Label(("nomusu"), (string)ViewBag.nomusu)*@
+    @*@Html.AntiForgeryToken()*@
+    @(Model == null ? new MvcHtmlString("") : Html.HiddenFor(p => p.ID))
+
+<div class="box-header with-border">
+
+    @{
+        var fecha = Convert.ToDateTime(Model.MovRe).ToString("dd-MM-yyyy");
+    }
+
+    <h3 class="box-title">Edite el documento de @Html.Label(("NombreCliente"), (string)ViewBag.NombreCliente)</h3>
+    
+</div>
+
+    <div class="widget-body form-horizontal">
+        <div class="box-body no-padding">
+                <!-- form start -->
+                <form class="form-horizontal">
+                    <div class="box-body">
+
+                        <div class="row">
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="col-sm-6">Numero de Comprobante:</div>
+
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(model => model.NumCent, new { @class = "custom-scroll form-control", @maxlength = "9", @id = "txtnumcent" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-6">Tipo de Documento:</div>
+
+                                    <div class="col-sm-6">
+                                        @Html.DropDownListFor(model => model.CTDCod, (SelectList)ViewBag.ListaTiposDoc, new { @class = "custom-scroll form-control", @id = "txttipdoc" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-6">Folio de Solicitud de Facturas:</div>
+
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(model => model.FolioSolFac, new { @class = "custom-scroll form-control", @maxlength = "9", @id = "txtfolio" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="col-sm-6">Fecha de Recepcion:</div>
+
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(model => model.MovRe, "{0:dd/MM/yyyy}", new { @class = "form-control datefield", @id = "txtfecha", rows = "2", @maxlength = "10" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-6">Año de Imputacion:</div>
+
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(model => model.CPBAño, new { @class = "custom-scroll form-control", @maxlength = "4", @id = "txtaño" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-6">Mes de Imputacion:</div>
+
+                                    <div class="col-sm-6">
+                                        @Html.DropDownListFor(model => model.CPBMes, new SelectListItem[] {new SelectListItem() {Text = "", Value = "" },
+                                                                                                new SelectListItem() {Text = "Enero", Value = "01" },
+                                                                                                new SelectListItem() {Text = "Febrero", Value = "02" },
+                                                                                                new SelectListItem() {Text = "Marzo", Value = "03" },
+                                                                                                new SelectListItem() {Text = "Abril", Value = "04" },
+                                                                                                new SelectListItem() {Text = "Mayo", Value = "05" },
+                                                                                                new SelectListItem() {Text = "Junio", Value = "06" },
+                                                                                                new SelectListItem() {Text = "Julio", Value = "07" },
+                                                                                                new SelectListItem() {Text = "Agosto", Value = "08" },
+                                                                                                new SelectListItem() {Text = "Septimbre", Value = "09" },
+                                                                                                new SelectListItem() {Text = "Octubre", Value = "10" },
+                                                                                                new SelectListItem() {Text = "Noviembre", Value = "11" },
+                                                                                                new SelectListItem() {Text = "Diciembre", Value = "12" } },
+                                                                         new { @class = "custom-scroll form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3">Archivo:</div>
+
+                            <div class="col-sm-5">
+                                <input type="file" id="files0" name="files" class="uploadfile" />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-footer -->
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                        <button type="submit" class="btn btn-warning pull-right" action="save" id="btnGuardar">Guardar</button>
+                    </div>
+
+                </form>
+            
+        </div>
+    </div>
+        }
+<script>
+    $(document).ready(function () {
+        debugger;
+        
+        $("#txtaño").keypress(function (e) {
+            if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
+        });
+        $("#txtnumcent").keypress(function (e) {
+            if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
+        });
+        $("#txtfolio").keypress(function (e) {
+            if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
+        });
+        $("#txtfecha").keypress(function (e) {
+            if (String.fromCharCode(e.keyCode).match(/[^0-9-]/g)) return false;
+        });
+
+        $(".datefield").datepicker
+            ({
+                autoclose: true,
+                format: 'dd-mm-yyyy',
+                changeYear: true
+            });
+     
+        $(".uploadfile").fileinput({
+            
+            fileType: "pdf",
+            showPreview: false,
+            showCancel: true,
+            showUpload: false,
+            browseClass: 'btn btn-warning',
+            //browseLabel: 'Up',
+            browseIcon: "<span class='glyphicon glyphicon-open-file' aria-hidden='true'></span>",
+            removeClass: "btn btn-danger",
+            removeLabel: "Delete",
+            removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i>",
+            showRemove: true,
+            showCancel: true,
+            uploadExtraData: function () {
+                return {
+                    documento: JSON.stringify(lista)
+                };
+            }
+        });
+
+
+        setFormulario("mant-formUp");
+  });
+</script>
+

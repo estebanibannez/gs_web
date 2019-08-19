@@ -1,0 +1,368 @@
+﻿@model WebApplicationMod.cab_anticipos
+<style>
+    .input-group .form-control {
+        width: 60% !important;
+    }
+</style>
+
+@using (Html.BeginForm((Model == null ? "Create" : "Edit"), "Anticipo", FormMethod.Post, new { @id = "mant-form", @novalidate = "novalidate", role = "form" }))
+{
+
+    @Html.AntiForgeryToken()
+    @(Model == null ? new MvcHtmlString("") : Html.HiddenFor(p => p.id_anticipo))
+
+
+    <div class="">
+        <!-- Custom Tabs Cuentas-->
+        <div class="nav-tabs-custom form-horizontal">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#cab" id="tab1"  data-toggle="tab" aria-expanded="false">Clientes / Cuentas</a></li>
+                <li class=""><a href="#det" id="tab2"  data-toggle="tab" aria-expanded="false">Proveedores</a></li>
+                <li class=""><a href="#file" id="tab3" data-toggle="tab" aria-expanded="true">Evidencias</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane box-body active" id="cab">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label pull-left" style="text-align: left">Fecha</label>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(model => model.fec_anticipo, new { @class = "form-control", type = "date" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label pull-left" style="text-align: left">Clientes</label>
+                        <div class="col-sm-6">
+                            @Html.DropDownListFor(model => model.id_clie, (SelectList)ViewBag.clientes, new { @class = "form-control" })
+                        </div>
+                        @*<div class="col-sm-4 saldo">                            
+                        </div>*@
+                    </div>
+                    <div class="form-group ctas">
+                        <label class="col-sm-2 control-label pull-left" style="text-align: left">Cuentas</label>
+                        <div class="col-sm-6 pull-left">
+                            <select id="Cod_cta" name="[0].Cod_cta" class="form-control Cta pull-left" placeholder="Cod. Cuenta"></select>
+                        </div>
+                        <div class="col-sm-3 ctasi">
+                            <input type="text" class="col-sm-6 form-control monto" id="[0].monto" name="[0].monto" placeholder="Monto" onfocus="mascara()" onchange="calcular()">
+                        </div>
+                        <div class="col-sm-1 col-md-1 pull-right">
+                            <a href="#" class="pull-right btn btn-warning" style="padding:3px" id="addScnt"><i class="fa fa-fw fa-plus-square-o"></i></a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-8 control-label pull-left" style="text-align: right">Total</label>
+                        <div class="col-sm-3">
+                            <input type="text" id="total_monto" class="col-sm-6 form-control total_monto pull-left" placeholder="Total" disabled />
+                        </div>
+                    </div>
+
+                    @*<table id="dt_saldos" class="table table-bordered table-hover dataTable">
+                        <thead>
+                            <tr>
+                                <th>Codigo</th>
+                                <th>Descripción</th>
+                                <th>Saldo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody"></tbody>
+                    </table>*@
+                </div>
+
+                <!-- /.tab-pane Proveedores-->
+                <div class="tab-pane table" id="det">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label pull-left" style="text-align: left">Proveedores</label>
+                        <div class="col-sm-10">
+                            <select id="id_prov" name="id_prov" style="width:100%" class="form-control js-data-example-ajax">
+                                <option value="3620194" selected="selected">Selecione Proveedor</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label class="col-sm-2 control-label pull-left" style="text-align: left">N° Docu</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="NumDoccb" name="NumDoccb" placeholder="NumDocCb" value="@DateTime.Now.Day.ToString()@DateTime.Now.Month.ToString("00")@DateTime.Now.ToString("yy")">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label pull-left" style="text-align: left">Descripción</label>
+                        <div class="col-sm-10">
+                            @Html.TextAreaFor( model => model.glosa, new {  @maxlength = 60, @class = "form-control", @placeholder = "Glosa ..." })
+                        </div>
+                    </div>
+                </div>
+               
+                <!-- /.tab-panel archivo -->
+                <div class="tab-pane" id="file">
+                    <div class="form-group">
+                        <label for="txtevidencia" class="col-sm-2 control-label pull-left" style="text-align: left">Evidencia</label>
+                        <div class="col-sm-7">
+                            <input type="file" style="width:50%!important" name="files" class="form-control uploadfile" placeholder="Evidencia" />
+                        </div>
+                    </div>
+                </div>
+                <!-- /.tab-pane -->
+            </div>
+        
+            <!-- /.box-footer -->
+            <div class="box-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                <a class="btn btn-default btnNext">Siguiente</a>
+                <button type="button" class="btn btn-warning pull-right btnGuardar" action="save">Guardar</button>
+            </div>
+            <!-- /.box-footer -->
+        </div>
+    </div>
+
+}
+<script>
+
+
+
+    //Suma_montos('.total_monto');
+
+
+    function mascara() {        
+        $('.monto').mask('000.000.000.000.000', { reverse: true });        
+    }
+   
+    function calcular() {
+        debugger;
+
+        Suma_montos('.total_monto');
+        //total = 0;
+        //parcial = 0;
+        //$(".monto").each(
+        //    function (index, value) {
+        //        parcial = Number(value.value.replace(/\./g, ''));
+        //        total = parcial + total;
+        //    });
+        //$(".total_monto").val(total);
+        //$('.total_monto').unmask();
+        //$('.total_monto').mask('000.000.000.000', { reverse: true });
+    }
+
+    $(document).ready(function () {
+
+            $('.btnGuardar').hide();
+            $('.btnNext').click(function () {
+                $('.nav-tabs > .active').next('li').find('a').trigger('click');            
+                var monto = $('.monto').value;
+                if (monto != null) {
+                    $('.monto').value
+                }
+            });
+
+            $('.nav-tabs > .active').next('li').next('li').find('a').on('click', function () {
+                $('.btnGuardar').show();
+                $('.btnNext').hide();
+            });
+
+            $('#tab1').on('click', function () {
+                $('.btnGuardar').hide();
+                $('.btnNext').show();
+            });
+
+            $('#tab2').on('click', function () {
+                $('.btnGuardar').hide();
+                $('.btnNext').show();
+            });
+
+            document.getElementById('fec_anticipo').value = moment().format('YYYY-MM-DD');
+
+            var scntDiv = $('#cab > div:nth-child(2)');
+            var i = 1;
+            $('#addScnt').click(function () {
+                RellenaGlosa();
+
+                var html_ = '<div class="form-group dinamic" > ' +
+                                       '<label class="col-sm-2 control-label" style="text-align: left">Cuentas</label>' +
+                                       '<div class="col-sm-6 pull-left">' +
+                                       '<select id="Cod_cta" name="[' + i + '].Cod_cta"  class="form-control ' + i + 'Cta" placeholder="Cod. Cuenta"></select></div>' +
+                                       '<div class="col-sm-3">' +
+                                       '<input type="text" class="form-control monto" id="[' + i + '].monto" name="[' + i + '].monto" placeholder="Monto" onfocus="mascara()" onchange="calcular()"></div>' +
+                                       '<div class="col-sm-1 col-md-1 pull-right">' +
+                                       '<a href="#"  class="pull-right btn btn-warning remScnt" style="padding:3px" ><i class="fa fa-times-circle"></i></a></div></div></div> ';
+
+                $(".ctas").after(html_);
+                CallCta(i);
+                i++;
+                return false;
+            });
+
+            $('#id_prov').change(function () {
+                RellenaGlosa();
+                //ActivaCombo($(this).data('cuenta_contable'));
+                return false;
+            });
+
+            //function ActivaCombo(cuenta_contable) {
+            //    debugger;
+
+            //    var cod = cuenta_contable.substr(0, 1);
+
+            //    if (cod == '6' || cod == '5' || cod == '4') {
+            //        CallCentroCosto();
+            //    }
+            //}
+
+            $('#Cod_cta').change(function () {
+                RellenaGlosa();
+                return false;
+            });  
+
+            $('#cab').on('click', 'div > div > a', function () {
+                if (i > 1) {
+                    $(this).last().closest('.dinamic').remove();
+                    i--;
+                }
+                return false;
+            });
+
+            function RellenaGlosa() {
+                if (i > 1) {
+                    $('#glosa').val('');
+                } else {
+                    $('#glosa').val($('#Cod_cta option:selected').text().split("/", 1) + '-' + $('#id_prov option:selected').text());
+                }
+            }
+
+            $("#id_clie").change(function () {
+                $("#dt_saldos").empty();            
+                $("#saldo").empty();
+                CallCta(); 
+                CallSaldoCuenta();
+                CallMontoCuentas();
+                //CallCentroCosto();
+            });
+
+            function CallCentroCosto(Num_class) {
+                debugger;
+                var idCLiente = $("#id_clie").val();
+                var url_ = "@Url.Action("CentroCosto", "Anticipo")" + "?id_cliente=" + idCLiente;
+
+                $.getJSON(url_, function (result) {
+                    var options = (Num_class== null )? $(".CC"): $('.' + Num_class + 'CC') ;
+                    $.each(result.data, function (value, index) {
+                        options.append($("<option />").val(index.CodiCC).text(index.DescCC));
+                    });
+                });
+            }
+
+            function CallCta(Num_class) {
+                var idCLiente = $("#id_clie").val();
+                var url_ = "@Url.Action("ObtenerCta", "Anticipo")" + "?rut=" + idCLiente;
+
+                $.getJSON(url_, function (result) {
+                    var options = (Num_class== null )? $(".Cta"): $('.' + Num_class + 'Cta') ;
+                    $.each(result.data, function (value, index) {
+                        options.append($("<option />").val(index.id_tanticipo).text(index.nom_tanticipo).data('cuenta_contable', index.id_cuenta_contable));
+                    });
+                });
+                $("#Cod_cta").val($("#target option:first").val());
+            }
+
+            function CallSaldoCuenta() {
+                var idCLiente = $("#id_clie").val();
+                var url_ = "@Url.Action("ObtenerSaldoCuentas", "Anticipo")" + "?rut=" + idCLiente;
+                $(".saldo").empty;
+                $(".saldo").html('');
+                $.getJSON(url_, function (result) {
+                    $(".saldo").append(' <i class="fa fa-fw fa-balance-scale"></i> Saldo es $' + result.data[0].Saldo);
+                });
+            }
+
+            function CallMontoCuentas() {           
+                var idCLiente = $("#id_clie").val();
+                var url_ = "@Url.Action("ObtenerSaldoCuentasAnticipo", "Anticipo")" + "?rut=" + idCLiente;
+                $('#dt_saldos').append('<tbody />').children('tbody').html('');
+                $.getJSON(url_, function (result) {
+                    var $tbody = $('#dt_saldos').append('<tbody />').children('tbody');
+
+                    $.each(result.data, function (value, index) {
+                    
+                        $tbody.append('<tr />').children('tr:last')
+                        .append("<td width='20%'>" + index.PctCod + "</td>")
+                        .append("<td>" + index.PCDESC + "</td>")
+                        .append("<td width='20%'>$" + index.Saldo + "</td>")
+                    });
+                });
+            }
+
+            $("#id_prov").select2({
+                dropdownParent: $("#myModal"),
+                ajax: {
+                    url: "@Url.Action("get_provedores", "Anticipo")",
+                    //type: "GET",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (term, page) {
+                        return {
+                            query: term.term
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1
+                        var results = [];
+                        jQuery.each(data.param, function (index, itemData) {
+                            //console.log(itemData.value);
+                            results.push({ text: itemData.data, id: itemData.value });
+                        });
+                        return {
+                            results: results,
+                            pagination: {
+                                more: (params.page * 30) < results.total_count
+                            }
+                        };
+
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+                minimumInputLength: 3,
+                language: {
+                    inputTooShort: function () {
+                        return 'Ingrese Rut';
+                    }
+                }
+            });
+        });
+
+        $(".uploadfile").fileinput({
+            showPreview: false,
+            //allowedFileTypes: ['image'],
+            previewSettings: {
+                other: { width: "50%", height: "50%" }
+            },
+            //allowedFileExtensions: ['doc', 'pdf'],
+            showCancel: true,
+            showUpload: false,
+            browseClass: 'btn btn-warning',
+            browseLabel: "Seleccione Documento",
+            browseIcon: "<span class='glyphicon glyphicon-open-file' aria-hidden='true'></span>",
+            removeClass: "btn btn-danger",
+            removeLabel: "Delete",
+            removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i>",
+            showCancel: true,
+            uploadExtraData: function () {
+                return {
+                    documento: JSON.stringify(lista)
+                };
+            }
+        });
+
+        setFormulario(
+            "mant-form",
+            {
+                monto: {
+                    required: true,
+                    min: 1
+                }
+            },
+            {
+                monto: {
+                    required: '<span class="help-block error" ><i class="fa fa-warning"></i> Ingrese monto valido</span> ',
+                    min: '<span class="help-block error" ><i class="fa fa-warning"></i> El monto debe ser superior a 1</span> '
+                }
+            }
+        );
+</script>

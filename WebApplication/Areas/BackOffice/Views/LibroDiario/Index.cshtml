@@ -1,0 +1,210 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .ui-datepicker-calendar {
+        display: none;
+    }
+</style>
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-book"></i> Libro Diario</h3>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="box-header with-border">
+                <div class="col-md-3">
+                    <select name="mes" id="mes" class="form-control">
+                        <option selected value=''>--Seleccione Mes--</option>
+                        <option value='01'>Enero</option>
+                        <option value='02'>Febrero</option>
+                        <option value='03'>Marzo</option>
+                        <option value='04'>Abril</option>
+                        <option value='05'>Mayo</option>
+                        <option value='06'>Junio</option>
+                        <option value='07'>Julio</option>
+                        <option value='08'>Agosto</option>
+                        <option value='09'>Septiembre</option>
+                        <option value='10'>Octubre</option>
+                        <option value='11'>Noviembre</option>
+                        <option value='12'>Diciembre</option>
+                        <option value='0'>all</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select name="ano" id="ano" class="form-control">
+                        <option selected value="@DateTime.Now.Year" >@DateTime.Now.Year</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    @Html.DropDownList("Clientes", new SelectList(ViewBag.Clientes, "id", "Nom"), "-- Seleccione un cliente --", new { @class = "form-control", id = "Clientes"})
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive no-padding">
+                    <table id="tbl_libroDiario" class="table display nowrap" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th>Año</th>
+                                <th>N° Cpte. Contable</th>
+                                <th>Fecha Cpte. Contable</th>
+                                <th>Código Documento</th>
+                                <th>N° Documento</th>
+                                <th>Fecha Emisión Documento</th>
+                                <th>Fecha Vencimiento</th>
+                                <th>Glosa Contable</th>
+                                <th>Debe</th>
+                                <th>Haber</th>
+                                <th>N° Cuenta Contable</th>
+                                <th>Nombre Cuenta Contable</th>
+                                <th>Centro de Costo</th>
+                                <th>RUT</th>
+                                <th>Tipo  de Referencia</th>
+                                <th>N°  de Referencia</th>
+                                <th>Tipo de Cpte.</th>
+                                <th>N° doc. Bancario</th>
+                                <th>CpbMes</th>
+                                <th>CpbEst</th>
+                                <th>CpbGlo</th>
+                                <th>Usuario</th>
+                            </tr>
+                        </thead>
+                    </table>
+
+
+                </div>
+               
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+
+        function ComboAno() {
+            var n = (new Date()).getFullYear()
+            var select = document.getElementById("ano");
+            for (var i = n; i >= 1990; i--)select.options.add(new Option(i, i));
+        };
+    
+
+
+        function retornaCliente(d) {
+            return $.extend({}, d, {
+                "id": $('#Clientes').val(),
+                "mes": $('#mes').val(),
+                "ano": $('#ano').val()
+            });
+        }
+
+        ComboAno();
+
+        var colLibro = [
+            { "data": "CpbAno" ,visible: false},
+            { "data": "CpbNum" },
+            {
+                "data": "CpbFec", "render": function (data) {
+                    if (data != null) {
+                        return moment(data).format('DD-MM-YYYY');
+                    } else {
+                        return '';
+                    }
+                }
+            },
+            { "data": "TtdCod" },
+            { "data": "NumDoc" },
+            {
+                "data": "MovFe", "render": function (data) {
+                    if (data != null) {
+                        return moment(data).format('DD-MM-YYYY');
+                    } else {
+                        return '';
+                    }
+
+                }
+            },
+            {
+                "data": "MovFv", "render": function (data) {
+                    if (data != null) {
+                        return moment(data).format('DD-MM-YYYY');
+                    } else {
+                        return '';
+                    }
+
+                }
+
+            },
+            { "data": "MovGlosa" },
+            { "data": "MovDebe" },
+            { "data": "MovHaber" },
+            { "data": "PctCod" },
+            { "data": "PCDESC" },
+            { "data": "CcCod" },
+            { "data": "CodAux" },
+            { "data": "MovTipDocRef" },
+            { "data": "MovNumDocRef" },
+            { "data": "CpbTip" },
+            { "data": "NumDocCb" },
+            { "data": "CpbMes",visible: false },
+            { "data": "CpbEst",visible: false },
+            { "data": "CpbGlo",visible: false },
+            { "data": "Usuario" ,visible: false},
+
+        ]
+
+
+        function getLibro(grilla, url, parametros, columnas) {
+            var tabla;
+            tabla = $('#' + grilla).DataTable({
+                dom: 'BClfrtip',
+                "processing": true,
+                "language": {
+                    "loadingRecords": '&nbsp;',
+                    "processing": 'Loading data...'
+                },
+                buttons: [
+                    'copyHtml5',
+                    {
+                          extend: 'excel',
+                          title: ''
+                    },
+                    'csvHtml5',
+                  
+                ],
+                "ajax": {
+                    "url": url,
+                    "type": "POST",
+                    "data": parametros,
+
+                },
+                "columns": columnas
+            });
+            return tabla;
+        }
+
+
+        var tablaLibro = getLibro("tbl_libroDiario", "@Url.Action("getLibro", "LibroDiario")", retornaCliente, colLibro);
+
+        $('#Clientes').select2();
+
+        $('#Clientes').change(function () {
+            tablaLibro.ajax.reload();
+        });
+        $('#mes').change(function () {
+            tablaLibro.ajax.reload();
+        });
+        $('#ano').change(function () {
+            tablaLibro.ajax.reload();
+        });
+    });
+
+</script>

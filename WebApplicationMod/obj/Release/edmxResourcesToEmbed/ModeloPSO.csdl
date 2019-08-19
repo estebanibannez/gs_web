@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PSOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="cwtccos">
+    <Key>
+      <PropertyRef Name="CodiCC" />
+    </Key>
+    <Property Name="CodiCC" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DescCC" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="NivelCC" Type="Int32" />
+    <Property Name="ACTIVO" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="PSOEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="cwtccos" EntityType="Self.cwtccos" />
+  </EntityContainer>
+</Schema>

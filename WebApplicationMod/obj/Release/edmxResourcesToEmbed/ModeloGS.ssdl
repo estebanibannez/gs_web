@@ -1,0 +1,1463 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GSPSOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="cab_anticipos">
+    <Key>
+      <PropertyRef Name="id_anticipo" />
+    </Key>
+    <Property Name="id_anticipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fec_anticipo" Type="smalldatetime" Nullable="false" />
+    <Property Name="id_tanticipo" Type="int" />
+    <Property Name="glosa" Type="nvarchar" MaxLength="250" />
+    <Property Name="fec_pago" Type="smalldatetime" />
+    <Property Name="estado" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CpbNum" Type="varchar" MaxLength="50" />
+    <Property Name="id_clie" Type="int" Nullable="false" />
+    <Property Name="NumDoc" Type="float" />
+    <Property Name="rut_clie" Type="int" />
+    <Property Name="id_prov" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="usu_sol" Type="char" MaxLength="20" />
+    <Property Name="usu_pag" Type="char" MaxLength="20" />
+    <Property Name="fecha_mod" Type="smalldatetime" Nullable="false" />
+    <Property Name="usu_mod" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="fec_sol" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="GS_Ctas">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Clie" Type="int" />
+    <Property Name="Cta" Type="int" Nullable="false" />
+    <Property Name="CodCta" Type="nchar" MaxLength="20" />
+    <Property Name="Esp" Type="nchar" MaxLength="40" />
+    <Property Name="Ing" Type="nchar" MaxLength="40" />
+  </EntityType>
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom" Type="nvarchar" MaxLength="50" />
+    <Property Name="Ruta" Type="nvarchar" MaxLength="255" />
+    <Property Name="Usu" Type="nvarchar" MaxLength="50" />
+    <Property Name="Nombre Archivo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tipo" Type="nvarchar" MaxLength="1" />
+    <Property Name="TC" Type="int" />
+    <Property Name="EcepCC" Type="char" MaxLength="1" />
+    <Property Name="IRFS" Type="char" MaxLength="1" />
+    <Property Name="Activo" Type="char" MaxLength="1" />
+    <Property Name="Rut" Type="int" />
+    <Property Name="BLK" Type="nchar" MaxLength="20" />
+    <Property Name="TCFac" Type="int" />
+    <Property Name="Tarifa" Type="float" />
+    <Property Name="TCFac1" Type="int" />
+    <Property Name="Tarifa1" Type="float" />
+    <Property Name="CC" Type="nchar" MaxLength="10" />
+    <Property Name="Holding" Type="char" MaxLength="1" />
+    <Property Name="BA" Type="int" />
+    <Property Name="ER" Type="int" />
+    <Property Name="SegMon" Type="int" />
+    <Property Name="BLKPag" Type="nchar" MaxLength="20" />
+    <Property Name="TES" Type="nchar" MaxLength="1" />
+    <Property Name="BcoPag" Type="int" />
+    <Property Name="CtaPag" Type="nchar" MaxLength="60" />
+    <Property Name="EmailPag" Type="nchar" MaxLength="100" />
+    <Property Name="MPago" Type="int" />
+    <Property Name="Obs" Type="varchar" MaxLength="800" />
+    <Property Name="Consi" Type="varchar" MaxLength="800" />
+    <Property Name="AdmCheque" Type="nchar" MaxLength="2" />
+    <Property Name="RRHH" Type="nchar" MaxLength="1" />
+    <Property Name="Grati" Type="int" />
+    <Property Name="ObsGrati" Type="nchar" MaxLength="100" />
+    <Property Name="Cola" Type="int" />
+    <Property Name="ObsCola" Type="nchar" MaxLength="100" />
+    <Property Name="Mov" Type="int" />
+    <Property Name="ObsMov" Type="nchar" MaxLength="100" />
+    <Property Name="Fpago" Type="int" />
+    <Property Name="Caja" Type="int" />
+    <Property Name="ObsCaja" Type="nchar" MaxLength="100" />
+    <Property Name="Mutual" Type="int" />
+    <Property Name="ObsMutual" Type="nchar" MaxLength="100" />
+    <Property Name="DiaSueldo" Type="int" />
+    <Property Name="DiaPago" Type="int" />
+    <Property Name="DiaAnticipo" Type="int" />
+    <Property Name="ObsRRHH" Type="varchar" MaxLength="800" />
+    <Property Name="PagaPSO" Type="int" />
+    <Property Name="emailcobro" Type="nchar" MaxLength="255" />
+    <Property Name="atencion" Type="nchar" MaxLength="60" />
+    <Property Name="TramoPR" Type="nchar" MaxLength="120" />
+    <Property Name="IIng" Type="nchar" MaxLength="2" />
+    <Property Name="TipChe" Type="int" />
+    <Property Name="rutadestino" Type="nvarchar" MaxLength="60" />
+    <Property Name="CTD" Type="char" MaxLength="1" />
+    <Property Name="fechalr" Type="date" />
+    <Property Name="gbo" Type="int" />
+    <Property Name="impsug" Type="nchar" MaxLength="1" />
+    <Property Name="gerencia_bo" Type="int" />
+    <Property Name="gerencia_ss" Type="int" />
+    <Property Name="snr_ingl" Type="nchar" MaxLength="1" />
+    <Property Name="cartera_tes" Type="int" />
+    <Property Name="cartera_pay" Type="int" />
+    <Property Name="publicar_eeff" Type="nchar" MaxLength="1" />
+    <Property Name="fingreso" Type="date" />
+    <Property Name="fsalida" Type="date" />
+    <Property Name="cartera_oper" Type="int" />
+    <Property Name="kpif29" Type="int" />
+    <Property Name="kpieeff" Type="nvarchar" MaxLength="60" />
+    <Property Name="nomfaccl" Type="nvarchar" MaxLength="60" />
+    <Property Name="kpieeffhabil" Type="bit" />
+    <Property Name="kpif29_automa" Type="int" />
+  </EntityType>
+  <EntityType Name="ctrl_acciones">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usu" Type="nvarchar" MaxLength="30" />
+    <Property Name="modulo" Type="int" />
+    <Property Name="accion" Type="nvarchar(max)" />
+    <Property Name="mom" Type="datetime" />
+  </EntityType>
+  <EntityType Name="det_anticipos">
+    <Key>
+      <PropertyRef Name="id_danticipo" />
+    </Key>
+    <Property Name="id_anticipo" Type="int" Nullable="false" />
+    <Property Name="id_danticipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cod_cta" Type="nvarchar" MaxLength="20" />
+    <Property Name="monto" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="TtdCod" Type="nvarchar" MaxLength="50" />
+    <Property Name="estado" Type="nvarchar" MaxLength="20" />
+    <Property Name="fecha_mod" Type="smalldatetime" Nullable="false" />
+    <Property Name="usu_mod" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Documento">
+    <Key>
+      <PropertyRef Name="id_cab" />
+    </Key>
+    <Property Name="id_cab" Type="int" Nullable="false" />
+    <Property Name="xml_dte" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="evento">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usuario_mod" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="fecha_mod" Type="datetime" Nullable="false" />
+    <Property Name="estado" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="id_cliente" Type="int" Nullable="false" />
+    <Property Name="id_usuario" Type="int" Nullable="false" />
+    <Property Name="fecha" Type="datetime" Nullable="false" />
+    <Property Name="titulo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="files_anticipos">
+    <Key>
+      <PropertyRef Name="id_fanticipos" />
+    </Key>
+    <Property Name="id_anticipo" Type="int" Nullable="false" />
+    <Property Name="id_fanticipos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ruta" Type="nvarchar(max)" />
+    <Property Name="estado" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="fecha_mod" Type="smalldatetime" Nullable="false" />
+    <Property Name="usu_mod" Type="nchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GS_AccFrm">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Frm" Type="int" />
+    <Property Name="Usu" Type="int" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GSPSO.dbo.GS_Archivos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="GS_Archivos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nchar" MaxLength="60" />
+    <Property Name="descripcion" Type="nchar" MaxLength="500" />
+    <Property Name="ruta" Type="nchar" MaxLength="255" />
+    <Property Name="tipo" Type="int" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GSPSO.dbo.GS_Asig_Carg_Clie' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="GS_Asig_Carg_Clie">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usu" Type="int" />
+    <Property Name="clie" Type="int" />
+  </EntityType>
+  <EntityType Name="GS_Asig_HrrAp">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usu" Type="int" />
+    <Property Name="HrrAp" Type="int" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GSPSO.dbo.GS_Bancos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="GS_Bancos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Nom" Type="nchar" MaxLength="60" />
+  </EntityType>
+  <EntityType Name="GS_Cargos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom" Type="nvarchar" MaxLength="60" />
+    <Property Name="area" Type="int" />
+    <Property Name="estado" Type="int" />
+    <Property Name="usuario_mod" Type="nchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="GS_ClaCtas">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom" Type="nvarchar" MaxLength="60" />
+    <Property Name="vcta" Type="nchar" MaxLength="1" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GSPSO.dbo.GS_ClasifDoc' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="GS_ClasifDoc">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="GS_ctrl_cump">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="clie" Type="int" />
+    <Property Name="periodo" Type="date" />
+    <Property Name="mom" Type="datetime" />
+    <Property Name="usu" Type="nchar" MaxLength="20" />
+    <Property Name="tipo" Type="int" />
+    <Property Name="clasif" Type="nvarchar" MaxLength="1" />
+    <Property Name="nulo" Type="nvarchar" MaxLength="1" />
+    <Property Name="compromiso" Type="date" />
+    <Property Name="exkpi" Type="nvarchar" MaxLength="1" />
+    <Property Name="tipo_carga" Type="nvarchar" MaxLength="1" />
+    <Property Name="comentario" Type="nvarchar(max)" />
+    <Property Name="dias_plazo" Type="int" />
+  </EntityType>
+  <EntityType Name="GS_CtasCtes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cliente" Type="int" />
+    <Property Name="Cta" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Banco" Type="int" />
+    <Property Name="CtaCont" Type="nchar" MaxLength="20" />
+    <Property Name="Moneda" Type="int" />
+    <Property Name="DescripCtaCont" Type="nchar" MaxLength="60" />
+    <Property Name="Obs" Type="nchar" MaxLength="60" />
+    <Property Name="Principal" Type="bit" />
+  </EntityType>
+  <EntityType Name="GS_Detalles">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Doc" Type="int" />
+    <Property Name="CodCta" Type="nvarchar" MaxLength="20" />
+    <Property Name="CCCod" Type="nvarchar" MaxLength="20" />
+    <Property Name="Monto" Type="nvarchar" MaxLength="20" />
+    <Property Name="Aux" Type="nvarchar" MaxLength="60" />
+    <Property Name="NDOC" Type="int" />
+    <Property Name="TDoc" Type="nvarchar" MaxLength="20" />
+    <Property Name="Glosa" Type="nchar" MaxLength="50" />
+    <Property Name="MontoSM" Type="float" />
+  </EntityType>
+  <EntityType Name="GS_Documentos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CLIENTE" Type="int" />
+    <Property Name="CPBAño" Type="nvarchar" MaxLength="4" />
+    <Property Name="CPBMes" Type="nvarchar" MaxLength="2" />
+    <Property Name="CodAux" Type="nvarchar" MaxLength="10" />
+    <Property Name="CTDCod" Type="nvarchar" MaxLength="2" />
+    <Property Name="NumDocI" Type="int" />
+    <Property Name="MovFe" Type="datetime" />
+    <Property Name="MovFv" Type="datetime" />
+    <Property Name="VendCod" Type="nvarchar" MaxLength="4" />
+    <Property Name="MovGlosa" Type="nvarchar" MaxLength="60" />
+    <Property Name="Neto" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Exento" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Impu" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Total" Type="float" />
+    <Property Name="NumDocF" Type="nvarchar" MaxLength="50" />
+    <Property Name="NomAux" Type="nvarchar" MaxLength="60" />
+    <Property Name="Archivo" Type="nvarchar" MaxLength="255" />
+    <Property Name="Usu" Type="nvarchar" MaxLength="15" />
+    <Property Name="CabGlo" Type="nvarchar" MaxLength="255" />
+    <Property Name="Entrega" Type="smalldatetime" />
+    <Property Name="UsuEnt" Type="nvarchar" MaxLength="25" />
+    <Property Name="Centraliza" Type="smalldatetime" />
+    <Property Name="UsuCent" Type="nchar" MaxLength="25" />
+    <Property Name="Imputacion" Type="smalldatetime" />
+    <Property Name="UsuImp" Type="nchar" MaxLength="25" />
+    <Property Name="NumCent" Type="int" />
+    <Property Name="Nula" Type="nchar" MaxLength="1" />
+    <Property Name="UsuAnu" Type="nchar" MaxLength="1" />
+    <Property Name="MotivoAnul" Type="nchar" MaxLength="60" />
+    <Property Name="SP" Type="int" />
+    <Property Name="AP" Type="int" />
+    <Property Name="Creacion" Type="datetime" />
+    <Property Name="Scaneo" Type="datetime" />
+    <Property Name="FechaSolPago" Type="datetime" />
+    <Property Name="UsuSolPago" Type="nchar" MaxLength="20" />
+    <Property Name="ObsPagRealizo" Type="nchar" MaxLength="120" />
+    <Property Name="ObsSolPago" Type="nchar" MaxLength="120" />
+    <Property Name="PagUrg" Type="datetime" />
+    <Property Name="FP" Type="nchar" MaxLength="2" />
+    <Property Name="UsuRec" Type="nchar" MaxLength="20" />
+    <Property Name="FecRec" Type="datetime" />
+    <Property Name="MontoPago" Type="int" />
+    <Property Name="fcrea" Type="datetime" />
+    <Property Name="TCambio" Type="float" />
+    <Property Name="folioint" Type="nvarchar" MaxLength="50" />
+    <Property Name="NetoSM" Type="float" />
+    <Property Name="ExentoSM" Type="float" />
+    <Property Name="ImpuSM" Type="float" />
+    <Property Name="TotalSM" Type="float" />
+    <Property Name="exkpi" Type="nvarchar" MaxLength="1" />
+    <Property Name="comenexpki" Type="nvarchar(max)" />
+    <Property Name="MovRe" Type="date" />
+    <Property Name="FolioSolFac" Type="int" />
+    <Property Name="exkpipd" Type="nvarchar" MaxLength="1" />
+    <Property Name="comenexkpipd" Type="nvarchar(max)" />
+    <Property Name="flingdoc" Type="date" />
+    <Property Name="justifindoc" Type="int" />
+    <Property Name="flemifac" Type="date" />
+    <Property Name="justifiemifac" Type="int" />
+    <Property Name="ting" Type="nchar" MaxLength="5" />
+    <Property Name="fofpoper" Type="datetime" />
+    <Property Name="uofpoper" Type="nvarchar" MaxLength="25" />
+    <Property Name="usurecep" Type="nchar" MaxLength="25" />
+    <Property Name="recep" Type="datetime" />
+    <Property Name="tst" Type="nvarchar" MaxLength="1" />
+    <Property Name="origen" Type="nvarchar" MaxLength="1" />
+    <Property Name="id_encab" Type="int" />
+    <Property Name="TipoDTE" Type="int" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GSPSO.dbo.GS_FRMS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="GS_FRMS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Nom" Type="nchar" MaxLength="60" />
+    <Property Name="Nom_Boton" Type="nchar" MaxLength="30" />
+    <Property Name="Nom_Frm" Type="nchar" MaxLength="20" />
+    <Property Name="WebGS" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="GS_HerrApoyo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom" Type="nvarchar" MaxLength="60" />
+    <Property Name="usuario" Type="nvarchar" MaxLength="20" />
+    <Property Name="pass" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GSPSO.dbo.GS_Medios_Pago' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="GS_Medios_Pago">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom" Type="nvarchar" MaxLength="20" />
+    <Property Name="Sigla" Type="nvarchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="GS_ModNumComp">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usuario" Type="nvarchar" MaxLength="20" />
+    <Property Name="Folio_old" Type="nvarchar" MaxLength="20" />
+    <Property Name="Folio_new" Type="nvarchar" MaxLength="20" />
+    <Property Name="momento" Type="datetime" />
+  </EntityType>
+  <EntityType Name="GS_Pagos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Org" Type="int" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Monto" Type="float" />
+    <Property Name="MPago" Type="nchar" MaxLength="2" />
+    <Property Name="DPago" Type="int" />
+    <Property Name="UsuPag" Type="nchar" MaxLength="20" />
+    <Property Name="NowSol" Type="datetime" />
+    <Property Name="OkTeso" Type="datetime" />
+    <Property Name="UsuTeso" Type="char" MaxLength="20" />
+    <Property Name="Bco" Type="int" />
+    <Property Name="CtaBco" Type="int" />
+    <Property Name="Comp" Type="int" />
+    <Property Name="NowComp" Type="datetime" />
+    <Property Name="GXls" Type="char" MaxLength="1" />
+    <Property Name="UsuOk1" Type="nchar" MaxLength="20" />
+    <Property Name="NowOk1" Type="datetime" />
+    <Property Name="UsuOk2" Type="nchar" MaxLength="20" />
+    <Property Name="NowOk2" Type="datetime" />
+    <Property Name="UsuCenPag" Type="char" MaxLength="20" />
+    <Property Name="Autoclie" Type="datetime" />
+    <Property Name="Autoclieusu" Type="char" MaxLength="20" />
+    <Property Name="Banco" Type="datetime" />
+    <Property Name="Bancousu" Type="char" MaxLength="20" />
+    <Property Name="Cierre" Type="datetime" />
+    <Property Name="Cierreusu" Type="char" MaxLength="20" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GSPSO.dbo.GS_Pass' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="GS_Pass">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Pass" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Clie" Type="int" />
+    <Property Name="Clasif" Type="int" />
+    <Property Name="Pass" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Usu" Type="nchar" MaxLength="20" />
+    <Property Name="Orga" Type="nchar" MaxLength="30" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GSPSO.dbo.GS_Procesos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="GS_Procesos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GSPSO.dbo.GS_Restriciones_Bancarias' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="GS_Restriciones_Bancarias">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Clie" Type="int" />
+    <Property Name="NomApo" Type="nchar" MaxLength="60" />
+    <Property Name="Rut" Type="nchar" MaxLength="15" />
+    <Property Name="MontoRest" Type="int" />
+    <Property Name="Moneda" Type="nchar" MaxLength="50" />
+    <Property Name="Obs" Type="nchar" MaxLength="50" />
+    <Property Name="Fpago" Type="nchar" MaxLength="50" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GSPSO.dbo.GS_Saldos_Bancarios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="GS_Saldos_Bancarios">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cliente" Type="int" />
+    <Property Name="Cta" Type="int" />
+    <Property Name="Monto" Type="int" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Momento" Type="datetime" />
+    <Property Name="Usu" Type="char" MaxLength="20" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GSPSO.dbo.GS_SubClasifDoc' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="GS_SubClasifDoc">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Clasif" Type="int" />
+    <Property Name="nom" Type="nvarchar" MaxLength="60" />
+  </EntityType>
+  <EntityType Name="GS_TDoc">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="CodDoc" Type="nvarchar" MaxLength="2" />
+    <Property Name="DesDoc" Type="nvarchar" MaxLength="60" />
+    <Property Name="Tipo" Type="nvarchar" MaxLength="2" />
+    <Property Name="Impto" Type="money" />
+    <Property Name="CamA" Type="nvarchar" MaxLength="4" />
+    <Property Name="Decu" Type="nvarchar" MaxLength="1" />
+    <Property Name="SumImp" Type="nvarchar" MaxLength="1" />
+    <Property Name="DSD" Type="nvarchar" MaxLength="1" />
+    <Property Name="DocRes" Type="nvarchar" MaxLength="50" />
+    <Property Name="RotuloDoc" Type="nvarchar" MaxLength="5" />
+    <Property Name="TipoCV" Type="nchar" MaxLength="1" />
+    <Property Name="FacElec" Type="nvarchar" MaxLength="1" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rotulo_fac_elec" Type="nvarchar" MaxLength="80" />
+    <Property Name="TipoDTE" Type="int" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GSPSO.dbo.GS_TIPMP' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="GS_TIPMP">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sigla" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="indicadores">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UF" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="IVP" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="DOLAR" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="EURO" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="ITCM" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="FECHA" Type="date" Nullable="false" />
+    <Property Name="usuario_mod" Type="varchar" MaxLength="100" />
+    <Property Name="fecha_mod" Type="date" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GSPSO.dbo.Monedas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Monedas">
+    <Key>
+      <PropertyRef Name="Id1" />
+    </Key>
+    <Property Name="Id1" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" />
+    <Property Name="Descrip" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sigla" Type="nvarchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="parametros">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom" Type="nvarchar" MaxLength="80" />
+    <Property Name="tipo" Type="nvarchar" MaxLength="6" />
+  </EntityType>
+  <EntityType Name="Parametros_GS_WEB">
+    <Key>
+      <PropertyRef Name="ID_Parametro" />
+    </Key>
+    <Property Name="ID_Parametro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Grupo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Valor" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Controller" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Perfiles">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom" Type="char" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="Permisos">
+    <Key>
+      <PropertyRef Name="Clie" />
+      <PropertyRef Name="Usu" />
+      <PropertyRef Name="Modulo" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Clie" Type="int" Nullable="false" />
+    <Property Name="Usu" Type="int" Nullable="false" />
+    <Property Name="Modulo" Type="nchar" MaxLength="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Permisos_GS_WEB">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Usu" Type="int" Nullable="false" />
+    <Property Name="ID_Parametro" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Permisos_Softland">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Clie" />
+      <PropertyRef Name="Usu" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Clie" Type="int" Nullable="false" />
+    <Property Name="Usu" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Proveedores">
+    <Key>
+      <PropertyRef Name="Aux" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Aux" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="Nom" Type="char" MaxLength="60" />
+    <Property Name="Bco" Type="int" />
+    <Property Name="Cta" Type="nchar" MaxLength="60" />
+    <Property Name="Email" Type="nchar" MaxLength="60" />
+    <Property Name="dv" Type="nvarchar" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="Saldo_Banco">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha" Type="smalldatetime" />
+    <Property Name="Corrientes" Type="varchar" MaxLength="100" />
+    <Property Name="Corrientes_1" Type="varchar" MaxLength="100" />
+    <Property Name="Corrientes_2" Type="varchar" MaxLength="100" />
+    <Property Name="Corrientes_3" Type="varchar" MaxLength="100" />
+    <Property Name="filename" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Tipo_Anticipos">
+    <Key>
+      <PropertyRef Name="id_tanticipo" />
+    </Key>
+    <Property Name="id_tanticipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom_tanticipo" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="CtaC" Type="nvarchar" MaxLength="50" />
+    <Property Name="TtdCod" Type="nvarchar" MaxLength="50" />
+    <Property Name="rut_emp" Type="int" />
+    <Property Name="estado" Type="nvarchar" MaxLength="50" />
+    <Property Name="fecha_mod" Type="smalldatetime" />
+    <Property Name="usu_mod" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Usu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Nom" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sigla" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Perfil" Type="int" />
+    <Property Name="Anexo" Type="int" />
+    <Property Name="IP" Type="int" />
+    <Property Name="cargo" Type="int" />
+    <Property Name="nomcorto" Type="nvarchar" MaxLength="50" />
+    <Property Name="nomususoft" Type="nchar" MaxLength="20" />
+    <Property Name="pass" Type="nvarchar" MaxLength="20" />
+    <Property Name="jefatura" Type="int" />
+    <Property Name="valpubeeff" Type="nchar" MaxLength="1" />
+    <Property Name="grupo" Type="int" />
+    <Property Name="ger" Type="int" />
+    <Property Name="gergen" Type="int" />
+    <Property Name="superv" Type="int" />
+    <Property Name="uactivo" Type="nchar" MaxLength="1" />
+    <Property Name="unidad" Type="int" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GSPSO.dbo.Docs' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Docs">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Expr2" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="CPBMes" Type="nvarchar" MaxLength="2" />
+    <Property Name="CPBAño" Type="nvarchar" MaxLength="4" />
+    <Property Name="CodAux" Type="nvarchar" MaxLength="10" />
+    <Property Name="NomAux" Type="nvarchar" MaxLength="60" />
+    <Property Name="CTDCod" Type="nvarchar" MaxLength="2" />
+    <Property Name="NumDocI" Type="int" />
+    <Property Name="Neto" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Exento" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Impu" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Total" Type="float" />
+    <Property Name="MovFe" Type="datetime" />
+    <Property Name="MovFv" Type="datetime" />
+    <Property Name="CabGlo" Type="nvarchar" MaxLength="255" />
+    <Property Name="UsuEnt" Type="nvarchar" MaxLength="25" />
+    <Property Name="Centraliza" Type="smalldatetime" />
+    <Property Name="DSD" Type="nvarchar" MaxLength="1" />
+    <Property Name="Tipo" Type="nvarchar" MaxLength="2" />
+    <Property Name="RotuloDoc" Type="nvarchar" MaxLength="5" />
+    <Property Name="CLIENTE" Type="int" />
+    <Property Name="Archivo" Type="nvarchar" MaxLength="255" />
+    <Property Name="Nombre Archivo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Expr1" Type="nvarchar" MaxLength="1" />
+    <Property Name="Rut" Type="int" />
+    <Property Name="UsuImp" Type="nchar" MaxLength="25" />
+    <Property Name="Ruta" Type="nvarchar" MaxLength="255" />
+    <Property Name="UsuCent" Type="nchar" MaxLength="25" />
+    <Property Name="MovGlosa" Type="nvarchar" MaxLength="60" />
+    <Property Name="Digit" Type="nvarchar" MaxLength="15" />
+    <Property Name="NumCent" Type="int" />
+    <Property Name="TipoCV" Type="nchar" MaxLength="1" />
+    <Property Name="SP" Type="int" />
+    <Property Name="AP" Type="int" />
+    <Property Name="PagUrg" Type="datetime" />
+    <Property Name="Saldo" Type="float" />
+    <Property Name="Expr2" Type="float" Nullable="false" />
+    <Property Name="IDCLIE" Type="int" />
+    <Property Name="FechaSolPago" Type="datetime" />
+    <Property Name="UsuSolPago" Type="nchar" MaxLength="20" />
+    <Property Name="ObsPagRealizo" Type="nchar" MaxLength="120" />
+    <Property Name="ObsSolPago" Type="nchar" MaxLength="120" />
+    <Property Name="NomBan" Type="nchar" MaxLength="60" />
+    <Property Name="Cta" Type="nchar" MaxLength="60" />
+    <Property Name="Bco" Type="int" />
+    <Property Name="Email" Type="nchar" MaxLength="60" />
+    <Property Name="EmailPag" Type="nchar" MaxLength="100" />
+    <Property Name="FP" Type="nchar" MaxLength="2" />
+    <Property Name="Expr3" Type="int" />
+    <Property Name="nom" Type="nvarchar" MaxLength="20" />
+    <Property Name="Obs" Type="varchar" MaxLength="800" />
+    <Property Name="Consi" Type="varchar" MaxLength="800" />
+    <Property Name="MontoPago" Type="int" />
+    <Property Name="Entrega" Type="smalldatetime" />
+    <Property Name="TipChe" Type="int" />
+    <Property Name="TCambio" Type="float" />
+    <Property Name="IRFS" Type="char" MaxLength="1" />
+    <Property Name="folioint" Type="nvarchar" MaxLength="50" />
+    <Property Name="NetoSM" Type="float" />
+    <Property Name="ExentoSM" Type="float" />
+    <Property Name="ImpuSM" Type="float" />
+    <Property Name="TotalSM" Type="float" />
+    <Property Name="Imputacion" Type="smalldatetime" />
+    <Property Name="impsug" Type="nchar" MaxLength="1" />
+    <Property Name="Creacion" Type="datetime" />
+    <Property Name="exkpi" Type="nvarchar" MaxLength="1" />
+    <Property Name="comenexpki" Type="nvarchar(max)" />
+    <Property Name="MovRe" Type="date" />
+    <Property Name="flingdoc" Type="date" />
+    <Property Name="docsinimp" Type="int" />
+    <Property Name="ting" Type="nchar" MaxLength="5" />
+    <Property Name="fofpoper" Type="datetime" />
+    <Property Name="uofpoper" Type="nvarchar" MaxLength="25" />
+    <Property Name="usurecep" Type="nchar" MaxLength="25" />
+    <Property Name="recep" Type="datetime" />
+    <Property Name="tst" Type="nvarchar" MaxLength="1" />
+    <Property Name="origen" Type="nvarchar" MaxLength="1" />
+    <Property Name="gbof" Type="nvarchar" MaxLength="80" />
+    <Property Name="vdolar" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="CTD" Type="char" MaxLength="1" />
+    <Property Name="id_encab" Type="int" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GSPSO.dbo.InfGestionPago' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="InfGestionPago">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="NPag" />
+      <PropertyRef Name="NPOK" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="NombreCorto" Type="nvarchar" MaxLength="50" />
+    <Property Name="CPBMes" Type="nvarchar" MaxLength="2" />
+    <Property Name="CPBAño" Type="nvarchar" MaxLength="4" />
+    <Property Name="RotuloDoc" Type="nvarchar" MaxLength="5" />
+    <Property Name="NumDocI" Type="int" />
+    <Property Name="NomAux" Type="nvarchar" MaxLength="60" />
+    <Property Name="MovFe" Type="datetime" />
+    <Property Name="MontoPago" Type="int" />
+    <Property Name="Saldo" Type="float" />
+    <Property Name="NPag" Type="int" Nullable="false" />
+    <Property Name="NPOK" Type="int" Nullable="false" />
+    <Property Name="NumCent" Type="int" />
+    <Property Name="Archivo" Type="nvarchar" MaxLength="255" />
+    <Property Name="PagUrg" Type="datetime" />
+    <Property Name="ObsSolPago" Type="nchar" MaxLength="120" />
+    <Property Name="NomBan" Type="nchar" MaxLength="60" />
+    <Property Name="Cta" Type="nchar" MaxLength="60" />
+    <Property Name="Rut" Type="int" />
+    <Property Name="Bco" Type="int" />
+    <Property Name="Org" Type="int" />
+    <Property Name="Email" Type="nchar" MaxLength="60" />
+    <Property Name="FP" Type="nchar" MaxLength="2" />
+    <Property Name="CodAux" Type="nvarchar" MaxLength="10" />
+    <Property Name="Comp" Type="int" />
+    <Property Name="IDCLIE" Type="int" />
+    <Property Name="EmailPag" Type="nchar" MaxLength="100" />
+    <Property Name="nom" Type="nvarchar" MaxLength="20" />
+    <Property Name="Obs" Type="varchar" MaxLength="800" />
+    <Property Name="Ruta" Type="nvarchar" MaxLength="255" />
+    <Property Name="FechaSolPago" Type="datetime" />
+    <Property Name="UsuSolPago" Type="nchar" MaxLength="20" />
+    <Property Name="MovFv" Type="datetime" />
+    <Property Name="estado" Type="int" />
+    <Property Name="Activo" Type="char" MaxLength="1" />
+    <Property Name="Nombre Archivo" Type="nvarchar" MaxLength="50" />
+    <Property Name="id_encab" Type="int" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GSPSO.dbo.l_clientes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="l_clientes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Rut" Type="int" />
+    <Property Name="Nom" Type="nvarchar" MaxLength="50" />
+    <Property Name="Ruta" Type="nvarchar" MaxLength="255" />
+    <Property Name="Nombre Archivo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tipo" Type="nvarchar" MaxLength="1" />
+    <Property Name="EcepCC" Type="char" MaxLength="1" />
+    <Property Name="IRFS" Type="char" MaxLength="1" />
+    <Property Name="Activo" Type="char" MaxLength="1" />
+    <Property Name="Sigla" Type="nvarchar" MaxLength="5" />
+    <Property Name="Tar1" Type="float" />
+    <Property Name="Mon1" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tar2" Type="float" />
+    <Property Name="Mon2" Type="nvarchar" MaxLength="50" />
+    <Property Name="CC" Type="nchar" MaxLength="10" />
+    <Property Name="Holding" Type="char" MaxLength="1" />
+    <Property Name="BA" Type="int" />
+    <Property Name="ER" Type="int" />
+    <Property Name="Descrip" Type="nvarchar" MaxLength="50" />
+    <Property Name="TES" Type="nchar" MaxLength="1" />
+    <Property Name="Expr1" Type="nchar" MaxLength="60" />
+    <Property Name="CtaPag" Type="nchar" MaxLength="60" />
+    <Property Name="EmailPag" Type="nchar" MaxLength="100" />
+    <Property Name="Mpago" Type="nvarchar" MaxLength="20" />
+    <Property Name="Obs" Type="varchar" MaxLength="800" />
+    <Property Name="AdmCheque" Type="nchar" MaxLength="2" />
+    <Property Name="RRHH" Type="nchar" MaxLength="1" />
+    <Property Name="Grati" Type="int" />
+    <Property Name="ObsGrati" Type="nchar" MaxLength="100" />
+    <Property Name="Cola" Type="int" />
+    <Property Name="ObsCola" Type="nchar" MaxLength="100" />
+    <Property Name="Mov" Type="int" />
+    <Property Name="ObsMov" Type="nchar" MaxLength="100" />
+    <Property Name="formapago" Type="nvarchar" MaxLength="20" />
+    <Property Name="Caja" Type="int" />
+    <Property Name="ObsCaja" Type="nchar" MaxLength="100" />
+    <Property Name="Mutual" Type="int" />
+    <Property Name="ObsMutual" Type="nchar" MaxLength="100" />
+    <Property Name="DiaSueldo" Type="int" />
+    <Property Name="DiaPago" Type="int" />
+    <Property Name="DiaAnticipo" Type="int" />
+    <Property Name="PagaPSO" Type="int" />
+    <Property Name="ObsRRHH" Type="varchar" MaxLength="800" />
+    <Property Name="emailcobro" Type="nchar" MaxLength="255" />
+    <Property Name="atencion" Type="nchar" MaxLength="60" />
+    <Property Name="TramoPR" Type="nchar" MaxLength="120" />
+    <Property Name="IIng" Type="nchar" MaxLength="2" />
+    <Property Name="TCheq" Type="nvarchar" MaxLength="50" />
+    <Property Name="rutadestino" Type="nvarchar" MaxLength="60" />
+    <Property Name="CTD" Type="char" MaxLength="1" />
+    <Property Name="tipomp" Type="nvarchar" MaxLength="50" />
+    <Property Name="fechalr" Type="date" />
+    <Property Name="gbo" Type="nvarchar" MaxLength="80" />
+    <Property Name="impsug" Type="nchar" MaxLength="1" />
+    <Property Name="senrec" Type="nchar" MaxLength="1" />
+    <Property Name="gebo" Type="nvarchar" MaxLength="80" />
+    <Property Name="gess" Type="nvarchar" MaxLength="80" />
+    <Property Name="cart_tes" Type="nvarchar" MaxLength="80" />
+    <Property Name="cart_pay" Type="nvarchar" MaxLength="80" />
+    <Property Name="publicar_eeff" Type="nchar" MaxLength="1" />
+    <Property Name="fingreso" Type="date" />
+    <Property Name="fsalida" Type="date" />
+    <Property Name="cart_oper" Type="nvarchar" MaxLength="80" />
+    <Property Name="kpif29" Type="nvarchar" MaxLength="80" />
+    <Property Name="kpieeff" Type="nvarchar" MaxLength="60" />
+    <Property Name="nomfaccl" Type="nvarchar" MaxLength="60" />
+    <Property Name="kpieeffhabil" Type="bit" />
+    <Property Name="numKpif29" Type="int" />
+    <Property Name="kpif29_automa" Type="int" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GSPSO.dbo.v_UsuarioIFRS2013' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="v_UsuarioIFRS2013">
+    <Key>
+      <PropertyRef Name="Usuario" />
+      <PropertyRef Name="Bloqueado" />
+    </Key>
+    <Property Name="Usuario" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="PassWord" Type="varchar" MaxLength="20" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Firma" Type="varchar" MaxLength="12" />
+    <Property Name="Bloqueado" Type="int" Nullable="false" />
+    <Property Name="FechaLogin" Type="datetime" />
+    <Property Name="MotivoBloqueo" Type="varchar" MaxLength="100" />
+    <Property Name="Rut" Type="varchar" MaxLength="20" />
+    <Property Name="eMail" Type="varchar" MaxLength="250" />
+    <Property Name="Sistema" Type="varchar" MaxLength="2" />
+    <Property Name="Expr1" Type="varchar" MaxLength="8" />
+    <Property Name="Formulario" Type="varchar" MaxLength="15" />
+    <Property Name="Control" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <Association Name="FK_Anticipos_Clientes">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+    <End Role="cab_anticipos" Type="Self.cab_anticipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="cab_anticipos">
+        <PropertyRef Name="id_clie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Anticipos_Proveedores">
+    <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="1" />
+    <End Role="cab_anticipos" Type="Self.cab_anticipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proveedores">
+        <PropertyRef Name="Aux" />
+      </Principal>
+      <Dependent Role="cab_anticipos">
+        <PropertyRef Name="id_prov" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_det_anticipos_cab_anticipos">
+    <End Role="cab_anticipos" Type="Self.cab_anticipos" Multiplicity="1" />
+    <End Role="det_anticipos" Type="Self.det_anticipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cab_anticipos">
+        <PropertyRef Name="id_anticipo" />
+      </Principal>
+      <Dependent Role="det_anticipos">
+        <PropertyRef Name="id_anticipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_evento_Clientes">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+    <End Role="evento" Type="Self.evento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="evento">
+        <PropertyRef Name="id_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_evento_Usu">
+    <End Role="Usu" Type="Self.Usu" Multiplicity="1" />
+    <End Role="evento" Type="Self.evento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="evento">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_files_anticipos_cab_anticipos">
+    <End Role="cab_anticipos" Type="Self.cab_anticipos" Multiplicity="1" />
+    <End Role="files_anticipos" Type="Self.files_anticipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cab_anticipos">
+        <PropertyRef Name="id_anticipo" />
+      </Principal>
+      <Dependent Role="files_anticipos">
+        <PropertyRef Name="id_anticipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Parametro">
+    <End Role="Parametros_GS_WEB" Type="Self.Parametros_GS_WEB" Multiplicity="1" />
+    <End Role="Permisos_GS_WEB" Type="Self.Permisos_GS_WEB" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Parametros_GS_WEB">
+        <PropertyRef Name="ID_Parametro" />
+      </Principal>
+      <Dependent Role="Permisos_GS_WEB">
+        <PropertyRef Name="ID_Parametro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usu">
+    <End Role="Usu" Type="Self.Usu" Multiplicity="1" />
+    <End Role="Permisos_GS_WEB" Type="Self.Permisos_GS_WEB" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Permisos_GS_WEB">
+        <PropertyRef Name="ID_Usu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usu_Usu">
+    <End Role="Usu" Type="Self.Usu" Multiplicity="1" />
+    <End Role="Usu1" Type="Self.Usu" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Usu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Usu1">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="PA_insAnticipos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="base" Type="nvarchar" Mode="In" />
+    <Parameter Name="anio" Type="nvarchar" Mode="In" />
+    <Parameter Name="mes" Type="nvarchar" Mode="In" />
+    <Parameter Name="TtdCod" Type="nvarchar" Mode="In" />
+    <Parameter Name="CtaDebe" Type="nvarchar" Mode="In" />
+    <Parameter Name="CtaHaber" Type="nvarchar" Mode="In" />
+    <Parameter Name="fecha" Type="nvarchar" Mode="In" />
+    <Parameter Name="monto" Type="nvarchar" Mode="In" />
+    <Parameter Name="NumDocCb" Type="nvarchar" Mode="In" />
+    <Parameter Name="ID" Type="nvarchar" Mode="In" />
+    <Parameter Name="Return_CpbNum" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="PA_insAnticiposVersion2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="base" Type="nvarchar" Mode="In" />
+    <Parameter Name="anio" Type="nvarchar" Mode="In" />
+    <Parameter Name="mes" Type="nvarchar" Mode="In" />
+    <Parameter Name="TtdCod" Type="nvarchar" Mode="In" />
+    <Parameter Name="CtaDebe" Type="nvarchar" Mode="In" />
+    <Parameter Name="CtaHaber" Type="nvarchar" Mode="In" />
+    <Parameter Name="fecha" Type="nvarchar" Mode="In" />
+    <Parameter Name="monto" Type="nvarchar" Mode="In" />
+    <Parameter Name="NumDocCb" Type="nvarchar" Mode="In" />
+    <Parameter Name="ID" Type="nvarchar" Mode="In" />
+    <Parameter Name="Return_CpbNum" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="PA_inspermisosusuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Cliente" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Usuario" Type="nvarchar" Mode="In" />
+    <Parameter Name="counts" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="PA_Valida_Existe_Documento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Cliente" Type="nvarchar" Mode="In" />
+    <Parameter Name="Rut_proveedor" Type="nvarchar" Mode="In" />
+    <Parameter Name="Tipo_Doc" Type="nvarchar" Mode="In" />
+    <Parameter Name="Num_Doc" Type="nvarchar" Mode="In" />
+    <Parameter Name="counts" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="PA_validaAntesInsertarDinamico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Cliente" Type="nvarchar" Mode="In" />
+    <Parameter Name="CodAux" Type="nvarchar" Mode="In" />
+    <Parameter Name="NomAux" Type="nvarchar" Mode="In" />
+    <Parameter Name="RutAux" Type="nvarchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="Usuario" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="SP_ExecuteQuery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CLIENTES" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="CONSULTA" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_selAnticiposProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_clie" Type="int" Mode="In" />
+    <Parameter Name="cod_aux" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="GSPSOModelStoreContainer">
+    <EntitySet Name="cab_anticipos" EntityType="Self.cab_anticipos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ctrl_acciones" EntityType="Self.ctrl_acciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="det_anticipos" EntityType="Self.det_anticipos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Documento" EntityType="Self.Documento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="evento" EntityType="Self.evento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="files_anticipos" EntityType="Self.files_anticipos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GS_AccFrm" EntityType="Self.GS_AccFrm" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GS_Asig_HrrAp" EntityType="Self.GS_Asig_HrrAp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GS_Cargos" EntityType="Self.GS_Cargos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GS_ClaCtas" EntityType="Self.GS_ClaCtas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GS_Ctas" EntityType="Self.GS_Ctas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GS_CtasCtes" EntityType="Self.GS_CtasCtes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GS_Detalles" EntityType="Self.GS_Detalles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GS_Documentos" EntityType="Self.GS_Documentos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GS_HerrApoyo" EntityType="Self.GS_HerrApoyo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GS_ModNumComp" EntityType="Self.GS_ModNumComp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GS_Pagos" EntityType="Self.GS_Pagos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GS_TDoc" EntityType="Self.GS_TDoc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="indicadores" EntityType="Self.indicadores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="parametros" EntityType="Self.parametros" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Parametros_GS_WEB" EntityType="Self.Parametros_GS_WEB" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Perfiles" EntityType="Self.Perfiles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Permisos" EntityType="Self.Permisos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Permisos_GS_WEB" EntityType="Self.Permisos_GS_WEB" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Permisos_Softland" EntityType="Self.Permisos_Softland" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Proveedores" EntityType="Self.Proveedores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Saldo_Banco" EntityType="Self.Saldo_Banco" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tipo_Anticipos" EntityType="Self.Tipo_Anticipos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usu" EntityType="Self.Usu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GS_Archivos" EntityType="Self.GS_Archivos" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GS_Archivos].[id] AS [id], 
+    [GS_Archivos].[nombre] AS [nombre], 
+    [GS_Archivos].[descripcion] AS [descripcion], 
+    [GS_Archivos].[ruta] AS [ruta], 
+    [GS_Archivos].[tipo] AS [tipo]
+    FROM [dbo].[GS_Archivos] AS [GS_Archivos]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="GS_Asig_Carg_Clie" EntityType="Self.GS_Asig_Carg_Clie" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GS_Asig_Carg_Clie].[id] AS [id], 
+    [GS_Asig_Carg_Clie].[usu] AS [usu], 
+    [GS_Asig_Carg_Clie].[clie] AS [clie]
+    FROM [dbo].[GS_Asig_Carg_Clie] AS [GS_Asig_Carg_Clie]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="GS_Bancos" EntityType="Self.GS_Bancos" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GS_Bancos].[ID] AS [ID], 
+    [GS_Bancos].[Nom] AS [Nom]
+    FROM [dbo].[GS_Bancos] AS [GS_Bancos]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="GS_ClasifDoc" EntityType="Self.GS_ClasifDoc" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GS_ClasifDoc].[id] AS [id], 
+    [GS_ClasifDoc].[Nom] AS [Nom]
+    FROM [dbo].[GS_ClasifDoc] AS [GS_ClasifDoc]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="GS_ctrl_cump" EntityType="Self.GS_ctrl_cump" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GS_ctrl_cump].[id] AS [id], 
+    [GS_ctrl_cump].[clie] AS [clie], 
+    [GS_ctrl_cump].[periodo] AS [periodo], 
+    [GS_ctrl_cump].[mom] AS [mom], 
+    [GS_ctrl_cump].[usu] AS [usu], 
+    [GS_ctrl_cump].[tipo] AS [tipo], 
+    [GS_ctrl_cump].[clasif] AS [clasif], 
+    [GS_ctrl_cump].[nulo] AS [nulo], 
+    [GS_ctrl_cump].[compromiso] AS [compromiso], 
+    [GS_ctrl_cump].[exkpi] AS [exkpi], 
+    [GS_ctrl_cump].[tipo_carga] AS [tipo_carga], 
+    [GS_ctrl_cump].[comentario] AS [comentario], 
+    [GS_ctrl_cump].[dias_plazo] AS [dias_plazo]
+    FROM [dbo].[GS_ctrl_cump] AS [GS_ctrl_cump]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="GS_FRMS" EntityType="Self.GS_FRMS" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GS_FRMS].[ID] AS [ID], 
+    [GS_FRMS].[Nom] AS [Nom], 
+    [GS_FRMS].[Nom_Boton] AS [Nom_Boton], 
+    [GS_FRMS].[Nom_Frm] AS [Nom_Frm], 
+    [GS_FRMS].[WebGS] AS [WebGS]
+    FROM [dbo].[GS_FRMS] AS [GS_FRMS]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="GS_Medios_Pago" EntityType="Self.GS_Medios_Pago" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GS_Medios_Pago].[ID] AS [ID], 
+    [GS_Medios_Pago].[nom] AS [nom], 
+    [GS_Medios_Pago].[Sigla] AS [Sigla]
+    FROM [dbo].[GS_Medios_Pago] AS [GS_Medios_Pago]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="GS_Pass" EntityType="Self.GS_Pass" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GS_Pass].[ID] AS [ID], 
+    [GS_Pass].[Clie] AS [Clie], 
+    [GS_Pass].[Clasif] AS [Clasif], 
+    [GS_Pass].[Pass] AS [Pass], 
+    [GS_Pass].[Usu] AS [Usu], 
+    [GS_Pass].[Orga] AS [Orga]
+    FROM [dbo].[GS_Pass] AS [GS_Pass]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="GS_Procesos" EntityType="Self.GS_Procesos" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GS_Procesos].[id] AS [id], 
+    [GS_Procesos].[Nom] AS [Nom]
+    FROM [dbo].[GS_Procesos] AS [GS_Procesos]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="GS_Restriciones_Bancarias" EntityType="Self.GS_Restriciones_Bancarias" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GS_Restriciones_Bancarias].[ID] AS [ID], 
+    [GS_Restriciones_Bancarias].[Clie] AS [Clie], 
+    [GS_Restriciones_Bancarias].[NomApo] AS [NomApo], 
+    [GS_Restriciones_Bancarias].[Rut] AS [Rut], 
+    [GS_Restriciones_Bancarias].[MontoRest] AS [MontoRest], 
+    [GS_Restriciones_Bancarias].[Moneda] AS [Moneda], 
+    [GS_Restriciones_Bancarias].[Obs] AS [Obs], 
+    [GS_Restriciones_Bancarias].[Fpago] AS [Fpago]
+    FROM [dbo].[GS_Restriciones_Bancarias] AS [GS_Restriciones_Bancarias]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="GS_Saldos_Bancarios" EntityType="Self.GS_Saldos_Bancarios" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GS_Saldos_Bancarios].[ID] AS [ID], 
+    [GS_Saldos_Bancarios].[Cliente] AS [Cliente], 
+    [GS_Saldos_Bancarios].[Cta] AS [Cta], 
+    [GS_Saldos_Bancarios].[Monto] AS [Monto], 
+    [GS_Saldos_Bancarios].[Fecha] AS [Fecha], 
+    [GS_Saldos_Bancarios].[Momento] AS [Momento], 
+    [GS_Saldos_Bancarios].[Usu] AS [Usu]
+    FROM [dbo].[GS_Saldos_Bancarios] AS [GS_Saldos_Bancarios]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="GS_SubClasifDoc" EntityType="Self.GS_SubClasifDoc" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GS_SubClasifDoc].[id] AS [id], 
+    [GS_SubClasifDoc].[Clasif] AS [Clasif], 
+    [GS_SubClasifDoc].[nom] AS [nom]
+    FROM [dbo].[GS_SubClasifDoc] AS [GS_SubClasifDoc]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="GS_TIPMP" EntityType="Self.GS_TIPMP" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GS_TIPMP].[ID] AS [ID], 
+    [GS_TIPMP].[Nom] AS [Nom], 
+    [GS_TIPMP].[Sigla] AS [Sigla]
+    FROM [dbo].[GS_TIPMP] AS [GS_TIPMP]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Monedas" EntityType="Self.Monedas" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Monedas].[Id1] AS [Id1], 
+    [Monedas].[Id] AS [Id], 
+    [Monedas].[Descrip] AS [Descrip], 
+    [Monedas].[Sigla] AS [Sigla]
+    FROM [dbo].[Monedas] AS [Monedas]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Docs" EntityType="Self.Docs" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Docs].[ID] AS [ID], 
+    [Docs].[CPBMes] AS [CPBMes], 
+    [Docs].[CPBAño] AS [CPBAño], 
+    [Docs].[CodAux] AS [CodAux], 
+    [Docs].[NomAux] AS [NomAux], 
+    [Docs].[CTDCod] AS [CTDCod], 
+    [Docs].[NumDocI] AS [NumDocI], 
+    [Docs].[Neto] AS [Neto], 
+    [Docs].[Exento] AS [Exento], 
+    [Docs].[Impu] AS [Impu], 
+    [Docs].[Total] AS [Total], 
+    [Docs].[MovFe] AS [MovFe], 
+    [Docs].[MovFv] AS [MovFv], 
+    [Docs].[CabGlo] AS [CabGlo], 
+    [Docs].[UsuEnt] AS [UsuEnt], 
+    [Docs].[Centraliza] AS [Centraliza], 
+    [Docs].[DSD] AS [DSD], 
+    [Docs].[Tipo] AS [Tipo], 
+    [Docs].[RotuloDoc] AS [RotuloDoc], 
+    [Docs].[CLIENTE] AS [CLIENTE], 
+    [Docs].[Archivo] AS [Archivo], 
+    [Docs].[Nombre Archivo] AS [Nombre Archivo], 
+    [Docs].[Expr1] AS [Expr1], 
+    [Docs].[Rut] AS [Rut], 
+    [Docs].[UsuImp] AS [UsuImp], 
+    [Docs].[Ruta] AS [Ruta], 
+    [Docs].[UsuCent] AS [UsuCent], 
+    [Docs].[MovGlosa] AS [MovGlosa], 
+    [Docs].[Digit] AS [Digit], 
+    [Docs].[NumCent] AS [NumCent], 
+    [Docs].[TipoCV] AS [TipoCV], 
+    [Docs].[SP] AS [SP], 
+    [Docs].[AP] AS [AP], 
+    [Docs].[PagUrg] AS [PagUrg], 
+    [Docs].[Saldo] AS [Saldo], 
+    [Docs].[Expr2] AS [Expr2], 
+    [Docs].[IDCLIE] AS [IDCLIE], 
+    [Docs].[FechaSolPago] AS [FechaSolPago], 
+    [Docs].[UsuSolPago] AS [UsuSolPago], 
+    [Docs].[ObsPagRealizo] AS [ObsPagRealizo], 
+    [Docs].[ObsSolPago] AS [ObsSolPago], 
+    [Docs].[NomBan] AS [NomBan], 
+    [Docs].[Cta] AS [Cta], 
+    [Docs].[Bco] AS [Bco], 
+    [Docs].[Email] AS [Email], 
+    [Docs].[EmailPag] AS [EmailPag], 
+    [Docs].[FP] AS [FP], 
+    [Docs].[Expr3] AS [Expr3], 
+    [Docs].[nom] AS [nom], 
+    [Docs].[Obs] AS [Obs], 
+    [Docs].[Consi] AS [Consi], 
+    [Docs].[MontoPago] AS [MontoPago], 
+    [Docs].[Entrega] AS [Entrega], 
+    [Docs].[TipChe] AS [TipChe], 
+    [Docs].[TCambio] AS [TCambio], 
+    [Docs].[IRFS] AS [IRFS], 
+    [Docs].[folioint] AS [folioint], 
+    [Docs].[NetoSM] AS [NetoSM], 
+    [Docs].[ExentoSM] AS [ExentoSM], 
+    [Docs].[ImpuSM] AS [ImpuSM], 
+    [Docs].[TotalSM] AS [TotalSM], 
+    [Docs].[Imputacion] AS [Imputacion], 
+    [Docs].[impsug] AS [impsug], 
+    [Docs].[Creacion] AS [Creacion], 
+    [Docs].[exkpi] AS [exkpi], 
+    [Docs].[comenexpki] AS [comenexpki], 
+    [Docs].[MovRe] AS [MovRe], 
+    [Docs].[flingdoc] AS [flingdoc], 
+    [Docs].[docsinimp] AS [docsinimp], 
+    [Docs].[ting] AS [ting], 
+    [Docs].[fofpoper] AS [fofpoper], 
+    [Docs].[uofpoper] AS [uofpoper], 
+    [Docs].[usurecep] AS [usurecep], 
+    [Docs].[recep] AS [recep], 
+    [Docs].[tst] AS [tst], 
+    [Docs].[origen] AS [origen], 
+    [Docs].[gbof] AS [gbof], 
+    [Docs].[vdolar] AS [vdolar], 
+    [Docs].[CTD] AS [CTD], 
+    [Docs].[id_encab] AS [id_encab]
+    FROM [dbo].[Docs] AS [Docs]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="InfGestionPago" EntityType="Self.InfGestionPago" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [InfGestionPago].[ID] AS [ID], 
+    [InfGestionPago].[NombreCorto] AS [NombreCorto], 
+    [InfGestionPago].[CPBMes] AS [CPBMes], 
+    [InfGestionPago].[CPBAño] AS [CPBAño], 
+    [InfGestionPago].[RotuloDoc] AS [RotuloDoc], 
+    [InfGestionPago].[NumDocI] AS [NumDocI], 
+    [InfGestionPago].[NomAux] AS [NomAux], 
+    [InfGestionPago].[MovFe] AS [MovFe], 
+    [InfGestionPago].[MontoPago] AS [MontoPago], 
+    [InfGestionPago].[Saldo] AS [Saldo], 
+    [InfGestionPago].[NPag] AS [NPag], 
+    [InfGestionPago].[NPOK] AS [NPOK], 
+    [InfGestionPago].[NumCent] AS [NumCent], 
+    [InfGestionPago].[Archivo] AS [Archivo], 
+    [InfGestionPago].[PagUrg] AS [PagUrg], 
+    [InfGestionPago].[ObsSolPago] AS [ObsSolPago], 
+    [InfGestionPago].[NomBan] AS [NomBan], 
+    [InfGestionPago].[Cta] AS [Cta], 
+    [InfGestionPago].[Rut] AS [Rut], 
+    [InfGestionPago].[Bco] AS [Bco], 
+    [InfGestionPago].[Org] AS [Org], 
+    [InfGestionPago].[Email] AS [Email], 
+    [InfGestionPago].[FP] AS [FP], 
+    [InfGestionPago].[CodAux] AS [CodAux], 
+    [InfGestionPago].[Comp] AS [Comp], 
+    [InfGestionPago].[IDCLIE] AS [IDCLIE], 
+    [InfGestionPago].[EmailPag] AS [EmailPag], 
+    [InfGestionPago].[nom] AS [nom], 
+    [InfGestionPago].[Obs] AS [Obs], 
+    [InfGestionPago].[Ruta] AS [Ruta], 
+    [InfGestionPago].[FechaSolPago] AS [FechaSolPago], 
+    [InfGestionPago].[UsuSolPago] AS [UsuSolPago], 
+    [InfGestionPago].[MovFv] AS [MovFv], 
+    [InfGestionPago].[estado] AS [estado], 
+    [InfGestionPago].[Activo] AS [Activo], 
+    [InfGestionPago].[Nombre Archivo] AS [Nombre Archivo], 
+    [InfGestionPago].[id_encab] AS [id_encab]
+    FROM [dbo].[InfGestionPago] AS [InfGestionPago]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="l_clientes" EntityType="Self.l_clientes" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [l_clientes].[ID] AS [ID], 
+    [l_clientes].[Rut] AS [Rut], 
+    [l_clientes].[Nom] AS [Nom], 
+    [l_clientes].[Ruta] AS [Ruta], 
+    [l_clientes].[Nombre Archivo] AS [Nombre Archivo], 
+    [l_clientes].[Tipo] AS [Tipo], 
+    [l_clientes].[EcepCC] AS [EcepCC], 
+    [l_clientes].[IRFS] AS [IRFS], 
+    [l_clientes].[Activo] AS [Activo], 
+    [l_clientes].[Sigla] AS [Sigla], 
+    [l_clientes].[Tar1] AS [Tar1], 
+    [l_clientes].[Mon1] AS [Mon1], 
+    [l_clientes].[Tar2] AS [Tar2], 
+    [l_clientes].[Mon2] AS [Mon2], 
+    [l_clientes].[CC] AS [CC], 
+    [l_clientes].[Holding] AS [Holding], 
+    [l_clientes].[BA] AS [BA], 
+    [l_clientes].[ER] AS [ER], 
+    [l_clientes].[Descrip] AS [Descrip], 
+    [l_clientes].[TES] AS [TES], 
+    [l_clientes].[Expr1] AS [Expr1], 
+    [l_clientes].[CtaPag] AS [CtaPag], 
+    [l_clientes].[EmailPag] AS [EmailPag], 
+    [l_clientes].[Mpago] AS [Mpago], 
+    [l_clientes].[Obs] AS [Obs], 
+    [l_clientes].[AdmCheque] AS [AdmCheque], 
+    [l_clientes].[RRHH] AS [RRHH], 
+    [l_clientes].[Grati] AS [Grati], 
+    [l_clientes].[ObsGrati] AS [ObsGrati], 
+    [l_clientes].[Cola] AS [Cola], 
+    [l_clientes].[ObsCola] AS [ObsCola], 
+    [l_clientes].[Mov] AS [Mov], 
+    [l_clientes].[ObsMov] AS [ObsMov], 
+    [l_clientes].[formapago] AS [formapago], 
+    [l_clientes].[Caja] AS [Caja], 
+    [l_clientes].[ObsCaja] AS [ObsCaja], 
+    [l_clientes].[Mutual] AS [Mutual], 
+    [l_clientes].[ObsMutual] AS [ObsMutual], 
+    [l_clientes].[DiaSueldo] AS [DiaSueldo], 
+    [l_clientes].[DiaPago] AS [DiaPago], 
+    [l_clientes].[DiaAnticipo] AS [DiaAnticipo], 
+    [l_clientes].[PagaPSO] AS [PagaPSO], 
+    [l_clientes].[ObsRRHH] AS [ObsRRHH], 
+    [l_clientes].[emailcobro] AS [emailcobro], 
+    [l_clientes].[atencion] AS [atencion], 
+    [l_clientes].[TramoPR] AS [TramoPR], 
+    [l_clientes].[IIng] AS [IIng], 
+    [l_clientes].[TCheq] AS [TCheq], 
+    [l_clientes].[rutadestino] AS [rutadestino], 
+    [l_clientes].[CTD] AS [CTD], 
+    [l_clientes].[tipomp] AS [tipomp], 
+    [l_clientes].[fechalr] AS [fechalr], 
+    [l_clientes].[gbo] AS [gbo], 
+    [l_clientes].[impsug] AS [impsug], 
+    [l_clientes].[senrec] AS [senrec], 
+    [l_clientes].[gebo] AS [gebo], 
+    [l_clientes].[gess] AS [gess], 
+    [l_clientes].[cart_tes] AS [cart_tes], 
+    [l_clientes].[cart_pay] AS [cart_pay], 
+    [l_clientes].[publicar_eeff] AS [publicar_eeff], 
+    [l_clientes].[fingreso] AS [fingreso], 
+    [l_clientes].[fsalida] AS [fsalida], 
+    [l_clientes].[cart_oper] AS [cart_oper], 
+    [l_clientes].[kpif29] AS [kpif29], 
+    [l_clientes].[kpieeff] AS [kpieeff], 
+    [l_clientes].[nomfaccl] AS [nomfaccl], 
+    [l_clientes].[kpieeffhabil] AS [kpieeffhabil], 
+    [l_clientes].[numKpif29] AS [numKpif29], 
+    [l_clientes].[kpif29_automa] AS [kpif29_automa]
+    FROM [dbo].[l_clientes] AS [l_clientes]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="v_UsuarioIFRS2013" EntityType="Self.v_UsuarioIFRS2013" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [v_UsuarioIFRS2013].[Usuario] AS [Usuario], 
+    [v_UsuarioIFRS2013].[PassWord] AS [PassWord], 
+    [v_UsuarioIFRS2013].[Nombre] AS [Nombre], 
+    [v_UsuarioIFRS2013].[Firma] AS [Firma], 
+    [v_UsuarioIFRS2013].[Bloqueado] AS [Bloqueado], 
+    [v_UsuarioIFRS2013].[FechaLogin] AS [FechaLogin], 
+    [v_UsuarioIFRS2013].[MotivoBloqueo] AS [MotivoBloqueo], 
+    [v_UsuarioIFRS2013].[Rut] AS [Rut], 
+    [v_UsuarioIFRS2013].[eMail] AS [eMail], 
+    [v_UsuarioIFRS2013].[Sistema] AS [Sistema], 
+    [v_UsuarioIFRS2013].[Expr1] AS [Expr1], 
+    [v_UsuarioIFRS2013].[Formulario] AS [Formulario], 
+    [v_UsuarioIFRS2013].[Control] AS [Control]
+    FROM [dbo].[v_UsuarioIFRS2013] AS [v_UsuarioIFRS2013]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Anticipos_Clientes" Association="Self.FK_Anticipos_Clientes">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="cab_anticipos" EntitySet="cab_anticipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Anticipos_Proveedores" Association="Self.FK_Anticipos_Proveedores">
+      <End Role="Proveedores" EntitySet="Proveedores" />
+      <End Role="cab_anticipos" EntitySet="cab_anticipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_det_anticipos_cab_anticipos" Association="Self.FK_det_anticipos_cab_anticipos">
+      <End Role="cab_anticipos" EntitySet="cab_anticipos" />
+      <End Role="det_anticipos" EntitySet="det_anticipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_evento_Clientes" Association="Self.FK_evento_Clientes">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="evento" EntitySet="evento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_evento_Usu" Association="Self.FK_evento_Usu">
+      <End Role="Usu" EntitySet="Usu" />
+      <End Role="evento" EntitySet="evento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_files_anticipos_cab_anticipos" Association="Self.FK_files_anticipos_cab_anticipos">
+      <End Role="cab_anticipos" EntitySet="cab_anticipos" />
+      <End Role="files_anticipos" EntitySet="files_anticipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Parametro" Association="Self.FK_Parametro">
+      <End Role="Parametros_GS_WEB" EntitySet="Parametros_GS_WEB" />
+      <End Role="Permisos_GS_WEB" EntitySet="Permisos_GS_WEB" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usu" Association="Self.FK_Usu">
+      <End Role="Usu" EntitySet="Usu" />
+      <End Role="Permisos_GS_WEB" EntitySet="Permisos_GS_WEB" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usu_Usu" Association="Self.FK_Usu_Usu">
+      <End Role="Usu" EntitySet="Usu" />
+      <End Role="Usu1" EntitySet="Usu" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

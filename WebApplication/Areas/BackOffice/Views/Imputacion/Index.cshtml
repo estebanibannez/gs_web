@@ -1,0 +1,716 @@
+﻿<style>
+    table.dataTable tbody td.no-padding {
+        padding: 0;
+    }
+    section.sl1der {
+        display: none;
+    }
+</style>
+<section class="content-header">
+    <h1>
+        Proceso de Imputación 
+        <small> y centralización </small>
+    </h1>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12 col-md-12 col-lg-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Documentos Para Imputar</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body" >
+                    <div class="table-responsive">
+                        <table id="DocumentosParaImputar" class="table table-striped display dataTable" style="width:100%; font-size:small;">
+                            <thead>
+                                <tr role="row">
+                                    <th>ID</th>
+                                    <th>Mes</th>
+                                    <th>Auxiliar</th>
+                                    <th>Tipo</th>
+                                    <th>Folio</th>
+                                    <th>Neto</th>
+                                    <th>Exento</th>
+                                    <th>Iva</th>
+                                    <th>Total</th>
+                                    <th>Emisión</th>
+                                    <th>Cliente</th>
+                                    <th>Digitador</th>
+                                    <th>Entregado</th>
+                                    <th>TC</th>
+                                    <th>NetoSM</th>
+                                    <th>ExentoSM</th>
+                                    <th>ImpuSM</th>
+                                    <th>TotalSM</th>
+                                    <th>Recepcionado</th>
+                                    <th>id_encab</th>
+                                    <th>MovGlosa</th>
+                                    <th>Archivo</th>
+                                    <th>Devolver</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                   
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+</section>
+
+
+<div id="dataDetails" hidden="hidden">
+    <div class="dataDetailsClass" style="padding:2px 2px 2px 2px; width:100%">
+        <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Datos Documento</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form role="form" class="formDocumento">
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="form-group col-md-6 col-lg-6 col-sm-12">
+                                    <label for="CTDCod">Tipo Documento</label>
+                                    <select name="CTDCod" id="CTDCod" class="form-control" style="width:100%;">
+                                        <option>Seleccione...</option>
+                                        @{ 
+                                            foreach (var item in (List<WebApplicationMod.GS_TDoc>)ViewBag.CTDCod) {
+                                                <option data-DSD="@item.DSD" value="@item.CodDoc">@item.DesDoc</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3 col-lg-3 col-sm-12">
+                                    <label for="CPBMes">Mes</label>
+                                    <input name="CPBMes" style="width:100%;" type="text" class="form-control" placeholder="Mes">
+                                </div>
+                                <div class="form-group col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                                    <label for="CPBAño">Año</label>
+                                    <input name="CPBAño" style="width:100%;" type="text" class="form-control" placeholder="Año">
+                                </div>
+                                <div class="form-group col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                                    <label for="MovFv">Vencimiento</label>
+                                    <input name="MovFv" style="width:100%;"  class="form-control fechaV" placeholder="Vencimiento">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label>Glosa</label>
+                                    <textarea rows="1" name="MovGlosa" class="form-control" placeholder="Glosa" style="width:100%;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>            
+
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Asignar</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form role="form" class="formAsignaciones">
+                    <div class="box-body">
+
+                        <div class="row">
+                            <div class="form-group col-md-6 col-lg-6 col-sm-12">
+                                <label for="CodCta">Cuenta(s)</label>
+                                <select name="CodCta" id="CodCta" class="form-control" style="width:100%;">
+                                    <option>Seleccione...</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2 col-lg-2 col-sm-12">
+                                <label for="NDOC">N° Documento</label>
+                                <input name="NDOC" style="width:100%;" type="number" min="0" class="form-control" placeholder="Num Documento">
+                            </div>
+                            <div class="form-group col-md-2 col-lg-2 col-sm-12">
+                                <label for="Monto">Monto</label>
+                                <input name="Monto" style="width:100%;" type="number" min="0" class="form-control monto" placeholder="$">
+                            </div>
+                            <div class="form-group col-md-2 col-lg-2 col-sm-12">
+                                <label for="Percent">Porcentaje</label>
+                                <input name="Percent" style="width:100%;" type="number" min="0" max="100" class="form-control porcentaje" placeholder="%">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6 col-lg-6 col-sm-12">
+                                <label for="CCCod">CC</label>
+                                <select name="CCCod" id="CCCod" class="form-control" style="width:100%;">
+                                    <option>Seleccione...</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2 col-lg-2 col-sm-12">
+                                <label for="ano">Tipo Doc</label>
+                                @Html.DropDownList("CBDoc", (SelectList)ViewBag.CBDoc, "No Aplica", new { @class = "form-control", style = "width:100%;", id = "CBDoc" })
+                            </div>
+                            <div class="form-group col-md-4 col-lg-4 col-sm-12">
+                                <label for="Aux">Rut</label>
+                                <input name="Aux" style="width:100%;" type="text" class="form-control rut" placeholder="12345678-9">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="box box-warning">
+                <div class="box-header">
+                    <h3 class="box-title">Imputación</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                    <table class="table table-striped imputaciones">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre Cuenta</th>
+                                <th>Nombre C.C</th>
+                                <th>Porcentaje</th>
+                                <th>Monto</th>
+                            </tr>
+                        </thead>
+                        <tbody id="impSugeridaTBody">
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3">Totales</td>
+                                <td class="totalPorcentaje">0</td>
+                                <td class="TotalMonto">0</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">Valor Documento</td>
+                                <td class="TotalMontoDocumento">0</td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <button type="submit" class="btn btn-primary">Aplicar Imputación</button>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+
+        </div>
+        <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
+            <div class="box box-warning">
+                <div class="box-header">
+                    <h3 class="box-title">PDF</h3>
+                </div>
+                <div class="box-body">
+                    <iframe style="border:none; height:800px; width:100%;" id="pdfFrame"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var dataImpu = [];
+
+    dataImpu.sum = function (element, prop) {
+        var total = 0
+        for (var i = 0, _len = this[element].length; i < _len; i++) {
+            total += parseFloat(this[element][i][prop])
+        }
+        return total
+    }
+
+
+    var dataColumns = [
+        {
+            data: null,
+            orderable: false,
+            className: 'details-control',
+            defaultContent: '<span><i class="fa fa-arrow-down"></i></span>',
+            title: ''
+        },
+        { data: 'CPBMes' },
+        { data: 'NomAux' },
+        { data: 'CTDCod' },
+        { data: 'NumDocI' },
+        { data: 'Neto' },
+        { data: 'Exento' },
+        { data: 'Impu' },
+        { data: 'Total' },
+        { data: 'MovFe' },
+        { data: 'Nombre_Archivo' },
+        { data: 'Usu', visible: false },
+        { data: 'Entrega', visible: false },
+        { data: 'TCambio' },
+        { data: 'NetoSM' },
+        { data: 'ExentoSM' },
+        { data: 'ImpuSM' },
+        { data: 'TotalSM' },
+        { data: 'MovRe', visible: false },
+        {
+            data: 'id_encab',
+            visible: false
+        },
+        {
+            data: 'MovGlosa',
+            visible: false
+        },
+        {
+            data: 'Archivo',
+            visible: false
+        },
+        {
+            data: 'ID',
+            "render": function (data, type, row) {
+                return '<button type="button" class="btn btn-default btn-xs" onClick="Devolver(' + data + ',this)"><i class="fa fa-reply"></i></button>';
+            }
+           
+        }
+    ];
+
+    var DocumentosParaImputar = $('#DocumentosParaImputar').DataTable({
+        "dom": 'BClfrtip',
+        buttons: [
+                          'copyHtml5',
+                          {
+                              extend: 'excel',
+                              title: ''
+                          },
+                          'csvHtml5',
+        ],
+        "ajax": {
+            "url": "@Url.Action("GetDocumentosParaImputar", "Imputacion")",
+            "type": "POST"
+        },
+        columns: dataColumns,
+    });
+
+    $('#DocumentosParaImputar tbody').on('click', 'td.details-control', function () {
+        
+        var tr = $(this).closest('tr');
+        var row = DocumentosParaImputar.row(tr);
+        tr.next()
+        if (row.child.isShown()) {
+            $(this).html('<span><i class="fa fa-arrow-down"></i></span>');
+            $('section.sl1der', row.child()).slideUp(function () {
+                row.child.hide();
+                tr.removeClass('shown');
+            });
+        }
+        else {
+            dataImpu[row.data().ID] = undefined;
+            $(this).html('<span><i class="fa fa-arrow-up"></i></span>');
+            var Elements = $.parseHTML(document.getElementById("dataDetails").outerHTML);
+            var $JQueryObjects = $(Elements);
+            $JQueryObjects.find('.dataDetailsClass').attr('id', row.data().ID);
+            row.child('<section class="sl1der">' + $JQueryObjects.html() + '</section>', 'no-padding').show();
+            tr.next('tr').addClass('dataDetailsClassMe');
+            tr.addClass('shown');
+            $('section.sl1der', row.child()).slideDown();
+            LoadDetails(row);
+        }
+    });
+
+    function LoadDetails(row) {
+        var elements = $('#' + row.data().ID);
+        //datos documento
+        elements.find('input[name=CPBMes]').val(row.data().CPBMes);
+        elements.find('input[name=CPBAño]').val(row.data().CPBAno);
+        elements.find('textarea[name=MovGlosa]').text(row.data().MovGlosa);
+        elements.find('select[name=CTDCod]').val(row.data().CTDCod);
+        elements.find('input[name=MovFv]').val(row.data().MovFv);
+        elements.find('.TotalMontoDocumento').html(row.data().Neto + row.data().Exento + (row.data().DSD == 1? row.data().Impu : 0));
+
+        //Pdf
+        if (row.data().Archivo.includes('PROYECTOS')) {
+            elements.find('#pdfFrame').attr('src', '@Url.Action("Pdf","IngresoDocumento", new { Area = "Operaciones" })/' + row.data().ID);
+        } else {
+            elements.find('#pdfFrame').attr('src', '@Url.Action("DocuXml","Master", new { Area = "" })?idCab=' + row.data().id_encab);
+        }
+
+        /*Trae la imputación sugerida*/
+        getDetallesImputacionSugerida(row, elements);
+
+        /*Trae Cuentas Contables*/
+        getCuentasContables(row, elements);
+
+        /*Trae Centros de Costo*/
+        getCentrosCosto(row, elements);
+
+        /* Lo formateo con datapicker */
+        $(".fechaV").datepicker({ autoclose: true, format: 'dd-mm-yyyy', changeYear: true });
+    }
+
+    function getDetallesImputacionSugerida(row, elements) {
+        $.ajax({
+            url: '@Url.Action("GetDetallesImputacionSugerida", "Imputacion")',
+            data: { ID: row.data().ID },
+            success: function (data, textSatus, jqXHR) {
+                if (data.Data.length > 0) {
+                    $.each(data.Data, function (index, item) {
+                        var data = {
+                            id: new Date().getTime(),
+                            CodCta: item.CodCta,
+                            PCDESC: item.PCDESC,
+                            CCCod: item.CCCod,
+                            DescCC: item.DescCC,
+                            Percent: item.porcentaje,
+                            Monto: item.Monto,
+                            Doc: row.data().ID,
+                            Aux: item.Aux,
+                            NDOC: item.NDOC,
+                            TDOC: item.TDOC,
+                            MontoSM: item.MontoSM
+                        }
+                        dataImpu[row.data().ID] = new Array(data);
+                        //if (dataImpu[row.data().ID] === undefined) {
+                        //    dataImpu[row.data().ID] = new Array(data);
+                        //} else {
+                        //    dataImpu[row.data().ID].push(data);
+                        //}
+                    });
+                    fillTable(row.data().ID);
+                }
+            },
+            type: "POST"
+        });
+    }
+
+    function getCuentasContables(row, elements) {
+        //row.data().Nombre_Archivo.split('\\')[row.data().Nombre_Archivo.split('\\').length - 1]
+        var select = elements.find('#CodCta');
+        $.ajax({
+            url: '@Url.Action("GetCuentasContables", "Imputacion")',
+            data: {
+                Nivel: row.data().IRFS == 'S' ? 5 : 4,
+                Cliente: row.data().Nombre_BD
+            },
+            success: function (data, textSatus, jqXHR) {
+                select.html('<option value="">No Aplica</option>');
+                $.each(data.Data, function (index, item) {
+                    select.append('<option data-text="' + item.PCDESC.trim() + '"' +
+                                    'data-PCCCOS="' + item.PCCCOS + '"' +
+                                    'data-PCAUXI="' + item.PCAUXI + '"' +
+                                    'data-PCCDOC="' + item.PCCDOC + '"' +
+                                    ' value="' + item.PCCODI + '">' + item.PCCODI.replace(/-/g, "") + ' ' + item.PCDESC.trim() + '</option>')
+                });
+            },
+            complete: function () {
+                select.select2();
+            },
+            type: "POST"
+        });
+    }
+
+    $(document.body).on('change', '#CodCta', function (e) {
+        debugger;
+        var form = $(this).closest('form.formAsignaciones');
+        var option = $(this).find(':selected');
+        form.find('input[name=NDOC]').attr('disabled', (option.attr('data-PCAUXI') == 'S' ? false : true));
+        form.find('#CCCod').attr('disabled', (option.attr('data-PCCCOS') == 'S' ? false : true));
+        form.find('#CBDoc').attr('disabled', (option.attr('data-PCCDOC') == 'S' ? false : true));
+        form.find('input[name=Aux]').attr('disabled', (option.attr('data-PCAUXI') == 'S' ? false : true));
+    });
+
+    $('#DocumentosParaImputar tbody').on('keyup', '.rut', function () {
+        $(this).val($.Rut.formatear($(this).val(), true))
+    });
+
+
+
+
+    function getCentrosCosto(row, elements) {
+        var select = elements.find('#CCCod');
+        $.ajax({
+            url: '@Url.Action("GetCentrosCosto", "Imputacion")',
+            data: {
+                Cliente: row.data().Nombre_BD
+            },
+            success: function (data, textSatus, jqXHR) {
+                select.html('<option data-text="" value="">No Aplica</option>');
+                $.each(data.Data, function (index, item) {
+                    select.append('<option data-text="' + item.DescCC.trim() + '" value="' + item.CodiCC + '">' + item.CodiCC + ' ' + item.DescCC.trim() + '</option>')
+                });
+            },
+            complete: function () {
+                select.select2();
+            },
+            type: "POST"
+        });
+    }
+
+
+    $('#DocumentosParaImputar tbody').on('click', 'td .dataDetailsClass .formDocumento button[type=submit]', function (e) {
+        e.preventDefault();
+        var tr = $(this).closest('tr.dataDetailsClassMe').prev('tr[role=row]');
+        var row = DocumentosParaImputar.row(tr);
+        var form = $(this).closest('.formDocumento');
+        $.ajax({
+            url: '@Url.Action("EditDoc", "Imputacion")',
+            data: {
+                CTDCod: form.find("select[name=CTDCod]").val(),
+                CPBMes: form.find("input[name=CPBMes]").val(),
+                CPBAño: form.find("input[name=CPBAño]").val(),
+                MovFv: moment(form.find("input[name=MovFv]").val(), 'DD-MM-YYYY').format('YYYY-MM-DD'),
+                MovGlosa: form.find("textarea[name=MovGlosa]").text(),
+                ID: row.data().ID
+            },
+            beforeSend: function () {
+                //don't work
+                $(this).addClass('disabled')
+            },
+            success: function (result) {
+                if (result.success) {
+                    mensajeExito("Documento", "Documento Modificado con exito");
+                    var elements = $('#' + row.data().ID);
+                    var temp = row.data();
+                    temp.CTDCod = form.find("select[name=CTDCod]").val();
+                    temp.DSD = form.find("select[name=CTDCod] option:selected").data('dsd');
+                    row.data(temp).invalidate().draw();
+                    elements.find('.TotalMontoDocumento').html(row.data().Neto + row.data().Exento + (row.data().DSD == 1 ? row.data().Impu : 0));
+                    getDetallesImputacionSugerida(row, elements);
+                } else if (result.error) {
+                    mensajeError("Documento", "Error al Modificar Documento");
+                    form.find("select[name=CTDCod]").val(row.data().CTDCod),
+                    form.find("input[name=CPBMes]").val(row.data().CPBMes),
+                    form.find("input[name=CPBAño]").val(row.data().CPBAño),
+                    form.find('input[name=MovFv]').val(row.data().MovFv);
+                    form.find("textarea[name=MovGlosa]").text(row.data().MovGlosa)
+                }
+            },
+            error: function () {
+                mensajeError("Documento", "Error al Modificar Documento");
+                form.find("select[name=CTDCod]").val(row.data().CTDCod),
+                form.find("input[name=CPBMes]").val(row.data().CPBMes),
+                form.find("input[name=CPBAño]").val(row.data().CPBAño),
+                form.find('input[name=CTDCod]').val(row.data().MovFv);
+                form.find("textarea[name=MovGlosa]]").text(row.data().MovGlosa)
+            },
+            complete: function () {
+                //don't work
+                $(this).removeClass('disabled')
+            }
+        });
+    });
+
+
+    $('#DocumentosParaImputar tbody').on('click', 'td .dataDetailsClass .imputaciones button[type=submit]', function (e) {
+        e.preventDefault();
+        var tr = $(this).closest('tr.dataDetailsClassMe').prev('tr[role=row]');
+        var row = DocumentosParaImputar.row(tr);
+
+        if (dataImpu.sum(row.data().ID, "Monto") != (row.data().Exento + row.data().Neto + (row.data().DSD == 1 ? row.data().Impu : 0))) {
+            mensajeError("Documento", "La Suma del total de asignaciones, debe ser igual al total del documento");
+            return;
+        }
+        var data = dataImpu[row.data().ID];
+        
+        $.ajax({
+            url: '@Url.Action("EditImpu", "Imputacion")',
+            data: JSON.stringify(data),
+            method: 'POST',
+            contentType: "application/json; charset=utf-8",
+            beforeSend: function () {
+                //don't work
+                $(this).attr('disabled', true);
+            },
+            success: function (result) {
+                if (result.success) {
+                    mensajeExito("Documento", "Documento Modificado con exito");
+                    loadAjaxContent(window.location.pathname);
+                } else if (result.error) {
+                    mensajeError("Documento", "Error al Modificar Documento");
+                }
+            },
+            error: function () {
+                mensajeError("Documento", "Error al Modificar Documento");
+            },
+            complete: function () {
+                $(this).attr('disabled', false);
+            }
+        });
+    });
+
+
+    $('#DocumentosParaImputar tbody').on('click', 'td .dataDetailsClass .imputaciones button[type=submit]', function (e) {
+        e.preventDefault();
+        var tr = $(this).closest('tr').prev('tr[role=row]');
+        var row = DocumentosParaImputar.row(tr);
+        var data = $(this).closest('.imputaciones');
+
+    });
+
+
+    $('#DocumentosParaImputar tbody').on('click', 'td .dataDetailsClass .formAsignaciones button[type=submit]', function (e) {
+        e.preventDefault();
+        var tr = $(this).closest('tr').prev('tr[role=row]');
+        var row = DocumentosParaImputar.row(tr);
+        var form = $(this).closest('.formAsignaciones');
+        debugger;
+        //validacion
+        var option = form.find('select[name=CodCta] option:selected');
+        var myRe = /^\s*(?=.*[1-9])\d*(?:\.\d*)?\s*$/;
+        if (form.find('input[name=NDOC]').attr('disabled') == undefined && form.find('input[name=NDOC]').val() == '') { mensajeError("Documento", "Error al Validar Formulario"); return; }
+        if (form.find('#CCCod').attr('disabled') == undefined && form.find('#CCCod').val() == '') { mensajeError("Documento", "Error al Validar Formulario"); return; }
+        if (form.find('#CBDoc').attr('disabled') == undefined && form.find('#CBDoc').val() == '') { mensajeError("Documento", "Error al Validar Formulario"); return; }
+        if (form.find('input[name=Aux]').attr('disabled') == undefined && !$.Rut.validar(form.find('input[name=Aux]').val())) { mensajeError("Documento", "Error al Validar Formulario"); return; }
+        if (myRe.test(form.find('input[name=Monto]').val()) == false) { mensajeError("Documento", "Error al Validar Formulario"); return; }
+        if (myRe.test(form.find('input[name=Percent]').val()) == false) { mensajeError("Documento", "Error al Validar Formulario"); return; }
+
+
+        var data = {
+            id: new Date().getTime(),
+            CodCta: form.find('select[name=CodCta] option:selected').val(),
+            CCCod: form.find('select[name=CCCod] option:selected').val(),
+            Percent: form.find('input[name=Percent]').val(),
+            Monto: form.find('input[name=Monto]').val(),
+            PCDESC: form.find('select[name=CodCta] option:selected').data('text'),
+            DescCC: form.find('select[name=CCCod] option:selected').data('text'),
+            Doc: row.data().ID,
+            Aux: form.find('input[name=Aux]').val(),
+            NDOC: form.find('input[name=NDOC]').val(),
+            TDOC: form.find('select[name=CBDoc] option:selected').val(),
+            MontoSM: form.find('input[name=Monto]').val()
+        };
+
+        if (dataImpu[row.data().ID] === undefined) {
+            dataImpu[row.data().ID] = new Array(data);
+        } else {
+            dataImpu[row.data().ID].push(data);
+        }
+        fillTable(row.data().ID);
+    });
+
+
+    function fillTable(rowID) {
+        var elements = $('#' + rowID);
+        var tbody = elements.find('#impSugeridaTBody')
+        tbody.html('');
+        var datai = dataImpu[rowID];
+
+        $.each(datai, function (index, item) {
+            tbody.append('<tr class="imputacionSugerida" id="' + item.id + '">' +
+                            '<td><button type="button" onClick="deleteRow(' + item.id + ',' + rowID + ')" class="btn btn-default"><i class="fa fa-trash"></i></button></td>' +
+                            '<td>' + item.CodCta + ' ' + item.PCDESC + '</td>' +
+                            '<td>' + item.CCCod + ' ' + item.DescCC + '</td>' +
+                            '<td><input class="porcentaje" type="text" value="' + item.Percent + '"></td>' +
+                            '<td><input class="monto" type="text" value="' + item.Monto + '"></td>' +
+                        '</tr>');
+        });
+        elements.find('.imputaciones .TotalMonto').html(dataImpu.sum(rowID, "Monto"));
+        elements.find('.imputaciones .totalPorcentaje').html(dataImpu.sum(rowID, "Percent"));
+    }
+
+    function deleteRow(rowID, ID) {
+        dataImpu[ID] = $.grep(dataImpu[ID], function (e) {
+            return e.id != rowID;
+        });
+        fillTable(ID);
+    }
+
+
+    $('#DocumentosParaImputar tbody').on('focusout', '.formAsignaciones input.monto,.formAsignaciones input.porcentaje', function (e) {
+        e.preventDefault();
+        if (!validateGreaterThanZero($(this).val())) { return; }
+        var tr = $(this).closest('tr.dataDetailsClassMe').prev('tr[role=row]');
+        var row = DocumentosParaImputar.row(tr);
+        var row_ = $(this).closest('div.row');
+        if ($(this).hasClass('monto')) {
+            row_.find('.porcentaje').val((100 * $(this).val()) / (row.data().Neto + row.data().Exento + (row.data().DSD == 1 ? row.data().Impu : 0)));
+        } else {
+            row_.find('.monto').val(((row.data().Neto + row.data().Exento + (row.data().DSD == 1 ? row.data().Impu : 0)) * $(this).val()) / 100);
+        }
+    });
+
+    $('#DocumentosParaImputar tbody').on('focusout', '#impSugeridaTBody input.monto,#impSugeridaTBody input.porcentaje', function (e) {
+        e.preventDefault();
+        if (!validateGreaterThanZero($(this).val())) { return; }
+        var tr = $(this).closest('tr.dataDetailsClassMe').prev('tr[role=row]');
+        var row = DocumentosParaImputar.row(tr);
+        var row_ = $(this).closest('tr');
+        if ($(this).hasClass('monto')) {
+            dataImpu[row.data().ID].find(x => x.id == row_.attr('id')).Percent = (100 * $(this).val()) / (row.data().Neto + row.data().Exento + (row.data().DSD == 1 ? row.data().Impu : 0));
+            dataImpu[row.data().ID].find(x => x.id == row_.attr('id')).Monto = $(this).val();
+        } else {
+            dataImpu[row.data().ID].find(x => x.id == row_.attr('id')).Percent = $(this).val();
+            dataImpu[row.data().ID].find(x => x.id == row_.attr('id')).Monto = ((row.data().Neto + row.data().Exento + (row.data().DSD == 1 ? row.data().Impu : 0)) * $(this).val()) / 100;
+        }
+        fillTable(row.data().ID);
+    });
+
+
+    function validateGreaterThanZero(value) {
+        var Rgx = /^\s*(?=.*[1-9])\d*(?:\.\d{1,2})?\s*$/;
+        return Rgx.test(value);
+    }
+
+
+    function Devolver(ID, click) {
+        var ID_GS = new Array();
+        ID_GS.push(ID)
+        iziToast.show({
+            color: 'dark',
+            icon: 'icon-person',
+            title: 'Eliminación',
+            transitionIn: 'flipInX',
+            message: 'Esta seguro que desea Devolver estos Registros',
+            position: 'center', 
+            progressBarColor: 'rgb(0, 255, 184)',
+            buttons: [
+                ['<button>Ok</button>', function (instance, toast) {
+                    iziToast.hide({
+                        transitionOut: 'flipOutX'
+                    }, toast);
+
+                    var url_ = "@Url.Action("Devolver", "Imputacion")";
+                    $.ajax({
+                        url: url_,
+                        type: 'POST',
+                        data: { idGS: ID_GS },
+                        error: function () {
+                            mensajeError("Formulario", "Registro con errores<br>");
+                        },
+                        success: function (result) {
+                            if (result.success) {
+
+                                var linha = $(click).closest('tr');
+                                linha.fadeOut(function () {
+                                    DocumentosParaImputar.row(linha).remove().draw()
+                                });
+                                mensajeExito("Formulario", "Registro procesado con exito");
+                            } else {
+                                mensajeError("Formulario", "Registro con errores<br>");
+                            }
+                        }
+                    });
+                }],
+                ['<button>Close</button>', function (instance, toast) {
+                    iziToast.hide({
+                        transitionOut: 'flipOutX'
+                    }, toast);
+                    
+                }]
+            ],
+            onClose: function (instance, toast) { //esconde el modal si la barra de progreso del alert termina
+                // $('#Modal_Background').modal('hide');
+            }
+        });
+
+
+    }
+
+</script>

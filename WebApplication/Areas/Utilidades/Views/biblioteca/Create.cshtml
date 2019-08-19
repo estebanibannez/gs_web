@@ -1,0 +1,185 @@
+﻿<style>
+    .help-block {
+        padding-left: 217px;
+    }
+
+    .fa-warning {
+        color: orange;
+    }
+</style>
+@model WebApplicationMod.Biblioteca_GS_Web
+
+@using (Html.BeginForm((Model == null ? "Create" : "Update"), "Biblioteca", FormMethod.Post, new { @id="mant-form", @novalidate = "novalidate", @role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @(Model == null ? new MvcHtmlString(""): Html.HiddenFor(p => p.ID))
+
+    if (Model == null)
+    {
+        <div class="box-header with-border">
+            <h3 class="box-title">Ingrese la informacion del nuevo archivo</h3>
+        </div>
+    }else
+    {
+        <div class="box-header with-border">
+            <h3 class="box-title">Modifique la informacion del archivo</h3>
+        </div>
+    }
+    
+        <div class="widget-body form-horizontal">
+            <div class="box-body no-padding">
+                <br/>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        Nombre
+                    </div>
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "custom-scroll form-control", @maxlength = "50", @minlength = "5" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        Clasificacion
+                    </div>
+                    <div class="col-sm-8">
+                        @Html.DropDownList("clasificacion_create", (SelectList)ViewBag.Clasificacion, "Seleccione...", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        SubClasificacion
+                    </div>
+                    <div class="col-sm-8">
+                        @Html.DropDownListFor(model => model.Tipo, new SelectList(string.Empty, "Value", "Text"), "Seleccione...", new { @class = "form-control" ,@id="tipo"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        Descripcion
+                    </div>
+                    <div class="col-sm-8">
+                        @Html.TextAreaFor(model => model.Descripcion, new { @class = "custom-scroll form-control", @maxlength = "200", @minlength = "5" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        Archivo
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="file" id="files" name="files" class="uploadfile" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+            <button type="button" class="btn btn-warning pull-right" action="save">Guardar</button>
+        </div>
+}
+
+<script>
+    $(document).ready(function () {
+        cargarUpdate();
+        setFormulario(
+            "mant-form",
+            {
+                Nombre: {
+                    required: true
+                },
+                clasificacion_create: {
+                    required: true
+                },
+                Tipo: {
+                    required: true
+                },
+                Descripcion: {
+                    required: true
+                }
+            },
+            {
+                Nombre: {
+                    required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese un nombre.</span> '
+                },
+                clasificacion_create: {
+                    required: '<span class="help-block error"><i class="fa fa-warning"></i> Seleccione una clasificacion.</span>'
+                },
+                Tipo: {
+                    required: '<span class="help-block error"><i class="fa fa-warning"></i> Seleccione una sub-clasificacion.</span>'
+                },
+                Descripcion: {
+                    required: '<span class="help-block error"><i class="fa fa-warning"></i> Ingrese una descripcion.</span>'
+                }
+            }
+        );
+    });
+
+    function cargarUpdate() {
+        var vbClasi = @Html.Raw(Json.Encode(ViewBag.clasificacionSelected));
+        if (vbClasi != null) {
+            $('#clasificacion_create').val(vbClasi).change();
+            $.ajax({
+                url: '@Url.Action("getSubClasif", "Biblioteca")',
+                data: { id_clasificacion: $('#clasificacion_create').val() },
+                //datatype: "json",
+                type: 'POST',
+                success: function (data) {
+                    var listado = $('#tipo');
+                    $.each(data.data, function (index, data) {
+                        listado.append('<option value="' + data.ID + '">' + data.Nombre + '</option>');
+                    });
+                    var vbSubclasi = @Html.Raw(Json.Encode(ViewBag.subclasificacionSelected));
+                    if (vbSubclasi != null) {
+                        $('#tipo').val(vbSubclasi).change();
+                    }
+                },
+                error: function () {
+                    mensajeError("Ops..", "Error de controlador. Contactese con el administrador");
+                    //$("#content").html('<h2>Se ha generado un error</h2>');
+                }
+            });
+        }
+    };
+
+    $('#clasificacion_create').change(function () {
+        debugger;
+        if ($(this).val() != "") {
+            var id = $(this).val();
+            $('#tipo').empty().append('<option selected="selected" value="">Seleccione...</option>');
+            $.ajax({
+                url: '@Url.Action("getSubClasif", "Biblioteca")',
+                data: { id_clasificacion: $('#clasificacion_create').val() },
+                //datatype: "json",
+                type: 'POST',
+                success: function (data) {
+                    debugger;
+                    var listado = $('#tipo');
+                    $.each(data.data, function (index, data) {
+                        listado.append('<option value="' + data.ID + '">' + data.Nombre + '</option>');
+                    });
+
+                },
+                error: function () {
+                    mensajeError("Ops..", "Error de controlador. Contactese con el administrador");
+                    //$("#content").html('<h2>Se ha generado un error</h2>');
+                }
+            });
+        } else {
+            $('#tipo').empty().append('<option selected="selected" value="">Seleccione...</option>');
+        }
+    });
+
+    $(".uploadfile").fileinput({
+        allowedFileExtensions: ['doc', 'pdf', 'cvs', 'xlsx', 'xls', 'ppt', 'txt', 'zip', 'html', 'mp3', 'jpg', 'png', 'zip', 'rar'],
+        showPreview: false,
+        showCancel: true,
+        showUpload: false,
+        browseClass: 'btn btn-warning',
+        browseIcon: "<span class='glyphicon glyphicon-open-file' aria-hidden='true'></span>",
+        removeClass: "btn btn-danger",
+        removeLabel: "Delete",
+        removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i>",
+        showRemove: true,
+        showCancel: true
+    });
+
+</script>

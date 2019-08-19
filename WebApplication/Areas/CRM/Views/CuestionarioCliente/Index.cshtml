@@ -1,0 +1,55 @@
+﻿
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-gear"></i> Agregar Cuestionario </h3>
+    </div>
+</div>
+
+<input type="hidden" value="" id="testing" />
+
+<div class="row">
+    <div class="col-md-12 table-responsive">
+        <div class="panel table-responsive no-padding">
+            <div class="box-header">
+                <h3 class="box-title"> Información</h3>
+            </div>
+            <table id="dt_clientes" class="table table-hover display responsive no-wrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Nombre Cliente</th>
+                        <th>Rut Cliente</th>
+                        <th>Fecha Primer Contacto</th>
+                        <th>Personal CS Asignado</th>
+                        <th>Pais</th>
+                        <th>Industria</th>
+                        <th>Agregar Cuestionario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var item in Model.listAnonymousToDynamic)
+                        {
+                            <tr value="@item.Id_cliente)">                                
+                                <td>@item.Nom_Cliente</td>
+                                <td>@item.Rut_Cliente</td>
+                                <td>@item.Primer_Contacto</td>
+                                <td>@item.Clien_Service</td>
+                                <td>@item.Pais</td>
+                                <td>@item.Industria</td>
+                                <td>
+                                    <button class="btn btn-default btn-xs modal-ajax-load" href="@Url.Action("AgregarCuestionario", "CuestionarioCliente", new { Area = "CRM", @id=item.Id_cliente })" data-toggle="modal" data-target="#myModal" data-remote="false"><i class="glyphicon glyphicon-search" aria-hidden="true"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#dt_clientes').DataTable();
+    });
+</script>

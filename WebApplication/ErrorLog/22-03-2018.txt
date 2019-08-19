@@ -1,0 +1,72 @@
+Time: 22-03-2018 11:23:21
+-----------------------------------------------------------
+Code: m7CQpuKFqMxvTkNTnd8o_22032018112321
+Message: Referencia a objeto no establecida como instancia de un objeto.
+StackTrace:    en WebApplication.App_Start.Helper.createFile(HttpPostedFileBase file, String tipo_documento, String cliente) en C:\Users\EstebanIbañez\Documents\Proyecto-GS-Local\WebApplication\App_Start\Helper.cs:línea 69
+Source: WebApplication
+TargetSite: System.String createFile(System.Web.HttpPostedFileBase, System.String, System.String)
+-----------------------------------------------------------
+
+Time: 22-03-2018 11:26:41
+-----------------------------------------------------------
+Code: 8WAgQifqeg9OcpFi90aB_22032018112641
+Message: Referencia a objeto no establecida como instancia de un objeto.
+StackTrace:    en WebApplication.App_Start.Helper.createFile(HttpPostedFileBase file, String tipo_documento, String cliente) en C:\Users\EstebanIbañez\Documents\Proyecto-GS-Local\WebApplication\App_Start\Helper.cs:línea 69
+Source: WebApplication
+TargetSite: System.String createFile(System.Web.HttpPostedFileBase, System.String, System.String)
+-----------------------------------------------------------
+
+Time: 22-03-2018 11:27:27
+-----------------------------------------------------------
+Code: CYfMCLBaukg3bj96Fh31_22032018112727
+Message: Referencia a objeto no establecida como instancia de un objeto.
+StackTrace:    en WebApplication.App_Start.Helper.createFile(HttpPostedFileBase file, String tipo_documento, String cliente) en C:\Users\EstebanIbañez\Documents\Proyecto-GS-Local\WebApplication\App_Start\Helper.cs:línea 69
+Source: WebApplication
+TargetSite: System.String createFile(System.Web.HttpPostedFileBase, System.String, System.String)
+-----------------------------------------------------------
+
+Time: 22-03-2018 11:31:13
+-----------------------------------------------------------
+Code: RLTd9FFiX6Z3ZKsQ3bCJ_22032018113113
+Message: Referencia a objeto no establecida como instancia de un objeto.
+StackTrace:    en WebApplication.App_Start.Helper.createFile(HttpPostedFileBase file, String tipo_documento, String cliente) en C:\Users\EstebanIbañez\Documents\Proyecto-GS-Local\WebApplication\App_Start\Helper.cs:línea 69
+Source: WebApplication
+TargetSite: System.String createFile(System.Web.HttpPostedFileBase, System.String, System.String)
+-----------------------------------------------------------
+
+Time: 22-03-2018 12:34:37
+-----------------------------------------------------------
+Code: jx8lughHX9AD1dFd1Tdh_22032018123437
+Message: Referencia a objeto no establecida como instancia de un objeto.
+StackTrace:    en WebApplication.App_Start.Helper.createFile(HttpPostedFileBase file, String tipo_documento, String cliente) en C:\Users\EstebanIbañez\Documents\Proyecto-GS-Local\WebApplication\App_Start\Helper.cs:línea 69
+Source: WebApplication
+TargetSite: System.String createFile(System.Web.HttpPostedFileBase, System.String, System.String)
+-----------------------------------------------------------
+
+Time: 22-03-2018 12:38:35
+-----------------------------------------------------------
+Code: SNJUwh5RPQy2cXk232br_22032018123835
+Message: Referencia a objeto no establecida como instancia de un objeto.
+StackTrace:    en WebApplication.App_Start.Helper.createFile(HttpPostedFileBase file, String tipo_documento, String cliente) en C:\Users\EstebanIbañez\Documents\Proyecto-GS-Local\WebApplication\App_Start\Helper.cs:línea 69
+Source: WebApplication
+TargetSite: System.String createFile(System.Web.HttpPostedFileBase, System.String, System.String)
+-----------------------------------------------------------
+
+Time: 22-03-2018 14:49:15
+-----------------------------------------------------------
+Code: ffb7U0llOkub37Njng6X_22032018144915
+Message: Referencia a objeto no establecida como instancia de un objeto.
+StackTrace:    en WebApplication.App_Start.Helper.createFile(HttpPostedFileBase file, String tipo_documento, String cliente)
+Source: WebApplication
+TargetSite: System.String createFile(System.Web.HttpPostedFileBase, System.String, System.String)
+-----------------------------------------------------------
+
+Time: 22-03-2018 15:48:19
+-----------------------------------------------------------
+Code: NtIV5MgrSSiQkjgeFImq_22032018154819
+Message: Referencia a objeto no establecida como instancia de un objeto.
+StackTrace:    en WebApplication.App_Start.Helper.createFile(HttpPostedFileBase file, String tipo_documento, String cliente)
+Source: WebApplication
+TargetSite: System.String createFile(System.Web.HttpPostedFileBase, System.String, System.String)
+-----------------------------------------------------------
+

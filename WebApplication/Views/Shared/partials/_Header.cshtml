@@ -1,0 +1,43 @@
+﻿<header class="main-header">
+    <a href="@Url.Action("Home", "Home", new { Area = "" })" class="logo">
+        @*<span class="logo-mini"><img src="~/Img/LOGO_PUENTESUR.png" style="max-width:50%" /></span>*@
+        <span class="logo-lg hidden-xs"><img src="~/Img/LOGO_PUENTESUR.png" style="max-width:70%" /></span>
+    </a>
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!--boton para minimizado-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <li class="dropdown tasks-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-flag-o"></i>
+                        @*<span class="label label-warning">10</span>*@
+                    </a>
+                    <ul class="dropdown-menu" style="max-height:120px">
+                        <li class="header">Seleccione Lenguaje</li>
+                        <li>
+                            <ul class="menu">
+                                <li>
+                                    <a href="@Url.Action("ChangeLanguage", "Home", new { Area = "", lang = "en" })">
+                                        <i class="fa fa-flag-o text-aqua"></i> English
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("ChangeLanguage", "Home", new { Area = "", lang = "es-CL" })">
+                                        <i class="fa fa-flag-o text-yellow"></i> Español
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Usuario:  -->
+                <li class="dropdown tasks-menu">
+                    @Html.Partial("_LoginPartial")
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

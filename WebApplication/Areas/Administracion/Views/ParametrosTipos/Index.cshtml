@@ -1,0 +1,231 @@
+﻿
+
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-file-text"></i> Parametros</h3>
+    </div>
+</div>
+
+<br />
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header with-border">
+                <div><h3 class="box-title">Cargos</h3></div>
+                <div style="text-align:right;"><a href="@Url.Action("CreateCargos","ParametrosTipos" ,new { Area = "Administracion"})"class="btn btn-warning pull-right modal-ajax-load" data-toggle="modal" data-target="#myModal" data-remote="false" style="text-align:right;">Agregar</a></div>
+            </div>
+
+            <div class="box-body">
+                <table class="table table-striped table-bordered" style="width:100%;" id="tblCargos">
+                    <thead>
+                        <tr>
+                            @*<th>ID</th>*@
+                            <th>Cargo</th>
+                            <th>Area</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header with-border">
+                <div><h3 class="box-title">Unidades</h3></div>
+                <div style="text-align:right;"><a href="@Url.Action("CreateUnidades","ParametrosTipos" ,new { Area = "Administracion"})" class="btn btn-warning pull-right modal-ajax-load" data-toggle="modal" data-target="#myModal" data-remote="false" style="text-align:right;">Agregar</a></div>
+            </div>
+
+            <div class="box-body">
+                <table class="table table-striped table-bordered" style="width:100%;" id="tblUnidades">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header with-border">
+                <div><h3 class="box-title">Tipos de procesos</h3></div>
+                <div style="text-align:right;">@*<a href="@Url.Action("CreateProcesos","ParametrosTipos" ,new { Area = "Administracion"})" class="btn btn-warning pull-right modal-ajax-load" data-toggle="modal" data-target="#myModal" data-remote="false" style="text-align:right;">Agregar</a>*@</div>
+            </div>
+
+            <div class="box-body">
+                <table class="table table-striped table-bordered" style="width:100%;"id="tblProcesos">
+                    <thead>
+                        <tr>
+                            @*<th>id</th>*@
+                            <th>Nombre Proceso</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header with-border">
+                <div><h3 class="box-title">Tipos de cuentas</h3></div>
+                <div style="text-align:right;">@*<a href="@Url.Action("CreateCuentas","ParametrosTipos" ,new { Area = "Administracion"})" class="btn btn-warning pull-right modal-ajax-load" data-toggle="modal" data-target="#myModal" data-remote="false" style="text-align:right;">Agregar</a>*@</div>
+            </div>
+
+            <div class="box-body">
+                <table  class="table table-striped table-bordered" style="width:100%;" id="tbltiposCuentas">
+                    <thead>
+                        <tr>
+                            @*<th>ID</th>*@
+                            <th>Nom</th>
+                            <th>vcta</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    $(function () {
+
+        //function retornaParametros(d) {
+        //    return $.extend({}, d, {
+        //        "id": 1,
+        //    });
+        ////    console.log(d);
+        //}
+
+        var ColumnasTipoCuentas = [
+        { "data": "Nom" },
+        { "data": "vcta" }
+        ]
+
+        var columnasProcesos = [
+        { "data": "Nom" },
+        ]
+
+        var columnasUnidades = [
+        { "data": "nom" },
+        ]
+
+        var columnasCargos = [
+              //{ data: "id" },
+              { data: "nom" },
+              { data: "area" },
+              {
+                  data: "id",
+                  render: function (data, type, full, meta) {
+
+                      var url = "'@Url.Action("eliminaCargos", "ParametrosTipos", new { Area = "Administracion" })";
+                      var urlReturn = url + '?id=' + full.id + '\'';
+
+                      @*return '<a href="@Url.Action("UpdateCargos", "ParametrosTipos", new { Area = "Administracion" })?id=' + full.id + '" class="btn btn-edit btn-xs"><i class="fa fa-edit"></i></a>';*@
+
+                      return '<button class=\"btn btn-default btn-xs\" onclick=\"confirmDelete(\'' + full.nom + '\',' + urlReturn + ');\"><i class=\"fa fa-trash\"></i></button>'
+
+                  }
+              },
+
+        ];
+
+
+
+        //-----------------------------------------------------------//
+        function dt_Cargos(grilla, url, parametros, Columnas, callBack) {
+            var tabla;
+            callBack = typeof callBack !== 'undefined' ? callBack : function (ajax) { return ajax.data };
+            tabla = $('#' + grilla).DataTable({
+
+                "ajax": {
+                    "url": url,
+                    "type": "POST",
+                    "data": parametros,
+                },
+
+                "columns": Columnas,
+                "order": [[0, "asc"]]
+
+
+            });
+            return tabla;
+        }
+
+
+        var tablaCargos = dt_Cargos("tblCargos", "@Url.Action("dt_Cargos", "ParametrosTipos")", null, columnasCargos);
+        var unidades = dt_Unidades("tblUnidades", "@Url.Action("dt_Unidades", "ParametrosTipos")", null, columnasUnidades);
+        var procesos = dt_procesos("tblProcesos", "@Url.Action("dt_procesos", "ParametrosTipos")", null, columnasProcesos);
+        var tiposCuentas = dt_tipoCuentas("tbltiposCuentas", "@Url.Action("dt_tiposCuentas", "ParametrosTipos")", null, ColumnasTipoCuentas);
+
+
+        function dt_Unidades(grilla, url, parametros, Columnas, callBack) {
+            debugger;
+            var tabla;
+            callBack = typeof callBack !== 'undefined' ? callBack : function (ajax) { return ajax.data };
+            tabla = $('#' + grilla).DataTable({
+                "ajax": {
+                    "url": url,
+                    "type": "POST",
+                    "data": parametros,
+                },
+                "columns": Columnas,
+                "order": [[0, "asc"]]
+            });
+            return tabla;
+        }
+
+
+
+
+        function dt_procesos(grilla, url, parametros, Columnas, callBack) {
+            var tabla;
+            callBack = typeof callBack !== 'undefined' ? callBack : function (ajax) { return ajax.data };
+            tabla = $('#' + grilla).DataTable({
+                "ajax": {
+                    "url": url,
+                    "type": "POST",
+                    "data": parametros,
+                },
+                "columns": Columnas
+                //,
+                //"order": [[0, "desc"]]
+            });
+            return tabla;
+        }
+
+
+
+
+        function dt_tipoCuentas(grilla, url, parametros, Columnas, callBack) {
+            var tabla;
+            callBack = typeof callBack !== 'undefined' ? callBack : function (ajax) { return ajax.data };
+            tabla = $('#' + grilla).DataTable({
+                "ajax": {
+                    "url": url,
+                    "type": "POST",
+                    "data": parametros
+                },
+                "columns": Columnas,
+                "order": [[1, "asc"]]
+            });
+            return tabla;
+        }
+    });
+
+</script>

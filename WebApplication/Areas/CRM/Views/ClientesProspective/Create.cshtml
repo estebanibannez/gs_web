@@ -1,0 +1,357 @@
+﻿@model ModeloCRM.Direccion_CRM
+
+@if (Model == null)
+{
+    <div class="box box-warning">
+        <div class="box-header with-border">
+            <h3 class="box-title"><i class="fa fa-gear"></i> Clients Prospective</h3>
+        </div>
+    </div>
+}
+else
+{
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title"><i class="fa fa-gear"></i> Editar información, Cliente: @Html.DisplayTextFor(model => model.Cliente_CRM.Nombre)</h3>
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm((Model == null ? "Create" : "Editar"), "ClientesProspective", FormMethod.Post, new { @id = "mant-form", @novalidate = "novalidate", role = "form" }))
+{
+    @(Model == null ? new MvcHtmlString("") : Html.HiddenFor(p => p.ID_Cliente))
+<div class="">
+    <div class="nav-tabs-custom form-horizontal">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#Info_Basica" id="tab1" data-toggle="tab" aria-expanded="true">Informacion Cliente</a></li>
+            <li class=""><a href="#Info_Detalles" id="tab2" data-toggle="tab" aria-expanded="false">Detalles del Cliente</a></li>
+            @if (Model == null)
+            {
+                <li class=""><a href="#Info_Direccion" id="tab3" data-toggle="tab" aria-expanded="true">Direccion del Cliente</a></li>
+            }
+            
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane table active" id="Info_Basica">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label pull-left" style="text-align: left">Nombre Cliente :</label>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(model => model.Cliente_CRM.Nombre, new { @class = "custom-scroll form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label pull-left" style="text-align: left">Rut :</label>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(model => model.Cliente_CRM.Rut, new { @class = "custom-scroll form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label pull-left" style="text-align: left">Pais :</label>
+                        <div class="col-sm-6">
+                            @Html.DropDownListFor(model => model.Cliente_CRM.ID_Pais, (SelectList)ViewBag.ListCountry, "Seleccione...", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label pull-left" style="text-align: left">Industria :</label>
+                        <div class="col-sm-6">
+                            @Html.DropDownListFor(model => model.Cliente_CRM.Industria, (SelectList)ViewBag.ListIndustry, "Seleccione...", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label pull-left" style="text-align: left">Parther Involucrado :</label>
+                        <div class="col-sm-6">
+                            @Html.DropDownListFor(model => model.Cliente_CRM.ID_Parther, (SelectList)ViewBag.ListPartner, "Seleccione...", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label pull-left" style="text-align: left">Personal CS Asignado :</label>
+                        <div class="col-sm-6">
+                            @Html.DropDownListFor(model => model.Cliente_CRM.ID_Client_Service, (SelectList)ViewBag.ListClientService, "Seleccione...", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label pull-left" style="text-align: left">Referenciado por :</label>
+                        <div class="col-sm-6">
+                            @Html.DropDownListFor(model => model.Cliente_CRM.Referencia_Cliente, (SelectList)ViewBag.ListReference, "Seleccione...", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane table" id="Info_Detalles">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label pull-left" style="text-align: left">Entidad o Cliente :</label>
+                    <div class="col-sm-6">
+                       @Html.DropDownList("Seleccione", (SelectList)ViewBag.ListEntidadCliente , new { @class = "form-control Selector_Cliente", @id = "Selector_Cliente" })
+                    </div>
+                </div>
+                @*<div id="entidad" hidden>*@                    
+                <div class="form-group" id="entidad" hidden>
+                    <label class="col-sm-3 control-label pull-left" style="text-align: left">Seleccione al Cliente :</label>
+                    <div class="col-sm-6">
+                        @Html.DropDownListFor(model => model.Cliente_CRM.ID_Cliente_Cliente, (SelectList)ViewBag.ListaClienteCliente, "Seleccione...", new { @class = "form-control" })
+                    </div>
+                </div>                    
+                @*</div>*@
+                <div class="form-group">
+                    <label class="col-sm-3 control-label pull-left" style="text-align: left">Fecha Primer Contacto :</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.Cliente_CRM.Fecha_Primer_Contacto, new { @class = "form-control datefield", rows = "2" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label pull-left" style="text-align: left">Perfil Español :</label>
+                    <div class="col-sm-6">
+                        @Html.TextAreaFor(model => model.Cliente_CRM.Perfil, new { @class = "custom-scroll form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label pull-left" style="text-align: left">Perfil Ingles :</label>
+                    <div class="col-sm-6">
+                        @Html.TextAreaFor(model => model.Cliente_CRM.Profile, new { @class = "custom-scroll form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label pull-left" style="text-align: left">Pagina Web :</label>
+                    <div class="col-sm-6">
+                        @Html.TextAreaFor(model => model.Pagina_Web, new { @class = "custom-scroll form-control" })
+                    </div>
+                </div>
+            </div>
+
+            @if (Model == null)
+            {
+                <div class="tab-pane table" id="Info_Direccion">
+                    @*<div class="form-group">
+                            <p>La primera direccion ingresada sera considerara la Casa Matriz del Cliente</p>
+                            <label class="col-sm-2 control-label pull-left" style="text-align: left">Mas Direcciones :</label>
+                            <div class="col-sm-1 col-md-1 pull-left">
+                                <a href="#" class="pull-right btn btn-warning" style="padding:3px" id="addDireccion"><i class="fa fa-fw fa-plus-square-o"></i></a>
+                            </div>
+                        </div>*@
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label pull-left" style="text-align: left">Región:</label>
+                            <div class="col-sm-3">
+                                @Html.DropDownList("Cod_Region", (SelectList)ViewBag.ListRegiones, "Seleccione", new { @class = "custom-scroll form-control .Cod_Region" })
+                                @*<select id="Cod_Region" name="[0].Cod_Region" class="form-control Cod_Region" data-placeholder="Seleccione..."></select>*@
+                                @*@Html.DropDownListFor(model => model.Direccion_CRM.ID_Region, (SelectList)ViewBag.ListRegion, "Seleccione...", new { @class = "form-control" })*@
+                            </div>
+                            <label class="col-sm-1 control-label pull-left" style="text-align: left">Provincia:</label>
+                            <div class="col-sm-3">
+                                <select id="Cod_Provincia" name=".Cod_Provincia" class="form-control Cod_Provincia" placeholder="Seleccione"></select>
+                                @*@Html.DropDownListFor(model => model.Direccion_CRM.ID_Comuna, (SelectList)ViewBag.ListComuna, "Seleccione...", new { @class = "form-control" })*@
+                            </div>
+                            <label class="col-sm-1 control-label pull-left" style="text-align: left">Comuna:</label>
+                            <div class="col-sm-3">
+                                <select id="Cod_Comuna" name="Cod_Comuna" class="form-control Cod_Comuna" placeholder="Seleccione"></select>
+                                @*@Html.DropDownListFor(model => model.Direccion_CRM.ID_Comuna, (SelectList)ViewBag.ListComuna, "Seleccione...", new { @class = "form-control" })*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label pull-left" style="text-align: left">Direccion:</label>
+                            <div class="col-sm-3">
+                                @*<input type="text" name="[0].direccion" class="form-control direccion" placeholder="Direccion"/>*@
+                                @Html.TextBoxFor(model => model.Direccion, new { @class = "custom-scroll form-control" })
+                            </div>
+                            <label class="col-sm-1 control-label pull-left" style="text-align: left">Numeración:</label>
+                            <div class="col-sm-3">
+                                @*<input type="text" name="[0].numeracion" class="form-control numeracion" placeholder="Numeracion" />*@
+                                @Html.TextBoxFor(model => model.Numeracion, new { @class = "custom-scroll form-control" })
+                            </div>
+                            <label class="col-sm-1 control-label pull-left" style="text-align: left">Piso:</label>
+                            <div class="col-sm-3">
+                                @*<input type="text" name="[0].piso" class="form-control piso" placeholder="Piso" />*@
+                                @Html.TextBoxFor(model => model.Piso, new { @class = "custom-scroll form-control" })
+                            </div>
+
+                        </div>
+                    </div>
+                    <div id="example"></div>
+                </div>
+            }
+        </div>
+        <div class="box-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancelar</button>
+            <a class="btn btn-default btnNext">Siguiente</a>
+            <button type="button" class="btn btn-warning pull-right" action="save">Guardar</button>
+        </div>
+    </div>
+</div>
+}
+<script>
+
+    $(document).ready(function () {
+        setFormulario("mant-form");
+
+        $(".datefield").datepicker({
+            autoclose: true,
+            format: 'dd-mm-yyyy',
+            changeYear: true
+        });
+
+        $('.btnGuardar').hide();
+        $('.btnNext').click(function () {
+            $('.nav-tabs > .active').next('li').find('a').trigger('click');
+        });
+
+        $('.nav-tabs > .active').next('li').next('li').find('a').on('click', function () {
+            $('.btnGuardar').show();
+            $('.btnNext').hide();
+        });
+
+        $('#tab1').on('click', function () {
+            $('.btnGuardar').hide();
+            $('.btnNext').show();
+        });
+
+        $('#tab2').on('click', function () {
+            $('.btnGuardar').hide();
+            $('.btnNext').show();
+        });
+
+
+        var i = 1;
+        $('#addDireccion').click(function () {
+            //debugger;
+
+            var html_ = '<div class="form-group dinamic" > ' +
+                            '<label class="col-sm-1 control-label pull-left" style="text-align: left">Region :</label>' +
+                            '<div class="col-sm-3">' +
+                                '<select id="Cod_Region" name="[' + i + '].Cod_Region" class="form-control ' + i + 'Cod_Region" placeholder="Seleccione"></select>' +
+                            '</div>' +    
+                            '<label class="col-sm-1 control-label pull-left" style="text-align: left">Provincia :</label>' +
+                            '<div class="col-sm-3">' +
+                                '<select id="Cod_Region" name="[' + i + '].Cod_Provincia" class="form-control ' + i + 'Cod_Provincia" placeholder="Seleccione"></select>' +
+                            '</div>' +
+                            '<label class="col-sm-2 control-label pull-left" style="text-align: left">Comuna :</label>' +
+                            '<div class="col-sm-4">' +
+                                '<select id="Cod_Comuna" name="[' + i + '].Cod_Comuna" class="form-control ' + i + 'Cod_Comuna" placeholder="Seleccione"></select>' +
+                            '</div>' +
+                            '<br />' +
+                        //'</div>' +
+                        //'<div class="form-group dinamic" > ' +
+                            '<label class="col-sm-2 control-label pull-left" style="text-align: left">Direccion :</label>' +
+		                    '<div class="col-sm-4">' +
+                                '<input type="text" name="[' + i + ']direccion" class="form-control ' + i + 'direccion" placeholder="Direccion"/>' +                                    
+                            '</div>' +
+                            '<label class="col-sm-2 control-label pull-left" style="text-align: left">Numeracion :</label>' +
+		                    '<div class="col-sm-4">' +
+                                '<input type="text" name="[' + i + ']numeracion" class="form-control ' + i + 'numeracion" placeholder="numeracion"/>' +
+                            '</div>' +
+                            '<label class="col-sm-2 control-label pull-left" style="text-align: left">Piso :</label>' +
+		                    '<div class="col-sm-4">' +
+                                '<input type="text" name="[' + i + ']piso" class="form-control ' + i + 'piso" placeholder="piso"/>' +
+                            '</div>' +
+                            '<label class="col-sm-2 control-label pull-left" style="text-align: left">Cancelar :</label>' +
+                            '<div class="col-sm-1 col-md-1 pull-left">' +
+                                '<a href="#" class="pull-right btn btn-warning remScnt" style="padding:3px"><i class="fa fa-times-circle"></i></a>' +
+                            '</div>' +
+                        '</div>';
+
+            $("#example").after(html_);
+            var ver = "";
+            ver = html_;
+            ObtenerRegiones(i);
+
+            $('.Cod_Region').change(function () {
+                debugger;
+                $('.Cod_Provincia').empty();
+                ObtenerProvincia(i);
+            });
+            $('.Cod_Provincia').change(function () {
+                ObtenerComuna(i);
+            });
+            i++;
+            return false;
+        });
+
+        $('#Info_Direccion').on('click', 'div > div > a', function () {
+            debugger;
+            if (i > 1) {
+                $(this).last().closest('.dinamic').remove();
+                i--;
+            }
+            return false;
+        });
+
+        @*function ObtenerRegiones(id_class) {
+            //debugger;
+            var url_ = "@Url.Action("ObtenerRegiones", "ClientesProspective")";
+            $.getJSON(url_, function (result) {                
+                var options = (id_class == null) ? $(".Cod_Region") : $('.' + id_class + 'Cod_Region');
+                $.each(result.data, function (value, index) {
+                    //options.append($("<option />").val(index.id_region).text(index.id_region).data('Nombre_Region', index.id_region));
+                    $(options).append($("<option value=''>Select your option</option>").attr("value", index.ID_Region).text(index.Nom_Region));
+                });
+            });
+        }*@
+
+        $('#Cod_Region').change(function () {
+            debugger;
+            $('#Cod_Provincia').empty();
+            ObtenerProvincia();
+        });
+
+        $('#Cod_Provincia').change(function () {
+            $('#Cod_Comuna').empty();
+            ObtenerComuna();
+        });
+
+        function ObtenerProvincia(id_class) {
+            debugger;
+            var id = $('#Cod_Region').val();
+            var url_ = '@Url.Action("ObtenerProvincia", "ClientesProspective")' + '?id=' + id;
+
+            $.getJSON(url_, function (result) {
+                var options = $("#Cod_Provincia");
+                //$('#'+options).prop('selectedIndex', 0);
+                $.each(result.data, function (value, index) {
+                    //options.append($("<option />").val(index.id_region).text(index.id_region).data('Nombre_Region', index.id_region));
+                    $(options).append($("<option></option>").attr("value", index.ID_Provincia).text(index.Nom_Provincia));
+                });
+            });
+            //$("#Cod_Region").val($("#target option:first").val());
+        }
+
+        function ObtenerComuna(id_class) {           
+            var id =  $('#Cod_Provincia').val();
+            var url_ = "@Url.Action("ObtenerComuna", "ClientesProspective")" + '?id=' + id;
+            $.getJSON(url_, function (result) {
+                var options = $("#Cod_Comuna");
+                $.each(result.data, function (value, index) {
+                    //options.append($("<option />").val(index.id_comuna).text(index.id_comuna).data('Nombre_Comuna', index.id_comuna));
+                    $(options).append($("<option></option>").attr("value", index.ID_Comuna).text(index.Nom_Comuna));
+                });
+            });
+        }
+        //ObtenerRegiones();
+        ObtenerProvincia();
+        ObtenerComuna();
+        
+        $('#Selector_Cliente').click(function () {
+            debugger
+            var valor = $('#Selector_Cliente').val();
+            if (valor == 'CLIENTENT') {                
+                $('#entidad').show();
+            }
+            if (valor == 'CLIENTCLI') {
+                $('#entidad').hide();
+            }
+        });
+    });
+</script>

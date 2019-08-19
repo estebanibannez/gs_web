@@ -1,0 +1,95 @@
+﻿@model WebApplicationMod.Usu
+@using WebApplication.App_GlobalResources;
+
+@{
+    Layout = null;
+    ViewBag.Title = "Log in";
+}
+
+<style>
+    
+body {
+  background: #c7c7c7;
+  color: #606468;
+  font: 87.5%/1.5em 'Open Sans', sans-serif;
+  margin: 0;
+}
+
+</style>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700">
+    <link href="~/css/login.css" rel="stylesheet">
+    <title>Acceso Usuarios Portal Web GS</title>
+</head>
+<body>
+    @*<div id="div_padre" class="page-header" style="display:none">
+        <div id="msn">
+            <span id="span"></span>
+        </div>
+    </div>*@
+    <div class="container">
+        <div id="login">
+            <div class="form-signin">
+                <h2 class="form-signin-heading"><img src="~/Img/LOGO_PUENTESUR.PNG" class="img-responsive" style="max-width: 300px"></h2>
+                @{
+                    using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "smart-form client-form", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("returnUrl", (string)ViewBag.returnUrl)
+
+                        
+                        @*<span class="fontawesome-user"></span>*@
+                        @Html.TextBoxFor(m => m.Sigla, new { MaxLength = "20", @class = "form-control", type = "text", placeholder = "Usuario", required = "required" })
+
+                        @*<span class="fontawesome-lock"></span>*@
+                        @Html.PasswordFor(m => m.pass, new { MaxLength = "15", @class = "form-control", type = "password", placeholder = "Contraseña", required = "required" })
+                        @Html.ValidationMessageFor(m => m.Sigla, "", new { @class = "text-warning badge badge-secondary", style = "width:100%; color: #ffffff !important;" })
+                        <div class="checkbox">
+                            <label>
+                                @Html.CheckBox("RememberMe", true, new { @class = "" })
+                                <label style="color:white">Recuerdáme</label>
+                            </label>
+                        </div>
+                        <input type="submit" class="btn btn-block btn-large" value="Acceder">
+                    }
+                }
+            </div>
+
+            <div class="p" style="text-align: center">
+                <a href="@Url.Action("changePassword","Account")"><span>¿Olvidó su contraseña?</span></a>
+            </div>
+
+        </div>
+    </div> 
+
+    @Scripts.Render("~/AdminLTE/plugins/jquery/js")
+    @Scripts.Render("~/AdminLTE/bootstrap/js")
+    @Scripts.Render("~/AdminLTE/plugins/jquery-validate/js")
+</body>
+
+</html>
+<script>
+    //setFormulario();
+    //$(document).ready(function () {
+
+    //    var url = $(location).attr('href');
+    //    var contador = url.length;
+    //    var url_new = url.substring((contador - 2), contador);
+    //    if (url_new == "oK") {
+    //        $('#div_padre').removeAttr("style");
+    //        $('#msn').addClass('alert alert-success');
+    //        $('#span').after().html("<i class='fa-fw fa fa-check'></i><strong>Exito!</strong> Se ha Enviado un correo con su Clave!!!");
+    //    }
+    //    setTimeout(function () {
+    //        $('#div_padre').hide()
+    //    }, 2000);
+    //});
+</script>

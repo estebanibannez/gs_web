@@ -1,0 +1,166 @@
+﻿@using WebApplication.App_GlobalResources
+@*@model   IEnumerable<WebApplicationMod.cab_anticipos>*@
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-hand-paper-o"></i> @Pay_Lenguaje.anticipos </h3>
+       @if (ViewBag.cargo == 19 || ViewBag.unidad == 63 ) { <a href="#" id="btn_pagado" class="btn btn-warning pull-right " > Pagado</a>}
+       @if (ViewBag.unidad == 60 || ViewBag.unidad == 63 || ViewBag.unidad == 67 || ViewBag.unidad == 62)   { <a href="@Url.Action("Create", "Anticipo", new { Area = "BackOffice" })" class="btn btn-warning pull-right modal-ajax-load" data-toggle="modal" data-target="#myModal" data-remote="false"> Agregar</a>}
+    </div>
+    <div class="box-body">
+        <div class="pull-left">
+            <i>  Pagados: @Html.Display("contadorActivo", (int)ViewBag.contadorActivo) </i>
+            <br />
+            <i style="color:red;"> Impagos: @Html.Display("contadorInactivo", (int)ViewBag.contadorInactivo) </i>
+        </div>
+        <div class="pull-right">
+            Mostrar Pagos
+            <div id="auxiliar"> </div>
+        </div>
+    </div>
+</div>
+<div class="table-responsive">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title"></h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+            <table  id="dt_Anticipos" class="table table-hover dataTable">
+                <thead>
+                    <tr>                        
+                        <th data-breakpoints="xs">x</th>
+                        <th>Estado</th>
+                        <th data-breakpoints="xs">ID Anticipo</th>
+                        <th>Fecha del Pago</th>
+                        <th>Cliente</th>                        
+                        <th>Rut Proveedor</th>
+                        <th>Nombre Proveedor</th>
+                        <th data-breakpoints="xs">Glosa</th>
+                        <th data-breakpoints="xs">Usuario</th>
+                        <th data-breakpoints="xs">Monto</th>
+                        <th data-breakpoints="xs">Comprobante</th>                        
+                        <th data-breakpoints="xs">Fecha Solicitud</th>                        
+                        <th data-breakpoints="xs"><label class="visible-xs">PDF / Eliminar</label></th>
+                    </tr>
+                </thead>
+        <tbody>
+            @{
+                foreach (var item in Model.listAnonymousToDynamic)
+                {
+                    <tr>                        
+                        <td>
+                            @{if (item.fec_pago == null)
+                                {
+                                    string nom = Convert.ToString(item.id_anticipo);
+                                      @Html.CheckBox(nom, false, new { id = nom, @class = "chk" })  
+                                }
+                            }</td>
+                                <td>@item.estado</td>
+                                <td>@item.id_anticipo</td>
+                                <td>@item.fec_pago</td> 
+                                <td>@item.Nombre_Archivo</td>                               
+                                <td>@item.Rut_proveedor</td>
+                                <td>@item.Nom_proveedor</td>
+                                <td>@item.Glosa</td>
+                                <td>@item.usuario</td>
+                                <td>@item.monto.ToString("$#,###")</td>
+                                <td>@item.comprobante</td>
+                                <td>@item.fec_sol</td>
+                        
+                                <td>
+                                    <a class="btn btn-default btn-xs" href="@Url.Action("Archivo", new { id = item.id_anticipo})" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
+                                    @if (ViewBag.cargo == 16 || ViewBag.unidad == 63)
+                                    {<button class="btn btn-default btn-xs" onclick="confirmDelete('Confirme la Eliminacion @Html.Raw(item.id_anticipo) ','@Url.Action("delete", new { id = item.id_anticipo })');"><i class="fa fa-trash-o"></i></button>}
+                                </td>
+                            </tr>
+                            }
+                        }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    //InicializaMantenedor("dt_Anticipos");
+    //$('.table').footable();    
+    var Selector = 'Pagados';
+    var table = $('#dt_Anticipos').DataTable({
+        initComplete: function () {
+            this.api().columns(1).every(function () {
+                var column = this;
+                var select = $('<select><option value="">Todos</option></select>')
+                    .appendTo($('#auxiliar').empty())
+                    .on('change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex($(this).val()
+                        );
+                        column.search(val ? '^' + val + '$' : '', true, false).draw();
+                    });
+
+                column.data().unique().sort().each(function (d, j) {
+                    if (Selector === d) {///Comparacion en valor y tipocon 3 ===
+                        select.append('<option SELECTED value="' + d + '">' + d + '</option>')
+                    } else {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    }
+                });
+                $(table).ready(function () {
+                    column.search(Selector ? '^' + Selector + '$' : '', true, false).draw();
+                });
+            });
+        }
+    });
+    $(document).ready(function () {
+        $('#btn_pagado').click(function () {
+            //debugger;
+            var chekeado = new Array()
+            chekeado = $('.chk:checked').map(function () { return this.name; }).get();
+            //console.log(chekeado);
+            iziToast.show({
+                color: 'dark',
+                icon: 'icon-person',
+                title: 'Eliminación',
+                transitionIn: 'flipInX',
+                message: 'Esta seguro de Pagar estos ' + chekeado.length + ' Anticipos',
+                position: 'center', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+                progressBarColor: 'rgb(0, 255, 184)',
+                buttons: [
+                    ['<button>Ok</button>', function (instance, toast) {
+                        //alert('aqui ejecuto el ajax');
+                        var url_ = "@Url.Action("Pagado", "Anticipo")";
+                        $.ajax({
+                            url: url_,
+                            dataType: "json",
+                            traditional: true,
+                            contentType: "application/json; charset=utf-8",
+                            data: { "idAnticipo": chekeado },
+                            error: function () { },
+                            success: function (result) {
+                                debugger;
+                                if (result.success) {
+                                   
+                                    mensajeExito("Formulario", "Registro procesado con exito");
+                                } else {
+                                    mensajeError("Formulario", "Registro con errores<br>");
+                                }
+                            }
+                        //    complete: function () {
+                        //        loadAjaxContent(window.location.pathname);
+                        //    }
+                        });
+                    }],
+                    ['<button>Close</button>', function (instance, toast) {
+                        iziToast.hide({
+                            transitionOut: 'flipOutX'
+                        }, toast);
+                       // $('#Modal_Background').modal('hide');
+                    }]
+                ],
+                onClose: function (instance, toast) { //esconde el modal si la barra de progreso del alert termina
+                   // $('#Modal_Background').modal('hide');
+                }
+            });
+        });
+    });
+    setFormulario();
+</script>

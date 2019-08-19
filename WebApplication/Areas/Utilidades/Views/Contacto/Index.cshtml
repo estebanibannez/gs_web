@@ -1,0 +1,61 @@
+﻿@model IEnumerable<WebApplicationMod.Clientes>
+
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-phone"></i> Contactos</h3>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title"></h3>
+        </div>
+        <div class="box-header no-padding">
+            <table id="dt_basic" class="table table-hover dataTable">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nombre de la Empresa</th>
+                        <th>Rut de la Empresa</th>                       
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <button class="btn btn-default btn-xs modal-ajax-load" href="@Url.Action("Buscar","Contacto", new { Area="Utilidades", @id=item.ID})" data-toggle="modal" data-target="#myModal" data-remote="false"><i class="glyphicon glyphicon-info-sign"></i></button>
+                                   
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.Nom)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Rut)</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+        setFormulario(
+             "mant-form",
+             {
+
+
+             }
+        )
+
+    });
+
+</script>
+<script type="text/javascript">
+    InicializaMantenedor("dt_basic");
+    setFormulario();
+</script>

@@ -1,0 +1,207 @@
+﻿@model WebApplicationMod.Clientes
+
+<h3 style="background-color:#f7f7f7; font-size: 18px; text-align: left; padding: 7px 10px; margin-top: 0;">
+    <i class="glyphicon glyphicon-list-alt" aria-hidden="true"> Declaraciones Juradas</i>
+</h3>
+
+<section>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-danger" id="DJporRut">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Estado Declaracion Jurada por Rut</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+
+                        <label class="col-md-1 control-label">Rut</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" id="rut" name="rut" />
+                        </div>
+                        <div class="col-md-2">
+                            <select class="form-control" id="periodo" name="periodo">
+                                <option value="" disabled selected>Periodo...</option>
+                                @{
+                                    for (var i = DateTime.Now.Year; i >= (DateTime.Now.Year - 4); i--) {
+                                        @Html.Raw("<option value='"+i+"'>"+i+"</option>");
+                                    }
+                                 }
+                            </select>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" id="btnbuscar" class="btn btn-warning">Buscar</button>
+                        </div>
+                        <div class="col-md-6" id="informationMessage">
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="DJporRutTable">
+                                <thead>
+                                    <tr>
+                                        <th>Título</th>
+                                        <th>Declaración Jurada</th>
+                                        <th class="anio1"></th>
+                                        <th class="anio2"></th>
+                                        <th class="anio3"></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer text-center">
+                </div>
+                <!-- /.box-footer -->
+            </div>
+            <!--/.box -->
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-danger" id="estadosDJ">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Estados Declaraciones Juradas Clientes</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Cliente</th>
+                                    <th>Declaración Jurada</th>
+                                    <th>Título</th>
+                                    <th>Año</th>
+                                    <th>Estado Actual</th>
+                                    <th>Estado Anterior</th>
+                                    <th>Última Actualización</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer text-center">
+                </div>
+                <!-- /.box-footer -->
+            </div>
+            <!--/.box -->
+        </div>
+    </div>
+</section>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var estadosDJDataTable = $('#estadosDJ>.box-body>.table-responsive>table').DataTable({
+            responsive: true,
+            "autoWidth": true,
+            "ajax": {
+                "url": "http://api.puente-sur.cl/api/ServicioImpuestosInternos/GetEstadosDeclaracionesJuradas",
+                "dataType": 'json',
+                "type": "GET",
+                "dataSrc": "",
+                "beforeSend": function (xhr, settings) {
+                    xhr.setRequestHeader('Authorization', 'bearer ' + getToken());
+                    $('#right').html('checking');
+                }
+            },
+            "columns": [
+                { "data": "cliente.nom" },
+                { "data": "estado.tb1_dj" },
+                { "data": "estado.tb1_titulo" },
+                { "data": "estado.tb1_anio" },
+                { "data": "estado.tb1_estado" },
+                { "data": "estado.tb2_estado" },
+                { "data": "estado.tb1_fecha_actualizacion" }
+            ]
+        });
+
+
+
+        $('#btnbuscar').on('click', function () {
+            if ($.Rut.validar($('#rut').val())) {
+                //debugger;
+                $.ajax({
+                    url: "http://api.puente-sur.cl/api/ServicioImpuestosInternos/GetDeclaracionesJuradasRut",
+                    type: 'GET',
+                    data: { 'periodo': $('#periodo').val(), 'rut': $('#rut').val() },
+                    dataType: 'json',
+                    success: function (data, status) {
+                        var anio = parseInt($('#periodo').val());
+                        $('.anio1').html(anio);
+                        $('.anio2').html(anio - 1);
+                        $('.anio3').html(anio - 2);
+                        $('#DJporRutTable>tbody').html('');
+
+                        $.each(data[0].data, function (index, item) {
+                            
+                            
+
+                            $('#DJporRutTable>tbody').append('<tr>   <td>' + item.titulo + '</td>' +
+                                                                    '<td>' + item.dj + '</td>' +
+                                                                    '<td>' + ((item.estados[anio]==undefined)? '-' : item.estados[anio]) + '</td>' +
+                                                                    '<td>' + ((item.estados[anio - 1] == undefined) ? '-' : item.estados[anio - 1]) + '</td>' +
+                                                                    '<td>' + ((item.estados[anio - 2] == undefined) ? '-' : item.estados[anio - 2]) + '</td>' +
+                                                                        '</tr>');
+                        });
+
+                        //return console.log("The returned data", data);
+                    },
+                    beforeSend: function (xhr, settings) {
+                        xhr.setRequestHeader('Authorization', 'bearer ' + getToken());
+                        $('#right').html('checking');
+                    }
+                });
+            }
+            
+        });
+
+        function on_error(E) {
+            $('#informationMessage').html('<div class="alert alert-warning no-margin fade in">'+
+							'<i class="fa-fw fa fa-info"></i>'+
+							'Rut Ingresado No Valido'+
+						'</div>');
+        }
+        function on_empty(E) {
+            $('#informationMessage').html('<div class="alert alert-warning no-margin fade in">' +
+                '<i class="fa-fw fa fa-info"></i>' +
+                'Debe Ingresar un Rut' +
+            '</div>');
+        }
+        function on_success(E) {
+            $('#informationMessage').html('');
+        }
+
+        $('#rut').Rut({
+            on_empty: on_empty,
+            on_error: on_error,
+            on_success: on_success,
+            format_on: 'change'
+        } );
+
+        
+
+
+    })
+
+</script>

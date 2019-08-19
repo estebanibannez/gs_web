@@ -1,0 +1,31 @@
+﻿@*@model System.Collections.IEnumerable*@
+
+<div class="table-responsive">
+    <table id="dt_basic0" class="table table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Organización</th>
+                <th>Usuario/Rut</th>
+                <th>Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td></td>
+                        <td>@item.Orga</td>
+                        <td>@item.Rut</td>
+                        <td>@item.Pass</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<script>
+    setFormulario();
+    InicializaMantenedor("dt_basic0");   
+</script>

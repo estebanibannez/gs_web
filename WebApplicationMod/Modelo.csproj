@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{34B51E67-F94E-4713-816F-A514F8096833}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebApplicationMod</RootNamespace>
+    <AssemblyName>WebApplicationMod</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Biblioteca_GS_Web.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cab_anticipos.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Categoria_Videos.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Clientes.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ctrl_acciones.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="det_anticipos.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Docs.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Documento.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="evento.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="files_anticipos.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_AccFrm.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_Act_Prog.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_Archivos.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_Asig_Carg_Clie.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_Asig_HrrAp.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_Bancos.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_Cargos.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_ClaCtas.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_ClasifDoc.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_Clasif_Arch.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_Ctas.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_CtasCtes.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_ctrl_cump.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_Detalles.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_Documentos.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gs_documentos_new.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_FRMS.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_HerrApoyo.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_Medios_Pago.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_ModNumComp.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_Pagos.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_Pass.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_Procesos.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_Restriciones_Bancarias.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_Saldos_Bancarios.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_SubClasifDoc.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_SubClasif_Arch.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_TDoc.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GS_TIPMP.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="indicadores.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InfGestionPago.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LogViewsVideos.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="l_clientes.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="l_usuarios.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloGS.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloGS.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloGS.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloGS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloGS.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Monedas.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="parametros.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros_GS_WEB.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Permisos.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Permisos_GS_WEB.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Permisos_Softland.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proveedores.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Saldo_Banco.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_getClientes_Result.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_getProveFactu_Result.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TDoc.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tipo_Anticipos.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Usu.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VideosTutoriales.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="v_UsuarioIFRS2013.cs">
+      <DependentUpon>ModeloGS.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="ModeloGS.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModeloGS.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ModeloGS.edmx.diagram">
+      <DependentUpon>ModeloGS.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModeloGS.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModeloGS.edmx</DependentUpon>
+      <LastGenOutput>ModeloGS.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ModeloGS.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModeloGS.edmx</DependentUpon>
+      <LastGenOutput>ModeloGS.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,201 @@
+.DTEPage {
+  background-image   : url("http://www.custodium.com/docs/cencosudc003/factura/img/fondo.gif");
+  background-position: center;
+  background-repeat  : repeat;
+  position           : relative;
+  width              : 680px;
+  height             : 19.0cm;
+  text-valign	 	 :top;
+  
+}
+
+
+.DTEidTable {
+  border: 1mm solid FC0B0B;
+  width: 8cm;
+  height: 4cm;
+  font-family: arial;
+  font-size: 0.5cm;
+  font-weight: bold; 
+  color: FC0B0B;
+  text-align: center;
+}
+
+.letraRazon {
+  font-style  : normal;
+  font-size   : 7mm;
+  font-family : Arial, Helvetica;
+  font-weight : bold;
+  color       : black;
+}
+
+.letraGiro {
+  font-style  : normal;
+  font-size   : 2mm;
+  font-family : Arial, Helvetica;
+  color       : black;
+}
+
+.letraDireccion {
+  font-style  : normal;
+  font-size   : 3mm;
+  font-family : Arial, Helvetica;
+  color       : black;
+}
+
+.tablaFactura {
+  border-style: solid;
+  border-color: red;
+  width	      : 70%;
+}
+
+.tablaDatos {
+  border-style: solid;
+  border-width: 1;
+  border-color: rgb(49,66,132);
+ 
+}
+
+.cabeceraClientes {
+  font-family : arial;
+  font-size   : 8px;
+  text-align  : left;
+}
+
+.cabeceraClientes2 {
+  font-family : arial;
+  font-size   : 8px;
+  text-align  : center;
+}
+
+.textoClientes {
+  font-family : arial;
+  font-size   : 8px;
+  text-align  : left;
+}
+
+.textoTransporte {
+  font-family : arial;
+  font-size   : 8px;
+  text-align  : left;  
+}
+
+.textoReferencia {
+  font-family : arial;
+  font-size   : 12px;
+  text-align  : left;
+}
+
+.cabeceraDetallesB {
+  border-right  : 1px solid rgb(49,66,132);
+  font-family   : arial;
+  font-size     : 8px;
+  font-weight   : bold;
+  text-align    : center;
+  border-bottom : 1px solid rgb(49,66,132);
+  border-top    : 1px solid rgb(49,66,132);
+  color         : black;  
+}
+
+.cabeceraDetallesN {
+  font-family   : arial;
+  font-size     : 10px;
+  text-align    : center;
+  border-bottom : 1px solid rgb(49,66,132);
+  border-top    : 1px solid rgb(49,66,132);
+  color         : rgb(49,66,132);
+}
+
+.DetalleB {
+  font-family  : arial;
+  font-size    : 8px;
+  border-right : 1px solid rgb(49,66,132);
+}
+
+.DetalleN {
+  font-family  : arial;
+  font-size    : 10px;
+}
+
+.productoTextoConMargenDF {
+  font-family :arial;
+  font-size   :10px;
+  border-right:1px solid rgb(49,66,132);
+  border-bottom:1px solid rgb(49,66,132);
+}
+
+.TablaTotales {
+  font-family :arial;
+  font-size   :9px;
+  font-weight :bold;
+  text-align  :left;
+  border      :2px solid rgb(49,66,132);
+  color       :rgb(49,66,132);
+}
+
+.TotalGlosa {
+  font-family :Arial;
+  font-size   :2.5mm;
+  font-weight :bold;
+  text-align  :left;
+  vertical-align: bottom;
+  color       :rgb(49,66,132);
+}
+
+.TotalMonto {
+  font-family :Courier New;
+  font-size   :3.5mm;
+  font-weight :bold;
+  text-align  :right;
+  color       :black;
+}
+
+.espacio {
+  height: 1mm;
+  font-size: 1mm;
+}
+
+.oficina-sii {
+  font-family: arial; 
+  font-size: 3mm; 
+  color: red; 
+  text-align: center; 
+  font-weight: bold; 
+  text-transform: uppercase;
+}
+<!-- CAmbios!-->
+/* ESTILO PARA COLOCAR ESPACIO (DE ALTO ARBITRARIO) A LAS FILAS O LINEAS DE UNA TABLA */
+.espacioLinea {
+  line-height: 7pt;
+}
+
+
+/* CUADRADO ROJO ESQ SUP DER*/
+
+.tablaFactura {
+ border: 1mm solid red;
+  width: 6cm;
+  height: 3cm;
+  font-family: arial;
+  font-size: 0.4cm;
+  font-weight: bold;
+  color: red;
+  text-align: center;
+}
+
+
+
+				
+#Timbre {padding: 10px 0px 0px 0px; font-family: sans-serif;	font-size:8pt; float: left;margin-left; width: 350px;	border:1px none #414040;	z-index:3;}				
+#textoTimbre {padding: 0px 0px 0px 0px; font-family: sans-serif;	font-weight: bold;	font-size:7pt;	width: 350px;	float: left;margin-left;	border:1px none #414040;	text-align: center;}				
+#TimbreResolucion {padding: 0px 0px 0px 0px; font-family: sans-serif;	font-size:8pt; float: left;margin-left;	width: 320px;}				
+#textoResolucion {padding: 0px 0px 0px 0px; font-family: sans-serif; font-weight: bold;	font-size:7pt;	width: 420px;	float: left;margin-left;	border:1px none #414040; text-align: center;}
+												 			      
+
+
+				
+				#code39 { width: 3in; height: 0.25in; }
+				
+				#CodigoBarra {padding: 3px 0px 0px 0px; font-family: sans-serif;	font-size:8pt; float: left;margin-left;	width: 250px;	border:1px none #414040; z-index:3;}				
+				#textoBarra {padding: 3px 0px 0px 0px; font-family: sans-serif; font-weight: bold;	font-size:7pt;	width: 300px;	float: left;margin-left;	border:1px none #414040;}						
+		

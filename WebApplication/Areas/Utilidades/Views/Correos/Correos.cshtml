@@ -1,0 +1,63 @@
+﻿@model WebApplication.Models.Correos
+@using (Html.BeginForm((Model == null ? "EnviarCorreo" : "Correos"), "Correos", FormMethod.Post, new { enctype = "multipart/form-data", @id = "mant-form", @novalidate = "novalidate" , role = "form" }))
+
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+@*<form id="mant-form" method="post" role="form" enctype="multipart/form-data">*@
+    <p class="help-block">Nuevo E-Mail</p>
+    <div class="box box-default">
+        <div class="box-body">
+            <div class="form-group">
+                <input class="form-control tooltip-test" id="Destinatario" name="Destinatario" title="Ingrese datos separados por un ;" data-toggle="tooltip" placeholder="Ingrese Destinatarios:" autofocus="autofocus">
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control tooltip-test" id="CC" name="CC" title="Ingrese datos separados por un ;" data-toggle="tooltip" placeholder="CC:">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="Asunto" name="Asunto" placeholder="Asunto:">
+            </div>
+
+            <div class="form-group">
+                <textarea class="form-control" id="MensajeCorreo" name="MensajeCorreo" placeholder="Ingrese Mensaje:" style="height:100px;"> </textarea>
+            </div>
+            <div class="form-group">
+                <input type="file" name="fileUploader" class="btn btn-default btn-file">
+                @* <p class="help-block">Max. 32MB</p>*@
+            </div>
+        </div>
+        <div class="box-footer">
+            <div class="pull-right">
+                <button type="button" class="btn btn-warning pull-right" action="save"><i class="fa fa-envelope-o"></i> Enviar correo</button>
+            </div>
+            <button type="reset" class="btn btn-default"><i class="fa fa-times"></i> Descartar</button>
+        </div>
+    </div>
+    @*</form>*@
+    }
+
+    <script>
+     $(function () {
+            
+       $('#MensajeCorreo').wysihtml5();
+         
+       setFormulario(
+            "mant-form",
+            {Destinatario: { required: true }},
+            {Destinatario: { required: '<span class="help-block error"><i class="fa fa-warning" style="color:red"></i> Ingrese al menos un destinatario</span> ' }
+                   });
+      });
+
+        $(document).on('show.bs.modal', '#myModal', function (e) {
+            debugger;
+             var d = $(e.relatedTarget);
+
+             if (d.hasClass('modal-ajax-load')) {
+
+                 $('#MensajeCorreo').wysihtml5();
+             }
+        });
+    </script>
+
+

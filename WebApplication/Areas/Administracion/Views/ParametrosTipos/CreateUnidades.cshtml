@@ -1,0 +1,44 @@
+﻿@model WebApplicationMod.parametros
+<style>
+    .pdddiv {
+        padding: 2px !important;
+    }
+</style>
+
+@using (Html.BeginForm((Model == null ? "CreateUnidades" : "UpdateUnidades"), "ParametrosTipos", FormMethod.Post, new { @id = "mant-form", @novalidate = "novalidate", role = "form" }))
+{
+
+    @Html.AntiForgeryToken()
+    @(Model == null ? new MvcHtmlString("") : Html.HiddenFor(p => p.id))
+
+
+    <div class="pdddiv">
+
+        <div class="row pdddiv">
+            <div class="col-12 col-md-8 col-xs-4">Nombre Unidad</div>
+            <div class="col-6 col-md-4 col-xs-8">@Html.TextBoxFor(model => model.nom, new { @class = "form-control", type = "text" })</div>
+        </div>
+
+        <div class="box-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+            <button type="button" class="btn btn-warning pull-right" action="save">Guardar</button>
+        </div>
+
+    </div>
+
+}
+
+
+<script>
+
+    setFormulario(
+        "mant-form",
+        {
+            nom: { required: true },
+        },
+        {
+            nom: { required: '<span class="help-block error" ><i class="fa fa-warning"></i>Ingrese un nombre</span> ' }
+        }
+    );
+
+</script>

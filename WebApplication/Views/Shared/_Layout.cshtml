@@ -1,0 +1,69 @@
+﻿@using WebApplication.App_GlobalResources
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Web GS PSO</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+ 
+    @Styles.Render("~/AdminLTE/css")
+    @Styles.Render("~/AdminLTE/plugins/fullcalendar/css/fullcalendar.css")
+    @Scripts.Render("~/AdminLTE/js")
+
+
+</head>
+<body class="sidebar-mini skin-yellow-light">
+    <div class="wrapper">
+        @Html.Partial("partials/_Header")
+         <aside class="main-sidebar">
+            @Html.Partial("partials/_Aside")
+        </aside>
+        <div class="content-wrapper">
+            <section id="content" class="content">
+                @RenderBody()
+            </section>
+        </div>
+    </div>
+    @*<aside class="control-sidebar control-sidebar-dark">
+        @Html.Partial("partials/_extraible")
+    </aside>*@
+    <footer class="main-footer">
+        @Html.Partial("partials/_Footer");
+    </footer>
+    @*<----------------------------modal de contenidos----------------------------------->*@
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-header form-control">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-content modal-body">
+            </div>           
+        </div>
+    </div>
+    @*<----------------------------modal de fondo ancho----------------------------------->*@
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" style="width:100%;">
+            <div class="modal-header form-control">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-content modal-body">
+            </div>
+        </div>
+    </div>
+
+    @*<----------------------------modal de fondo----------------------------------->*@
+    <div class="modal fade" id="Modal_Background" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+
+
+    @Html.Hidden("base_url", Url.Action("", "", new { }, Request.Url.Scheme))
+</body>
+</html>

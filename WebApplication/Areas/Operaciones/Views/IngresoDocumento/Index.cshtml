@@ -1,0 +1,1239 @@
+﻿@model IEnumerable<WebApplicationMod.Docs>
+@using System.Globalization
+<style>
+    .help-block {
+        color: red !important;
+    }
+
+    .files input {
+        outline: 2px dashed #92b0b3;
+        outline-offset: -10px;
+        -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        padding: 120px 0px 85px 35%;
+        text-align: center !important;
+        margin: 0;
+        width: 100% !important;
+    }
+
+        .files input:focus {
+            outline: 2px dashed #92b0b3;
+            outline-offset: -10px;
+            -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+            transition: outline-offset .15s ease-in-out, background-color .15s linear;
+            border: 1px solid #92b0b3;
+        }
+
+    .files {
+        position: relative;
+    }
+
+        .files:after {
+            pointer-events: none;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 50px;
+            right: 0;
+            height: 56px;
+            content: "";
+            background-image: url(https://image.flaticon.com/icons/png/128/109/109612.png);
+            display: block;
+            margin: 0 auto;
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+
+    .color input {
+        background-color: #f1f1f1;
+    }
+
+    .files:before {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        pointer-events: none;
+        width: 100%;
+        right: 0;
+        height: 57px;
+        content: "";
+        display: block;
+        margin: 0 auto;
+        color: #2ea591;
+        font-weight: 600;
+        text-transform: capitalize;
+        text-align: center;
+    }
+</style>
+
+<div class="box box-warning">
+    <div class="box box-body">
+        <button class="btn btn-primary pull-right" id="entregar">Entregar Docs</button>
+        <div class="pull-left">
+            <button type="button" class="btn btn-danger" id="btnNew">Nuevo</button>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="table-responsive">
+        <div class="col-md-12">
+            <div class="box-body">
+                <table class="table table-striped display no-wrap" style="width:100%" id="dt_table">
+
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Auxiliar</th>
+                            <th>TD</th>
+                            <th>n°Doc</th>
+                            <th>Total</th>
+                            <th>Cliente</th>
+                            <th>IS</th>
+                            <th>Recepción </th>
+                            <th>En</th>
+                            <th>Glosa</th>
+                            <th>T/C</th>
+                            <th>Valor Dolar</th>
+                            <th>cldol</th>
+                            <th>XaoPDF</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+
+                    </tbody>
+                </table>
+
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+@using (Html.BeginForm(Model == null ? "Create " : "Edit", "IngresoDocumento", FormMethod.Post, new { id = "mant-form" }))
+{
+    <input type="hidden" id="ID" name="ID" />
+    <input type="hidden" id="CTDCod" name="CTDCod" />
+
+    <div class="box box-primary">
+        <div class="box-body">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Edición</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="text-muted well well-sm no-shadow">
+                                <div class="box-body text-center">
+                                    <div class="col-md-12">
+                                        <label>Rut Cliente</label>
+                                        <div id="ddlclie">
+                                            @Html.DropDownList("CLIENTE", ViewBag.clientes as SelectList, "Seleccione ...", new { @class = "form-control", @id = "CLIENTE", @style = "width:100%" })
+                                        </div>
+                                        <div>
+                                            @Html.TextBox("txtRut", null, new { @class = "ed form-control", @readonly = "readonly", @placeholder = "Rut Cliente" })
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6 col-xs-12">
+                                        <label>Nombre Cliente</label>
+                                        <div>@Html.TextBox("txtnomClie", null, new { @class = "ed form-control", @readonly = "readonly", @placeholder = "Nombre cliente" })</div>
+                                        <label>Imputación sugerida</label>
+                                        <div>@Html.TextBox("txtimpsug", null, new { @class = "ed form-control", @readonly = "readonly", @placeholder = "Imputación Sugerida" })</div>
+                                        <label>Tipo</label>
+                                        <div>@Html.TextBox("Tipo", null, new { @class = "ed form-control", @readonly = "readonly", @id = "tipodo", @placeholder = "Tipo" })</div>
+                                    </div>
+                                    <div class="col-md-6 col-xs-12">
+                                        <label>Rut Proveedor</label>
+                                        <div>@Html.TextBox("CodAux", null, new { @class = "ed form-control", @maxlength = 10, @placeholder = "Rut Proveedor" })</div>
+                                        <label>Nombre Proveedor</label>
+                                        <div>@Html.TextBox("NomAux", null, new { @class = "ed form-control", @readonly = "readonly", @placeholder = "Nombre Proveedor" })</div>
+                                        <label>Nombre Corto Proveedor</label>
+                                        <div>@Html.TextBox("txtNomcor", null, new { @class = "ed form-control", @readonly = "readonly", @placeholder = "Nombre corto Proveedor" })</div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="col-md-12">
+                            <div class="text-muted well well-sm no-shadow">
+                                <div class="box-body text-center">
+                                    <div class="col-xs-12 col-md-6">
+                                        <label>Tipo Cambio</label>
+                                        <div>@Html.TextBox("TCambio", null, new { @class = "ed form-control", @placeholder = "Tipo Cambio", @maxlength = 9 })</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-12">
+                            <div class="text-muted well well-sm no-shadow">
+
+                                <div class="box-body text-center">
+                                    <div class="col-md-3  col-xs-12">
+                                        <label>año</label>
+                                        <div>@Html.TextBox("CPBAño", null, new { @class = "ed form-control", @id = "CPBAño", @maxlength = 4, @placeholder = "Año" })</div>
+                                    </div>
+                                    <div class="col-md-3  col-xs-12">
+                                        <label>Mes</label>
+                                        <div>@Html.TextBox("CPBMes", null, new { @class = "ed form-control", @id = "CPBMes", @maxlength = 2, @placeholder = "Mes" })</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="text-muted well well-sm no-shadow">
+                                <div class="box-body text-center">
+                                    <div class="form-group col-md-6 col-xs-12">
+                                        <label>Fecha Emisión</label>
+                                        <div>@Html.TextBox("emision", null, new { @class = "ed form-control", @id = "emision" })</div>
+
+                                        <label>N°Documento</label>
+                                        <div>@Html.TextBox("NumDocI", null, new { @class = "ed form-control", @placeholder = "Número documento", @maxlength = 9 })</div>
+                                    </div>
+
+                                    <div class="form-group col-md-6 col-xs-12">
+
+                                        <label>Fecha Vencimiento</label>
+                                        <div>@Html.TextBox("vencimiento", null, new { @class = "ed form-control" })</div>
+
+                                        <label>Tipo Documento</label>
+                                        <div><select class="ed form-control" name="tipo" id="tipo"></select></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="text-muted well well-sm no-shadow">
+                                <div class="box-body text-center">
+                                    <div class="form-group col-md-6 col-xs-12">
+                                        <label>Neto/bruto</label>
+                                        <div>@Html.TextBox("Neto", null, new { @class = "ed form-control", @maxlength = 17, @placeholder = "Neto" })</div>
+                                        <label>Iva/Retención</label>
+                                        <div>@Html.TextBox("Impu", null, new { @class = "ed form-control", @maxlength = 17, @placeholder = "Iva/Retención" })</div>
+
+                                    </div>
+                                    <div class="form-group col-md-6 col-xs-12">
+
+                                        <label>Exento</label>
+                                        <div>@Html.TextBox("Exento", null, new { @class = "ed form-control", @maxlength = 17, @placeholder = "Exento" })</div>
+                                        <label>Total Liquido</label>
+                                        <div>@Html.TextBox("Total", null, new { @class = "ed form-control", @placeholder = "Total Liquido" })</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="text-muted well well-sm no-shadow">
+                                <div class="box-body text-center">
+                                    <div class="col-md-6 col-xs-12">
+                                        <label>Descripción corta</label>
+                                        <div>@Html.TextArea("CabGlo", null, new { @class = "ed form-control col-md-8", @readonly = "readonly", @maxlength = 100, @placeholder = "Cab Glosa" })</div>
+                                    </div>
+                                    <div class="col-md-6 col-xs-12">
+                                        <label>Descripción</label>
+                                        <div>@Html.TextArea("MovGlosa", null, new { @class = "ed form-control col-md-8", @maxlength = 59, @placeholder = "mov Glosa" })</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+
+                    <div class="box-footer">
+                        <div class="col-md-12">
+                            <button type="button" id="btnSave" class="btn btn-warning col-xs-12 col-md-4 pull-left" action="guardar">Guardar</button>
+                            <button type="button" class="btn btn-danger col-xs-12 col-md-6 pull-right" disabled="disabled" id="btnCancelNew">Cancelar Nuevo</button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="box-header with-border">
+                        <h3></h3>
+                    </div>
+                    <iframe id="ob" src="" style="width:100%; height:800px;  display: block;" onerror="obOnError"></iframe>
+                    <div class="form-group files color" id="contfile">
+                        <label>Ingrese documento PDF </label>
+
+                        <input type="file" accept="application/pdf" class="form-control" name="file" id="archivo">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+
+
+    $("#emision").datepicker
+        ({
+            minDate: '01-01-2000',
+            maxDate: '02-06-'+new Date().getFullYear(),
+            autoclose: true,
+            format: 'dd-mm-yyyy',
+            changeYear: false,
+            onSelect: function(dateText) {
+                $(this).change();
+            }
+        }).on("change", function () {
+            $("#vencimiento").removeAttr("disabled");
+           var stringfecha = $("#emision").val().toString();
+            var fechastrseparada = stringfecha.split('-');
+            var anno = fechastrseparada[2];
+            var mes = fechastrseparada[1];
+            var dia = fechastrseparada[0];
+            var fechajava = new Date(anno, parseInt(mes) - 1, dia);
+            fechajava.setMonth((fechajava.getMonth()) + 1);
+            var fechafinal = moment(fechajava).format("DD-MM-YYYY");
+            if (($("#emision").val().toString()) != "") {
+                comprobarprove = false;
+
+                if (parseInt(fechajava.getFullYear()) < 2000 || parseInt(fechajava.getFullYear()) > parseInt(new Date().getFullYear())) {
+                    alert("fecha de emisión no debe ser mayor a año actual ni menor al 2000");
+                    $("#emision").val("");
+
+                    $("#vencimiento").val("");
+
+                } else {
+                    $("#vencimiento").val(fechafinal);
+                    $("#erroremision").remove();
+                }
+            }
+
+        });
+
+    $("#vencimiento").datepicker
+        ({
+            autoclose: true,
+            format: 'dd-mm-yyyy',
+            changeYear: true,
+            onSelect: function(dateText) {
+        $(this).change();
+    }
+    }).on("change", function () {
+
+      var  stringfecha = this.value;
+        var fechastrseparada = stringfecha.split('-');
+        var anno = fechastrseparada[2];
+        var mes = fechastrseparada[1];
+        var dia = fechastrseparada[0];
+        var fechajava = new Date(anno, parseInt(mes) - 1, dia);
+        fechajava.setMonth((fechajava.getMonth()) + 1);
+        var fechafinal = moment(fechajava).format("DD-MM-YYYY");
+        if (parseInt(fechajava.getFullYear()) < 2000 || parseInt(fechajava.getFullYear()) > parseInt(new Date().getFullYear())) {
+            alert("fecha de vencimiento no debe ser mayor a año actual ni menor al 2000");
+            $("#emision").val("");
+            $("#vencimiento").val("");
+
+        } else {
+            if ((($("#emision").val()).toString()) == "") {
+                alert("Ingrese fecha de emisión");
+            } else {
+                $("#vencimiento").val(fechafinal);
+            }
+        }
+
+    });
+
+    $("#emision").focusout(function () {
+        var stringfecha = $("#emision").val();
+        if (stringfecha == "") {
+            $("#vencimiento").attr("disabled", "disabled");
+            $("#vencimiento").val("");
+        } else
+        {
+            $("#vencimiento").removeAttr("disabled");
+            var fechastrseparada = stringfecha.split('-');
+            var anno = fechastrseparada[2];
+            var mes = fechastrseparada[1];
+            var dia = fechastrseparada[0];
+            var fechajava = new Date(anno, parseInt(mes) - 1, dia);
+            fechajava.setMonth((fechajava.getMonth()) + 1);
+            var fechafinal = moment(fechajava).format("DD-MM-YYYY");
+            if (parseInt(fechajava.getFullYear()) < 2000 || parseInt(fechajava.getFullYear()) > parseInt(new Date().getFullYear())) {
+                alert("fecha de emisión no debe ser mayor a año actual ni menor al 2000");
+                $("#emision").val("");
+                $("#vencimiento").val("");
+            } else {
+                $("#vencimiento").val(fechafinal);
+            }
+
+        }
+
+
+
+    });
+
+    $("#btnSave").mouseenter(function () {
+        var archivo = $("#archivo").get(0).files[0];
+        if (!nuevo)
+        {
+            if (archivo == null)
+            {
+                $("#archivo").attr("disabled","disabled");
+            }
+        }
+        var clientevalidar = $("#CLIENTE").val();
+
+
+
+    });
+
+    $("#btnSave").mouseleave(function () {
+        var archivo = $("#archivo").get(0).files[0];
+        if (!nuevo)
+        {
+            if (archivo == null)
+            {
+                $("#archivo").removeAttr("disabled","disabled");
+            }
+        }
+    });
+
+    $("#CLIENTE").select2({
+        matcher: customMatcher, "language": {
+            "noResults": function () {
+                return "Cliente no encontrado";
+            }
+        }
+    });
+
+    function customMatcher(params, data) {
+        var bole = false;
+        if ($.trim(params.term) === '')
+        {
+            return data;
+        }
+       var elemenum= ((data.element.value).toString()).indexOf(params.term);
+       var elemenpala = (((data.text).toString()).toLowerCase()).indexOf((params.term.toString()).toLowerCase());
+
+       if (elemenum > -1)
+       {
+           return data;
+       }
+       if (elemenpala > -1)
+       {
+           return data;
+       }
+       return null;
+    }
+
+    $('#CLIENTE').on("change", function () {
+        var rut = parseInt($("#CLIENTE").val());
+        if (isNaN(rut)){
+            $('#tipo option').remove();
+            $('#tipo').attr("disabled","disabled");
+            $("#txtnomClie").val("");
+            $("#tipodo").val("");
+            $("#txtimpsug").val("");
+        }
+        $.ajax({
+            url: '@Url.Action("GetEditarManual", "IngresoDocumento")',
+            data: "{rutClie:" + rut + "}",
+            type: 'post',
+            contentType: 'application/json',
+            success(resultado) {
+                $("#errorcliente").remove();
+                $('#tipo option').remove();
+                $('#tipo').removeAttr("disabled");
+                $("#txtnomClie").val(resultado.nombreArc);
+                $("#tipodo").val(resultado.tipo);
+                $("#txtimpsug").val(resultado.impsug);
+                var tipos = resultado.tipos;
+                for (var i = 0; i < tipos.length; i++) {
+                    $('#tipo').append('<option id=' + tipos[i].id + ' data-impu="' +Math.abs(tipos[i].impu) + '">' + tipos[i].nom + '</option>');
+
+                }
+                $("#CTDCod").val($("#tipo option:selected").attr("id"));
+            }
+        });
+
+    });
+
+
+    $("#archivo").change(function () {
+        var archi = $("#archivo").get(0).files[0];
+        var separador = (archi.name).split(".");
+        if (separador[1].toLowerCase() == "pdf") {
+            var urlArchivo = URL.createObjectURL($("#archivo").get(0).files[0]);
+            $("#ob").css("height", "800px");
+            $("#ob").attr('src', urlArchivo);
+            $("#ob").show();
+        } else
+        {
+            document.getElementById("archivo").value = null;
+            alert("Ingrese documento pdf");
+        }
+
+    });
+
+    $("#ob").css("height", "0px");
+    $("#contfile").hide();
+    var comprobaranno = false;
+    var comprobarmes = false;
+    var comprobarmove = false;
+    var comprobarprove = false;
+    $(document).ready(function () {
+        $("#ddlclie").hide();
+        $("#btnCancelNew").hide();
+    });
+
+    function activarCamposManual()
+    {
+        $("#archivo").removeAttr("disabled");
+        $("#CodAux").removeAttr("disabled");
+        $("#CodAux").removeAttr("readonly");
+        $('#tipo option').remove();
+        $('#tipodo').removeAttr("disabled");
+        $("#CPBAño").removeAttr("disabled");
+        $("#CPBMes").removeAttr("disabled");
+        $("#NumDocI").removeAttr("disabled");
+        $("#Neto").removeAttr("disabled");
+        $("#Exento").removeAttr("disabled");
+        $("#Impu").removeAttr("disabled");
+        $("#Total").removeAttr("disabled");
+        $("#TCambio").removeAttr("disabled");
+        $("#emision").removeAttr("disabled");
+        $("#vencimiento").removeAttr("disabled");
+        $("#CabGlo").removeAttr("disabled");
+        $("#CabGlo").removeAttr("readonly");
+        $("#MovGlosa").removeAttr("disabled");
+        $("#ddltipo").removeAttr("disabled");
+        $("#txtRut").hide();
+        $("#txtRut").attr("type", "hidden");
+        $("#CLIENTE").show();
+        $("#CLIENTE").removeAttr("disabled");
+        document.getElementById("archivo").value = null;
+        $(".help-block").show();
+    }
+
+    function desactivarCamposManual() {
+
+        $("#archivo").attr("disabled","disabled");
+        $("#txtRut").attr("disabled", "disabled");
+        $("#CodAux").attr("disabled", "disabled");
+        $("#CodAux").attr("readonly","readonly");
+        $('#tipo option').remove();
+        $('#tipo').attr("disabled","disabled");
+        $("#CPBAño").attr("disabled", "disabled");
+        $("#CPBMes").attr("disabled", "disabled");
+        $("#NumDocI").attr("disabled", "disabled");
+        $("#tipodo").attr("disabled", "disabled");
+        $("#Neto").attr("disabled", "disabled");
+        $("#Exento").attr("disabled", "disabled");
+        $("#Impu").attr("disabled", "disabled");
+        $("#Total").attr("disabled", "disabled");
+        $("#TCambio").attr("disabled", "disabled");
+        $("#emision").attr("disabled", "disabled");
+        $("#vencimiento").attr("disabled", "disabled");
+        $("#CabGlo").attr("disabled", "disabled");
+        $("#MovGlosa").attr("disabled", "disabled");
+        $("#ddltipo").attr("disabled", "disabled");
+        $("#CLIENTE").attr("disabled","disabled");
+        $("#CLIENTE").hide();
+        $("#txtRut").show();
+        $("#txtRut").attr("type", "text");
+        $(".help-block").hide();
+        $("#CodAux").show();
+        document.getElementById("archivo").value = null;
+    }
+
+    function vaciar()
+    {
+        $("#ID").val("");
+        $("#txtRut").val("");
+        $("#txtnomClie").val("");
+        $("#txttip").val("");
+        $("#txtimpsug").val("");
+        $("#CodAux").val("");
+        $("#NomAux").val("");
+        $("#txtNomcor").val("");
+        $('#tipo option').remove();
+        $("#CPBAño").val("");
+        $("#CPBMes").val("");
+        $("#NumDocI").val("");
+        $("#tipodo").val("");
+        $("#Neto").val("");
+        $("#Exento").val("");
+        $("#Impu").val("");
+        $("#Total").val("");
+        $("#TCambio").val("");
+        $("#emision").val("");
+        $("#vencimiento").val("");
+        $("#CabGlo").val("");
+        $("#MovGlosa").val("");
+        $("#ddltipo").val("");
+        $("#CTDCod").val("");
+        document.getElementById("archivo").value = null;
+    }
+
+    $("#btnNew").click(function () {
+        $(".help-block").remove();
+        $(".selected").removeClass("selected");
+        var alto = document.body.scrollHeight;
+        alto = alto-1050 ;
+        //$(window).scrollTop(alto);
+        $("#btnNew").attr("disabled", "disabled");
+        $("#btnCancelNew").removeAttr("disabled");
+        $("#btnEdit").hide();
+        $("#btnCancelNew").show();
+        nuevo = true;
+        $("#ob").css("height", "0px");
+        vaciar();
+        var fechaactual = new Date();
+        $("#CPBAño").val(fechaactual.getFullYear());
+        $("#CPBMes").val(fechaactual.getMonth()+1);
+        activarCamposManual();
+        $("#vencimiento").attr("disabled", "disabled");
+        $("#btnSave").removeAttr("disabled");
+        $("#ddlclie").show();
+        $("#contfile").show();
+        document.getElementById("archivo").value = null;
+    });
+
+    $("#btnCancelNew").click(function () {
+        $("#ob").css("height", "0px");
+        $(".help-block").remove();
+            nuevo = false;
+            desactivarCamposManual();
+            vaciar();
+            $("#btnEdit").show();
+            $("#btnCancelNew").hide();
+            $("#btnCancelNew").attr("disabled", "disabled");
+            $("#btnNew").removeAttr("disabled");
+            $("#btnSave").attr("disabled", "disabled");
+            $("#ddlclie").hide();
+            $('#CLIENTE').val("");
+            $('#CLIENTE').select2({
+                matcher: customMatcher, "language": {
+                    "noResults": function () {
+                        return "Cliente no encontrado";
+                    }
+                }
+            });
+
+    });
+
+    $("#file").on("change", function ()
+    {
+        $("#btnSave").attr("disabled", "disabled");
+    });
+
+    var nuevo = false;
+    $("#vencimiento").focusout(function ()
+    {
+        var stringfecha = $("#emision").val();
+        if (stringfecha == "") {
+            $("#vencimiento").val("");
+            comprobarmove = true;
+        } else {
+            var fechastrseparada = stringfecha.split('-');
+            var anno = fechastrseparada[2];
+            var mes = fechastrseparada[1];
+            var dia = fechastrseparada[0];
+            var fechajava = new Date(anno, parseInt(mes) - 1, dia);
+            fechajava.setMonth((fechajava.getMonth()) + 1);
+            var fechafinal = moment(fechajava).format("DD-MM-YYYY");
+            $("#vencimiento").val(fechafinal);
+            comprobarmove = false;
+        }
+    });
+
+    $('#tipo').on('change', function () {
+        $("#CTDCod").val($(this).children(":selected").attr("id"));
+        $("#Neto").val("");
+        $("#Impu").val("");
+        $("#Exento").val("");
+        $("#Total").val("");
+    });
+
+    $('#emision').mask('99-99-9999', { reverse: true, placeholder: 'dd-mm-yyyy' });
+    $('#vencimiento').mask('99-99-9999', { reverse: true, placeholder: 'dd-mm-yyyy' });
+
+    setFormularioPersonal("mant-form",
+        {
+            CPBAño: {required: true},
+            CPBMes: { required: true },
+            NumDocI: { required: true },
+            Neto: { required: true },
+            Impu: { required: true },
+            Total: { required: true },
+            TCambio: { required: true },
+            vencimiento: { required: true },
+            emision: { required: true },
+            CodAux: { required: true },
+            Exento: { required: true },
+            MovGlosa: { required: true },
+            txtRut: { required: true },
+            file: { required: true },
+            CabGlo: { required: true },
+            CLIENTE: {required:true}
+        },
+        {
+            CPBAño: '<span class="help-block error" ><i class="fa fa-warning">Campo Requerido</i></span> ',
+            CPBMes: '<span class="help-block error" ><i class="fa fa-warning">Campo Requerido</i></span> ',
+            NumDocI: '<span class="help-block error" ><i class="fa fa-warning">Campo Requerido</i></span> ',
+            Neto: '<span class="help-block error" ><i class="fa fa-warning">Campo Requerido</i></span> ',
+            Impu: '<span class="help-block error" ><i class="fa fa-warning">Campo Requerido</i></span> ',
+            Total: '<span class="help-block error" ><i class="fa fa-warning">Campo Requerido</i></span> ',
+            TCambio: '<span class="help-block error" ><i class="fa fa-warning">Campo Requerido</i></span> ',
+            vencimiento: '<span class="help-block error" ><i class="fa fa-warning">Campo Requerido</i></span> ',
+            emision: '<span class="help-block error" id="erroremision" ><i class="fa fa-warning">Campo Requerido</i></span> ',
+            CodAux: '<span class="help-block error" ><i class="fa fa-warning">Campo Requerido</i></span> ',
+            Exento: '<span class="help-block error" ><i class="fa fa-warning">Campo Requerido</i></span> ',
+            MovGlosa: '<span class="help-block error" ><i class="fa fa-warning">Campo Requerido</i></span> ',
+            txtRut: '<span class="help-block error" ><i class="fa fa-warning">Campo Requerido</i></span> ',
+            file: '<span class="help-block error" ><i class="fa fa-warning">PDF Requerido</i></span> ',
+            CabGlo: '<span class="help-block error" ><i class="fa fa-warning">Campo requerido</i></span>',
+            CLIENTE: '<span id="errorcliente" class="help-block error" ><i class="fa fa-warning">Campo requerido</i></span>'
+        });
+
+    $("#CPBMes").focusout(function () {
+        var numero = $("#CPBMes").val();
+        if (numero > 12 || numero == 0 || numero < 0 || numero == "") {
+            alert("Ingresar mes entre 1 y 12");
+            comprobarmes = true;
+        } else
+        {
+            comprobarmes = false;
+        }
+        if (!comprobaranno && !comprobarmes && !comprobarmove && !comprobarprove) {
+            $("#btnSave").removeAttr("disabled");
+        } else {
+            $("#btnSave").attr("disabled", "disabled");
+        }
+
+    });
+
+    $("#CodAux").focusout(function () {
+        var numero = $("#CodAux").val();
+        if (numero=="") {
+            numero = 0;
+        }
+        $.ajax(
+            {
+                url: '@Url.Action("getProveedor", "IngresoDocumento")',
+                data: "{codaux:"+numero+ " }",
+                type: 'POST',
+                contentType: 'application/json',
+                success: function (data) {
+                    if (data.success) {
+                        comprobarprove = false;
+                        $("#NomAux").val(data.nombre);
+                        $("#txtNomcor").val(data.nombrecorto);
+                        $("#btnSave").removeAttr("disabled");
+                    } else
+                    {
+                        comprobarprove = true;
+                        mensajeError("Not Found","Proveedor no encontrado");
+                        $("#btnSave").attr("disabled", "disabled");
+                        $("#NomAux").val("");
+                        $("#txtNomcor").val("");
+                    }
+                    if (!comprobaranno && !comprobarmes && !comprobarmove && !comprobarprove)
+                    {
+                        $("#btnSave").removeAttr("disabled");
+                    } else
+                    {
+                        $("#btnSave").attr("disabled", "disabled");
+                    }
+
+                }
+            })
+            });
+
+
+    $("#CPBAño").focusout(function () {
+        var numero = parseInt($("#CPBAño").val());
+        var actual = new Date().getFullYear();
+        if (numero <1900 || numero>actual) {
+            alert("Ingrese año igual o menor al actual");
+            comprobaranno = true;
+        } else {
+            comprobaranno = false;
+        }
+        if (!comprobaranno && !comprobarmes && !comprobarmove && !comprobarprove) {
+            $("#btnSave").removeAttr("disabled");
+        } else {
+            $("#btnSave").attr("disabled", "disabled");
+        }
+
+    });
+
+
+    $("#Neto").focusout(function () {
+        var neto = parseInt($("#Neto").val());
+        var exento = parseInt($("#Exento").val());
+        var iva =parseFloat($("#tipo option:selected").data("impu"));
+        if (isNaN(neto)) { neto = 0; }
+        if (isNaN(exento)) { exento = 0; }
+        if (isNaN(iva)) { iva = 0; }
+        $("#Impu").val(Math.round(iva*neto));
+        $("#Exento").val("0");
+        $("#Total").val(Math.round(neto + exento +(neto*iva)));
+    }
+    );
+    $("#Impu").focusout(function () {
+
+        var neto = parseInt($("#Neto").val());
+        var ivadrop = parseFloat($("#tipo option:selected").data("impu"));
+        var ivainp = parseFloat($("#Impu").val());
+        var exento = parseInt($("#Exento").val());
+        if (isNaN(neto)) { neto = 0; }
+        if (isNaN(exento)) { exento = 0; }
+        if (isNaN(ivadrop)) { ivadrop = 0; }
+        ivadrop = Math.round(ivadrop * neto);
+        if (ivainp != ivadrop) {
+            $("#Total").val(Math.round(neto + exento + (ivainp)));
+        } else
+        {
+            $("#Total").val(Math.round(neto + exento + (ivadrop)));
+        }
+    }
+  );
+    $("#Exento").focusout(function () {
+        var tipo = $("#tipodo").val();
+        if (isNaN(exento)) { exento = 0; }
+        if (tipo == 'exento') {
+            var exento = parseInt($("#Exento").val());
+            $("#Total").val(Math.round(exento));
+            $("#Exento").val("0");
+        }
+        else
+        {
+
+            var neto = parseInt($("#Neto").val());
+            var exento = parseInt($("#Exento").val());
+            var ivadrop = parseFloat($("#tipo option:selected").data("impu"));
+            if (isNaN(neto)) { neto = 0; }
+            if (isNaN(ivadrop)) {ivadrop = 0; }
+            $("#Impu").val(Math.round(neto * ivadrop));
+            if (isNaN(exento)) { exento = 0; }
+            $("#Total").val(Math.round(neto + exento + (neto* ivadrop)));
+        }
+    });
+
+    $("#TCambio").focusout(function () {
+        if (isNaN(parseFloat(this.value))) {
+            $("#TCambio").val("");
+        } else
+        {
+            $("#TCambio").val(parseFloat(this.value));
+        }
+    });
+
+    $("#TCambio").keypress(function (e) {
+        var caracter=$("#TCambio").val().toString();
+        var bole = caracter.includes(".");
+        if (bole && e.charCode==46) {
+            return false;
+        } else { if (String.fromCharCode(e.keyCode).match(/[^0-9.]/g)) return false; }
+
+    });
+        $("#NumDocI").keypress(function (t) {
+            if (t.charCode < 48 || t.charCode > 57) return false;
+        });
+        $("#Neto").keypress(function(t) {
+            if(t.charCode < 48 || t.charCode > 57) return false;
+        });
+        $("#Exento").keypress(function (t) {
+            if (t.charCode < 48 || t.charCode > 57) return false;
+        });
+        $("#Impu").keypress(function (t) {
+            if (t.charCode < 48 || t.charCode > 57) return false;
+        });
+        $("#Total").keypress(function (t) {
+            if (t.charCode < 48 || t.charCode > 57) return false;
+        });
+        $("#CPBAño").keypress(function (t) {
+            if (t.charCode < 48 || t.charCode > 57) return false;
+        });
+        $("#CPBMes").keypress(function (t) {
+            if (t.charCode < 48 || t.charCode > 57) return false;
+        });
+        $("#CodAux").keypress(function (t) {
+            if (t.charCode < 48 || t.charCode > 57) return false;
+        });
+
+        function Eliminar(ide)
+        {
+            var url= '@Url.Action("Delete", "IngresoDocumento")/';
+            confirmDeletePost('¿Desea eliminar el registro?',url , ide);
+        }
+        Desactivar();
+        var coleccion = [];
+        var filaid = 0;
+        //var table = $('#dt_table').DataTable();
+        //table = InicializaMantenedor("tabla");
+        var boton = document.getElementById("entrega");
+
+      $(document).ready(function () {
+          
+        function mvscreen() {
+            var alto = document.body.scrollHeight;
+            alto = alto-1050;
+            $(window).scrollTop(alto);
+        }
+
+        $('#dt_table tbody').on('click', 'tr', function () {
+            //if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+                vaciar();
+                $("#CabGlo").removeAttr("disabled");
+                $("#ob").attr("src", "");
+                $("#object").attr("data", "");
+                $("#ob").hide();
+                $(".help-block").hide();
+                Desactivar();
+                $("#contfile").hide();
+                document.getElementById("archivo").value = null;
+            //}else {
+                if (!nuevo) {
+                    if ($("#btnSave").attr("disabled")) {
+                        //mvscreen();
+                        Desactivar();
+                        $('#dt_table tbody tr.selected').removeClass('selected');
+                        $(this).addClass('selected');
+                        //filaid = $('.selected').attr("ID");
+                        var $row = $(this).closest('tr');
+                        var data = docsTable.row($row).data();
+                        var idRow = data.ID;
+                        $.ajax({
+                            url: '@Url.Action("Editar", "IngresoDocumento")',
+                            data: "{ id_file:" + idRow + " }",
+                            type: 'POST',
+                            contentType: 'application/json',
+                            success: function (res) {
+                                if (res.Model!=null) {
+                                    mensajeExito("Exito","Se han cargados los datos.Baje para verificar...");
+                                } else {
+                                    mensajeError("Error","Hubo un error al cargar los datos del documento...")
+                                }
+                                var mode = res.Model;
+                                Activar();
+                                $("#CabGlo").attr("disabled", "disabled");
+                                $(".help-block").remove();
+                                $("#CodAux").attr("readonly", "readonly");
+                                $("#ID").val(mode.ID);
+                                $("#txtRut").val(mode.Rut);
+                                $("#txtnomClie").val(mode.Nombre_Archivo);
+                                $("#tipodo").val(res.ty);
+                                $("#txtimpsug").val(mode.impsug);
+                                $("#CodAux").val(mode.CodAux);
+                                $("#NomAux").val(mode.NomAux);
+                                $("#txtNomcor").val(res.nomCorto);
+                                $("#CPBAño").val(mode.CPBAño);
+                                $("#CPBMes").val(mode.CPBMes);
+                                $("#NumDocI").val(mode.NumDocI);
+                                $("#Neto").val(mode.Neto);
+                                $("#Exento").val(mode.Exento);
+                                $("#Impu").val(mode.Impu);
+                                $("#Total").val(mode.Total);
+                                $("#TCambio").val(mode.CTD == "S" ? mode.vdolar: mode.TCambio);
+                                $("#emision").val(res.emi);
+                                $("#vencimiento").val(res.ven);
+                                $("#CabGlo").val(mode.CabGlo);
+                                $("#MovGlosa").val(mode.MovGlosa);
+                                $("#CTDCod").val(mode.CTDCod);
+                                $("#contfile").show();
+                                $("#ob").css("height", "850px");
+                                $("#ob").css("display", "block");
+                                document.getElementById("archivo").value = null;
+                                var ix = mode.ID;
+                                if (mode.Archivo != "") {
+                                    var url = '@Url.Action("Pdf","IngresoDocumento")/' + ix;
+                                    $("#ob").attr("src", url);
+                                    $("#ob").css("width", "100%");
+                                } else
+                                {
+                                    $("#ob").attr("src", 'http://gs.pso.cl/Master/DocuXml?idCab=' + mode.id_encab);
+                                    $("#ob").css("width", "100%");
+                                    $("#ob").css("padding-left", "7%");
+                                }
+                                var element = res.tipos;
+
+                                for (var i = 0; i < element.length; i++) {
+
+                                    if (element[i].id == mode.CTDCod) {
+                                        $('#tipo').append('<option selected id="' + element[i].id + '" data-impu="' +Math.abs(element[i].impu) + '">' + element[i].nom + '</option>');
+                                    } else {
+                                        $('#tipo').append('<option id="' + element[i].id + '" data-impu="' + Math.abs(element[i].impu)+ '">' + element[i].nom + '</option>');
+                                    }
+                                }
+
+                            },
+                            error: function (erro) {
+                                console.log("error al Envio " + erro);
+                            }
+                        });
+                    }
+                }
+            //}
+        });
+      });
+
+
+
+
+    function saveID(elemento) {
+        if (elemento.checked) {
+            coleccion.push(elemento.id);
+        }
+        else if (!elemento.checked) {
+            for (var i = 0; i < coleccion.length; i++) {
+                var element = coleccion[i];
+                if (element == elemento.id) {
+                    coleccion.splice(i, 1);
+                    break;
+                }
+            }
+        }
+
+    }
+    $("#file").on('change', function ()
+    {
+        $("#btnSave").removeAttr("disabled");
+    });
+
+    function Activar()
+    {
+        $("#btnSave").removeAttr("disabled");
+        $(".ed").removeAttr("disabled", "disabled");
+    }
+
+    function Desactivar()
+    {
+        $(".ed").attr("disabled", "disabled");
+        $("#btnSave").attr("disabled", "disabled");
+    }
+
+    $('#entregar').click(function () {
+        for (var i = 0; i < coleccion.length; i++) {
+            console.log(coleccion[i]);
+        }
+            var uri = '@Url.Action("setImputacion", "ingresoDocumento")';
+            $.ajax({
+                url: uri,
+                data: JSON.stringify(coleccion),
+                type: 'POST',
+                contentType: 'application/json',
+                success: function (result) {
+                    //mensajeExito("Formulario", "Registro Eliminado Correctamente");
+                    if (!result.success) {
+                        mensajeError("Error", result.mensaje);
+                        $('#dt_table').DataTable().ajax.reload(null, false);
+                        $(this).removeClass('selected');
+                        vaciar();
+                        $("#CabGlo").removeAttr("disabled");
+                        $("#ob").attr("src", "");
+                        $("#object").attr("data", "");
+                        $("#ob").hide();
+                        $(".help-block").hide();
+                        Desactivar();
+                        $("#contfile").hide();
+                        document.getElementById("archivo").value = null;
+                    } else {
+                        mensajeExito("Formulario", "Registro se Envio Correctamente");
+                        $('#dt_table').DataTable().ajax.reload(null, false);
+                        $(this).removeClass('selected');
+                        vaciar();
+                        $("#CabGlo").removeAttr("disabled");
+                        $("#ob").attr("src", "");
+                        $("#object").attr("data", "");
+                        $("#ob").hide();
+                        $(".help-block").hide();
+                        Desactivar();
+                        $("#contfile").hide();
+                        document.getElementById("archivo").value = null;
+                    }
+                },
+                error: function() {
+                }
+            });
+    });
+    //set formularios personalizado para no refrescar la pagina y solo la fila a modificar
+    function setFormularioPersonal(form, rules, messages) {
+        var $orderForm = $("#" + form).validate({
+            rules: rules,
+            messages: messages,
+            // Do not change code below
+            errorPlacement: function (error, element) {
+                error.insertAfter(element.parent());
+            }
+        });
+
+        $("button[action=guardar]").click(function () {
+            $("button[action=guardar]").prop('disabled', true);
+            if ($('#' + form).valid()) {
+                var formJS = document.getElementById(form);
+                var formData = new FormData(formJS);
+
+                for(var pair of formData.entries()) {
+
+                    if (pair[0].includes(".monto")) {
+                        formData.set(pair[0], pair[1].replace(new RegExp('\\.', 'g'), ''));
+                    }
+                }
+
+                $.ajax({
+                    url: document.getElementById(form).action,
+                    type: document.getElementById(form).method,
+                    processData: false,
+                    contentType: false,
+                    data: formData,
+                    success: function (result) {
+                        debugger;
+                        if (result.success) {
+                            
+                            mensajeExito("Actualizado", "Datos actualizados con éxito!");
+                                    
+                            $('#dt_table').DataTable().ajax.reload(null, false);
+                            $(this).removeClass('selected');
+                            vaciar();
+                            $("#CabGlo").removeAttr("disabled");
+                            $("#ob").attr("src", "");
+                            $("#object").attr("data", "");
+                            $("#ob").hide();
+                            $(".help-block").hide();
+                            Desactivar();
+                            $("#contfile").hide();
+                            document.getElementById("archivo").value = null;
+                        }
+                        else {
+                            if (result.error) {
+                                mensajeError("Error", result.mensaje);
+                            } else {
+                                $(contenedor).html(result);
+                            }
+                        }
+                    }, complete: function () {
+                        $("button[action=guardar]").prop('disabled', false);
+                    }
+                });
+            } else {
+                console.log("error formulario");
+                $("button[action=guardar]").prop('disabled', false);
+            }
+        });
+    }
+    ///////////////////////nueva datatable
+    var docsColumns = [
+        {
+            data: "ID",
+            targets: 0,
+            searchable: false,
+            orderable: false,
+            className: 'sorting_disabled',
+            render: function (data) {
+                var url = "'@Url.Action("Delete", "IngresoDocumento", new { Area = "Operaciones" })";
+                var urlReturn = url + '?id=' + data + '\'';
+                return '<button class=\"btn btn-default btn-xs noMove\" value="' + data + '" onclick=\"confirmDelete(\'¿Desea devolver este documento?\',' + urlReturn + ');\"><i class=\"fa fa-trash\"></i> </button>'
+            }
+        },
+        {
+            data: "NomAux"
+        },
+        {
+            data: "CTDCod"
+        },
+        {
+            data: "NumDocI"
+        },
+        {
+            data: "Total"
+        },
+        {
+            data: "Nombre_Archivo"
+        },
+        {
+            data: "impsug",
+            render: function (data, full) {
+                if (data != null) {
+                    if (data == "S") {
+                        return "S";
+                    } else {
+                        return "";
+                    }
+                } else {
+                    return ""
+                }
+            }
+        },
+        {
+            data: "MovRe",
+            render: function (data, type, row) {
+                return new moment(data).format('DD/MM/YYYY');
+            }
+        },
+        {
+            data: "MovGlosa",
+            targets: 0,
+            searchable: false,
+            orderable: false,
+            className: 'sorting_disabled',
+            render: function (data,type, row) {
+                if (data==null||data=="") {
+                    return '<td><input id="' + row.ID + '" class="chks checkbox" onclick="saveID(this);" type="checkbox" disabled="disabled" /></td>';
+                }
+                else {
+                    return '<td><input id="' + row.ID + '" class="chks checkbox" onclick="saveID(this);" type="checkbox" /></td>';
+                }
+                
+            }
+        },
+        {
+            data: "MovGlosa"
+        },
+        {
+            data: "TCambio"
+        },
+        {
+            data: "vdolar"
+        },
+        {
+            data: "CTD"
+        },
+        {
+            data: "id_encab"
+        }
+    ];
+    var docsTable = $("#dt_table").DataTable({
+        "ajax": {
+            "url": '@Url.Action("CargaDocs","IngresoDocumento")',
+            "type":"POST"
+        },
+        processing: true,
+        language: {
+            'processing': '<i class="fa fa-refresh fa-spin"></i> <label> Cargando Solicitud...</label>'
+        },
+        "columns": docsColumns,
+        "order": [[5,"asc"]],
+    });
+
+</script>
+
+

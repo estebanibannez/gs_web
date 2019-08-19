@@ -1,0 +1,615 @@
+﻿@model WebApplicationMod.GS_Documentos
+
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-credit-card-alt"></i> Solicitud de Pagos</h3>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="box-header with-border">
+        <h3 class="box-title">Búsqueda de Documentos</h3>
+    </div>
+    <div class="panel-body">
+        <form id="form-busc">
+            <div class="box-body">
+                <div class="form-group row">
+                    <label class="col-sm-3">Cliente</label>
+                    <div class="col-sm-3">
+                        @Html.DropDownList("ListaClientes", (SelectList)ViewBag.ListaClientes, "Seleccione...", new { @class = "js-example-basic-single form-control col-md-12", @id = "cbxNomArchivo" })
+                    </div>
+                    <label class="col-sm-3">N° de Documento</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="txtNumDoc" id="txtNumDoc" maxlength="9">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3">Nombre de Auxiliar</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="txtNomAux" id="txtNomAux" maxlength="9">
+                    </div>
+                    <div class="col-sm-3 pull-right">
+                        <button type="submit" id="btnBuscarXDatos" class="btn btn-warning pull-right">Buscar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="table-responsive">
+        <div class="box-body table-responsive no-padding">
+            <table id="dt_docs" class="table table-striped display responsive no-wrap text-center" style="width:100%" role="grid" aria-describedby="example1_info">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Rut</th>
+                        <th>Auxiliar</th>
+                        <th>Tipo Doc</th>
+                        <th>N° Doc</th>
+                        <th>Mes</th>
+                        <th>Año</th>
+                        <th>Emisión</th>
+                        <th>Monto</th>
+                        @*<th>Anticipos</th>*@
+                        <th>Saldo</th>
+                        <th>Observación Tesorería</th>
+                        <th>¿Pagado?</th>
+                        <th>Fecha Límite</th>
+                        <th>Banco Prov</th>
+                        <th>Cuenta Prov</th>
+                        <th>Correo Prov</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@using (Html.BeginForm("Edit", "SolicitudPagos", FormMethod.Post, new { @id = "mant-form", role = "form" }))
+{
+    @Html.HiddenFor(model => model.ID,new { id= "ID"})
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Solicitud del pago</h3>
+                </div>
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Monto del Documento</label>
+                                <div>
+                                    @Html.TextBox("MontoPago", null, new { @class = "custom-scroll form-control", @maxlength = "9", @readonly = "readonly" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Anticipo</label>
+                                <div>
+                                    @Html.TextBox("Anticipo", null, new { @class = "custom-scroll form-control sub", @maxlength = "9", @id = "idAnticipo" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Saldo</label>
+                                <div id="box">
+                                    @Html.TextBox("SaldoxAnticipo", null, new { @class = "custom-scroll form-control", @maxlength = "9", @readonly = "readonly" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.CheckBox("PagTot", new { @class = "pull-left", @id = "idPagTot", @onchange = "PagoTotal(this.checked);" })
+                                <label class="control-label" style="padding-left:5px;">  Pago Total de la Solicitud </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Fecha Límite</label>
+                                <div>
+                                    @*<input type="text" id="datepicker" class="datepicker">*@
+                                    @Html.TextBox("PagUrg",null, new { @class = "form-control datepicker", @id = "idPagUrg" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Observación Tesorería</label>
+                                <div>
+                                    <div>@Html.TextArea("ObsSolPago", null, new { @class = "ed form-control col-md-12", @maxlength = 200, @rows = 5, @style = "width:100%" })</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="box-footer">
+                    <button type="button" action="save" id="btnRealizaPago" class="btn btn-warning pull-right">Enviar Solicitud</button>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Anticipos del proveedor</h3>
+                    </div>
+      
+                    <div class="box-body table-responsive no-padding">
+                        <table id="dt_ant" class="table table-striped display responsive no-wrap text-center" style="width: 100%" role="grid" aria-describedby="example1_info">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Fecha</th>
+                                    <th>Debe</th>
+                                    <th>Haber</th>
+                                    <th>N° Doc</th>
+                                    <th style="width: 40%">Glosa</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                   
+                    <div class="box-footer">
+                        <div class="form-group col-sm-3 pull-right">
+                            <label class="control-label">Saldo Total</label>
+                            <input type="text" name="lbsaldos" id="lbsaldos" class="form-control custom-scroll" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel-body">
+                 <iframe src="" height="800" style="width:100%" id="ob"></iframe>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    //-----Controla el input de anticipo (validacion de su contenido) 
+    $('#idAnticipo').on('input', function () {
+
+        var limite = document.getElementById("MontoPago").value;
+        var value = $(this).val();
+
+        if ((value !== '') && (value.indexOf('.') === -1)) {
+
+            $(this).val(Math.max(Math.min(value, limite), 0));
+        }
+    });
+
+    setFormulario("mant-form",
+        {
+            Anticipo: { required: true },
+        },
+        {
+            Anticipo:  '<span class="help-block error"><i class="fa fa-warning"></i> Campo Requerido.</span>'
+        });
+
+    $('.datepicker').datepicker({
+        autoclose: true,
+        format: 'dd-mm-yyyy',
+        startDate: 'today',
+        endDate: '+1m',
+    });
+
+    //funcion pago total
+    function PagoTotal(value) {
+        if (value == true) {
+
+            document.getElementById("idAnticipo").disabled = true;
+            var monto = document.getElementById("MontoPago").value;
+            $("#idAnticipo").val(monto);
+            $("#SaldoxAnticipo").val(0);
+        } else if (value == false) {
+
+            document.getElementById("idAnticipo").disabled = false;
+            $("#idAnticipo").val(0);
+            $("#SaldoxAnticipo").val(document.getElementById("MontoPago").value);
+        }
+    }
+
+
+
+    $(document).ready(function () {
+        //------restriccion de las teclas-------
+        $("#txtNumDoc").keypress(function (e) {
+            if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
+        });
+        $("#idAnticipo").keypress(function (e) {
+            if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
+        });
+        $("#idPagUrg").keypress(function (e) {
+            if (String.fromCharCode(e.keyCode).match(/[^\d{1,2}\-\d{1,2}\-\d{2,4}$]/g)) return false;
+        });
+
+
+
+
+
+        Desactivar();
+        //flags
+        var CodAux = '';
+        var totalSal = 0;
+        debugger;
+        var fechHoy = new Date("DD-MM-YYYY");
+        //formato date
+        
+
+        //----Estructura DataTable Docs----
+        var dataColumns = [
+            {
+                data: "IdDoc",
+                targets: 0,
+                searchable: false,
+                orderable: false,
+                className: 'sorting_disabled',
+                render: function (data, type, full, meta) {
+
+                    var url = "'@Url.Action("Delete", "SolicitudPagos", new { Area = "BackOffice" })";
+                    var urlReturn = url + '?id=' + full.IdDoc + '\'';
+                    return '<button action="save" class=\"btn btn-default btn-xs noMove\" value="' + full.IdDoc + '" onclick=\"confirmDelete(\'¿Desea eliminar este documento?\',' + urlReturn + ');\"><i class=\"fa fa-trash\"></i></button>'
+
+                }
+            },
+            { data: 'Auxiliar' },
+            { data: 'NomPro' },
+            { data: 'Rotulo' },
+            { data: 'NumDoc' },
+            {
+                data: 'Mes',
+                render: function (data, full) {
+                    var mes = data
+                    switch (mes) {
+                        case "01":
+                            mes = "Enero";
+                            break;
+                        case "02":
+                            mes = "Febrero";
+                            break;
+                        case "03":
+                            mes = "Marzo";
+                            break;
+                        case "04":
+                            mes = "Abril";
+                            break;
+                        case "05":
+                            mes = "Mayo";
+                            break;
+                        case "06":
+                            mes = "Junio";
+                            break;
+                        case "07":
+                            mes = "Julio";
+                            break;
+                        case "08":
+                            mes = "Agosto";
+                            break;
+                        case "09":
+                            mes = "Septiembre";
+                            break;
+                        case "10":
+                            mes = "Octubre";
+                            break;
+                        case "11":
+                            mes = "Noviembre";
+                            break;
+                        case "12":
+                            mes = "Diciembre";
+                            break;
+                        default:
+                            mes = null;
+                    };
+                    return mes;
+                }
+            },
+            { data: 'Año' },
+            {
+                data: 'MovFe', "render": function (data, type, row) {
+                    return new moment(data).format('DD/MM/YYYY');
+                }
+            },
+            {
+                data: 'Totl',
+                render: $.fn.dataTable.render.number('.','','','$')
+                
+            },
+            //{ data: 'Monto' },//Anticipo
+            {
+                data: 'MontPag',
+                render: $.fn.dataTable.render.number('.', '', '', '$')
+
+            },//Saldo
+            { data: 'ObSolPago' },
+            { data: 'ObPagRea' },
+            { data: 'FechPagUrg' },
+            {
+                data: 'NomBco',
+                render:
+                    function (data,full) {
+                        if (data != null) {
+                            var l = data.trim();
+                            if (l.length > 3) {
+                                return '<i class="fa fa-check"></i>';
+                            } else {
+                                return "";
+                            }
+                        } else {
+                            return "";
+                        }
+                    }
+            },
+            {
+                data: 'CtaProv',
+                render:
+
+                    function (data,full) {
+
+                        if (data != null) {
+                            var l = data.trim();
+                            if (l.length > 3) {
+                                return '<i class="fa fa-check"></i>';
+                            } else {
+                                return "";
+                            }
+
+                        } else {
+                            return "";
+                        }
+                    }
+            },
+            {
+                data: 'EmailProv',
+                render:
+
+                    function (data,full) {
+
+                        if (data != null) {
+                            var l = data.trim();
+                            if (l.length > 3) {
+                                return '<i class="fa fa-check"></i>';
+                            } else {
+                                return "";
+                            }
+
+                        } else {
+                            return "";
+                        }
+                    }
+            }
+        ];
+
+        function parameterFunction(d) {
+
+            return $.extend({}, d, {
+                "idCliente": $("#cbxNomArchivo").val(),
+                "nomAux": $("#txtNomAux").val(),
+                "numDoc": $("#txtNumDoc").val()
+            });
+        }
+
+        var table;
+        table = $('#dt_docs').DataTable({
+            "ajax": {
+                "url": "@Url.Action("BuscarDocs", "SolicitudPagos")",
+                "type": "POST",
+                "data": parameterFunction,
+            },
+            //createdRow: createdRow,
+            processing: true,
+            language: {
+                'processing': '<i class="fa fa-refresh fa-spin"></i> <label> Cargando Solicitud...</label>'
+            },
+            "columns": dataColumns,
+            "order": [[1, "asc"]],
+            rowReorder: {
+            },
+        });
+
+        //----Estructura DataTable Anticipos----
+        var antColumns = [
+            {
+                targets: 0,
+                searchable: false,
+                orderable: false,
+                className: 'sorting_disabled',
+                data: null,
+                defaultContent: ''
+            },
+            {
+                data: 'CpbFec', "render": function (data, type, row) {
+                    return new moment(data).format('DD/MM/YYYY');
+                }
+            },
+            { data: 'MovDebe' },
+            { data: 'MovHaber' },
+            { data: 'MovNumDocRef' },
+            { data: 'MovGlosa' }
+
+        ];
+
+        function parameterAnt(d) {
+            return $.extend({}, d, {
+                "idclie": $("#cbxNomArchivo").val(),
+                "codaux": CodAux
+            });
+        }
+        function funcionx(par1, par2){
+            var rest = (par1 - par2);
+            return rest;
+
+        }
+        var table_ant;
+        table_ant = $('#dt_ant').DataTable({
+
+            "ajax": {
+                    "url": "@Url.Action("BuscarAnticipos", "SolicitudPagos")",
+                    "type": "POST",
+                    "data": parameterAnt,
+            },
+            //createdRow: createdRow,
+            processing: true,
+            language: {
+                'processing': '<i class="fa fa-refresh fa-spin"></i> <label> Cargando Solicitud...</label>'
+            },
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            },
+            "columns": antColumns,
+            "order": [[1, "asc"]],
+            "searching": false,
+            "lengthChange": false,
+            rowCallback: function (row, data) {
+                debugger;
+                totalSal = totalSal + funcionx(data.MovDebe, data.MovHaber);
+                $('#lbsaldos').val(totalSal);
+            },
+            "error": function () {
+                mensajeError("Ops..", "Error de controlador. Contactese con el administrador");
+            }
+        });
+
+        //----botones----
+        $("#btnBuscarXDatos").click(function (e) {
+            $("#form-busc").validate({
+                rules: {
+
+                    ListaClientes: { required: true },
+                },
+                messages: {
+
+                    ListaClientes: { required: '<span class="help-block error"><i class="fa fa-warning"></i> Campo Requerido.</span>' },
+                },
+            });
+            var id_clien = $("#cbxNomArchivo").val();
+
+            if (id_clien == "") {
+                $("#cbxNomArchivo").focus();
+            } else {
+                Desactivar();
+                e.preventDefault();
+                table.ajax.reload();
+            }
+        });
+
+        //----mueve pantalla
+        function Mvscreen() {
+            var alto = document.body.scrollHeight;
+            $(window).scrollTop(alto,200000);
+        }
+
+        //----Funcion para el calculo del saldo----
+        function resta() {
+            $("#SaldoxAnticipo").val(Number($("#MontoPago").val()) - Number($("#idAnticipo").val()));
+        }
+        $('#idAnticipo').on('keydown keyup', resta);
+        //------Selecciona la fila del documento-----
+        $('#dt_docs tbody').on('click', 'tr', function () {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+                
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+                
+            }
+        });
+
+        //----Evento click sobre un documento----
+        $('#dt_docs tbody').on('click', 'tr td:nth-child(1n+2)', function (e) {
+
+            if ($(this).context.innerText == "No data available in table") {
+                $(this).removeClass('.selected');
+                Desactivar();
+            }
+            else {
+                Activar();
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+                Mvscreen();
+                var $row = $(this).closest('tr');
+                var data = table.row($row).data();
+                var idRow = data.IdDoc;
+                CodAux = data.Auxiliar;//carga del flag
+
+                $.ajax({
+                    async: true,
+                    url: '@Url.Action("Editar", "SolicitudPagos" ,new {Area = "BackOffice" })',
+                    data: "{ id:" + idRow + " }",
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (result) {
+                        var mode = result.Model;
+                        $("#ID").val(mode.ID);
+                        $("#MontoPago").val(mode.Total);
+                        $("#idAnticipo").val("");
+                        $("#SaldoxAnticipo").val(mode.Total);
+                        $("#PagUrg").val(mode.PagUrg);
+                        $("#ObsTeso").val(mode.ObsSolPago);
+                        var ix = mode.ID;
+                        document.getElementById("ob").empt;
+                        if (mode.Archivo != "") {
+                            debugger;
+                            var url = '@Url.Action("Pdf","SolicitudPagos")/' + ix;
+                            if (url.value == false) {
+                                debugger;
+                                mensajeError("Error ", url.mensaje);
+                            } else {
+                                debugger;
+                                $("#ob").attr("src", url);
+                            }
+                        } else {
+                            $("#ob").attr("src", "http://gs.pso.cl/Master/DocuXml?idCab=" + mode.id_encab);
+                        }
+                        
+                    },
+                    error: function (response) {
+                        mensajeError("Error ", response.mensaje);
+                    }
+                });
+                table_ant.ajax.reload();
+            }
+        });
+
+        function Desactivar() {
+            $("#lbsaldos").val(0);
+            $("#idPagTot").prop("disabled", true);
+            $("#btnRealizaPago").prop("disabled", true);
+            $("#MontoPago").prop("disabled", true);
+            $("#idAnticipo").prop("disabled", true);
+            $("#idPagUrg").prop("disabled", true);
+            $("#MontoxAnticipo").prop("disabled", true);
+            $("#ObsSolPago").prop("disabled", true);
+            $("#SaldoxAnticipo").prop("disabled", true);
+            $("#idPagTot").val("");
+            $("#MontoPago").val("");
+            $("#idAnticipo").val("");
+            $("#idPagUrg").val("");
+            $("#MontoxAnticipo").val("");
+            $("#ObsSolPago").val("");
+            $("#SaldoxAnticipo").val("");
+        }
+
+        function Activar() {
+            $("#lbsaldos").val(0);
+            $("#idPagTot").prop("disabled", false);
+            $("#btnRealizaPago").prop("disabled", false);
+            $("#MontoPago").prop("disabled", false);
+            $("#idAnticipo").prop("disabled", false);
+            $("#idPagUrg").prop("disabled", false);
+            $("#MontoxAnticipo").prop("disabled", false);
+            $("#ObsSolPago").prop("disabled", false);
+            $("#SaldoxAnticipo").prop("disabled", false);
+        }
+
+
+    });
+
+</script>
+
+
+

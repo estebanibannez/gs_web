@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <configSections>
+    <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
+    <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false"/>
+  </configSections>
+  <connectionStrings>
+    <add name="ChaoPDFEntities" connectionString="metadata=res://*/ChaoPdf.csdl|res://*/ChaoPdf.ssdl|res://*/ChaoPdf.msl;provider=System.Data.SqlClient;provider connection string='data source=DESARROLLO\DESA;initial catalog=ChaoPDF;persist security info=True;user id=sa;password=&quot;Rootpso 2016&quot;;MultipleActiveResultSets=True;App=EntityFramework'" providerName="System.Data.EntityClient"/>
+    <!--<add name="GSPSOEntities" connectionString="metadata=res://*/GsPso.csdl|res://*/GsPso.ssdl|res://*/GsPso.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DESARROLLO\DESA;initial catalog=ChaoPDF;persist security info=True;user id=sa;password=&quot;Rootpso 2016&quot;;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient"/>-->
+    <add name="GSPSOEntities" connectionString="metadata=res://*/GsPso.csdl|res://*/GsPso.ssdl|res://*/GsPso.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=PSURSOFTSQL;initial catalog=GSPSO;persist security info=True;user id=sa;password=colico;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient"/>
+  </connectionStrings>
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.6.1"/>
+  </startup>
+  <entityFramework>
+    <defaultConnectionFactory type="System.Data.Entity.Infrastructure.LocalDbConnectionFactory, EntityFramework">
+      <parameters>
+        <parameter value="mssqllocaldb"/>
+      </parameters>
+    </defaultConnectionFactory>
+    <providers>
+      <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer"/>
+    </providers>
+  </entityFramework>
+  <system.serviceModel>
+    <bindings>
+      <basicHttpBinding>
+        <binding name="wsplanoSoap" />
+      </basicHttpBinding>
+      <customBinding>
+        <binding name="wsplanoSoap12">
+          <textMessageEncoding messageVersion="Soap12" />
+          <httpTransport />
+        </binding>
+      </customBinding>
+    </bindings>
+    <client>
+      <endpoint address="http://ws.facturacion.cl/WSDS/wsplano.asmx"
+          binding="basicHttpBinding" bindingConfiguration="wsplanoSoap"
+          contract="Facturacion.cl.wsplanoSoap" name="wsplanoSoap" />
+      <endpoint address="http://ws.facturacion.cl/WSDS/wsplano.asmx"
+          binding="customBinding" bindingConfiguration="wsplanoSoap12"
+          contract="Facturacion.cl.wsplanoSoap12" name="wsplanoSoap12" />
+    </client>
+  </system.serviceModel>
+</configuration>

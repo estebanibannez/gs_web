@@ -1,0 +1,481 @@
+﻿<style>
+
+    table.dataTable.select tbody tr,
+    table.dataTable thead th:first-child {
+        cursor: pointer; /*puntero*/
+    }
+
+    .contenedorCheck {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+        /* Oculta la casilla de verificación predeterminada del navegador */
+        .contenedorCheck input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+    /* propiedades del span */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+    }
+
+    /* evento mouse-over, add a grey background color */
+    .contenedorCheck:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    /* cuando el checkbox está checked, add el background naranjo */
+    .contenedorCheck input:checked ~ .checkmark {
+        background-color: #ff6a00;
+    }
+
+    /* Crea el ticket de verificación (oculto cuando no está marcado) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Muestra el ticket de verificación cuando esté marcado*/
+    .contenedorCheck input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* estilos del ticket */
+    .contenedorCheck .checkmark:after {
+        left: 7px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+</style>
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-files-o"></i> Centralizar Pagos</h3>
+    </div>
+</div>
+<div class="box-default">
+    <div class="box">
+        <div class="box-header with-border">
+            <div class="row">
+                <div class="col-md-3">
+                    <select class="form-control" id="selectClientes" name="selectClientes"></select>
+                </div>
+                <div class="col-md-1">
+                    <label>Proveedor</label>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" class="form-control" id="txtProveedor" readonly />
+                </div>
+                <div class="col-md-1">
+                    <label>Honorarios</label>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" class="form-control" id="txtHonorarios" readonly />
+                </div>
+                <div class="col-md-3 col-xs-12">
+                    <select id="selectorOp" class="form-control">
+                        <option value="Op1">Op1</option>
+                        <option value="Op2">Op2</option>
+                        <option value="Op3">Op3</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="header">
+                <div class="pull-right">
+                    <label class='contenedorCheck selector' id="selector">
+                        <input type='checkbox' value='1' name="select_all">
+                        <span class='checkmark'></span>
+                    </label>
+                </div>
+                <div class="pull-right" style="padding-right:10px;">
+                    <b><i>Seleccionar todo </i></b>
+                </div>
+            </div>
+
+            <table class="table table-hover display responsive no-wrap" style="width:100%" id="tblCentralizar">
+                <thead>
+                    <tr>
+                        <th>Cent</th>
+                        <th>Fecha</th>
+                        <th>Monto</th>
+                        <th>N° Doc</th>
+                        <th>Banco</th>
+                        <th>Cuenta</th>
+                        <th>Forma de Pago</th>
+                        <th>Nombre Proveedor</th>
+                        <th>Rut Proveedor</th>
+                        <th style="background-color:#e5e5e5">XLS</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="panel-default">
+    <div class="box-footer">
+        <div class="pull-right">
+            <div class="margin">
+                <input type="text" id="txtTotal" value="0" class="form-control" readonly />
+            </div>
+            <div class="margin">
+                <button class="btn btn-info btn-block" id="btnCentralizar">Centralizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+
+        var ArrayCentralizar = [];
+
+        getClientes();
+
+        function getClientes() {
+
+        $.ajax({
+                url: '@Url.Action("getClientes", "CentralizarPagos")',
+                type: 'POST',
+                success: function (rsp) {
+                    $('#selectClientes').append("<option label='--Seleccione--' value='0'></option>");
+                    $.each(rsp.data, function (i, item) {
+                        var numDocu = "Numero de documentos :  " + item.count;
+                        $('#selectClientes').append("<optgroup label='" + numDocu + "'>" +
+                            "<option value=" + item.id_cliente + ">" + item.nom_cliente + "</option>" +
+                            "</optgroup>");
+                    });
+                }
+         });
+        }
+
+        function retornaID(d) {
+            return $.extend({}, d, {
+                "id": $('#selectClientes').val()
+            });
+        }
+
+        var columnastbl = [
+            { "data": "empty" },
+            {
+                "data": "fecha", "render": function (data) {
+                    return moment(data).format('DD-MM-YYYY');
+                }
+            },
+            { "data": "monto" },
+            { "data": "numDoc" },
+            { "data": "NomBanco" },
+            { "data": "cuenta" },
+            { "data": "formaPago" },
+            { "data": "nomAux" },
+            { "data": "codAux" },
+            {
+                "data": "xls", "render": function (data) {
+                    return (data == "S" ? "<label class='contenedorCheck'>" +
+                        "<input type='checkbox' checked disabled>" +
+                        "<span class='checkmark' style='background-color:#028c2b!important'></span>" +
+                        "</label>": "");
+
+                }
+            }
+        ]
+
+        function getCuentas(id) {
+            fetch('@Url.Action("getCtas", "CentralizarPagos",new { Area = "Tesoreria" })/'+ id)
+                .then(function (data) { return data.json(); })
+                .then(function (res) {
+                   
+                        cargaBoxs(res)
+            });
+        }
+
+
+        function verificaSelectAll(tabla) {
+
+            var $table = tabla.table().node();// contexto tabla
+            var $chkbox_all = $('tbody input[type="checkbox"]', $table);// todos los checkbox
+            var $chkbox_checked = $('tbody input[type="checkbox"]:checked', $table);// solo los check en estado checked
+            var chkbox_select_all = $('label.selector > input[name="select_all"]', function (e) {
+                return this;
+            }).get(0);
+
+
+
+            // Si ninguna de las casillas está marcada.
+            if ($chkbox_checked.length === 0) {
+                chkbox_select_all.checked = false;
+                if ('indeterminate' in chkbox_select_all) {
+                    chkbox_select_all.indeterminate = false;
+                }
+
+                // Si todas las casillas están marcadas
+            } else if ($chkbox_checked.length === $chkbox_all.length) {
+                chkbox_select_all.checked = true;
+                if ('indeterminate' in chkbox_select_all) {
+                    chkbox_select_all.indeterminate = false;
+                }
+
+                // Si algunas de las casillas están marcadas
+            } else {
+                chkbox_select_all.checked = true;
+                if ('indeterminate' in chkbox_select_all) {
+                    chkbox_select_all.indeterminate = true;
+                }
+            }
+        }
+
+
+
+        var tabla;
+        function centDocum(grilla, url, parametros, columnas) {
+
+            tabla = $('#' + grilla).DataTable({
+                "ajax": {
+                    "url": url,
+                    "type": "POST",
+                    "data": parametros
+                },
+
+                columnDefs: [{
+                    targets: 0,
+                    searchable: false,
+                    orderable: false,
+                    width: '1%',
+                    className: 'dt-check',
+                    render: function (data, type, full, meta) {
+                        return "<label class='contenedorCheck'>" +
+                               "<input type='checkbox' value='" + full.id + "'>" +
+                               "<span class='checkmark'></span>" +
+                               "</label>";
+                    }
+                }],
+                columns: columnas,
+                order: [1, 'asc'],
+                rowCallback: function (row, data) {
+         
+                    var Obj = ArmingObject(data);
+
+                    var i = _inArray(Obj, ArrayCentralizar);
+
+                    if (i !== -1) {
+
+                        $(row).find('input[type="checkbox"]').prop('checked', true);
+                        $(row).addClass('selected');
+                    }
+                    if (this.checked && i === -1) {
+
+                        ArrayCentralizar.push(Obj);
+
+                    } else if (!this.checked && i !== -1) {
+
+                        ArrayCentralizar.splice(i, 1);
+
+                    }
+                }
+            });
+            return tabla;
+        }
+
+        function cargaBoxs(data) {
+            $('#txtHonorarios').val('');
+            $('#txtProveedor').val('');
+            $.map(data.data, function (item, i) {
+                if (item.tipo == "Honorarios")
+                    $('#txtHonorarios').val(item.codCta)
+                if (item.tipo == "Proveedor")
+                    $('#txtProveedor').val(item.codCta)
+            });
+        }
+
+        var table = centDocum('tblCentralizar','@Url.Action("getDataDocum", "CentralizarPagos")', retornaID, columnastbl);
+
+        $('#selectClientes').change(function () {
+            getCuentas(parseInt(this.value));
+            table.ajax.reload();
+        });
+
+        //funcion que arma el objeto.
+        function ArmingObject(data) {
+
+            var obj_ = {
+                NomBanco: data.NomBanco,
+                codAux: data.codAux,
+                ctdCod: data.ctdCod,
+                cuenta: data.cuenta,
+                emailPag: data.emailPag,
+                fecha: (data.fecha == "" ? "" : moment(data.fecha).format("YYYY-MM-DD HH:mm:ss")),
+                formaPago: data.formaPago,
+                id: data.id,
+                idBanco: data.idBanco,
+                monto: data.monto,
+                nomAux: data.nomAux,
+                numBanco: data.numBanco,
+                numDoc: data.numDoc,
+                numcta: data.numcta,
+                rotuloDoc: data.rotuloDoc,
+                tipoCv: data.tipoCv,
+                xls: data.xls
+            };
+
+            return obj_;
+
+        }
+
+
+        $("#tblCentralizar tbody").on("click", 'input[type="checkbox"]', function (e) {
+            var op = this.checked;
+            var $row = $(this).closest('tr');
+            var $data = table.row($row).data();
+
+            //sumando el total de los registros
+            cargaTotal($data.monto, op );
+
+            // Obtengo datos de la fila
+            var data = tabla.row($row).data();
+
+            var Obj =  ArmingObject(data);
+
+            var i = _inArray(Obj, ArrayCentralizar);
+
+            // Si el checkbox está marcado y el ID de la fila no está en el array
+            if (this.checked && i === -1) {
+                //agrego al arreglo el id de la fila + el numero de centralización
+                ArrayCentralizar.push(Obj);
+
+                // De lo contrario, si el checkbox no está marcado y el indice que retorno el inArray es diferente a -1 ()
+            } else if (!this.checked && i !== -1) {
+                //splice remueve elementos de un arreglo (recibe 2 parametros el indice y la cantidad de elementos que quiero remover en el array.)
+                ArrayCentralizar.splice(i, 1);
+            }
+
+            if (this.checked) {
+                $row.addClass('selected');
+            } else {
+                $row.removeClass('selected');
+            }
+
+            console.log(ArrayCentralizar);
+
+            verificaSelectAll(tabla);
+
+            e.stopPropagation();
+
+        });
+
+
+        $('label.selector > input[name="select_all"]').click(function (e) {
+            if (this.checked) {
+                $('#tblCentralizar tbody input[type="checkbox"]:not(:checked)').trigger('click');
+            } else {
+                $('#tblCentralizar tbody input[type="checkbox"]:checked').trigger('click');
+                //elimino los obj del arreglo en caso de deseleccionar todo.
+                ArrayCentralizar.splice(0, ArrayCentralizar.length);
+            }
+
+            e.stopPropagation();
+
+        });
+
+        function cargaTotal(param, op) {
+            if (op) {
+                var total = parseInt($('#txtTotal').val());
+                total += param;
+            } else {
+                var total = parseInt($('#txtTotal').val());
+                total -= param;
+            }
+            $('#txtTotal').val(total);
+        }
+
+
+        $('#btnCentralizar').click(function () {
+            if (ArrayCentralizar.length == 0)
+                mensajeExito("Mensaje", "Seleccione al menos uno...");
+            else {
+                var d = validaInfoCtas();
+                if (d == 0) {
+                    centralizando('@Url.Action("CentPagos", "CentralizarPagos", new { Area = "Tesoreria"})', ArrayCentralizar);
+                }
+                
+            }
+
+        });
+
+         //Valida que las cuentas honorario y proveedores no estén vacías.
+        function validaInfoCtas() {
+            var p = ($('#txtHonorarios').val() == "" || $('#txtProveedor').val() == "" ? mensajeExito("Mensaje", "Falta información de cuentas contables para realizar centralización.") : 0);
+            return p;
+        }
+
+        function centralizando(url, registros) {
+         
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: { id: $('#selectClientes').val(), data: JSON.stringify(registros), op: $('#selectorOp').val() },
+                type: "POST",
+                dataType: "json",
+                success: function (response) {
+                    if (response.error) {
+                        mensajeError("Ocurrió un error", response.mensaje);
+                    } else {
+                        mensajeExitoComprobante("Registros centralizados éxitosamente", "el numero de comprobante es : " + "<b>" + response.data + "</b>", response.data);
+
+                        table.ajax.reload();
+                     
+                    }
+             
+                }            
+            });
+
+
+        }
+
+        function _inArray(dato, arrayObj) {
+            var salida = -1;
+            if (arrayObj.length == 0) { return -1; }
+            $.each(arrayObj, function (indice, elemento) {
+                if (elemento.id == dato.id) {
+                    salida = indice;
+                }
+            });
+            return salida;
+        }
+
+
+        table.on('draw', function () {
+            verificaSelectAll(table);
+        });
+
+    });
+
+
+
+</script>
+

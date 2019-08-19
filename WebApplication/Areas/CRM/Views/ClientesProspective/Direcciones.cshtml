@@ -1,0 +1,332 @@
+﻿<style>
+    .ASD {
+    color: #333333;
+    font : 8px; 
+    font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+    }
+</style>
+
+@{
+     string nom = (string)ViewBag.Nombre;
+    int id_cli = (int)ViewBag.ID_Cliente;
+}
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-gear"></i> Agregar Direcciones, Cliente: @nom</h3>
+    </div>
+</div>
+
+<div class="">
+    <div class="box box-primary">
+        <div class="box-body ht" id="ht">
+            <div class="row">
+                <div class="col-lg-3">
+                    <p class="text-muted text-center">Seleccione Region</p>
+                    @Html.DropDownList("Cod_Region", (SelectList)ViewBag.ListRegiones, "Seleccione", new { @class = "custom-scroll form-control .Cod_Region" })
+                    @*@Html.DropDownListFor(model => model.ID_Region, (SelectList)ViewBag.ListRegion, "Seleccione...", new { @class = "form-control" })*@
+                    @*@Html.DropDownList("Seleccione", (SelectList)ViewBag.ListRegion, "Seleccione...", new { @class = "form-control Selector_Region", @id = "Selector_Region" })*@
+                </div>
+
+                <div class="col-lg-3">
+                    <p class="text-muted text-center">Seleccione Provincia</p>
+                    <select id="Cod_Provincia" name="Cod_Provincia" class="form-control Cod_Provincia" placeholder="Seleccione"></select>
+                    @*@Html.DropDownListFor(model => model.ID_Comuna, (SelectList)ViewBag.ListComuna, "Seleccione...", new { @class = "form-control" })*@
+                    @*@Html.DropDownList("Seleccione", (SelectList)ViewBag.ListComuna, "Seleccione...", new { @class = "form-control Selector_Comuna", @id = "Selector_Comuna" })*@
+                </div>
+                <div class="col-lg-3">
+                    <p class="text-muted text-center">Seleccione Comuna</p>
+                    <select id="Cod_Comuna" name="Cod_Comuna" class="form-control Cod_Comuna" placeholder="Seleccione"></select>
+                    @*@Html.DropDownListFor(model => model.ID_Comuna, (SelectList)ViewBag.ListComuna, "Seleccione...", new { @class = "form-control" })*@
+                    @*@Html.DropDownList("Seleccione", (SelectList)ViewBag.ListComuna, "Seleccione...", new { @class = "form-control Selector_Comuna", @id = "Selector_Comuna" })*@
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <p class="text-muted text-center">Ingrese Direccion</p>
+                    @*@Html.TextBoxFor(model => model.Direccion, new { @class = "custom-scroll form-control" })*@
+                    @Html.TextBox("Direccion", null, new { @class="form-control"})
+                </div>
+                <div class="col-lg-3">
+                    <p class="text-muted text-center">Numeración</p>
+                    @*@Html.TextBoxFor(model => model.Direccion, new { @class = "custom-scroll form-control" })*@
+                    @Html.TextBox("Numeracion", null, new { @class = "form-control" })
+                </div>
+                <div class="col-lg-3">
+                    <p class="text-muted text-center">Piso</p>
+                    @*@Html.TextBoxFor(model => model.Direccion, new { @class = "custom-scroll form-control" })*@
+                    @Html.TextBox("Piso", null, new { @class = "form-control" })
+                </div>
+                <div class="col-lg-2">
+                    <p class="text-muted text-center">Agregar</p>
+                    <a href="#" class="pull-right btn" style="padding:3px" id="add_direccion"><i class="fa fa-fw fa-plus-square-o"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-striped col-lg-12" id="tbl_Direcciones">
+                <thead>
+                    <tr>
+                        <th class="col-sm-1">ID</th>
+                        <th class="col-sm-3">Dirección</th>
+                        <th class="col-sm-1">Numeración</th>
+                        <th class="col-sm-1">Piso</th>
+                        <th class="col-sm-2">Región</th>
+                        <th class="col-sm-2">Provincia</th>
+                        <th class="col-sm-2">Comuna</th>                        
+                        <th class="col-sm-1">Eliminar</th>
+                        <th class="col-sm-1">Casa Matriz</th>
+                    </tr>
+                </thead>
+                <tbody id="dibuja">
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close" >Cancelar</button>
+            @*<button type="button" class="btn btn-warning pull-right" action="save" id="guardar_direcciones">Guardar</button>*@
+            <button type="button" class="btn btn-warning pull-right" id="guardar_direcciones">Guardar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    var tabla;
+    $('#tbl_Direcciones').on("click", "#deleteDep", function(){
+        debugger;
+        console.log($(this).parent());
+        tabla.row($(this).parents('tr')).remove().draw(false);
+    });
+
+    //function deleteRow(row){
+    //    debugger;
+    //    var td = event.target.parentNode; 
+    //    var tr = td.parentNode; //the row to be removed
+    //    tr.parentNode.removeChild(tr);
+    //    row.parentNode.parentNode.removeChild(row.parentNode);
+    //    var p = row.parentNode.parentNode;
+    //    p.parentNode.removeChild(p);
+    //}
+
+    function validaCheck(){
+        debugger;
+        $(this).val($(this).attr('checked') ? '1' : '0');
+    }
+
+    $(document).ready(function () {
+        var id_cli = @id_cli;
+        var url_Direcciones = '@Url.Action("ObtenerDirecciones", "ClientesProspective")';
+        var dataColumnsDireccion = [
+           { data: "id" },
+           { data: "direc" },
+           { data: "nume" },
+           { data: "piso" },
+           //{ data: "direc", "render": function(data, type, row){
+           //    debugger;
+           //    //var options = (id_class == null) ? $(".Cod_Region") : $('.' + id_class + 'Cod_Region');
+           //    var dire = data;
+           //    var num = row.nume != null ? row.nume : '';
+           //    var pis = row.piso != null ? ' Piso ' + row.piso : '';
+
+           //    return dire + ' ' + num  + ' ' + pis;
+           //} },
+           { data: "region", "render": function (data, type, row){
+               return '<label class="ASD">'+data+'</label> <input type="hidden" name="name" value="'+row.id_region+'">';
+           }
+           },
+            { data: "provi" , "render": function (data, type, row){
+                return '<label class="ASD">'+data+'</label> <input type="hidden" name="name" value="'+row.id_provincia+'">';
+            }
+            },
+           { data: "comuna" , "render": function (data, type, row){
+               return '<label class="ASD">'+data+'</label> <input type="hidden" name="name" value="'+row.id_comuna+'">';
+           }
+           },
+           { data: "id", "render": function(data){
+               return '<button type="button" id="deleteDep" class="btn btn-default" value="'+ data +'" ><i class="fa fa-trash" aria-hidden="true"></i></button>';
+               //return '<button type="button" id="deleteDep" class="btn btn-default" value="'+ data +'" onclick = "deleteRow(this);"><i class="fa fa-trash" aria-hidden="true"></i></button>';
+           }},
+           { data: "matriz", "render" : function(data){
+               //debugger;
+               var texto ="";
+               if(data == 1){
+                   texto = "<input type='checkbox' id='che' value='1' checked onclick='$(this).val(this.checked ? 1 : 0)';'>";
+               }else{
+                   texto = "<input type='checkbox' id='che' value='0' onclick='$(this).val(this.checked ? 1 : 0)';'>";
+               }
+               return texto;
+           }},
+        ];
+
+        function parameterFunction(d) {
+            //debugger;
+            return $.extend({}, d, {
+                "id": id_cli
+            });
+        }
+        //var tabla;
+        function dtdirecion(grilla, url, parametro, columnas) {
+            tabla = $('#' + grilla).DataTable({
+                "ajax": {
+                    "url": url,
+                    "type": "POST",
+                    "data": parametro
+                },
+                "createdRow": function( row, data, dataIndex ) {
+                },
+                columns: columnas,
+                order: [[0, "asc"]]
+            });
+            return tabla;
+            validaCheck();
+            clean();
+        }
+
+        var direcion = dtdirecion("tbl_Direcciones", url_Direcciones, parameterFunction, dataColumnsDireccion);
+
+
+        $('#Cod_Region').change(function () {
+            debugger;
+            $('#Cod_Provincia').empty();
+            $('#Cod_Comuna').empty();
+            ObtenerProvincia();
+        });
+
+        $('#Cod_Provincia').change(function () {
+            $('#Cod_Comuna').empty();
+            ObtenerComuna();
+        });
+
+        function ObtenerProvincia(id_class) {
+            debugger;
+            var id = $('#Cod_Region').val();
+            var url_ = '@Url.Action("ObtenerProvincia", "ClientesProspective")' + '?id=' + id;
+
+            $.getJSON(url_, function (result) {
+                var options = $("#Cod_Provincia");
+                //$('#'+options).prop('selectedIndex', 0);
+                $.each(result.data, function (value, index) {
+                    //options.append($("<option />").val(index.id_region).text(index.id_region).data('Nombre_Region', index.id_region));
+                    $(options).append($("<option></option>").attr("value", index.ID_Provincia).text(index.Nom_Provincia));
+                });
+            });
+            //$("#Cod_Region").val($("#target option:first").val());
+        }
+
+        function ObtenerComuna(id_class) {           
+            var id =  $('#Cod_Provincia').val();
+            var url_ = "@Url.Action("ObtenerComuna", "ClientesProspective")" + '?id=' + id;
+            $.getJSON(url_, function (result) {
+                var options = $("#Cod_Comuna");
+                $.each(result.data, function (value, index) {
+                    //options.append($("<option />").val(index.id_comuna).text(index.id_comuna).data('Nombre_Comuna', index.id_comuna));
+                    $(options).append($("<option></option>").attr("value", index.ID_Comuna).text(index.Nom_Comuna));
+                });
+            });
+        }
+
+        ObtenerProvincia();
+        ObtenerComuna();
+
+
+
+
+
+
+        $('#add_direccion').on('click', function () {
+            debugger;
+            var id = '0';
+            var region = $("#Cod_Region option:selected").text();
+            var comuna = $("#Cod_Comuna option:selected").text();
+            var provi = $("#Cod_Provincia option:selected").text();
+            var id_region = $("#Cod_Region option:selected").val();
+            var id_comuna = $("#Cod_Comuna option:selected").val();
+            var id_provincia = $("#Cod_Provincia option:selected").val();
+            var direc = $("#Direccion").val();
+            var piso = $("#Piso").val();
+            var nume = $("#Numeracion").val();
+            //var combo_region = $("#Selector_Region").html();
+            //var combo_comuna = $("#Selector_Comuna").html();
+            var detalle = new addDetalle(id, region, comuna, provi, id_region, id_comuna, id_provincia, direc, piso, nume);
+            var array = returnProduc(detalle);
+            tabla.row.add(detalle).draw(false);
+            clean();
+            validaCheck();
+        });
+
+        function returnProduc(array) {
+            var produc = [];
+            produc.push(array)
+            //produc.push($("#Direccion").val())
+            //produc.push($("#Selector_Region option:selected").text())
+            //produc.push( $("#Selector_Comuna option:selected").text())
+            return produc;
+        }
+        //creo objeto detalle.
+        function addDetalle(id, region, comuna, provi, id_region, id_comuna, id_provincia, direc, piso, nume) {
+            this.id = id;
+            this.region = region;
+            this.comuna = comuna;
+            this.provi = provi;
+            this.id_region = id_region;
+            this.id_comuna = id_comuna;
+            this.id_provincia = id_provincia;
+            this.direc = direc;
+            this.piso = piso;
+            this.nume = nume;
+        }
+
+        function clean() {
+            //debugger;
+            $('#Cod_Region').prop('selectedIndex', 0);
+            $('#Cod_Comuna').prop('selectedIndex', 0);
+            $('#Cod_Provincia').empty();
+            $('#Direccion').val('');
+            $('#Numeracion').val('');
+            $('#Piso').val('');
+        }
+
+        $("#guardar_direcciones").on('click', function () {
+            validaCheck();
+            var urlDirecciones = '@Url.Action("Crear_Direcciones", "ClientesProspective")';
+            var data = [];
+            var dat = [];
+            
+            $("#tbl_Direcciones tr:gt(0)").each(function () {   
+                debugger;
+                data.push(
+                {
+                    //Pagina_Web : $.trim($(this).find('td:eq(0)').text()),
+                    id_direccion: $.trim($(this).find('td:eq(0)').text()),
+                    direccion: $.trim($(this).find('td:eq(1)').text()),
+                    numeracion: $.trim($(this).find('td:eq(2)').text()),
+                    piso: $.trim($(this).find('td:eq(3)').text()),
+                    id_comuna: $.trim($(this).find('td:eq(6) > input').val()),
+                    //casa_matriz: parseInt($.trim($(this).find('td:eq(8) > input').val()))
+                });
+                dat.push(
+                {
+                    casa_matriz: parseInt($.trim($(this).find('td:eq(8) > input').val()))
+                });
+            });
+
+            $.ajax({
+                url: urlDirecciones,
+                type: "POST",
+                data: {
+                    model: data,
+                    id_cliente: id_cli,                    
+                    casa_matriz: JSON.stringify(dat)
+                },
+                datatype: 'json',
+                ContentType: 'application/json;utf-8'
+            }).done(function (resp) {
+                mensajeExito(resp.mensaje, resp.mensaje2);
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            }).error(function (err) {
+                //alert("Error " + err.status);
+            });
+        });
+    });
+</script>

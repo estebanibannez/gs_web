@@ -1,0 +1,87 @@
+﻿<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-calendar-check-o"></i> Comprobantes</h3>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <div class="box">
+        <div class="box-body no-padding">
+            <table id="tbl_comprobante" class="table table-bordered table-hover dataTable">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Tipo Comprobante</th>
+                        <th>N° Comprobante</th>                      
+                        <th>Usuario</th>                        
+                        <th>Fecha Creación</th>
+                        <th>Fecha Ultima Modificación</th>
+                    </tr>
+                </thead><!-- /.agrego el body de la tabla 
+                <tbody id="dtable"></tbody>-->
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        var columnasComprobante =
+            [
+               { "data": "BASE" },
+               { "data": "Tipo" },
+               { "data": "cpbnum" },
+               { "data": "Usuario" },
+               { "data": "Fecha" },
+               { "data": "Modificacion"}               
+            ]
+
+        var comprobantes = tbl_comprobante("tbl_comprobante", "@Url.Action("ComprobantesPendientes", "Comprobante")", null, columnasComprobante);
+
+        function tbl_comprobante(grilla, url, parametros, Columnas, callBack) {
+            //debugger;
+            var tabla;
+            callBack = typeof callBack !== 'undefined' ? callBack : function (ajax) { return ajax.data };
+            tabla = $('#' + grilla).DataTable({
+                "ajax": {
+                    "url": url,
+                    "type": "POST",
+                    "data": parametros
+                    
+                },
+                "columns": Columnas,
+                "order": [[0, "asc"]]
+            });
+            return tabla;
+        }
+    });
+
+    @*$(document).ready(function () {
+        cargaBody();
+
+
+        function cargaBody() {
+            debugger;
+            $.ajax({
+                async: true,
+                type: 'GET',
+                url: '@Url.Action("ComprobantesPendientes", "Comprobante")',
+                success: function (data) {
+                    //debugger;
+                    $.each(data.data, function (index, item) {
+
+                        $('#dtable').append('<tr>' +
+                            '<td>' + item.BASE + '</td>' +
+                            '<td>' + item.Tipo + '</td>' +
+                            '<td>' + item.cpbnum + '</td>' +
+                            '<td>' + item.Usuario + '</td>' +
+                            '<td>' + item.Fecha + '</td>' +
+                            '<td>' + item.Modificacion + '</td>' +
+                            '</tr>');
+                    });
+                },
+            });
+        }
+    });*@
+</script>

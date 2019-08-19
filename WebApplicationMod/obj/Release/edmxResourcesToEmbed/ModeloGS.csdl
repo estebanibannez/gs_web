@@ -1,0 +1,1149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GSPSOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Ruta" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Usu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Nombre_Archivo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Tipo" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="TC" Type="Int32" />
+    <Property Name="EcepCC" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="IRFS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Activo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Rut" Type="Int32" />
+    <Property Name="BLK" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="TCFac" Type="Int32" />
+    <Property Name="Tarifa" Type="Double" />
+    <Property Name="TCFac1" Type="Int32" />
+    <Property Name="Tarifa1" Type="Double" />
+    <Property Name="CC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Holding" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="BA" Type="Int32" />
+    <Property Name="ER" Type="Int32" />
+    <Property Name="SegMon" Type="Int32" />
+    <Property Name="BLKPag" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="TES" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="BcoPag" Type="Int32" />
+    <Property Name="CtaPag" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="EmailPag" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="MPago" Type="Int32" />
+    <Property Name="Obs" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
+    <Property Name="Consi" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
+    <Property Name="AdmCheque" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="RRHH" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="Grati" Type="Int32" />
+    <Property Name="ObsGrati" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Cola" Type="Int32" />
+    <Property Name="ObsCola" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Mov" Type="Int32" />
+    <Property Name="ObsMov" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Fpago" Type="Int32" />
+    <Property Name="Caja" Type="Int32" />
+    <Property Name="ObsCaja" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Mutual" Type="Int32" />
+    <Property Name="ObsMutual" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="DiaSueldo" Type="Int32" />
+    <Property Name="DiaPago" Type="Int32" />
+    <Property Name="DiaAnticipo" Type="Int32" />
+    <Property Name="ObsRRHH" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
+    <Property Name="PagaPSO" Type="Int32" />
+    <Property Name="emailcobro" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+    <Property Name="atencion" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="TramoPR" Type="String" MaxLength="120" FixedLength="true" Unicode="true" />
+    <Property Name="IIng" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="TipChe" Type="Int32" />
+    <Property Name="rutadestino" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="CTD" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="fechalr" Type="DateTime" Precision="0" />
+    <Property Name="gbo" Type="Int32" />
+    <Property Name="impsug" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="gerencia_bo" Type="Int32" />
+    <Property Name="gerencia_ss" Type="Int32" />
+    <Property Name="snr_ingl" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="cartera_tes" Type="Int32" />
+    <Property Name="cartera_pay" Type="Int32" />
+    <Property Name="publicar_eeff" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="fingreso" Type="DateTime" Precision="0" />
+    <Property Name="fsalida" Type="DateTime" Precision="0" />
+    <Property Name="cartera_oper" Type="Int32" />
+    <Property Name="kpif29" Type="Int32" />
+    <Property Name="kpieeff" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="nomfaccl" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="kpieeffhabil" Type="Boolean" />
+    <Property Name="kpif29_automa" Type="Int32" />
+    <NavigationProperty Name="cab_anticipos" Relationship="GSPSOModel.FK_Anticipos_Clientes" FromRole="Clientes" ToRole="cab_anticipos" />
+    <NavigationProperty Name="evento" Relationship="GSPSOModel.FK_evento_Clientes" FromRole="Clientes" ToRole="evento" />
+  </EntityType>
+  <EntityType Name="Permisos">
+    <Key>
+      <PropertyRef Name="Clie" />
+      <PropertyRef Name="Usu" />
+      <PropertyRef Name="Modulo" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Clie" Type="Int32" Nullable="false" />
+    <Property Name="Usu" Type="Int32" Nullable="false" />
+    <Property Name="Modulo" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Proveedores">
+    <Key>
+      <PropertyRef Name="Aux" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Aux" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Nom" Type="String" MaxLength="60" FixedLength="true" Unicode="false" />
+    <Property Name="Bco" Type="Int32" />
+    <Property Name="Cta" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="dv" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="cab_anticipos" Relationship="GSPSOModel.FK_Anticipos_Proveedores" FromRole="Proveedores" ToRole="cab_anticipos" />
+  </EntityType>
+  <EntityType Name="GS_Documentos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CLIENTE" Type="Int32" />
+    <Property Name="CPBAño" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="CPBMes" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="CodAux" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CTDCod" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="NumDocI" Type="Int32" />
+    <Property Name="MovFe" Type="DateTime" Precision="3" />
+    <Property Name="MovFv" Type="DateTime" Precision="3" />
+    <Property Name="VendCod" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="MovGlosa" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="Neto" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Exento" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Impu" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Total" Type="Double" />
+    <Property Name="NumDocF" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NomAux" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="Archivo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Usu" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="CabGlo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Entrega" Type="DateTime" Precision="0" />
+    <Property Name="UsuEnt" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="Centraliza" Type="DateTime" Precision="0" />
+    <Property Name="UsuCent" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+    <Property Name="Imputacion" Type="DateTime" Precision="0" />
+    <Property Name="UsuImp" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+    <Property Name="NumCent" Type="Int32" />
+    <Property Name="Nula" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="UsuAnu" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="MotivoAnul" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="SP" Type="Int32" />
+    <Property Name="AP" Type="Int32" />
+    <Property Name="Creacion" Type="DateTime" Precision="3" />
+    <Property Name="Scaneo" Type="DateTime" Precision="3" />
+    <Property Name="FechaSolPago" Type="DateTime" Precision="3" />
+    <Property Name="UsuSolPago" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="ObsPagRealizo" Type="String" MaxLength="120" FixedLength="true" Unicode="true" />
+    <Property Name="ObsSolPago" Type="String" MaxLength="120" FixedLength="true" Unicode="true" />
+    <Property Name="PagUrg" Type="DateTime" Precision="3" />
+    <Property Name="FP" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="UsuRec" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="FecRec" Type="DateTime" Precision="3" />
+    <Property Name="MontoPago" Type="Int32" />
+    <Property Name="fcrea" Type="DateTime" Precision="3" />
+    <Property Name="TCambio" Type="Double" />
+    <Property Name="folioint" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NetoSM" Type="Double" />
+    <Property Name="ExentoSM" Type="Double" />
+    <Property Name="ImpuSM" Type="Double" />
+    <Property Name="TotalSM" Type="Double" />
+    <Property Name="exkpi" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="comenexpki" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MovRe" Type="DateTime" Precision="0" />
+    <Property Name="FolioSolFac" Type="Int32" />
+    <Property Name="exkpipd" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="comenexkpipd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="flingdoc" Type="DateTime" Precision="0" />
+    <Property Name="justifindoc" Type="Int32" />
+    <Property Name="flemifac" Type="DateTime" Precision="0" />
+    <Property Name="justifiemifac" Type="Int32" />
+    <Property Name="ting" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+    <Property Name="fofpoper" Type="DateTime" Precision="3" />
+    <Property Name="uofpoper" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="usurecep" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+    <Property Name="recep" Type="DateTime" Precision="3" />
+    <Property Name="tst" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="origen" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="id_encab" Type="Int32" />
+    <Property Name="TipoDTE" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="GSPSOEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+    <EntitySet Name="Permisos" EntityType="Self.Permisos" />
+    <EntitySet Name="Proveedores" EntityType="Self.Proveedores" />
+    <EntitySet Name="GS_Documentos" EntityType="Self.GS_Documentos" />
+    <FunctionImport Name="PA_insAnticipos">
+      <Parameter Name="base" Mode="In" Type="String" />
+      <Parameter Name="anio" Mode="In" Type="String" />
+      <Parameter Name="mes" Mode="In" Type="String" />
+      <Parameter Name="TtdCod" Mode="In" Type="String" />
+      <Parameter Name="CtaDebe" Mode="In" Type="String" />
+      <Parameter Name="CtaHaber" Mode="In" Type="String" />
+      <Parameter Name="fecha" Mode="In" Type="String" />
+      <Parameter Name="monto" Mode="In" Type="String" />
+      <Parameter Name="NumDocCb" Mode="In" Type="String" />
+      <Parameter Name="ID" Mode="In" Type="String" />
+      <Parameter Name="Return_CpbNum" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="cab_anticipos" EntityType="GSPSOModel.cab_anticipos" />
+    <AssociationSet Name="FK_Anticipos_Clientes" Association="GSPSOModel.FK_Anticipos_Clientes">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="cab_anticipos" EntitySet="cab_anticipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Anticipos_Proveedores" Association="GSPSOModel.FK_Anticipos_Proveedores">
+      <End Role="Proveedores" EntitySet="Proveedores" />
+      <End Role="cab_anticipos" EntitySet="cab_anticipos" />
+    </AssociationSet>
+    <EntitySet Name="GS_TDoc" EntityType="GSPSOModel.GS_TDoc" />
+    <EntitySet Name="GS_SubClasifDoc" EntityType="GSPSOModel.GS_SubClasifDoc" />
+    <EntitySet Name="GS_ClasifDoc" EntityType="GSPSOModel.GS_ClasifDoc" />
+    <EntitySet Name="evento" EntityType="GSPSOModel.evento" />
+    <EntitySet Name="parametros" EntityType="GSPSOModel.parametros" />
+    <AssociationSet Name="FK_evento_Clientes" Association="GSPSOModel.FK_evento_Clientes">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="evento" EntitySet="evento" />
+    </AssociationSet>
+    <EntitySet Name="GS_Pass" EntityType="GSPSOModel.GS_Pass" />
+    <EntitySet Name="Perfiles" EntityType="GSPSOModel.Perfiles" />
+    <EntitySet Name="GS_Cargos" EntityType="GSPSOModel.GS_Cargos" />
+    <EntitySet Name="Permisos_Softland" EntityType="GSPSOModel.Permisos_Softland" />
+    <EntitySet Name="GS_Archivos" EntityType="GSPSOModel.GS_Archivos" />
+    <EntitySet Name="GS_Asig_HrrAp" EntityType="GSPSOModel.GS_Asig_HrrAp" />
+    <FunctionImport Name="PA_AsignacionPermisosAUsuario">
+      <Parameter Name="Cliente" Mode="In" Type="String" />
+      <Parameter Name="Usuario" Mode="In" Type="String" />
+      <Parameter Name="Aux" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="v_UsuarioIFRS2013" EntityType="GSPSOModel.v_UsuarioIFRS2013" />
+    <FunctionImport Name="PA_AsignacionPermisosAUsuario1">
+      <Parameter Name="Cliente" Mode="In" Type="String" />
+      <Parameter Name="Usuario" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PA_AsignacionPermisosAUsuario2">
+      <Parameter Name="Cliente" Mode="In" Type="String" />
+      <Parameter Name="Usuario" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="pa_insercionsoftlandusuarioypermiso">
+      <Parameter Name="Cliente" Mode="In" Type="String" />
+      <Parameter Name="Usuario" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PA_inspermisosusuario">
+      <Parameter Name="Cliente" Mode="In" Type="String" />
+      <Parameter Name="Usuario" Mode="In" Type="String" />
+      <Parameter Name="counts" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="PA_consultaselect">
+      <Parameter Name="CLIENTE" Mode="In" Type="String" />
+      <Parameter Name="USUARIO" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="indicadores" EntityType="GSPSOModel.indicadores" />
+    <EntitySet Name="Monedas" EntityType="GSPSOModel.Monedas" />
+    <EntitySet Name="GS_Medios_Pago" EntityType="GSPSOModel.GS_Medios_Pago" />
+    <EntitySet Name="GS_TIPMP" EntityType="GSPSOModel.GS_TIPMP" />
+    <EntitySet Name="l_clientes" EntityType="GSPSOModel.l_clientes" />
+    <EntitySet Name="GS_AccFrm" EntityType="GSPSOModel.GS_AccFrm" />
+    <EntitySet Name="GS_FRMS" EntityType="GSPSOModel.GS_FRMS" />
+    <EntitySet Name="GS_HerrApoyo" EntityType="GSPSOModel.GS_HerrApoyo" />
+    <EntitySet Name="Tipo_Anticipos" EntityType="GSPSOModel.Tipo_Anticipos" />
+    <EntitySet Name="det_anticipos" EntityType="GSPSOModel.det_anticipos" />
+    <AssociationSet Name="FK_det_anticipos_cab_anticipos" Association="GSPSOModel.FK_det_anticipos_cab_anticipos">
+      <End Role="cab_anticipos" EntitySet="cab_anticipos" />
+      <End Role="det_anticipos" EntitySet="det_anticipos" />
+    </AssociationSet>
+    <FunctionImport Name="SP_ExecuteQuery">
+      <Parameter Name="CLIENTES" Mode="In" Type="String" />
+      <Parameter Name="CONSULTA" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PA_validaAntesInsertarDinamico">
+      <Parameter Name="Cliente" Mode="In" Type="String" />
+      <Parameter Name="CodAux" Mode="In" Type="String" />
+      <Parameter Name="NomAux" Mode="In" Type="String" />
+      <Parameter Name="RutAux" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Usuario" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="GS_Procesos" EntityType="GSPSOModel.GS_Procesos" />
+    <EntitySet Name="GS_ClaCtas" EntityType="GSPSOModel.GS_ClaCtas" />
+    <EntitySet Name="GS_Asig_Carg_Clie" EntityType="GSPSOModel.GS_Asig_Carg_Clie" />
+    <EntitySet Name="Docs" EntityType="GSPSOModel.Docs" />
+    <EntitySet Name="Saldo_Banco" EntityType="GSPSOModel.Saldo_Banco" />
+    <EntitySet Name="Usu" EntityType="GSPSOModel.Usu" />
+    <AssociationSet Name="FK_evento_Usu" Association="GSPSOModel.FK_evento_Usu">
+      <End Role="Usu" EntitySet="Usu" />
+      <End Role="evento" EntitySet="evento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usu_Usu" Association="GSPSOModel.FK_Usu_Usu">
+      <End Role="Usu" EntitySet="Usu" />
+      <End Role="Usu1" EntitySet="Usu" />
+    </AssociationSet>
+    <EntitySet Name="Documento" EntityType="GSPSOModel.Documento" />
+    <FunctionImport Name="PA_insAnticiposVersion2">
+      <Parameter Name="base" Mode="In" Type="String" />
+      <Parameter Name="anio" Mode="In" Type="String" />
+      <Parameter Name="mes" Mode="In" Type="String" />
+      <Parameter Name="TtdCod" Mode="In" Type="String" />
+      <Parameter Name="CtaDebe" Mode="In" Type="String" />
+      <Parameter Name="CtaHaber" Mode="In" Type="String" />
+      <Parameter Name="fecha" Mode="In" Type="String" />
+      <Parameter Name="monto" Mode="In" Type="String" />
+      <Parameter Name="NumDocCb" Mode="In" Type="String" />
+      <Parameter Name="ID" Mode="In" Type="String" />
+      <Parameter Name="Return_CpbNum" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="files_anticipos" EntityType="GSPSOModel.files_anticipos" />
+    <AssociationSet Name="FK_files_anticipos_cab_anticipos" Association="GSPSOModel.FK_files_anticipos_cab_anticipos">
+      <End Role="cab_anticipos" EntitySet="cab_anticipos" />
+      <End Role="files_anticipos" EntitySet="files_anticipos" />
+    </AssociationSet>
+    <EntitySet Name="Parametros_GS_WEB" EntityType="GSPSOModel.Parametros_GS_WEB" />
+    <EntitySet Name="Permisos_GS_WEB" EntityType="GSPSOModel.Permisos_GS_WEB" />
+    <AssociationSet Name="FK_Parametro" Association="GSPSOModel.FK_Parametro">
+      <End Role="Parametros_GS_WEB" EntitySet="Parametros_GS_WEB" />
+      <End Role="Permisos_GS_WEB" EntitySet="Permisos_GS_WEB" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usu" Association="GSPSOModel.FK_Usu">
+      <End Role="Usu" EntitySet="Usu" />
+      <End Role="Permisos_GS_WEB" EntitySet="Permisos_GS_WEB" />
+    </AssociationSet>
+    <EntitySet Name="GS_ModNumComp" EntityType="GSPSOModel.GS_ModNumComp" />
+    <EntitySet Name="GS_Bancos" EntityType="GSPSOModel.GS_Bancos" />
+    <EntitySet Name="GS_Detalles" EntityType="GSPSOModel.GS_Detalles" />
+    <EntitySet Name="GS_ctrl_cump" EntityType="GSPSOModel.GS_ctrl_cump" />
+    <EntitySet Name="ctrl_acciones" EntityType="GSPSOModel.ctrl_acciones" />
+    <FunctionImport Name="PA_Valida_Existe_Documento" ReturnType="Collection(Int32)">
+      <Parameter Name="Cliente" Mode="In" Type="String" />
+      <Parameter Name="Rut_proveedor" Mode="In" Type="String" />
+      <Parameter Name="Tipo_Doc" Mode="In" Type="String" />
+      <Parameter Name="Num_Doc" Mode="In" Type="String" />
+      <Parameter Name="counts" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_selAnticiposProveedor">
+      <Parameter Name="id_clie" Mode="In" Type="Int32" />
+      <Parameter Name="cod_aux" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="InfGestionPago" EntityType="GSPSOModel.InfGestionPago" />
+    <EntitySet Name="GS_Restriciones_Bancarias" EntityType="GSPSOModel.GS_Restriciones_Bancarias" />
+    <EntitySet Name="GS_Pagos" EntityType="GSPSOModel.GS_Pagos" />
+    <EntitySet Name="GS_Ctas" EntityType="GSPSOModel.GS_Ctas" />
+    <EntitySet Name="GS_CtasCtes" EntityType="GSPSOModel.GS_CtasCtes" />
+    <EntitySet Name="GS_Saldos_Bancarios" EntityType="GSPSOModel.GS_Saldos_Bancarios" />
+  </EntityContainer>
+  <EntityType Name="cab_anticipos">
+    <Key>
+      <PropertyRef Name="id_anticipo" />
+    </Key>
+    <Property Name="id_anticipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fec_anticipo" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="id_tanticipo" Type="Int32" />
+    <Property Name="fec_pago" Type="DateTime" Precision="0" />
+    <Property Name="estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CpbNum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="id_clie" Type="Int32" Nullable="false" />
+    <Property Name="id_prov" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="usu_sol" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="usu_pag" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="fecha_mod" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="usu_mod" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Clientes" Relationship="GSPSOModel.FK_Anticipos_Clientes" FromRole="cab_anticipos" ToRole="Clientes" />
+    <NavigationProperty Name="Proveedores" Relationship="GSPSOModel.FK_Anticipos_Proveedores" FromRole="cab_anticipos" ToRole="Proveedores" />
+    <Property Name="glosa" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="NumDoc" Type="Double" />
+    <Property Name="rut_clie" Type="Int32" />
+    <NavigationProperty Name="det_anticipos" Relationship="GSPSOModel.FK_det_anticipos_cab_anticipos" FromRole="cab_anticipos" ToRole="det_anticipos" />
+    <NavigationProperty Name="files_anticipos" Relationship="GSPSOModel.FK_files_anticipos_cab_anticipos" FromRole="cab_anticipos" ToRole="files_anticipos" />
+    <Property Name="fec_sol" Type="DateTime" Precision="0" />
+  </EntityType>
+  <Association Name="FK_Anticipos_Clientes">
+    <End Type="GSPSOModel.Clientes" Role="Clientes" Multiplicity="1" />
+    <End Type="GSPSOModel.cab_anticipos" Role="cab_anticipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="cab_anticipos">
+        <PropertyRef Name="id_clie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Anticipos_Proveedores">
+    <End Type="GSPSOModel.Proveedores" Role="Proveedores" Multiplicity="1" />
+    <End Type="GSPSOModel.cab_anticipos" Role="cab_anticipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proveedores">
+        <PropertyRef Name="Aux" />
+      </Principal>
+      <Dependent Role="cab_anticipos">
+        <PropertyRef Name="id_prov" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="GS_TDoc">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="CodDoc" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="DesDoc" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="Tipo" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="Impto" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="CamA" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="Decu" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="SumImp" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="DSD" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="DocRes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RotuloDoc" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="TipoCV" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="FacElec" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="rotulo_fac_elec" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="TipoDTE" Type="Int32" />
+  </EntityType>
+  <EntityType Name="GS_SubClasifDoc">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Clasif" Type="Int32" />
+    <Property Name="nom" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="GS_ClasifDoc">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="evento">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usuario_mod" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_mod" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="estado" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="id_cliente" Type="Int32" Nullable="false" />
+    <Property Name="id_usuario" Type="Int32" Nullable="false" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="titulo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Clientes" Relationship="GSPSOModel.FK_evento_Clientes" FromRole="evento" ToRole="Clientes" />
+    <NavigationProperty Name="Usu" Relationship="GSPSOModel.FK_evento_Usu" FromRole="evento" ToRole="Usu" />
+  </EntityType>
+  <EntityType Name="parametros">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="tipo" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_evento_Clientes">
+    <End Type="GSPSOModel.Clientes" Role="Clientes" Multiplicity="1" />
+    <End Type="GSPSOModel.evento" Role="evento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="evento">
+        <PropertyRef Name="id_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="GS_Pass">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Pass" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Clie" Type="Int32" />
+    <Property Name="Clasif" Type="Int32" />
+    <Property Name="Pass" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Usu" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Orga" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Perfiles">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="GS_Cargos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="area" Type="Int32" />
+    <Property Name="estado" Type="Int32" />
+    <Property Name="usuario_mod" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Permisos_Softland">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Clie" />
+      <PropertyRef Name="Usu" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Clie" Type="Int32" Nullable="false" />
+    <Property Name="Usu" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GS_Archivos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="descripcion" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+    <Property Name="ruta" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+    <Property Name="tipo" Type="Int32" />
+  </EntityType>
+  <EntityType Name="GS_Asig_HrrAp">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usu" Type="Int32" />
+    <Property Name="HrrAp" Type="Int32" />
+  </EntityType>
+  <EntityType Name="v_UsuarioIFRS2013">
+    <Key>
+      <PropertyRef Name="Usuario" />
+      <PropertyRef Name="Bloqueado" />
+    </Key>
+    <Property Name="Usuario" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="PassWord" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Firma" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="Bloqueado" Type="Int32" Nullable="false" />
+    <Property Name="FechaLogin" Type="DateTime" Precision="3" />
+    <Property Name="MotivoBloqueo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Rut" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="eMail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Sistema" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Expr1" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="Formulario" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Control" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Monedas">
+    <Key>
+      <PropertyRef Name="Id1" />
+    </Key>
+    <Property Name="Id1" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" />
+    <Property Name="Descrip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sigla" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="GS_Medios_Pago">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Sigla" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="GS_TIPMP">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sigla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="indicadores">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UF" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="IVP" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="DOLAR" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="EURO" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="ITCM" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="usuario_mod" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_mod" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="l_clientes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Rut" Type="Int32" />
+    <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Ruta" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Nombre_Archivo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Tipo" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="EcepCC" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="IRFS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Activo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Sigla" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="Tar1" Type="Double" />
+    <Property Name="Mon1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Tar2" Type="Double" />
+    <Property Name="Mon2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Holding" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="BA" Type="Int32" />
+    <Property Name="ER" Type="Int32" />
+    <Property Name="Descrip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TES" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="Expr1" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="CtaPag" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="EmailPag" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Mpago" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Obs" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
+    <Property Name="AdmCheque" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="RRHH" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="Grati" Type="Int32" />
+    <Property Name="ObsGrati" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Cola" Type="Int32" />
+    <Property Name="ObsCola" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Mov" Type="Int32" />
+    <Property Name="ObsMov" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="formapago" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Caja" Type="Int32" />
+    <Property Name="ObsCaja" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Mutual" Type="Int32" />
+    <Property Name="ObsMutual" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="DiaSueldo" Type="Int32" />
+    <Property Name="DiaPago" Type="Int32" />
+    <Property Name="DiaAnticipo" Type="Int32" />
+    <Property Name="PagaPSO" Type="Int32" />
+    <Property Name="ObsRRHH" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
+    <Property Name="emailcobro" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+    <Property Name="atencion" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="TramoPR" Type="String" MaxLength="120" FixedLength="true" Unicode="true" />
+    <Property Name="IIng" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="TCheq" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="rutadestino" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="CTD" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="tipomp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fechalr" Type="DateTime" Precision="0" />
+    <Property Name="gbo" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="impsug" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="senrec" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="gebo" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="gess" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="cart_tes" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="cart_pay" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="publicar_eeff" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="fingreso" Type="DateTime" Precision="0" />
+    <Property Name="fsalida" Type="DateTime" Precision="0" />
+    <Property Name="cart_oper" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="kpif29" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="kpieeff" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="nomfaccl" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="kpieeffhabil" Type="Boolean" />
+    <Property Name="numKpif29" Type="Int32" />
+    <Property Name="kpif29_automa" Type="Int32" />
+  </EntityType>
+  <EntityType Name="GS_AccFrm">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Frm" Type="Int32" />
+    <Property Name="Usu" Type="Int32" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="GS_FRMS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Nom" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="Nom_Boton" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+    <Property Name="Nom_Frm" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="WebGS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="GS_HerrApoyo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="usuario" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="pass" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Tipo_Anticipos">
+    <Key>
+      <PropertyRef Name="id_tanticipo" />
+    </Key>
+    <Property Name="id_tanticipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom_tanticipo" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="CtaC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TtdCod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="rut_emp" Type="Int32" />
+    <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fecha_mod" Type="DateTime" Precision="0" />
+    <Property Name="usu_mod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="det_anticipos">
+    <Key>
+      <PropertyRef Name="id_danticipo" />
+    </Key>
+    <Property Name="id_anticipo" Type="Int32" Nullable="false" />
+    <Property Name="id_danticipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cod_cta" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="monto" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="TtdCod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="estado" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="fecha_mod" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="usu_mod" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="cab_anticipos" Relationship="GSPSOModel.FK_det_anticipos_cab_anticipos" FromRole="det_anticipos" ToRole="cab_anticipos" />
+  </EntityType>
+  <Association Name="FK_det_anticipos_cab_anticipos">
+    <End Type="GSPSOModel.cab_anticipos" Role="cab_anticipos" Multiplicity="1" />
+    <End Type="GSPSOModel.det_anticipos" Role="det_anticipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cab_anticipos">
+        <PropertyRef Name="id_anticipo" />
+      </Principal>
+      <Dependent Role="det_anticipos">
+        <PropertyRef Name="id_anticipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="GS_Procesos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="GS_ClaCtas">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="vcta" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="GS_Asig_Carg_Clie">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usu" Type="Int32" />
+    <Property Name="clie" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Docs">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Expr2" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="CPBMes" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="CPBAño" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="CodAux" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NomAux" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="CTDCod" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="NumDocI" Type="Int32" />
+    <Property Name="Neto" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Exento" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Impu" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Total" Type="Double" />
+    <Property Name="MovFe" Type="DateTime" Precision="3" />
+    <Property Name="MovFv" Type="DateTime" Precision="3" />
+    <Property Name="CabGlo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="UsuEnt" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="Centraliza" Type="DateTime" Precision="0" />
+    <Property Name="DSD" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="Tipo" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="RotuloDoc" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="CLIENTE" Type="Int32" />
+    <Property Name="Archivo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Nombre_Archivo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Expr1" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="Rut" Type="Int32" />
+    <Property Name="UsuImp" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+    <Property Name="Ruta" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="UsuCent" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+    <Property Name="MovGlosa" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="Digit" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="NumCent" Type="Int32" />
+    <Property Name="TipoCV" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="SP" Type="Int32" />
+    <Property Name="AP" Type="Int32" />
+    <Property Name="PagUrg" Type="DateTime" Precision="3" />
+    <Property Name="Saldo" Type="Double" />
+    <Property Name="Expr2" Type="Double" Nullable="false" />
+    <Property Name="IDCLIE" Type="Int32" />
+    <Property Name="FechaSolPago" Type="DateTime" Precision="3" />
+    <Property Name="UsuSolPago" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="ObsPagRealizo" Type="String" MaxLength="120" FixedLength="true" Unicode="true" />
+    <Property Name="ObsSolPago" Type="String" MaxLength="120" FixedLength="true" Unicode="true" />
+    <Property Name="NomBan" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="Cta" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="Bco" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="EmailPag" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="FP" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="Expr3" Type="Int32" />
+    <Property Name="nom" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Obs" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
+    <Property Name="Consi" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
+    <Property Name="MontoPago" Type="Int32" />
+    <Property Name="Entrega" Type="DateTime" Precision="0" />
+    <Property Name="TipChe" Type="Int32" />
+    <Property Name="TCambio" Type="Double" />
+    <Property Name="IRFS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="folioint" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NetoSM" Type="Double" />
+    <Property Name="ExentoSM" Type="Double" />
+    <Property Name="ImpuSM" Type="Double" />
+    <Property Name="TotalSM" Type="Double" />
+    <Property Name="Imputacion" Type="DateTime" Precision="0" />
+    <Property Name="impsug" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="Creacion" Type="DateTime" Precision="3" />
+    <Property Name="exkpi" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="comenexpki" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MovRe" Type="DateTime" Precision="0" />
+    <Property Name="flingdoc" Type="DateTime" Precision="0" />
+    <Property Name="docsinimp" Type="Int32" />
+    <Property Name="ting" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+    <Property Name="fofpoper" Type="DateTime" Precision="3" />
+    <Property Name="uofpoper" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="usurecep" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+    <Property Name="recep" Type="DateTime" Precision="3" />
+    <Property Name="tst" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="origen" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="gbof" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="vdolar" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="CTD" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="id_encab" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Saldo_Banco">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fecha" Type="DateTime" Precision="0" />
+    <Property Name="Corrientes" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Corrientes_1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Corrientes_2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Corrientes_3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="filename" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Usu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sigla" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Perfil" Type="Int32" />
+    <Property Name="Anexo" Type="Int32" />
+    <Property Name="IP" Type="Int32" />
+    <Property Name="cargo" Type="Int32" />
+    <Property Name="nomcorto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="nomususoft" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="pass" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="jefatura" Type="Int32" />
+    <Property Name="valpubeeff" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="grupo" Type="Int32" />
+    <Property Name="ger" Type="Int32" />
+    <Property Name="gergen" Type="Int32" />
+    <Property Name="superv" Type="Int32" />
+    <Property Name="uactivo" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="unidad" Type="Int32" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="evento" Relationship="GSPSOModel.FK_evento_Usu" FromRole="Usu" ToRole="evento" />
+    <NavigationProperty Name="Usu1" Relationship="GSPSOModel.FK_Usu_Usu" FromRole="Usu" ToRole="Usu1" />
+    <NavigationProperty Name="Usu2" Relationship="GSPSOModel.FK_Usu_Usu" FromRole="Usu1" ToRole="Usu" />
+    <NavigationProperty Name="Permisos_GS_WEB" Relationship="GSPSOModel.FK_Usu" FromRole="Usu" ToRole="Permisos_GS_WEB" />
+  </EntityType>
+  <Association Name="FK_evento_Usu">
+    <End Type="GSPSOModel.Usu" Role="Usu" Multiplicity="1" />
+    <End Type="GSPSOModel.evento" Role="evento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="evento">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usu_Usu">
+    <End Type="GSPSOModel.Usu" Role="Usu" Multiplicity="1" />
+    <End Type="GSPSOModel.Usu" Role="Usu1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Usu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Usu1">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Documento">
+    <Key>
+      <PropertyRef Name="id_cab" />
+    </Key>
+    <Property Name="id_cab" Type="Int32" Nullable="false" />
+    <Property Name="xml_dte" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="files_anticipos">
+    <Key>
+      <PropertyRef Name="id_fanticipos" />
+    </Key>
+    <Property Name="id_anticipo" Type="Int32" Nullable="false" />
+    <Property Name="id_fanticipos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ruta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="estado" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="fecha_mod" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="usu_mod" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="cab_anticipos" Relationship="GSPSOModel.FK_files_anticipos_cab_anticipos" FromRole="files_anticipos" ToRole="cab_anticipos" />
+  </EntityType>
+  <Association Name="FK_files_anticipos_cab_anticipos">
+    <End Type="GSPSOModel.cab_anticipos" Role="cab_anticipos" Multiplicity="1" />
+    <End Type="GSPSOModel.files_anticipos" Role="files_anticipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cab_anticipos">
+        <PropertyRef Name="id_anticipo" />
+      </Principal>
+      <Dependent Role="files_anticipos">
+        <PropertyRef Name="id_anticipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Parametros_GS_WEB">
+    <Key>
+      <PropertyRef Name="ID_Parametro" />
+    </Key>
+    <Property Name="ID_Parametro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Grupo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Valor" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Controller" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Permisos_GS_WEB" Relationship="GSPSOModel.FK_Parametro" FromRole="Parametros_GS_WEB" ToRole="Permisos_GS_WEB" />
+  </EntityType>
+  <EntityType Name="Permisos_GS_WEB">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Usu" Type="Int32" Nullable="false" />
+    <Property Name="ID_Parametro" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Parametros_GS_WEB" Relationship="GSPSOModel.FK_Parametro" FromRole="Permisos_GS_WEB" ToRole="Parametros_GS_WEB" />
+    <NavigationProperty Name="Usu" Relationship="GSPSOModel.FK_Usu" FromRole="Permisos_GS_WEB" ToRole="Usu" />
+  </EntityType>
+  <Association Name="FK_Parametro">
+    <End Type="GSPSOModel.Parametros_GS_WEB" Role="Parametros_GS_WEB" Multiplicity="1" />
+    <End Type="GSPSOModel.Permisos_GS_WEB" Role="Permisos_GS_WEB" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Parametros_GS_WEB">
+        <PropertyRef Name="ID_Parametro" />
+      </Principal>
+      <Dependent Role="Permisos_GS_WEB">
+        <PropertyRef Name="ID_Parametro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usu">
+    <End Type="GSPSOModel.Usu" Role="Usu" Multiplicity="1" />
+    <End Type="GSPSOModel.Permisos_GS_WEB" Role="Permisos_GS_WEB" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Permisos_GS_WEB">
+        <PropertyRef Name="ID_Usu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="GS_ModNumComp">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usuario" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Folio_old" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Folio_new" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="momento" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="ctrl_acciones">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usu" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="modulo" Type="Int32" />
+    <Property Name="accion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="mom" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="GS_Detalles">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Doc" Type="Int32" />
+    <Property Name="CodCta" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CCCod" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Monto" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Aux" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="NDOC" Type="Int32" />
+    <Property Name="TDoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Glosa" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="MontoSM" Type="Double" />
+  </EntityType>
+  <EntityType Name="GS_Bancos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Nom" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="GS_ctrl_cump">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="clie" Type="Int32" />
+    <Property Name="periodo" Type="DateTime" Precision="0" />
+    <Property Name="mom" Type="DateTime" Precision="3" />
+    <Property Name="usu" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="tipo" Type="Int32" />
+    <Property Name="clasif" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="nulo" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="compromiso" Type="DateTime" Precision="0" />
+    <Property Name="exkpi" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="tipo_carga" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="comentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="dias_plazo" Type="Int32" />
+  </EntityType>
+  <EntityType Name="InfGestionPago">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="NPag" />
+      <PropertyRef Name="NPOK" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="NombreCorto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CPBMes" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="CPBAño" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="RotuloDoc" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="NumDocI" Type="Int32" />
+    <Property Name="NomAux" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="MovFe" Type="DateTime" Precision="3" />
+    <Property Name="MontoPago" Type="Int32" />
+    <Property Name="Saldo" Type="Double" />
+    <Property Name="NPag" Type="Int32" Nullable="false" />
+    <Property Name="NPOK" Type="Int32" Nullable="false" />
+    <Property Name="NumCent" Type="Int32" />
+    <Property Name="Archivo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="PagUrg" Type="DateTime" Precision="3" />
+    <Property Name="ObsSolPago" Type="String" MaxLength="120" FixedLength="true" Unicode="true" />
+    <Property Name="NomBan" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="Cta" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="Rut" Type="Int32" />
+    <Property Name="Bco" Type="Int32" />
+    <Property Name="Org" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="FP" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="CodAux" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Comp" Type="Int32" />
+    <Property Name="IDCLIE" Type="Int32" />
+    <Property Name="EmailPag" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="nom" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Obs" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
+    <Property Name="Ruta" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="FechaSolPago" Type="DateTime" Precision="3" />
+    <Property Name="UsuSolPago" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="MovFv" Type="DateTime" Precision="3" />
+    <Property Name="estado" Type="Int32" />
+    <Property Name="Activo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Nombre_Archivo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="id_encab" Type="Int32" />
+  </EntityType>
+  <EntityType Name="GS_Restriciones_Bancarias">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Clie" Type="Int32" />
+    <Property Name="NomApo" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="Rut" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="MontoRest" Type="Int32" />
+    <Property Name="Moneda" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Obs" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Fpago" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="GS_Pagos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Org" Type="Int32" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="Monto" Type="Double" />
+    <Property Name="MPago" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="DPago" Type="Int32" />
+    <Property Name="UsuPag" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="NowSol" Type="DateTime" Precision="3" />
+    <Property Name="OkTeso" Type="DateTime" Precision="3" />
+    <Property Name="UsuTeso" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="Bco" Type="Int32" />
+    <Property Name="CtaBco" Type="Int32" />
+    <Property Name="Comp" Type="Int32" />
+    <Property Name="NowComp" Type="DateTime" Precision="3" />
+    <Property Name="GXls" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="UsuOk1" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="NowOk1" Type="DateTime" Precision="3" />
+    <Property Name="UsuOk2" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="NowOk2" Type="DateTime" Precision="3" />
+    <Property Name="UsuCenPag" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="Autoclie" Type="DateTime" Precision="3" />
+    <Property Name="Autoclieusu" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="Banco" Type="DateTime" Precision="3" />
+    <Property Name="Bancousu" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="Cierre" Type="DateTime" Precision="3" />
+    <Property Name="Cierreusu" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="GS_CtasCtes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cliente" Type="Int32" />
+    <Property Name="Cta" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Banco" Type="Int32" />
+    <Property Name="CtaCont" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Moneda" Type="Int32" />
+    <Property Name="DescripCtaCont" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="Obs" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="Principal" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="GS_Saldos_Bancarios">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cliente" Type="Int32" />
+    <Property Name="Cta" Type="Int32" />
+    <Property Name="Monto" Type="Int32" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="Momento" Type="DateTime" Precision="3" />
+    <Property Name="Usu" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="GS_Ctas">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Clie" Type="Int32" />
+    <Property Name="Cta" Type="Int32" Nullable="false" />
+    <Property Name="CodCta" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Esp" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+    <Property Name="Ing" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,9 @@
+Time: 14-11-2017 11:06:55
+-----------------------------------------------------------
+Code: JKFRuXEGc1IwI6W9DK0r_14112017110655
+Message: Referencia a objeto no establecida como instancia de un objeto.
+StackTrace:    en WebApplication.App_Start.Helper.createFile(HttpPostedFileBase file, String tipo_documento, String cliente) en C:\ANEVES\Repositorios\Local\treasuryweb\WebApplication\App_Start\Helper.cs:línea 67
+Source: WebApplication
+TargetSite: System.String createFile(System.Web.HttpPostedFileBase, System.String, System.String)
+-----------------------------------------------------------
+

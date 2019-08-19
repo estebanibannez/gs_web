@@ -1,0 +1,198 @@
+﻿@model ModeloCRM.Contacto_Cliente_CRM
+
+@if (Model == null)
+{
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title"><i class="fa fa-gear"></i> Crear Contacto</h3>
+        </div>
+    </div>
+}
+else
+{
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title"><i class="fa fa-gear"></i> Editar Contacto del Cliente: @Html.DisplayTextFor(model => model.Cliente_CRM.Nombre)</h3>
+        </div>
+    </div>
+}
+
+
+@using (Html.BeginForm((Model == null ? "Create" : "Editar"), "ContactosClientes", FormMethod.Post, new { @id = "mant-form", @novalidate = "novalidate", role = "form" }))
+{
+    @(Model == null ? new MvcHtmlString("") : Html.HiddenFor(p => p.ID_Cliente))
+    <div class="">
+        <div class="nav-tabs-custom form-horizontal">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#personal_informacion" id="tab1" data-toggle="tab" aria-expanded="false">Informacion Personal</a></li>
+                @*<li class=""><a href="#tipo_contacto" id="tab2" data-toggle="tab" aria-expanded="false">Contact Information About the Company</a></li>*@
+                <li class=""><a href="#selecion_tipo_contacto" id="tab3" data-toggle="tab" aria-expanded="true">Tipo Contacto</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane box-body active" id="personal_informacion">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label pull-left" style="text-align: left">Nombre :</label>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(model => model.Contacto_CRM.Nombre, new { @class = "custom-scroll form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label pull-left" style="text-align: left">Apellido :</label>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(model => model.Contacto_CRM.Apellido, new { @class = "custom-scroll form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label pull-left" style="text-align: left">Run :</label>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(model => model.Contacto_CRM.Rut, new { @class = "custom-scroll form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label pull-left" style="text-align: left">Telefono Personal :</label>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(model => model.Telefono_Personal, new { @class = "custom-scroll form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label pull-left" style="text-align: left">Telefono Trabajo :</label>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(model => model.Telefono_Trabajo, new { @class = "custom-scroll form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label pull-left" style="text-align: left">Email :</label>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(model => model.email, new { @class = "custom-scroll form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label pull-left" style="text-align: left">Fax :</label>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(model => model.Fax, new { @class = "custom-scroll form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label pull-left" style="text-align: left">Cargo en la Empresa :</label>
+                        <div class="col-sm-6">
+                            @Html.DropDownListFor(model => model.Cargo, (SelectList)ViewBag.ListPositionInicial, "Select...", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                @*<div class="tab-pane table" id="tipo_contacto">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label pull-left" style="text-align: left">Date First Contact :</label>
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(model => model.Fecha_Inicio_Contacto, new { @class = "form-control datefield", rows = "2" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label pull-left" style="text-align: left">Position in Company :</label>
+                            <div class="col-sm-6">
+                                @Html.DropDownListFor(model => model.Cargo, (SelectList)ViewBag.ListPositionInicial, "Select...", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label pull-left" style="text-align: left">Contact Reference :</label>
+                            <div class="col-sm-6">
+                                @Html.DropDownListFor(model => model.Cargo, (SelectList)ViewBag.ListReference, "Select...", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>*@
+                <div class="tab-pane table" id="selecion_tipo_contacto">
+                    <div class="row">
+                        <div class="col-md-12 table-responsive">
+                            <div class="panel table-responsive no-padding">
+                                <div class="box-header">
+                                    <h3 class="box-title"></h3>
+                                </div>
+                                <table id="dt_con" class="table table-hover display responsive no-wrap" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Tipo Conctato</th>
+                                            <th>Seleccione</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            if (Model == null)
+                                            {
+                                                foreach (var item in ViewBag.ListPositionOperational)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Text</td>
+                                                        <td><input type="checkbox" name="check" id="check_" value="@item.Value"></td>
+                                                    </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                foreach (var item in ViewBag.ListPositionOperational)
+                                                {
+                                                    bool chec = false;
+                                                    var id_sel = Int32.Parse(item.Value);
+                                                    foreach (var it in ViewBag.ListB)
+                                                    {
+                                                        if (it == id_sel) { chec = true; break; }
+                                                    }
+                                                    <tr>
+                                                        <td>@item.Text</td>
+                                                        @if (chec)
+                                                        {
+                                                    <td><input type="checkbox" name="check" id="check_" value="@item.Value" checked></td>}
+                                                        else
+                                                        {
+                                                    <td><input type="checkbox" name="check" id="check_" value="@item.Value"></td>}
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancelar</button>
+                <a class="btn btn-default btnNext">Next</a>
+                <button type="button" class="btn btn-warning pull-right btnGuardar" action="save">Guardar</button>
+            </div>
+        </div>
+    </div>
+                                            }
+<script>
+
+    $(document).ready(function () {
+        $('#dt_con').DataTable();
+        setFormulario("mant-form");
+
+        $(".datefield").datepicker({
+            autoclose: true,
+            format: 'dd-mm-yyyy',
+            changeYear: true
+        });
+
+        $('.btnGuardar').hide();
+        $('.btnNext').click(function () {
+            $('.nav-tabs > .active').next('li').find('a').trigger('click');
+        });
+        $('.nav-tabs > .active').next('li').next('li').find('a').on('click', function () {
+            $('.btnGuardar').show();
+            $('.btnNext').hide();
+        });
+        $('#tab1').on('click', function () {
+            $('.btnGuardar').hide();
+            $('.btnNext').show();
+        });
+        $('#tab1').on('click', function () {
+            $('.btnGuardar').hide();
+            $('.btnNext').show();
+        });
+        $('#tab3').on('click', function () {
+            $('.btnGuardar').show();
+            $('.btnNext').hide();
+        });
+    });
+</script>

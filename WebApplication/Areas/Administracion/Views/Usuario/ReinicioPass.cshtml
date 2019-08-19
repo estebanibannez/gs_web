@@ -1,0 +1,59 @@
+
+<form id="ReinicioPassword" action="@Url.Action("ReinicioPasswordSoftland", "Usuario")" method="post">
+
+    <div class="table-responsive">
+        @Html.Hidden("nombreCompleto", (string)ViewBag.nombreCompleto)
+        @Html.Hidden("nombreCorto", (string)ViewBag.nombreCorto)
+        @Html.Hidden("id_usu", (int)ViewBag.id_usu)
+
+        <div>
+            <div class="box-header with-border">
+                <h4>Las empresas Softland asociadas, de @Html.Label(("nombre"), (string)ViewBag.nombreCompleto) son:</h4>
+            </div>
+            <div class="box-body no-padding">
+                <table id="dt_basic1" class="table table-bordered table-hover dataTable">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Seleccione</th>
+                            <th>Nombre Comercial</th>
+                            <th>Nombre Abreviado</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var item in Model.listAnonymousToDynamic)
+                            {
+                                <tr>
+                                    <td></td>
+                                    @*<td>@Html.Hidden("ID", (int)item.ClieID)</td>*@
+                                    <td>@Html.CheckBox("check", new Dictionary<string, object>{ { "value" , item.ClieID } , { "id" , "aux"} })</td>
+                                    <td>@item.Nombre</td>
+                                    <td>@item.NomArchivo</td>
+                                    <td></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="box-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+            <button type="button" class="btn btn-warning pull-right" action="save">Guardar</button>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    setFormulario("ReinicioPassword");
+    InicializaMantenedor("dt_basic1");    
+    
+    $(document).ready(function () {
+        $('.btn-warning').click(function () {
+            iziToast.show({ timeout: 5000, position: 'center', title: '', message: ' <i class="fa fa-refresh fa-spin"></i> Cargando Solicitud...' });        
+        });
+
+    });
+</script> 

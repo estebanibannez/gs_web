@@ -1,0 +1,202 @@
+class Program
+    {
+        static List<Dictionary<string, object>> Gs_TDoc = new List<Dictionary<string, object>>();
+        static List<Tuple<Encabezado, GS_Documentos>> toInsert = new List<Tuple<Encabezado, GS_Documentos>>();
+        static void Main(string[] args)
+        {
+            //Gs_TDoc = LoadData("SELECT [CodDoc] " +
+            //                          ",[DesDoc] " + 
+            //                          ",[Tipo] " +
+            //                          ",[Impto] " +
+            //                          ",[CamA] " +
+            //                          ",[Decu] " +
+            //                          ",[SumImp] " +
+            //                          ",[DSD] " +
+            //                          ",[DocRes] " +
+            //                          ",[RotuloDoc] " +
+            //                          ",[TipoCV] " +
+            //                          ",[FacElec] " +
+            //                          ",[id] " +
+            //                          ",[rotulo_fac_elec] " +
+            //                          ",[TipoDTE] " +
+            //                      "FROM[GSPSO].[dbo].[GS_TDoc]");
+
+            //IFacturador facturador = new FacturacionCL(new Dictionary<string, string>() {
+            //    {"Clave","plano91098" },
+            //    {"Puerto","10033" },
+            //    {"Rut","1-9" },
+            //    {"Usuario","PSO" }
+            //});
+
+            //facturador.ResultFileWatcher += Facturador_ResultFileWatcher;
+            //facturador.addSystemFileWatcher("C:\\Facturacion\\Facturacion\\Configuracion", false);
+
+            //Console.WriteLine("Se activó System File Watcher, para salir presione (q)");
+            //while (true)
+            //{
+            //    var y = Console.ReadKey(true).KeyChar;
+            //    Console.Write(y);
+            //    if (y == 'q')
+            //    {
+            //        break;
+            //    }
+            //}
+
+
+            //typeof(GSPSOEntities)
+            //    .GetProperties()
+            //    .Where(prop => prop.PropertyType.IsGenericType)
+            //    .Where(prop => prop.PropertyType.GetGenericTypeDefinition() == typeof(DbSet<>))
+            //    .Select(prop => prop.PropertyType.GenericTypeArguments.First())
+            //    .Distinct().Where(p => p.Name != "Documento").ToList()
+
+
+            //using (GSPSOEntities db = new GSPSOEntities())
+            //{
+            //    var x = db.Encabezado.FirstOrDefault();
+            //    ConvertObjectToXml convert = new ConvertObjectToXml(typeof(GSPSOEntities)
+            //    .GetProperties()
+            //    .Where(prop => prop.PropertyType.IsGenericType)
+            //    .Where(prop => prop.PropertyType.GetGenericTypeDefinition() == typeof(DbSet<>))
+            //    .Select(prop => prop.PropertyType.GenericTypeArguments.First())
+            //    .Distinct().Where(p => p.Name != "Documento").ToList());
+            //    var nuevonandu = convert.convertFromObjectToXml(x);
+            //}
+
+            //facturador.quitSystemFileWatcher();
+
+            //var listResultFacturador = facturador.FacturarMultiples("C:\\Facturacion\\Facturacion\\Configuracion");
+
+            //foreach (var item in listResultFacturador.Where(p => p.folio != null)) {
+            //    var conversor = new Xml(item.DTE);
+            //    var encabezado = (Encabezado)conversor.getInstance();
+            //    encabezado.version = item.DTE.GetElementsByTagName("DTE").Item(0).Attributes["version"].Value;
+            //    encabezado.Documento = new Documento() { xml_dte = item.DTE.OuterXml };
+            //    GS_Documentos gs_Documentos = getGS_Documentos(encabezado);
+            //}
+        }
+
+        private static void Facturador_ResultFileWatcher(object sender, FacturadorElectronico.Modelo.ResultFacturador e)
+        {
+            ConvertXmlToObject convert = new ConvertXmlToObject(e.XmlDTE, typeof(GSPSOEntities)
+                .GetProperties()
+                .Where(prop => prop.PropertyType.IsGenericType)
+                .Where(prop => prop.PropertyType.GetGenericTypeDefinition() == typeof(DbSet<>))
+                .Select(prop => prop.PropertyType.GenericTypeArguments.First())
+                .Distinct().Where(p => p.Name != "Documento").ToList());
+            Encabezado encabezado = convert.convertFromXmlToObject() as Encabezado;
+            encabezado.version = e.XmlDTE.Descendants().FirstOrDefault(p => p.Name.LocalName == "DTE").Attribute("version").Value;// xmlDocument.GetElementsByTagName("DTE").Item(0).Attributes["version"].Value;
+            encabezado.Documento = new Documento() { xml_dte = e.XmlDTE.ToString() };//.OuterXml };
+            GS_Documentos gs_documentos = getGS_Documentos(encabezado);
+            //toInsert.Add(new Tuple<Encabezado, GS_Documentos>(encabezado, gs_documentos));
+        }
+
+        private static List<Dictionary<string, object>> LoadData(string sqlSelect, params object[] sqlParameters)
+        {
+            var table = new List<Dictionary<string, object>>();
+            using (GSPSOEntities db = new GSPSOEntities())
+            {
+                db.Database.Connection.Open();
+                using (var cmd = db.Database.Connection.CreateCommand())
+                {
+                    cmd.CommandText = sqlSelect;
+                    foreach (var param in sqlParameters)
+                        cmd.Parameters.Add(param);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var row = new Dictionary<string, object>();
+                            for (int i = 0; i < reader.FieldCount; i++)
+                                row[reader.GetName(i)] = reader[i];
+                            table.Add(row);
+                        }
+                    }
+                }
+                db.Database.Connection.Close();
+            }
+            return table;
+        }
+
+        private static GS_Documentos getGS_Documentos(Encabezado encabezado)
+        {
+            try
+            {
+                using (var db = new GSPSOEntities())
+                {
+                    var nn = Gs_TDoc.FirstOrDefault(n => n["TipoDTE"].ToString() == encabezado.IdDoc.TipoDTE.ToString());
+                    if (nn != null)
+                    {
+                        String CTDCod = nn["CodDoc"]?.ToString();
+                        String CabGlo = nn["RotuloDoc"]?.ToString();
+                        String RUTEmisor = encabezado.Emisor.RUTEmisor.Split('-').First();
+                        Int32 RUTRecep = Int32.Parse(encabezado.Receptor.RUTRecep.Split('-').First());
+
+                        return new GS_Documentos()
+                        {
+                            CLIENTE = Int32.Parse(encabezado.Receptor.RUTRecep.Split('-').First()),
+                            CPBAño = DateTime.Now.ToString("yyyy"),
+                            CPBMes = DateTime.Now.ToString("MM"),
+                            CodAux = encabezado.Emisor.RUTEmisor.Split('-').First(),
+                            CTDCod = CTDCod,
+                            NumDocI = encabezado.IdDoc.Folio,
+                            MovFe = encabezado.IdDoc.FchEmis,
+                            MovFv = encabezado.IdDoc.FchVenc == null ? DateTime.Now.Date.AddMonths(1) : encabezado.IdDoc.FchVenc,
+                            VendCod = "1",
+                            MovGlosa = "",//glosa,
+                            Neto = encabezado.Totales.MntNeto == null ? 0 : encabezado.Totales.MntNeto,
+                            Exento = encabezado.Totales.MntExe == null ? 0 : encabezado.Totales.MntExe,
+                            Impu = encabezado.Totales.IVA == null ? 0 : encabezado.Totales.IVA,
+                            Total = (double)(encabezado.Totales.MntTotal == null ? 0 : encabezado.Totales.MntTotal),
+                            NumDocF = null,
+                            NomAux = encabezado.Emisor.RznSoc.Substring(0, (encabezado.Emisor.RznSoc.Length <= 60 ? encabezado.Emisor.RznSoc.Length : 60)),
+                            Archivo = "",
+                            Usu = "demon",
+                            CabGlo = CabGlo + " " + encabezado.IdDoc.Folio + " ",
+                            Entrega = null,
+                            UsuEnt = null,
+                            Centraliza = null,
+                            UsuCent = null,
+                            Imputacion = null,
+                            UsuImp = null,
+                            NumCent = null,
+                            Nula = null,
+                            UsuAnu = null,
+                            MotivoAnul = null,
+                            SP = null,
+                            AP = null,
+                            Creacion = DateTime.Now,
+                            Scaneo = null,
+                            FechaSolPago = null,
+                            UsuSolPago = null,
+                            ObsPagRealizo = null,
+                            ObsSolPago = null,
+                            PagUrg = null,
+                            FP = null,
+                            UsuRec = null,
+                            FecRec = null,
+                            MontoPago = null,
+                            ting = "GS-SO",
+                            fcrea = DateTime.Now,
+                            id_encab = encabezado.id,
+                            TipoDTE = encabezado.IdDoc.TipoDTE,
+                            MovRe = DateTime.Now,
+                            NetoSM = (double?)(encabezado.Totales.MntNeto == null ? 0 : encabezado.Totales.MntNeto),
+                            ExentoSM = (double?)(encabezado.Totales.MntExe == null ? 0 : encabezado.Totales.MntExe),
+                            ImpuSM = (double?)(encabezado.Totales.IVA == null ? 0 : encabezado.Totales.IVA),
+                            TotalSM = (double?)(encabezado.Totales.MntTotal == null ? 0 : encabezado.Totales.MntTotal),
+                            TCambio = 1
+                        };
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+    }

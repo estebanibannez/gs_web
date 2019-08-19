@@ -1,0 +1,201 @@
+﻿@{ 
+    List<string> permisos = (List<string>)ViewBag.permisos;
+}
+
+    @model WebApplicationMod.GS_SubClasif_Arch
+
+    <div class="box box-warning">
+        <div class="box-header with-border">
+            <h3 class="box-title"><i class="fa fa-archive"></i> Biblioteca</h3>
+
+        </div>
+        <div class="box-body">
+
+            <div class="col-md-6">
+                <div>
+                    <p>Clasificación</p>
+                    @Html.DropDownList("id_clasificacion", (SelectList)ViewBag.clasificacion, "Seleccione...", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <p>Sub-Clasificación</p>
+                    @Html.DropDownList("idsub_clasificacion", new SelectList(string.Empty, "Value", "Text"), "Seleccione...", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            @if (permisos.Contains("MantAdminDocsBiblio"))
+            {
+                <a href="@Url.Action("Create", "Biblioteca", new { Area = "Utilidades" })" class="btn btn-warning modal-ajax-load pull-right" data-toggle="modal" data-target="#myModal" data-remote="false">Agregar Archivo</a>
+            }
+
+            <button type="button" id="limpiar" class="btn btn-warning pull-left">Limpiar</button>
+        </div>
+    </div>
+
+
+    <div class="table-responsive">
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title"></h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+                <table id="dt_basic" class="table table-hover dataTable" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Clasificación</th>
+                            <th>Sub Clasificación</th>
+                            <th>Nombre</th>
+                            <th data-breakpoints="xs">Descripción</th>
+                            <th data-breakpoints="xs">Autor Mod.</th>
+                            <th data-breakpoints="xs">Fecha Mod.</th>
+                            <th data-breakpoints="xs"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.box -->
+    <script type="text/javascript">
+        // boton Limpiar
+        $("#limpiar").click(function () {
+            $("#id_clasificacion").val("");
+            $("#idsub_clasificacion").val("");
+            oTable.ajax.reload();
+        });
+
+        $('#id_clasificacion').change(function () {
+            if ($(this).val() != "") {
+                var id = $(this).val();
+                //$('#idsub_clasificacion').prop('selectedIndex', 0);
+                $('#idsub_clasificacion').empty().append('<option selected="selected" value="">Seleccione...</option>');
+                $.ajax({
+                    url: '@Url.Action("getSubClasif", "Biblioteca")',
+                    data: { id_clasificacion : $('#id_clasificacion').val() },
+                    //datatype: "json",
+                    type: 'POST',
+                    success: function (data) {
+                        debugger;
+                        var listado = $('#idsub_clasificacion');
+                        $.each(data.data, function (index, data) {
+                            listado.append('<option value="' + data.ID + '">' + data.Nombre + '</option>');
+                        });
+                    },
+                    error: function () {
+                        mensajeError("Ops..", "Error de controlador. Contactese con el administrador");
+                        //$("#content").html('<h2>Se ha generado un error</h2>');
+                    }
+                });
+            } else {
+                $('#idsub_clasificacion').empty().append('<option selected="selected" value="0">Seleccione...</option>');
+            }
+        });
+
+        var dataColumns = [
+            { data: 'clasificacion',render:(function (data){
+                try {
+                    var l = data.trim();
+                    var lar = l.length;
+                    var clas = l.substring(4,lar);
+                    return clas
+                } catch (e) {
+                    return ""
+                }
+                })
+            },
+            { data: 'subclasificacion',render:(function (data){
+                try {
+                    var l = data.trim();
+                    var lar = l.length;
+                    var subClas = l.substring(4,lar);
+                    return subClas
+                } catch (e) {
+                    return ""
+                }
+            })
+
+            },
+            { data: 'nombre' },
+            { data: 'descripcion' },
+            { data: 'usumod',
+                render: function (data) {
+                    if (data != null) {
+                        var l = data.trim();
+                        var lar = l.length;
+                        var ape = l.substring(1, lar);
+                        var apes = ape.substring(0, 1).toUpperCase();
+                        var capi = l.substring(0, 1).toUpperCase();
+                        return capi + '.' + apes + ape.substring(1, (lar - 1));
+                    } else {
+                        return "";
+                    }
+                },
+                visible:false
+            },
+            { data: 'fechamod', render: function (data, type, row) {
+                    return new moment(data).format('DD/MM/YYYY HH:mm:ss');
+            },
+                visible:false
+            },
+            {
+                data: 'ID', render: function (data, type, row) {
+                    debugger;
+                    var permisos = @Html.Raw(Json.Encode((List<string>)ViewBag.permisos));
+                    var urlUpd = "@Url.Action("Update","Biblioteca")" + "?id=" + data;
+                    var urlDel = "@Url.Action("Delete","Biblioteca")" + "?id=" + data;
+                    if (permisos.includes("MantAdminDocsBiblio")) {
+                        return '<a href="@Url.Action("Descarga", "Biblioteca")/' + data + '" class="btn btn-info btn-xs"  data-remote="false"><i class="fa fa-download" aria-hidden="true"></i></a>'
+                            + '<a href=' + urlUpd + ' class="btn btn-default btn-xs modal-ajax-load" data-toggle="modal" data-target="#myModal" data-remote="false"><i class="fa fa-edit" aria-hidden="true"></i></a>'
+                            + '<a href=\"javascript:confirmDelete(\'Confirme la eliminacion\',\'' + urlDel + '\');\" class="btn btn-xs btn-default"><i class="fa fa-trash" aria-hidden="true"></i></a>';
+                    } else {
+                        return '<a href="@Url.Action("Descarga", "Biblioteca")/' + data + '" class="btn btn-info btn-xs"  data-remote="false"><i class="fa fa-download" aria-hidden="true"></i></a>';
+                    }
+                }
+            }
+        ];
+
+        function parameterFunction(d) {
+            return $.extend({}, d, {
+                "id_clasificacion": $('#id_clasificacion').val(),
+                "idsub_clasificacion": $('#idsub_clasificacion').val(),
+            });
+        }
+
+        var oTable = InicializaGrillaFiltroAjax("dt_basic", "@Url.Action("consultatabla", "Biblioteca")", parameterFunction, dataColumns);
+
+        $("#id_clasificacion").change(function () {
+            oTable.ajax.reload();
+        });
+
+        $("#idsub_clasificacion").change(function () {
+            oTable.ajax.reload();
+        });
+
+        function ocultaColumnas(){
+            debugger;
+            var permisos = @Html.Raw(Json.Encode((List<string>)ViewBag.permisos));
+            if (permisos.includes("MantAdminDocsBiblio")) {
+                oTable.column(4).visible(true);
+                oTable.column(5).visible(true);
+            }
+        }
+
+        $(document).ready(function() {
+            ocultaColumnas();
+        });
+
+    </script>
