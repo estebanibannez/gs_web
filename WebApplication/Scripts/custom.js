@@ -519,7 +519,7 @@ function mensajeExitoModal(titulo, mensaje, req) {
             iziToast.warning({
                 timeout: 8000,
                 title: titulo,
-                message: "<i>" + mensaje + "<br/><h5>( si puede visualizar los videos... olvide esté mensaje... )</h5></i>",
+                message: "<i>" + mensaje + "<br/></i>",
                 position: 'center',
                 transitionIn: 'flipInX',
                 transitionOut: 'flipOutX'
@@ -541,6 +541,29 @@ function mensajeExitoModal(titulo, mensaje, req) {
                 message: "<i class='fa fa-minus-circle'></i> <i>" + mensaje + "</i>",
                 position: 'topRight',
                 transitionIn: 'bounceInLeft'
+            });
+            break;
+        case "6":
+            iziToast.show({
+                timeout: false,
+                color: 'dark',
+                icon: 'fa fa-file-text',
+                title: titulo,
+                close: false,
+                message: 'Folio N° : '+ mensaje ,
+                position: 'center', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+                progressBarColor: 'rgb(0, 255, 184)',
+                buttons: [
+                    ['<button>Close</button>', function (instance, toast) {
+                        iziToast.hide({
+                            transitionOut: 'flipOutX'
+                        }, toast);
+                        setTimeout((e) => {
+                            loadAjaxContent(window.location.pathname);
+                        }, 1000)
+                       
+                    }]
+                ]
             });
             break;
         default:

@@ -4,6 +4,7 @@ using FacturadorElectronico.Interfaces;
 using FacturadorElectronico.Modelo;
 using ModelChaoPdf;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -69,7 +70,7 @@ namespace WebApplication.Areas.Utilidades.Controllers
 
         [HttpPost]
         [ClientAuthorize("MantFacturacion")]
-        public JsonResult saveInfo(string receptor, string detalle, string totales, string dscRcgGlobal)
+        public JsonResult saveInfo(string receptor, string detalle, string totales, string dscRcgGlobal, string detallefactura)
         {
             try
             {
@@ -90,44 +91,32 @@ namespace WebApplication.Areas.Utilidades.Controllers
 
                 };
 
-                var fechaHoy = DateTime.Now;
-                var fechaFenc = fechaHoy.AddMonths(1);
-                //var fechaHoy = DateTime.Now.ToString("yyyy-mm-dd");
-                IdDoc _IdDoc = new IdDoc()
-                {
-                    TipoDTE = 33,
-                    Folio = 0,
-                    FchEmis = fechaHoy,
-                    FchVenc = fechaFenc,
-                    //MntBruto = 1 //si va en 1 se asume que es un monto bruto Si no se indica, se  asume los valores en montos Netos.
-                };
-
-                Documento docu = new Documento()
-                {
-                    xml_dte = ""
-                };
+                Documento docu = new Documento() { xml_dte = "" };
 
                 Transporte transporte = new Transporte();
-               
 
+                //JArray detalleFac = JArray.Parse(detallefactura);
+                var _detalleDoc = JsonConvert.DeserializeObject<List<IdDoc>>(detallefactura).FirstOrDefault();
                 var _receptor = JsonConvert.DeserializeObject<List<Receptor>>(receptor).FirstOrDefault();
                 var _detalle = JsonConvert.DeserializeObject<List<Detalle>>(detalle).ToList();
                 var _totales = JsonConvert.DeserializeObject<List<Totales>>(totales).FirstOrDefault();
+
                 model.Transporte = transporte;
                 model.Documento = docu;
                 model.Emisor = _emisor;
                 model.Detalle = _detalle;
                 model.Receptor = _receptor;
                 model.Totales = _totales;
-                model.IdDoc = _IdDoc;
+                model.IdDoc = _detalleDoc;
+                model.IdDoc.FchVenc = model.IdDoc.FchEmis.AddMonths(1);
                 model.version = "1.0";
                 model.TipoOperacion = "COM";
 
                 //_db.Encabezado.Add(model);
                 //_db.SaveChanges();
-                facturadorPrueba(model);
+                var Folio  =  facturadorPrueba(model);
 
-                return JsonExitoMsg("Registro correcto.");
+                return Folio;
 
 
             }
@@ -138,7 +127,8 @@ namespace WebApplication.Areas.Utilidades.Controllers
 
         }
 
-        private void facturadorPrueba(Encabezado model)
+        //public void facturadorPrueba(Encabezado model)
+        public JsonResult facturadorPrueba(Encabezado model)
         {
 
             IFacturador facturador = new FacturacionCL(new Dictionary<string, string>() {
@@ -161,6 +151,8 @@ namespace WebApplication.Areas.Utilidades.Controllers
             xml.LoadXml(xmlString);
             ResultFacturador x = facturador.Facturar(xml);
 
+            
+            return Json(x.Folio);
         }
 
 

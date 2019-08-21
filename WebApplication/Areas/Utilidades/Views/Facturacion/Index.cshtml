@@ -30,15 +30,14 @@
         border-top-color: #ffc800 !important;
     }
 </style>
-@{
-    ViewBag.Title = "Index";
-}
-
 <div class="row">
     <div class="col-md-12">
         <div class="box box-solid">
-            <div class="box-header with-border">
-                <h3 class="box-title">Encabezado</h3>
+            <div class="box-header">
+                <select class="form-control" id="tipoFactura">
+                    <option value="33" selected>FACTURA ELECTRONICA (Tipo 33)</option>
+                    <option value="34">FACTURA NO AFECTA O EXENTA ELECTRONICA (Tipo 34)</option>
+                </select>
             </div>
         </div>
     </div>
@@ -49,6 +48,7 @@
     <div class="col-lg-6 col-md-8">
         <div class="box box-solid">
             <div class="box-body">
+
                 <div class="form-group-sm">
                     <span class="col-sm-4">Rut :</span>
                     <div class="col-sm-6" id="selBx">
@@ -68,62 +68,49 @@
                         </a>
                     </div>
                 </div>
+
                 <div class="form-group-sm">
                     <span class="col-sm-4">Razón Social :</span>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="bxRazonSocial">
                     </div>
                 </div>
+
                 <div class="form-group-sm">
                     <span class="col-sm-4">Giro :</span>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="bxGiro" maxlength="40" placeholder="40 caracteres Máx.">
                     </div>
                 </div>
-                <!-- -->
-                @*<div class="form-group-sm">
-                       <span class="col-sm-4">Sucursal :</span>
-                       <div class="col-sm-8">
-                           <input type="text" class="form-control" id="bxSucursal">
-                       </div>
-                    </div>*@
+
                 <div class="form-group-sm">
                     <span class="col-sm-4">Dirección :</span>
                     <div class="col-sm-8" data-toggle="tooltip" data-placement="right">
                         <input type="text" class="form-control" id="bxDireccion">
                     </div>
                 </div>
+
                 <div class="form-group-sm">
                     <span class="col-sm-4">Comuna :</span>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="bxComuna">
                     </div>
                 </div>
+
                 <div class="form-group-sm">
                     <span class="col-sm-4">Ciudad :</span>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="bxCiudad">
                     </div>
                 </div>
+
                 <div class="form-group-sm">
                     <span class="col-sm-4">Teléfono :</span>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="bxFono">
                     </div>
                 </div>
-                <!-- -->
-                @*<div class="form-group-sm">
-                            <span class="col-sm-4">E-mail :</span>
-                            <div class="col-sm-8">
-                                <input type="email" class="form-control" id="bxMail">
-                            </div>
-                        </div>
-                        <div class="form-group-sm">
-                            <span class="col-sm-4">Vendedor :</span>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="bxVendedor">
-                            </div>
-                </div>*@
+
             </div>
 
         </div>
@@ -135,41 +122,41 @@
                 <div class="form-group-sm">
                     <span class="col-sm-4 col-md-12"> <i class="fa fa-calendar"></i> Fecha Documento</span>
                     <div class="col-sm-8 col-md-12">
-                        <input type="text" class="form-control bg-teal-gradient" id="dateDocu" readonly>
+                        <input type="text" class="form-control bg-teal-gradient" id="dateDocu">
                     </div>
                 </div>
                 <div class="form-group-sm">
                     <span class="col-sm-4 col-md-12">Forma de pago</span>
                     <div class="col-sm-8 col-md-12">
-                        <select class="form-control">
-                            <option value="contado">Contado</option>
-                            <option value="efectivo">Efectivo</option>
-                            <option value="chqAldia">Cheque al día</option>
-                            <option value="deposito_tranf">Deposito o transferencia</option>
-                            <option value="credito" selected>Credito</option>
-                            <option value="cheque">Cheque</option>
-                            <option value="chequeAfecha">Cheque a fecha</option>
-                            <option value="anticipo">Anticipo Cliente</option>
-                            <option value="ajuste">Ajuste</option>
+                        <select class="form-control" id="FormaPago">
+                            <option value="3">Contado</option>
+                            <option value="14">Efectivo</option>
+                            <option value="4">Cheque al día</option>
+                            <option value="8">Deposito o transferencia</option>
+                            <option value="14" selected>Credito</option>
+                            <option value="15">Cheque</option>
+                            <option value="5">Cheque a fecha</option>
+                            <option value="6">Anticipo Cliente</option>
+                            <option value="9">Ajuste</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group-sm">
                     <span class="col-sm-4 col-md-12">Tipo de Venta</span>
                     <div class="col-sm-8 col-md-12">
-                        <select class="form-control">
-                            <option value="delGiro" selected>Del Giro</option>
-                            <option value="actFijo">Activo Fijo</option>
-                            <option value="bieneRaices">Bienes Raíces</option>
+                        <select class="form-control" id="tipoVenta">
+                            <option value="1" selected>Del Giro</option>
+                            <option value="2">Activo Fijo</option>
+                            <option value="3">Bienes Raíces</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group-sm">
                     <span class="col-sm-4 col-md-12"><i class="fa fa-dollar"></i> Valores Unitarios </span>
                     <div class="col-sm-8 col-md-12">
-                        <select class="form-control">
-                            <option value="">NETO</option>
-                            <option value="">BRUTO</option>
+                        <select class="form-control" id="ValorUnidades">
+                            <option value="0">NETO</option>
+                            <option value="1" disabled>BRUTO</option>
                         </select>
                     </div>
                 </div>
@@ -180,7 +167,6 @@
     <div class="col-lg-2 col-md-12">
         <div class="box box-solid">
             <div class="box-body">
-
                 <button type="button" class="btn btn-default btn-block btn-xs" id="btn-continuar">
                     Continuar
                     <span class="fa fa-save"></span>
@@ -195,17 +181,6 @@
                     Modificar
                     <span class="fa fa-save"></span>
                 </button>
-
-                <button type="button" class="btn btn-default btn-block btn-xs" disabled id="btn-referenciar">
-                    Referenciar
-                    <span class="fa fa-save"></span>
-                </button>
-
-                <button type="button" class="btn btn-default btn-block btn-xs" id="btn-pendientes">
-                    Pendientes
-                    <span class="fa fa-save"></span>
-                </button>
-
             </div>
         </div>
     </div>
@@ -219,60 +194,69 @@
             <div class="box-body">
 
                 <div class="col-lg-7">
-                    <div class="row">
-                        @*<div class="form-group-sm" id="_bxCodigoProd">
-                            <span class="col-sm-2">Codigo</span>
-                            <div class="col-sm-2">
-                                <input type="text" class="form-control" name="bxCodigoProd" id="bxCodigoProd" data-toggle="tooltip" title="Indique un codigo para el producto">
-                            </div>
+
+                    @*<div class="form-group-sm" id="_bxCodigoProd">
+                                <span class="col-sm-2">Codigo</span>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="bxCodigoProd" id="bxCodigoProd" data-toggle="tooltip" title="Indique un codigo para el producto">
+                                </div>
                         </div>*@
-                        <div class="form-group-sm" id="_bxDescripcion">
-                            <span class="col-sm-2">Descripción</span>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="bxDescripcion" data-toggle="tooltip" title="Indique una descripción para el producto">
+
+                    <div class="row" style="padding-bottom:0.3em">
+                        <div class="col-sm-12">
+                            <div class="form-group" id="_bxDescripcion">
+                                <span class="col-sm-4">Descripción</span>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="bxDescripcion" data-toggle="tooltip" title="Indique una descripción para el producto">
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="row" style="padding-bottom:0.3em">
+                        <div class="col-sm-6">
+                            <div class="form-group" id="_bxCantidad">
+                                <span class="col-sm-4">Cantidad</span>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control" min="1" id="bxCantidad" data-toggle="tooltip" title="Indique cantidad como minimo 1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group" id="_bxUnitario">
+                                <span class="col-sm-6">Valor unidad</span>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="bxUnitario" data-toggle="tooltip" title="Ingrese un valor...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--no aplica por el momento.-->
+                    @*<div class="form-group-sm">
+                                      <span class="col-sm-2">Descuento</span>
+                                      <div class="col-sm-2">
+                                          <select id="tipoDescuento" class="form-control">
+                                              <option value="pesos">$</option>
+                                              <option value="porcentaje">%</option>
+                                          </select>
+
+                                      </div>
+                                      <div class="col-sm-2">
+                                          <input type="text" class="form-control" id="bxDescuento">
+                                      </div>
+                        </div>*@
 
                     <div class="row">
-                        <div class="form-group-sm" id="_bxCantidad">
-                            <span class="col-sm-2">Cantidad</span>
-                            <div class="col-sm-2">
-                                <input type="number" class="form-control" min="1" id="bxCantidad" data-toggle="tooltip" title="Indique cantidad como minimo 1">
-                            </div>
-                        </div>
-                        <div class="form-group-sm" id="_bxUnitario">
-                            <span class="col-sm-2">Valor unidad</span>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" id="bxUnitario" data-toggle="tooltip" title="Ingrese un valor...">
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <!--no aplica por el momento.-->
-                        @*<div class="form-group-sm">
-                                  <span class="col-sm-2">Descuento</span>
-                                  <div class="col-sm-2">
-                                      <select id="tipoDescuento" class="form-control">
-                                          <option value="pesos">$</option>
-                                          <option value="porcentaje">%</option>
-                                      </select>
-
-                                  </div>
-                                  <div class="col-sm-2">
-                                      <input type="text" class="form-control" id="bxDescuento">
-                                  </div>
-                            </div>*@
-                        <div class="form-group-sm">
-                            <span class="col-sm-2">Total</span>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" id="bxTotalProd" min="1" pattern="^[0-9]+" readonly>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <span class="col-sm-8">Total</span>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="bxTotalProd" min="1" pattern="^[0-9]+" readonly>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="col-lg-2">
@@ -302,7 +286,7 @@
 
                 <div class="col-lg-3">
                     <button class="btn btn-app pull-right" type="button" id="btn-insertar-prod">
-                        <i class="fa fa-edit"></i> Ingresar
+                        <i class="fa fa-edit"></i> Agregar
                     </button>
                 </div>
 
@@ -318,17 +302,17 @@
                     <table class="table table-hover" style="width:100%" id="tblData">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th><i>ID</i></th>
                                 @*<th>Código</th>*@
-                                <th>descripción</th>
-                                <th>Cantidad</th>
-                                <th>Unitario</th>
+                                <th><i>Descripción</i></th>
+                                <th><i>Cantidad</i></th>
+                                <th><i>Unitario</i></th>
                                 @*<th>Descuento</th>*@
                                 @*<th>Tipo Descto</th>*@
-                                <th>Exento</th>
-                                <th>Sub Total</th>
+                                <th><i>Exento</i></th>
+                                <th><i>Sub Total</i></th>
                                 @*<th>C. Costo</th>*@
-                                <th>Eliminar</th>
+                                <th></th>
                             </tr>
                         </thead>
                     </table>
@@ -387,19 +371,17 @@
                             </div>
                         </div>
                     </div>*@
-                <div class="row">
-                    <div class="col-md-12">
-
-                        <div class="form-group-sm">
+                <div class="box-body">
+                    @*<div class="form-group">
                             <div class="col-md-6 col-xs-6">
                                 <span>Valor Recargo</span>
                                 <div>
                                     <input type="text" id="valorRecargoTotal" readonly class="form-control">
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
 
-                        @*<div class="form-group-sm">
+                    @*<div class="form-group-sm">
                             <div class="col-md-6 col-xs-6">
                                 <span>Valor Descuento</span>
                                 <div>
@@ -407,126 +389,119 @@
                                 </div>
                             </div>
                         </div>*@
-
-                        <div class="form-group-sm">
-                            <div class="col-md-6 col-xs-6">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div class="col-xs-12">
                                 <span>Valor Exento</span>
                                 <div>
-                                    <input type="text" id="valorExentoTotal" readonly class="form-control">
+                                    <input type="text" id="ValorExentoTotal" readonly class="form-control">
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group-sm col-md-6 col-xs-6">
-                            <span>Valor Neto</span>
-                            <div>
-                                <input type="text" id="ValorNetoTotal" readonly class="form-control">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <span>Valor Neto</span>
+                                <div>
+                                    <input type="text" id="ValorNetoTotal" readonly class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <span class="text-info">19% I.V.A</span>
+                                <div>
+                                    <input type="text" id="Iva" readonly class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <i>Valor Total</i>
+                                <div>
+                                    <input type="text" id="ValorTotal" readonly class="form-control" style="background-color:rgba(255, 200, 0, 0.35)">
+                                </div>
                             </div>
                         </div>
                     </div>
 
-
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group-sm col-md-6 pull-right">
-                            <span class="text-info">19% I.V.A</span>
-                            <div>
-                                <input type="text" id="Iva" readonly class="form-control">
-                            </div>
-
-                            <i>Valor Total</i>
-                            <div>
-                                <input type="text" id="ValorTotal" readonly class="form-control" style="background-color:rgba(255, 200, 0, 0.35)">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-6 col-xs-6">
-                            <button class="btn btn-default btn-block">
-                                <i class="fa fa-search"></i> Vista Previa
-                            </button>
-
-                        </div>
-                        <div class="col-md-6 col-xs-6">
-                            <button class="btn btn-default btn-block" id="btnGuardarDoc" disabled>
-                                <i class="fa fa-save"></i> Emitir Documento
-                            </button>
-                        </div>
+                    <div class="col-xs-12" style="padding-top:0.3em">
+                        <button class="btn btn-app btn-block" id="btnGuardarDoc" disabled>
+                            <i class="fa fa-save"></i> Emitir Documento
+                        </button>
                     </div>
                 </div>
             </div>
+
+
+
         </div>
     </div>
 </div>
 
 <script>
+    //var dateWorking = new Date();
+    //este indice lo ocupo mas abajo , para asignarle un id a los detalles que se irán agregando al datatable, que me sirve para eliminar del arreglo.
     var i = 0;
+    //creo los arrays , para luego insertarles información
     var Receptor = [];
     var Detalle = [];
     var Totales = [];
+    var Datosfactura = [];
     var DscRcgGlobal = [];
 
     var table = $("#tblData").DataTable({
         "bLengthChange": false,
         "info": false,
-        //"columnDefs": [
-        //    { "visible": false, "targets": 0 }
-        //],
+        "columnDefs": [
+            { "visible": false, "targets": 0 }
+        ],
         "fnCreatedRow": function (nRow, aData, iDataIndex) {
             debugger;
-            let btn = `<button class="btn btn-default btn-xs" id="${iDataIndex}" onclick="eliminar(this, ${iDataIndex})"> Eliminar </button>`;
-           
-            // si se crea una row envio la data al arreglo
+
+            let btn = `<button class="btn btn-danger btn-xs" id="${iDataIndex}" onclick="eliminar(this, ${iDataIndex})"><i class="fa fa-trash-o"></i></button>`;
 
             //let Codigo = $('td:eq(1)', nRow).text();
             //let descuento = $('td:eq(5)', nRow).text();
             //let ccosto = $('td:eq(9)', nRow).text();
             let id = iDataIndex;
-            let Descripcion = $('td:eq(1)', nRow).text();
-            let cantidad = $('td:eq(2)', nRow).text();
-            let valorUnitario = $('td:eq(3)', nRow).text();
-            let exento = $('td:eq(4)', nRow).text();
-            let subtotal = $('td:eq(5)', nRow).text();
-            $('td:eq(6)', nRow).append(btn);
+            let Descripcion = $('td:eq(0)', nRow).text();
+            let cantidad = $('td:eq(1)', nRow).text();
+            let valorUnitario = $('td:eq(2)', nRow).text();
+            let exento = $('td:eq(3)', nRow).text();
+            let subtotal = $('td:eq(4)', nRow).text();
+            $('td:eq(5)', nRow).append(btn);
 
-            let detalle = new addDetalle(id, iDataIndex + 1, Descripcion, cantidad, valorUnitario, /*descuento*/ exento, subtotal, /*ccosto*/);
-
+            let detalle = new addDetalle(id, iDataIndex, Descripcion, cantidad, valorUnitario, /*descuento*/ exento, subtotal, /*ccosto*/);
             //devolveré si está o no el detalle.
-            let ObjectoDetalle = CreateArrayObj(detalle);
+            let ObjetoDetalle = CreateArrayObj(detalle);
+            let elObj = ReasigNroLinDet(ObjetoDetalle);
 
-            console.log(ObjectoDetalle);
+
             //valido si tiene descuento , recargo o nada. descuento =0 , recargo = 1
             //let tieneGlob = $("#DescuRecar").val();
             //let valor = $('#ValorDR').val();
-            totales(ObjectoDetalle);
 
+            totales(elObj);
+            console.log(elObj);
         }
-        //, rowCallback: function (nRow, aData, index) {
-        //    var ds = window.displaystart | 0;
-        //    if (nRow) {
-        //        $('td:eq(0)', nRow).html(ds + index + 1);
-        //    }
-        //    return nRow;
-        //}
     });
 
-    //table.on('order.dt search.dt', function () {
-    //    table.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
-    //        cell.innerHTML = i + 1;
-    //   });
-    //}).draw();
+    //está funcion reasigna los numeros de las lineas de detalle al eliminar o agregar un detalle (EJEMPLO : si de 5 registros elimino el 3 , me queda 1, 2 , 4 ,5).
+    //por lo cual faltaría un numero de línea, por está razón se reasigna el orden al detalle de la factura.
+    function ReasigNroLinDet(elObjeto) {
+        $.each(elObjeto, function (indice, elemento) {
+            debugger;
+            elemento.NroLinDet = indice + 1;
+        });
+        return elObjeto;
+    }
 
     //VALIDACIÓN QUE SE INGRESEN SOLO NUMEROS A LAS CAJAS.
     $("#bxCantidad").keypress(function (e) {
         if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
     });
-    //esta validación la quité ya que el codigo puede contener letras y numeros.
-    //$("#bxCodigoProd").keypress(function (e) {
-    //    if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
-    //});
     $("#bxUnitario").keypress(function (e) {
         if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
     });
@@ -537,20 +512,18 @@
         if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
     });
 
-    //FUNCION QUE PASA OBJETOS DETALLE AL ARREGLO.
+    //FUNCION QUE PASA OBJETOS DETALLE AL ARREGLO DINAMICAMENTE.
     function CreateArrayObj(detalle) {
-        debugger;
         Detalle.push(detalle);
         return Detalle;
     }
 
     //CREO DETALLE CON SUS VALORES.
     function addDetalle(id, NroLinDet, /*cod,*/ descripcion, cantidad, valorUnitario, /*descuento*/ exento, subtotal, /*ccosto*/) {
-        debugger;
-        this.id = id;
         //this.codigoItem = cod;
         //this.descuento = descuento;
         //this.ccosto = ccosto;
+        this.id = id;
         this.NroLinDet = NroLinDet;
         this.NmbItem = descripcion;
         this.MontoItem = subtotal;
@@ -558,7 +531,7 @@
         this.PrcItem = valorUnitario;
         this.exento = exento;
         this.subtotal = subtotal;
-       
+
     }
 
     //INGRESA PRODUCTO AL DATATABLE SIN ANTES VALIDAR LOS CAMPOS.
@@ -578,6 +551,7 @@
         //        trigger: "focus"
         //    });
         //}
+
         if (validoDescr == "") {
             $('#bxDescripcion').focus();
             $('#_bxDescripcion').addClass('has-error');
@@ -586,6 +560,7 @@
                 trigger: "focus"
             });
         }
+
         if (validoCantidad == "") {
             $('#bxCantidad').focus();
             $('#_bxCantidad').addClass('has-error');
@@ -594,6 +569,7 @@
                 trigger: "focus"
             });
         }
+
         if (validoValorUni == "") {
             $('#bxUnitario').focus();
             $('#_bxUnitario').addClass('has-error');
@@ -602,10 +578,9 @@
                 trigger: "focus"
             });
         }
+
         if (validoDescr && validoCantidad && validoValorUni != "") {
             var addProd = returnProduc();
-            debugger;
-        
             //para agregar una columna datatable necesita un arreglo que contenga la misma cantidad de campos.
             table.row.add(addProd).draw();
             emptyProd()
@@ -614,7 +589,6 @@
 
     //Retorno un detalle de producto para pasarlo al datatable //
     function returnProduc() {
-        debugger;
         var produc = [];
         produc.push(i ++)
         //produc.push($("#bxCodigoProd").val())
@@ -630,7 +604,16 @@
         return produc;
     }
 
-    function createReceptor(rut ,nombre, giro, comuna, ciudad, direccion , contacto) {
+
+    function datosFactura(tipfac, fechaDocumento, formaPago, TipoVenta, ValorUnitario) {
+        this.TipoDTE = tipfac;
+        this.FchEmis = fechaDocumento;
+        this.FmaPago = formaPago;
+        this.TipoCtaPago = TipoVenta;
+        this.MntBruto = ValorUnitario;
+    }
+
+    function createReceptor(rut ,nombre, giro, comuna, ciudad, direccion , contacto, fono) {
         this.RutRecep = rut;
         this.RznSocRecep = nombre;
         this.GiroRecep = giro;
@@ -638,19 +621,19 @@
         this.DirRecep = direccion;
         this.CmnaRecep = comuna;
         this.CiudadRecep = ciudad;
+        this.fono = fono;
     }
 
     function createTotales(exento, descuento, neto, iva, valorTotal) {
         this.MntNeto = neto;
         this.MntExe = exento;
-        this.TasaIVA = 19;
+        this.TasaIVA = ($("#tipoFactura").val() == "34" ? 0 : 19);
         this.IVA = iva;
         this.MntTotal = valorTotal;
-        //this.VlrPagar = valorTotal;
     }
 
+    //SE APLICABA PARA DESCUENTOS -- NO SÉ UTILIZARÁ POR ESTÁ VEZ.
     function createDscRcgGlobal(TpoMov, GlosaDR, TpoValor, ValorDR) {
-        debugger;
         this.NroLinDR = 1;
         this.TpoMov = (parseInt(TpoMov) == 0 ? "D" : "R"); // Indica el tipo de movimiento, texto 1 carácter D o R
         this.GlosaDR = GlosaDR; //Especificación del descuento o recargo, de tipo alfanumérico con un largo máximo de 45 caracteres.
@@ -661,20 +644,20 @@
 
     //FUNCIÓN PARA ELIMINAR DEL DATATABLE Y EL ARREGLO.
     function eliminar(e, id) {
-        debugger;
         var i = _inArray(id, Detalle);
-
         if ( i === -1) {
             //ArrayCentralizar.push(Obj);
-        } else if ( i !== -1) {
+        } else if (i !== -1) {
             //splice remueve elementos de un arreglo (recibe 2 parametros el indice y la cantidad de elementos que quiero remover en el array.)
             Detalle.splice(i, 1);
+            ReasigNroLinDet(Detalle)
             totales(Detalle)
+            console.log(Detalle)
         }
         $(e).parent().parent().fadeOut(400).remove();
     }
 
-   $("#dateDocu").datepicker({ format: 'dd/mm/yyyy', todayHighlight: true }).datepicker("update", new Date());
+   $("#dateDocu").datepicker({ format: 'yyyy-mm-dd', todayHighlight: true }).datepicker("update", new Date());
 
    var selectCl = $("#selectClie").select2({
         ajax: {
@@ -691,7 +674,6 @@
                 params.page = params.page || 1
                 var results = [];
                 jQuery.each(data.param, function (index, itemData) {
-                    debugger;
                     results.push({ text: itemData.nom_cliente, id: itemData.Rut });
                 });
                 return {
@@ -706,8 +688,6 @@
         },
         escapeMarkup: function (markup) { return markup; },
         minimumInputLength: 1,
-        //formatResult: format,
-        //formatSelection: format,
         placeholder: 'Ingrese un Rut ...',
         //language: {
         //    inputTooShort: function () {
@@ -723,20 +703,17 @@
         }
     });
 
-    //---------------------BUTTONS EVENTS----------------------//
-
+    //EVENTS BUTTONS
     //en caso de no encontrar el rut , botón nuevo desactiva select2 y muestra textbox para ingresar el rut manual
     $("#add_new").click(function () {
-
         $("#selBx").prop("hidden", true)
         $("#inptBx").prop("hidden", false)
         $("#delinpt").css("display", "")
         $("#selectClie").prop("id", "x")
-
     });
+
     //boton que oculta el textbox y vuelve a mostrar el select2
     $("#delinpt").click(function () {
-
         $("#selectClie").prop("id", "x")
         $("#x").prop("id", "selectClie" )
         $("#inptBx").prop("hidden", true)
@@ -746,25 +723,32 @@
 
     //activo y desactivo botones de la cabecera.
     $("#btn-continuar").click(() => {
-        desactivaBox()
-        $("#btn-continuar").prop("disabled", true)
-        $("#btn-cancelar").prop('disabled', false)
-        $("#btn-modificar").prop('disabled', false)
-        $("#btn-referenciar").prop('disabled', false)
-        $("#selectClie").prop("disabled", true)
-        $("#btn-insertar").prop("disabled", false)
-        $("#btnGuardarDoc").prop("disabled", false)
-    //MUESTRO CAJA PARA INGRESAR DETALLES A LA TABLA.
-        $('#_bxProd').fadeIn(300)
+        if ($("#selectClie").val() !== "") {
+            $("#selBx").removeClass("has-error")
+            desactivaBox()
+            $("#btn-continuar").prop("disabled", true)
+            $("#btn-cancelar").prop('disabled', false)
+            $("#btn-modificar").prop('disabled', false)
+            $("#selectClie").prop("disabled", true)
+            $("#btn-insertar").prop("disabled", false)
+            $("#btnGuardarDoc").prop("disabled", false)
+            //MUESTRO CAJA PARA INGRESAR DETALLES A LA TABLA.
+            $('#_bxProd').fadeIn(300)
+        } else {
+            $("#selectClie").focus()
+            mensajeExitoModal("Falta llenar Campos","Para continuar indique el Receptor.", "3")
+        }
+
     });
 
     $('#btn-modificar').click((e) => {
         activaBox()
         Receptor = [];
+        Datosfactura = [];
         $("#btn-continuar").prop("disabled", false)
         $("#btn-modificar").prop('disabled', true)
-        $("#btn-referenciar").prop('disabled', true)
-        $("#btn-pendientes").prop('disabled', true)
+        //$("#btn-referenciar").prop('disabled', true)
+        //$("#btn-pendientes").prop('disabled', true)
         $("#selectClie").prop("disabled", false)
     });
 
@@ -774,19 +758,12 @@
         $('#btn-continuar').prop('disabled', false)
         $('#btn-modificar').prop('disabled', true)
         $(this).prop('disabled', true)
-        $('#selectClie').prop('disabled', false)
         $("#btnGuardarDoc").prop("disabled", true)
         emptyBox()
-        activaBox()
         emptyTotales()
         emptyProd()
-
         //limpio la tabla y creo una instancia nueva de los array para vaciarlos.
-        table.clear().rows.add([]).draw();
-        Receptor = [];
-        Detalle = [];
-        Totales = [];
-
+        cleanAll();
     });
 
     //BOTÓN GUARDAR ENVIA LA DATA AL CONTROLADOR.
@@ -800,15 +777,25 @@
             $('#bxCiudad').val(),
             $('#bxDireccion').val(),
             $('#bxMail').val(),
+            $('#bxFono').val()
         );
 
         var totales = new createTotales(
-            $('#valorExentoTotal').val(),
+            $('#ValorExentoTotal').val(),
             $('#valorDescuentoTotal').val(),
             $('#ValorNetoTotal').val(),
             $('#Iva').val(),
             $('#ValorTotal').val(),
         );
+
+        var datoFactura = new datosFactura(
+            parseInt($("#tipoFactura").val()),
+            $("#dateDocu").val(),
+            $("#FormaPago").val(),
+            $("#tipoVenta").val(),
+            $("#ValorUnidades").val()
+        );
+
         // según lo conversado con el seba , pidé quitar estos campos.
         //var DscRcgGlob = new createDscRcgGlobal(
         //    $('#DescuRecar').val(),
@@ -816,32 +803,43 @@
         //    $('#TpoValor').val(),
         //    $('#ValorDR').val(),
         //);
+        //DscRcgGlobal.push(DscRcgGlob);
 
+        Datosfactura.push(datoFactura);
         Receptor.push(receptor);
         Totales.push(totales);
 
-        //DscRcgGlobal.push(DscRcgGlob);
-
+        //MantenerFecha();
         $.ajax({
             url: '@Url.Action("saveInfo", "Facturacion")',
             data: {
                 receptor: JSON.stringify(Receptor),
                 detalle: JSON.stringify(Detalle),
                 totales: JSON.stringify(Totales),
-                dscRcgGlobal: JSON.stringify(DscRcgGlobal)
+                dscRcgGlobal: JSON.stringify(DscRcgGlobal),
+                detallefactura: JSON.stringify(Datosfactura)
             },
             type: 'POST',
-            success: (data) => {
-                //AQUÍ VA LA RESPUESTA DEL CONTROLADOR.
-                mensajeExito("El Proceso se ha realizado con éxito...")
-            },
-            error: (data) => {
+            success: (res) => {
                 debugger;
+                //AQUÍ VA LA RESPUESTA DEL CONTROLADOR.
+                mensajeExitoModal("El Proceso se ha realizado con éxito...", res, "6")
+            },
+            error: (res) => {
                 mensajeError("Ha ocurrido un error" + data)
             }
         });
 
     });
+
+
+    //function MantenerFecha() {
+    //    debugger;
+
+    //    var from = $("#dateDocu").val().split("-")
+    //    var f = new Date(from[2], from[1] - 1, from[0])
+    //    dateWorking = f;
+    //}
 
     //Valida que el descuento no sea menor que el total. (funcionando pero está vez no aplica)
     //var total_Prod = document.getElementById('bxDescuento')
@@ -879,8 +877,9 @@
         $("#bxFono").prop("readonly", true)
         $("#bxVendedor").prop("readonly", true)
     }
-    //VACIADORES DE CAJAS //
+    //VACÍA LAS CAJAS DEL ENCABEZADO RECEPTOR.
     function emptyBox() {
+        $('#selectClie').prop('disabled', false)
         $("#selectClie").val(null).trigger("change")
         $("#bxRazonSocial").val("")
         $("#bxGiro").val("")
@@ -900,14 +899,20 @@
         $("#bxUnitario").val("")
         $("#bxTotalProd").val("")
         $("#bxDescuento").val("")
-
-        $("#chkExento").prop("checked", false)
+        if ($("#tipoFactura").val() == "34") {
+            $("#chkExento").prop("checked", true)
+            .prop("disabled", true)
+        } else {
+            $("#chkExento").prop("checked", false)
+            .prop("disabled", false)
+        }
+        $("#chkExento").prop("checked", true)
         $("#chkCc").prop("checked", false)
         $("#chkBodega").prop("checked", false)
     }
 
     function emptyTotales() {
-        $("#valorExentoTotal").val("")
+        $("#ValorExentoTotal").val("")
         $("#valorDescuentoTotal").val("")
         $("#valorRecargoTotal").val("")
         $("#ValorNetoTotal").val("")
@@ -915,14 +920,7 @@
         $("#ValorTotal").val("")
     }
 
-    function cleanBoxs() {
-        $('#ValorNetoTotal').val("");
-        $('#valorDescuentoTotal').val("");
-        $('#Iva').val("");
-        $('#ValorTotal').val("");
-    }
-
-    //FUNCIÓN QUE TRAE INFO DE LA BD
+    //FUNCIÓN QUE TRAE INFO DEL PROCEDURE
     function getCliData(id) {
         $.ajax({
             url: '@Url.Action("getDataClie", "Facturacion")',
@@ -934,7 +932,7 @@
         });
     }
 
-    //LLENO LAS CAJAS CON LOS DATOS QUE TRAE LA FUNCIÓN ANTERIOR
+    //LLENO LA VISTA CON LOS DATOS QUE TRAE LA FUNCIÓN ANTERIOR ESTÁ INFO VIENE DESDE EL PROCEDURE
     function cargaData(data) {
         $('#bxRazonSocial').val(data.nom_cliente);
         $('#bxDireccion').val(data.direccion);
@@ -944,7 +942,153 @@
         $('#bxMail').val(data.correo);
     }
 
-    //---------EVENTS LISTENERS - VALIDACION DE CAMPOS HAS-ERROR------------//
+    document.getElementById('tipoFactura')
+        .addEventListener('change', function (e) {
+                $("#btn-continuar").prop("disabled", false)
+                $("#btn-modificar").prop("disabled", true)
+                emptyBox()
+                activaBox()
+                emptyTotales()
+                emptyProd()
+
+                //limpio la tabla y creo una instancia nueva de los array para vaciarlos.
+                cleanAll();
+        })
+
+    document.getElementById('bxDescripcion')
+        .addEventListener('keyup', function (e) {
+            if (this.value != "") {
+                $("#_bxDescripcion").removeClass("has-error")
+            };
+        })
+
+    document.getElementById('bxUnitario')
+        .addEventListener('input', function (e) {
+            if (this.value != "") {
+                calculaTotalProd()
+                $("#_bxUnitario").removeClass("has-error")
+            } else {
+                $("#_bxUnitario").addClass("has-error")
+            }
+        })
+
+    let o = document.getElementById('bxCantidad');
+    o.addEventListener('keyup', function (e) {
+        if (this.value != "") {
+            calculaTotalProd()
+            $("#_bxCantidad").removeClass("has-error")
+        };
+    })
+
+    o.addEventListener('mouseup', function (e) {
+        if (this.value != "") {
+            calculaTotalProd()
+            $("#_bxCantidad").removeClass("has-error")
+        };
+    })
+
+    //CALCULA LOS VALORES DEL PRODUCTO QUE SE AGREGARÁ AL DATATABLE
+    function calculaTotalProd() {
+        //------------------------------------------------------- descuentos no se aplica por el momento.
+        //let descuento = (Number($("#bxDescuento").val()) == "" ? 0 : Number($("#bxDescuento").val()));
+        //$("#bxTotalProd").val(parseInt(this.value) * valorUnitario - descuento);
+        //----------------------------------------------------------------------------------------------
+
+        let valorUnitario = (Number($("#bxUnitario").val()) == "" ? 0 : Number($("#bxUnitario").val()))
+        let cantidadProd = Number($("#bxCantidad").val())
+
+        //$("#bxTotalProd").val(valorUnitario * valorUnitario - descuento);
+        $("#bxTotalProd").val(valorUnitario * cantidadProd);
+
+    }
+
+    //FUNCIÓN QUE AGREGA DETALLES AL ARREGLO
+    function _inArray(id, arrayObj) {
+        var salida = -1;
+        $.each(arrayObj, function (indice, elemento) {
+            if (elemento.id == id) {
+                salida = indice;
+            }
+        });
+        return salida;
+    }
+
+    //FUNCIÓN PARA CALCULAR LOS TOTALES
+    function totales(array /*, descuentoGlobal, desc_recar*/) {
+        var valorExento = 0;
+        var valorNeto = 0;
+
+        var tipoFactura = $("#tipoFactura").val();
+        //ES FACTURA VENTA
+        if (tipoFactura == "33") {
+            $.each(array, function (i, elemento) {
+                //SUMA LOS VALORES
+                var e = (elemento.exento == "Sí" ? parseInt(elemento.subtotal) : 0);
+                var n = (elemento.exento == "No" ? parseInt(elemento.subtotal) : 0);
+                //no se aplicará descuento a cada unidad según reunión con sebastian.
+                //var d = (elemento.descuento != "" ? parseInt(elemento.descuento) : 0);
+                valorNeto += n;
+                valorExento += e;
+                //descuTotal += d;
+            });
+
+        //ES FACTURA VENTA NO AFECTA O EXENTA ELECTRÓNICA.
+        } else {
+            $.each(array, function (i, elemento) {
+                debugger;
+                var e = parseInt(elemento.subtotal);
+                valorNeto = 0;
+                valorExento += e;
+                //descuTotal += d;
+            });
+        }
+        calculaTotales(valorNeto, valorExento /*descuTotal, descuentoGlobal, desc_recar*/)
+    }
+
+    //FUNCIÓN QUE LLENA LAS CAJAS CON LOS TOTALES CORRESPONDIENTES A LA TOTALIDAD DE LOS DETALLES.
+    function calculaTotales(netoTotal, valorExento /*descuTotal, valorDR, desc_recar*/) {
+        let iva = Math.round(netoTotal * 0.19)
+        emptyTotales();
+        $('#ValorExentoTotal').val(valorExento)
+        $('#ValorNetoTotal').val(netoTotal)
+        $('#Iva').val(iva);
+        //$('#valorDescuentoTotal').val(descuTotal)
+        let ValorGlobalTotal = netoTotal + valorExento + iva /* + impuesto - retencion - CredEC*/;
+        $('#ValorTotal').val(ValorGlobalTotal);
+
+       // resto al neto total + el iva el descuento global.
+       /* if (parseInt(desc_recar) == 0) {
+            debugger;
+            if (valorDR == 0) {
+                $('#ValorTotal').val(ValorGlobalTotal);
+            } else {
+                // resto al neto total + el iva el descuento global.
+                $('#ValorTotal').val(ValorGlobalTotal - parseInt(valorDR));
+            }
+        } else {
+            //de lo contrario le sumo el recargo adicional a la factura.
+
+            if (valorDR == 0) {
+                $('#ValorTotal').val(ValorGlobalTotal);
+            } else {
+                valorDR = 0;
+                // resto al neto total + el iva el descuento global.
+                $('#ValorTotal').val(ValorGlobalTotal + parseInt(valorDR));
+            }
+        }*/
+    }
+
+    //Función que limpia los arreglos que serán enviados al controlados y vacía la información que contiene el datatable.
+    function cleanAll(){
+        table.clear().rows.add([]).draw();
+        Receptor = [];
+        Detalle = [];
+        Totales = [];
+        Datosfactura = [];
+    }
+
+
+      //---------EVENTS LISTENERS - VALIDACION DE CAMPOS HAS-ERROR------------//
 
     //Listener para descuento o recargo (se comenta por que está vez no aplica.)
 
@@ -1007,117 +1151,6 @@
     //        };
     //    })
 
-    document.getElementById('bxDescripcion')
-        .addEventListener('keyup', function (e) {
-            if (this.value != "") {
-                $("#_bxDescripcion").removeClass("has-error")
-            };
-        })
-
-    document.getElementById('bxUnitario')
-        .addEventListener('input', function (e) {
-            debugger;
-            if (this.value != "") {
-                calculaTotalProd()
-                $("#_bxUnitario").removeClass("has-error")
-            } else {
-                $("#_bxUnitario").addClass("has-error")
-            }
-        })
-    //escucha de eventos multiples en javascript , pqe no use jquery? a la antigua nomá
-    let o = document.getElementById('bxCantidad');
-        o.addEventListener('keyup', function (e) {
-            if (this.value != "") {
-                debugger;
-                calculaTotalProd()
-                $("#_bxCantidad").removeClass("has-error")
-            };
-    })
-
-    o.addEventListener('mouseup', function (e) {
-        debugger;
-        if (this.value != "") {
-            calculaTotalProd()
-            $("#_bxCantidad").removeClass("has-error")
-        };
-    })
-    //---------------------------------------------------------------------------------
-
-    //CALCULA LOS VALORES DEL PRODUCTO QUE SE AGREGARÁ AL DATATABLE
-    function calculaTotalProd() {
-        //------------------------------------------------------- descuentos no se aplica por el momento.
-        //let descuento = (Number($("#bxDescuento").val()) == "" ? 0 : Number($("#bxDescuento").val()));
-        //$("#bxTotalProd").val(parseInt(this.value) * valorUnitario - descuento);
-        //----------------------------------------------------------------------------------------------
-
-        let valorUnitario = (Number($("#bxUnitario").val()) == "" ? 0 : Number($("#bxUnitario").val()))
-        let cantidadProd = Number($("#bxCantidad").val())
-      
-        //$("#bxTotalProd").val(valorUnitario * valorUnitario - descuento);
-        $("#bxTotalProd").val(valorUnitario * cantidadProd);
-  
-    }
 
 
-    //FUNCIÓN QUE AGREGA DETALLES AL ARREGLO
-    function _inArray(id, arrayObj) {
-        var salida = -1;
-        $.each(arrayObj, function (indice, elemento) {
-            if (elemento.id == id) {
-                salida = indice;
-            }
-        });
-        return salida;
-    }
-
-    //FUNCIÓN PARA CALCULAR LOS TOTALES
-    function totales(array, descuentoGlobal, desc_recar) {
-
-        var netoTotal = 0;
-        var descuTotal = 0;
-        $.each(array, function (indice, elemento) {
-            //SUMA LOS VALORES 
-            var i = parseInt(elemento.subtotal)
-            var d = (elemento.descuento != "" ? parseInt(elemento.descuento) : 0);
-            netoTotal += i;
-            descuTotal += d;
-        });
-        calculaTotales(netoTotal, descuTotal, descuentoGlobal, desc_recar)
-    }
-
-    //FUNCIÓN QUE LLENA LAS CAJAS CON LOS TOTALES
-    function calculaTotales(netoTotal, descuTotal, valorDR, desc_recar) {
-        let iva = Math.round(netoTotal * 0.19)
-
-        cleanBoxs();
-
-        $('#ValorNetoTotal').val(netoTotal)
-        $('#valorDescuentoTotal').val(descuTotal)
-        $('#Iva').val(iva);
-
-        debugger;
-        let valorConIva = parseInt(netoTotal) + parseInt(iva);
-        //si desc_recar es igual a 0 es descuento de lo contrario es recargo
-
-            // resto al neto total + el iva el descuento global.
-        if (parseInt(desc_recar) == 0) {
-            debugger;
-            if (valorDR == 0) {
-                $('#ValorTotal').val(valorConIva);
-            } else {
-                // resto al neto total + el iva el descuento global.
-                $('#ValorTotal').val(valorConIva - parseInt(valorDR));
-            }
-        } else {
-            //de lo contrario le sumo el recargo adicional a la factura.
-
-            if (valorDR == 0) {
-                $('#ValorTotal').val(valorConIva);
-            } else {
-                valorDR = 0;
-                // resto al neto total + el iva el descuento global.
-                $('#ValorTotal').val(valorConIva + parseInt(valorDR));
-            }
-        }
-    }
 </script>
